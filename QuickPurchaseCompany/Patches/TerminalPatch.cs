@@ -1,5 +1,6 @@
 using BepInEx.Logging;
 using HarmonyLib;
+using QuickPurchaseCompany.Utils;
 using Unity.Netcode;
 
 namespace QuickPurchaseCompany.Patches;
@@ -13,13 +14,7 @@ internal class TerminalPatch
     [HarmonyPrefix]
     public static void SyncGroupCreditsClientRpcPrefix(Terminal __instance, int newGroupCredits, ref int numItemsInShip)
     {
-        var networkManager = NetworkManager.Singleton;
-        if (networkManager == null)
-        {
-            Logger.LogError("NetworkManager.Singleton is null.");
-            return;
-        }
-        if (!networkManager.IsServer)
+        if (! NetworkUtils.IsServer())
         {
             Logger.LogDebug("Not the server. Skipping instant purchase logic.");
             return;
@@ -39,10 +34,7 @@ internal class TerminalPatch
             return;
         }
 
-        Logger.LogDebug(
-            "Preparing instant purchase." +
-            $" IsHost={networkManager.IsHost} IsServer={networkManager.IsServer} IsClient={networkManager.IsClient}"
-        );
+        Logger.LogDebug("Preparing instant purchase.");
 
         var result = instantPurchaseManager.PrepareInstantPurchase(
             boughtItemIndexes: orderedItemsFromTerminal
@@ -71,13 +63,7 @@ internal class TerminalPatch
     [HarmonyPostfix]
     public static void SyncGroupCreditsClientRpcPostfix(Terminal __instance, int newGroupCredits, ref int numItemsInShip)
     {
-        var networkManager = NetworkManager.Singleton;
-        if (networkManager == null)
-        {
-            Logger.LogError("NetworkManager.Singleton is null.");
-            return;
-        }
-        if (!networkManager.IsServer)
+        if (! NetworkUtils.IsServer())
         {
             Logger.LogDebug("Not the server. Skipping instant purchase logic.");
             return;
@@ -90,10 +76,7 @@ internal class TerminalPatch
             return;
         }
 
-        Logger.LogDebug(
-            "Spawning prepared instant purchased items." +
-            $" IsHost={networkManager.IsHost} IsServer={networkManager.IsServer} IsClient={networkManager.IsClient}"
-        );
+        Logger.LogDebug("Spawning prepared instant purchased items.");
 
         var result = instantPurchaseManager.SpawnPreparedInstantPurchasedItems();
         if (!result.Succeeded)

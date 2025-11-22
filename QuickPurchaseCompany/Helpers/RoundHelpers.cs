@@ -84,14 +84,14 @@ internal static class RoundHelpers
         var landingHistory = landingHistoryManager.GetLandingHistory();
         if (landingHistory == null)
         {
-            Logger.LogError("Last landed scene name is null.");
+            Logger.LogError("Landing history is null.");
             return false;
         }
 
         var lastLandedSceneName = landingHistory.LastOrDefault();
         if (lastLandedSceneName == null)
         {
-            Logger.LogError("Last landed scene name is null.");
+            Logger.LogDebug("Last landed scene name is null.");
             return false;
         }
 

@@ -1,3 +1,4 @@
+using System.Linq;
 using BepInEx.Logging;
 
 namespace QuickPurchaseCompany.Utils;
@@ -6,7 +7,7 @@ internal static class RoundUtils
 {
     internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
 
-    public static bool IsFirstDayOrbit()
+    public static bool IsInOrbit()
     {
         var startOfRound = StartOfRound.Instance;
         if (startOfRound == null) {
@@ -21,20 +22,16 @@ internal static class RoundUtils
             return false;
         }
 
-        var gameStats = startOfRound.gameStats;
-        if (gameStats == null) {
-            // Invalid state
-            Logger.LogError("StartOfRound.Instance.gameStats is null.");
-            return false;
-        }
-
-        var daysSpent = gameStats.daysSpent;
-        Logger.LogDebug($"daysSpent={daysSpent}");
-
-        return daysSpent == 0;
+        return true;
     }
 
-    public static bool IsLandedOnCompany()
+    public static bool IsSceneNameCompany(string sceneName)
+    {
+        Logger.LogDebug($"IsSceneNameCompany? sceneName={sceneName}");
+        return sceneName == "CompanyBuilding";
+    }
+
+    public static bool IsRoutingToCompany()
     {
         var startOfRound = StartOfRound.Instance;
         if (startOfRound == null) {
@@ -43,30 +40,40 @@ internal static class RoundUtils
             return false;
         }
 
-        if (startOfRound.inShipPhase)
-        {
-            // In orbit
-            return false;
-        }
-
-        var roundManager = RoundManager.Instance;
-        if (roundManager == null) {
-            // Invalid state
-            Logger.LogError("RoundManager.Instance is null.");
-            return false;
-        }
-
-        // Current selected level in orbit / Current landed level
-        var currentLevel = roundManager.currentLevel;
+        var currentLevel = startOfRound.currentLevel;
         if (currentLevel == null) {
             // Invalid state
-            Logger.LogError("RoundManager.Instance.currentLevel is null.");
+            Logger.LogError("StartOfRound.Instance.currentLevel is null.");
             return false;
         }
 
         var sceneName = currentLevel.sceneName;
-        Logger.LogDebug($"sceneName={sceneName}");
+        return IsSceneNameCompany(sceneName);
+    }
 
-        return sceneName == "CompanyBuilding";
+    public static SelectableLevel GetLevelById(int levelId)
+    {
+        var startOfRound = StartOfRound.Instance;
+        if (startOfRound == null) {
+            // Invalid state
+            Logger.LogError("StartOfRound.Instance is null.");
+            return null;
+        }
+
+        var levels = startOfRound.levels;
+        if (levels == null) {
+            // Invalid state
+            Logger.LogError("StartOfRound.Instance.levels is null.");
+            return null;
+        }
+
+        var level = levels.ElementAtOrDefault(levelId);
+        if (level == null)
+        {
+            Logger.LogError($"Level not found. levelId={levelId}");
+            return null;
+        }
+
+        return level;
     }
 }

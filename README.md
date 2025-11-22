@@ -1,13 +1,20 @@
 # QuickPurchaseCompany
 
-Lethal Company Mod to make the item purchase process faster in a fair way.
+A Lethal Company mod that speeds up item purchases only when you're on the Company or in other limited situations.
 
 ## Features
 
-- Directly spawn the purchased items on the ship.
-  - The first day orbit
-  - Landed on the Company
-  - TODO: The next day orbit after landing on the company and before routing to a moon
+### Instant Item Delivery
+
+Purchased items are spawned directly on the ship.
+
+#### When It Activates
+
+This feature activates when any of these conditions are met:
+
+- In orbit on the first day
+- While landed on the Company
+- In orbit on the next day after landing on the Company, still routing to the Company
 
 ## Development
 
@@ -26,17 +33,27 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build
 DOTNET_CLI_UI_LANGUAGE=en dotnet build --configuration Release
 ```
 
-## Install
+## Debugging
+
+### r2modman
+
+1. Open r2modman.
+2. Open `Config editor`.
+3. Open `BeplnEx\config\BepInEx.cfg` in the config list.
+4. Set `Logging.Console.LogLevels` to `All`.
+5. Open `Settings > Import local mod`.
+6. Select the DLL file from `bin/Debug/netstandard2.1/`.
+7. Click `Start modded`.
 
 ### Manual
 
 1. Install BeplnEx: https://docs.bepinex.dev/articles/user_guide/installation/index.html
-2. Copy the DLL file into `C:/Program Files (x86)/Steam/steamapps/common/Lethal Company/BepInEx/plugins/` from `bin/Release/netstandard2.1/`.
-
-### r2modman
-
-1. Open `Settings > Import local mod`.
-2. Select the DLL file from `bin/Release/netstandard2.1/`.
+2. Launch `Lethal Company.exe` and exit to generate the BeplnEx config files.
+3. Open `C:/Program Files (x86)/Steam/steamapps/common/Lethal Company/BeplnEx/config/BepInEx.cfg`.
+4. Copy the DLL file into `C:/Program Files (x86)/Steam/steamapps/common/Lethal Company/BepInEx/plugins/` from `bin/Debug/netstandard2.1/`.
+5. Set `Logging.Console.Enabled` to `true`.
+6. Set `Logging.Console.LogLevels` to `All`.
+7. Launch `Lethal Company.exe` again.
 
 ## Credit
 
@@ -89,8 +106,7 @@ Inspired by the following projects:
 5. Take off.
 6. Open the terminal.
 7. Issue a command: `wal`.
-8. Issue a command: `help`.
-9. Confirm that the terminal shows `1 purchased items on route.`.
+8. Confirm that a walkie is spawned on the ship.
 
 ### 6. Purchase on the second day orbit after landing on a moon
 
@@ -102,7 +118,35 @@ Inspired by the following projects:
 6. Issue a command: `help`.
 7. Confirm that the terminal shows `1 purchased items on route.`.
 
-### 7. Purchase on the first day after ejected
+### 7. Purchase on the third day orbit after landing on the company
+
+1. Start a new game.
+2. Land on `Experimentation`.
+3. Take off.
+4. Open the terminal.
+5. Issue a command: `comp`.
+6. Land on `Gordion`.
+7. Take off.
+8. Open the terminal.
+9. Issue a command: `wal`.
+10. Confirm that a walkie is spawned on the ship.
+
+### 8. Purchase on the third day orbit after landing on the company and routing to a moon
+
+1. Start a new game.
+2. Land on `Experimentation`.
+3. Take off.
+4. Open the terminal.
+5. Issue a command: `comp`.
+6. Land on `Gordion`.
+7. Take off.
+8. Open the terminal.
+9. Issue a command: `exp`.
+10. Issue a command: `wal`.
+11. Issue a command: `help`.
+12. Confirm that the terminal shows `1 purchased items on route.`.
+
+### 9. Purchase on the first day after ejected
 
 1. Start a new game.
 2. Land on `Experimentation`.
@@ -114,7 +158,7 @@ Inspired by the following projects:
 8. Issue a command: `wal`.
 9. Confirm that a walkie is spawned on the ship.
 
-### 9. Purchase on the second day orbit then land on the company
+### 10. Purchase on the second day orbit then land on the company
 
 1. Start a new game.
 2. Land on `Experimentation`.
@@ -127,7 +171,7 @@ Inspired by the following projects:
 9. Land on `Gordion`.
 10. Confirm that the dropship arrives and contains a walkie.
 
-### 10. Purchase on the second day orbit then land and purchase on the company
+### 11. Purchase on the second day orbit then land and purchase on the company
 
 1. Start a new game.
 2. Land on `Experimentation`.

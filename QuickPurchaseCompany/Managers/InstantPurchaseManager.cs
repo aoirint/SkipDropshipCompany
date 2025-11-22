@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BepInEx.Logging;
+using QuickPurchaseCompany.Helpers;
 using QuickPurchaseCompany.Utils;
 
 namespace QuickPurchaseCompany.Managers;
@@ -50,12 +51,17 @@ internal class InstantPurchaseManager
     {
         Logger.LogDebug("Checking if instant purchase is allowed.");
 
-        var isFirstDayOrbit = RoundUtils.IsFirstDayOrbit();
-        var isLandedOnCompany = RoundUtils.IsLandedOnCompany();
+        var isFirstDayOrbit = RoundHelpers.IsFirstDayOrbit();
+        var isLandedOnCompany = RoundHelpers.IsLandedOnCompany();
+        var isInOrbitAndLastLandedOnCompanyAndRoutingToCompany = RoundHelpers.IsInOrbitAndLastLandedOnCompanyAndRoutingToCompany();
 
-        Logger.LogDebug($"IsFirstDayOrbit={isFirstDayOrbit} IsLandedOnCompany={isLandedOnCompany}");
+        Logger.LogDebug(
+            $"IsFirstDayOrbit={isFirstDayOrbit}" +
+            $" IsLandedOnCompany={isLandedOnCompany}" +
+            $" isInOrbitAndLastLandedOnCompanyAndRoutingToCompany={isInOrbitAndLastLandedOnCompanyAndRoutingToCompany}"
+        );
 
-        return isFirstDayOrbit || isLandedOnCompany;
+        return isFirstDayOrbit || isLandedOnCompany || isInOrbitAndLastLandedOnCompanyAndRoutingToCompany;
     }
 
     public PrepareInstantPurchaseResult PrepareInstantPurchase(List<int> boughtItemIndexes)

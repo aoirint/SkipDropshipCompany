@@ -1,0 +1,72 @@
+using BepInEx.Logging;
+
+namespace QuickPurchaseCompany.Utils;
+
+internal static class RoundUtils
+{
+    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+
+    public static bool IsFirstDayOrbit()
+    {
+        var startOfRound = StartOfRound.Instance;
+        if (startOfRound == null) {
+            // Invalid state
+            Logger.LogError("StartOfRound.Instance is null.");
+            return false;
+        }
+
+        if (!startOfRound.inShipPhase)
+        {
+            // Landed
+            return false;
+        }
+
+        var gameStats = startOfRound.gameStats;
+        if (gameStats == null) {
+            // Invalid state
+            Logger.LogError("StartOfRound.Instance.gameStats is null.");
+            return false;
+        }
+
+        var daysSpent = gameStats.daysSpent;
+        Logger.LogDebug($"daysSpent={daysSpent}");
+
+        return daysSpent == 0;
+    }
+
+    public static bool IsLandedOnCompany()
+    {
+        var startOfRound = StartOfRound.Instance;
+        if (startOfRound == null) {
+            // Invalid state
+            Logger.LogError("StartOfRound.Instance is null.");
+            return false;
+        }
+
+        if (startOfRound.inShipPhase)
+        {
+            // In orbit
+            return false;
+        }
+
+        var roundManager = RoundManager.Instance;
+        if (roundManager == null) {
+            // Invalid state
+            Logger.LogError("RoundManager.Instance is null.");
+            return false;
+        }
+
+        // Current selected level in orbit / Current landed level
+        var currentLevel = roundManager.currentLevel;
+        if (currentLevel == null) {
+            // Invalid state
+            Logger.LogError("RoundManager.Instance.currentLevel is null.");
+            return false;
+        }
+
+        var sceneName = currentLevel.sceneName;
+        Logger.LogDebug($"sceneName={sceneName}");
+
+        return sceneName == "CompanyBuilding";
+    }
+}

@@ -1,5 +1,6 @@
 using BepInEx.Logging;
 using HarmonyLib;
+using QuickPurchaseCompany.Utils;
 
 namespace QuickPurchaseCompany.Patches;
 
@@ -12,6 +13,12 @@ internal class StartOfRoundPatch
     [HarmonyPostfix]
     public static void StartGamePostfix(StartOfRound __instance)
     {
+        if (! NetworkUtils.IsServer())
+        {
+            Logger.LogDebug("Not the server. Skipping landing history addition.");
+            return;
+        }
+
         var currentLevel = __instance.currentLevel;
         if (currentLevel == null)
         {
@@ -41,6 +48,12 @@ internal class StartOfRoundPatch
     [HarmonyPostfix]
     public static void ResetShipPostfix(StartOfRound __instance)
     {
+        if (! NetworkUtils.IsServer())
+        {
+            Logger.LogDebug("Not the server. Skipping landing history clear.");
+            return;
+        }
+
         var landingHistoryManager = QuickPurchaseCompany.landingHistoryManager;
         if (landingHistoryManager == null)
         {

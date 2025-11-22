@@ -14,7 +14,7 @@ This feature activates when any of these conditions are met:
 
 - In orbit on the first day
 - While landed on the Company
-- In orbit on the next day after landing on the Company, still routing to the Company
+- In orbit on the next day after landing on the Company, still routing to the Company (current session only)
 
 ## Development
 

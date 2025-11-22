@@ -9,7 +9,7 @@ internal class TerminalPatch
 {
     internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
 
-    [HarmonyPatch("SyncGroupCreditsClientRpc")]
+    [HarmonyPatch(nameof(Terminal.SyncGroupCreditsClientRpc))]
     [HarmonyPrefix]
     public static void SyncGroupCreditsClientRpcPrefix(Terminal __instance, int newGroupCredits, ref int numItemsInShip)
     {
@@ -67,7 +67,7 @@ internal class TerminalPatch
         );
     }
 
-    [HarmonyPatch("SyncGroupCreditsClientRpc")]
+    [HarmonyPatch(nameof(Terminal.SyncGroupCreditsClientRpc))]
     [HarmonyPostfix]
     public static void SyncGroupCreditsClientRpcPostfix(Terminal __instance, int newGroupCredits, ref int numItemsInShip)
     {

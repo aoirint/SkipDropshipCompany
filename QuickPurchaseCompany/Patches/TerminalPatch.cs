@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
 using BepInEx.Logging;
 using HarmonyLib;
-using QuickPurchaseCompany.Utils;
 using Unity.Netcode;
 
 namespace QuickPurchaseCompany.Patches;

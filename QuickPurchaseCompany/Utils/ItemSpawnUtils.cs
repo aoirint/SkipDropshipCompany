@@ -78,10 +78,10 @@ internal static class ItemSpawnUtils
             return false;
         }
 
-        var shipTransform = shipGameObject.transform;
-        if (shipTransform == null) {
+        var elevatorTransform = startOfRound.elevatorTransform;
+        if (elevatorTransform == null) {
             // Invalid state
-            Logger.LogError("Failed to get Ship transform.");
+            Logger.LogError("StartOfRound.Instance.elevatorTransform is null.");
             return false;
         }
 
@@ -106,7 +106,7 @@ internal static class ItemSpawnUtils
             spawnPrefab,
             spawnPosition,
             Quaternion.identity,
-            startOfRound.propsContainer
+            elevatorTransform
         );
 
         var grabbableObject = gameObject.GetComponent<GrabbableObject>();
@@ -118,9 +118,9 @@ internal static class ItemSpawnUtils
         }
 
         grabbableObject.fallTime = 0f;
-        grabbableObject.hasHitGround = true; // Disable drop sound effect
+        grabbableObject.isInElevator = true;
         grabbableObject.isInShipRoom = true;
-        grabbableObject.transform.parent = shipTransform;
+        grabbableObject.hasHitGround = true; // Disable drop sound effect
 
         var networkObject = gameObject.GetComponent<NetworkObject>();
         if (networkObject == null) {

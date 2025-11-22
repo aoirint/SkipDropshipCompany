@@ -1,13 +1,20 @@
 # QuickPurchaseCompany
 
-Lethal Company Mod to make the item purchase process faster in a fair way.
+A Lethal Company mod that speeds up item purchases only when you're on the Company or in other limited situations.
 
 ## Features
 
-- Directly spawn the purchased items on the ship.
-  - The first day orbit
-  - Landed on the Company
-  - The next day orbit after landing on the company and routing to the company
+### Instant Item Delivery
+
+Purchased items are spawned directly on the ship.
+
+#### When It Activates
+
+This feature activates when any of these conditions are met:
+
+- In orbit on the first day
+- While landed on the Company
+- In orbit on the next day after landing on the Company, still routing to the Company
 
 ## Development
 

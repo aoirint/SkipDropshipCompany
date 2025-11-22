@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using BepInEx.Logging;
 using QuickPurchaseCompany.Helpers;
 using QuickPurchaseCompany.Utils;

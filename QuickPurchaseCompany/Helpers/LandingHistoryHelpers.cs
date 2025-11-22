@@ -1,6 +1,4 @@
-using System.Linq;
 using BepInEx.Logging;
-using QuickPurchaseCompany.Utils;
 
 namespace QuickPurchaseCompany.Helpers;
 

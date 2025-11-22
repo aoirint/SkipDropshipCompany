@@ -1,6 +1,6 @@
 # QuickPurchaseCompany
 
-A Lethal Company mod that speeds up item purchases only when you're on the Company or in other limited situations.
+A Lethal Company mod that speeds up item purchases when you're on the Company or in other limited situations only.
 
 ## Features
 

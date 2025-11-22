@@ -37,3 +37,9 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build --configuration Release
 
 1. Open `Settings > Import local mod`.
 2. Select the DLL file from `bin/Release/netstandard2.1/`.
+
+## Credit
+
+Inspired by the following projects:
+
+- [InstantBuy by nexor-source](https://github.com/nexor-source/InstantBuy)

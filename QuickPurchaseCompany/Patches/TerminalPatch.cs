@@ -46,7 +46,7 @@ internal class TerminalPatch
 
         // Adjust the number of items in the dropship
         // NOTE:  `numItemsInShip` will be set to `Terminal.numberOfItemsInDropship`.
-        // This is an incorrect argument name in the original game code.
+        // This is the argument name in the original game code.
         // It means `numItemsInDropship`.
         numItemsInShip = result.DropShipBoughtItemIndexes.Count;
 

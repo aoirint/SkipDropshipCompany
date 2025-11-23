@@ -43,6 +43,12 @@ You can still use it.
 
 The dropship will arrive as usual on that moon in these cases.
 
+### Already purchased items before the conditions are met. Will they be delivered directly to the ship?
+
+No. Only items purchased after the conditions are met will be delivered directly to the ship.
+
+However, if you purchase additional items before the dropship arrives, they will be delivered together with the previous ones to the ship.
+
 ### Is it compatible with FasterItemDropship/LC_FasterRocket?
 
 At least the following versions are assumed to be compatible.

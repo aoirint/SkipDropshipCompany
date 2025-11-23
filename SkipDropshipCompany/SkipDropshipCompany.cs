@@ -1,21 +1,19 @@
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using SkipDropshipCompany.Generated;
 using SkipDropshipCompany.Managers;
 
 namespace SkipDropshipCompany;
 
-[BepInPlugin(MOD_GUID, MOD_NAME, MOD_VERSION)]
+[BepInPlugin(ModInfo.GUID, ModInfo.NAME, ModInfo.VERSION)]
 [BepInProcess("Lethal Company.exe")]
 public class SkipDropshipCompany : BaseUnityPlugin
 {
-    public const string MOD_GUID = "com.aoirint.SkipDropshipCompany";
-    public const string MOD_NAME = "SkipDropshipCompany";
-    public const string MOD_VERSION = "0.1.0";
 
     internal static new ManualLogSource Logger { get; private set; }
 
-    internal static Harmony harmony = new(MOD_GUID);
+    internal static Harmony harmony = new(ModInfo.GUID);
 
     internal static InstantPurchaseManager instantPurchaseManager = new();
 
@@ -27,6 +25,6 @@ public class SkipDropshipCompany : BaseUnityPlugin
 
         harmony.PatchAll();
 
-        Logger.LogInfo($"Plugin {MOD_NAME} v{MOD_VERSION} is loaded!");
+        Logger.LogInfo($"Plugin {ModInfo.NAME} v{ModInfo.VERSION} is loaded!");
     }
 }

@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>SkipDropshipCompany</AssemblyName>
+    <AssemblyName>com.aoirint.SkipDropshipCompany</AssemblyName>
     <Product>SkipDropshipCompany</Product>
-    <!-- APP_VERSION_MARKER -->
-    <Version>0.0.1</Version>
+    <!-- !!APP_VERSION_MARKER!! -->
+    <Version>0.0.2</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RestoreAdditionalProjectSources>
@@ -27,4 +27,41 @@
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
+
+
+  <PropertyGroup>
+    <ModInfoTemplate>
+      $([System.IO.File]::ReadAllText('Templates/ModInfo.template.cs'))
+    </ModInfoTemplate>
+    <ModInfoOut>
+      $([System.String]::Copy('$(ModInfoTemplate)')
+          .Replace('__CSPROJ_ASSEMBLY_NAME__', '$(AssemblyName)')
+          .Replace('__CSPROJ_PRODUCT__', '$(Product)')
+          .Replace('__CSPROJ_VERSION__', '$(Version)')
+      )
+    </ModInfoOut>
+  </PropertyGroup>
+  <Target Name="GenerateModInfo" BeforeTargets="BeforeCompile">
+    <WriteLinesToFile
+        File="Generated/ModInfo.g.cs"
+        Overwrite="true"
+        Lines="$(ModInfoOut)"
+    />
+  </Target>
+
+  <PropertyGroup>
+    <ManifestJsonTemplate>$([System.IO.File]::ReadAllText('assets/manifest.json'))</ManifestJsonTemplate>
+    <ManifestJsonOut>
+      $([System.String]::Copy('$(ManifestJsonTemplate)')
+        .Replace('"version_number": "0.0.0"', '"version_number": "$(Version)"')
+      )
+    </ManifestJsonOut>
+  </PropertyGroup>
+  <Target Name="GenerateManifestJson" BeforeTargets="BeforeCompile">
+    <WriteLinesToFile
+      File="Generated/manifest.g.json"
+      Overwrite="true"
+      Lines="$(ManifestJsonOut)"
+    />
+  </Target>
 </Project>

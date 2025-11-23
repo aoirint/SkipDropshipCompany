@@ -83,11 +83,11 @@ This mod does not have such a configuration option yet.
 
 ## Differences from [befuddled_productions/Quick_Buy_Menu](https://thunderstore.io/c/lethal-company/p/befuddled_productions/Quick_Buy_Menu/)
 
-`befuddled_productions/Quick_Buy_Menu` adds some chat commands to purchase items quickly.
+`befuddled_productions/Quick_Buy_Menu` adds some chat commands to purchase items in a faster way.
 
 This mod uses the terminal as usual to purchase items.
 
-`befuddled_productions/Quick_Buy_Menu` store the purchased items into the player's inventory directly.
+`befuddled_productions/Quick_Buy_Menu` stores the purchased items into the player's inventory directly.
 
 This mod stores the purchased items on the ship directly.
 

@@ -39,7 +39,7 @@ internal sealed class SpawnPreparedInstantPurchasedItemsResult
 
 internal class InstantPurchaseManager
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
     private PrepareInstantPurchaseResult? preparedInstantPurchaseResult;
 

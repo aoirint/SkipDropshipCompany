@@ -14,7 +14,7 @@ namespace SkipDropshipCompany;
 public class SkipDropshipCompany : BaseUnityPlugin
 {
 
-    internal static new ManualLogSource Logger { get; private set; }
+    internal static new ManualLogSource? Logger { get; private set; }
 
     internal static Harmony harmony = new(ModInfo.GUID);
 

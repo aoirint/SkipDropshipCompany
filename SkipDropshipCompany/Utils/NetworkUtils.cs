@@ -1,3 +1,5 @@
+#nullable enable
+
 using BepInEx.Logging;
 using Unity.Netcode;
 
@@ -5,7 +7,7 @@ namespace SkipDropshipCompany.Utils;
 
 internal static class NetworkUtils
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
     public static bool IsServer()
     {

@@ -1,3 +1,5 @@
+#nullable enable
+
 using System.Linq;
 using BepInEx.Logging;
 
@@ -5,7 +7,7 @@ namespace SkipDropshipCompany.Utils;
 
 internal static class RoundUtils
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
     public static bool IsInOrbit()
     {
@@ -78,7 +80,7 @@ internal static class RoundUtils
         return IsSceneNameCompany(sceneName);
     }
 
-    public static SelectableLevel GetLevelById(int levelId)
+    public static SelectableLevel? GetLevelById(int levelId)
     {
         var startOfRound = StartOfRound.Instance;
         if (startOfRound == null)

@@ -1,3 +1,5 @@
+#nullable enable
+
 using System.Linq;
 using BepInEx.Logging;
 using SkipDropshipCompany.Utils;
@@ -6,7 +8,7 @@ namespace SkipDropshipCompany.Helpers;
 
 internal static class LandingHistoryHelpers
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
     public static bool AddLandingHistory(string sceneName)
     {

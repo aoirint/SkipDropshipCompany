@@ -1,3 +1,5 @@
+#nullable enable
+
 using BepInEx.Logging;
 using HarmonyLib;
 using SkipDropshipCompany.Helpers;
@@ -8,7 +10,7 @@ namespace SkipDropshipCompany.Patches;
 [HarmonyPatch(typeof(StartOfRound))]
 internal class StartOfRoundPatch
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
     [HarmonyPatch(nameof(StartOfRound.StartGame))]
     [HarmonyPostfix]

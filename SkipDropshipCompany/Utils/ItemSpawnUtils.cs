@@ -1,3 +1,5 @@
+#nullable enable
+
 using System.Collections.Generic;
 using System.Linq;
 using BepInEx.Logging;
@@ -9,31 +11,9 @@ namespace SkipDropshipCompany.Utils;
 
 internal static class ItemSpawnUtils
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
-    private static GameObject cachedShipGameObject;
-
-    private static Dictionary<int, float> cachedSpawnOffsetXByItemId = new();
-
-    public static GameObject GetShipGameObject()
-    {
-        if (cachedShipGameObject != null)
-        {
-            return cachedShipGameObject;
-        }
-
-        var shipGameObject = GameObject.Find("/Environment/HangarShip");
-        if (shipGameObject == null)
-        {
-            // Invalid state
-            Logger.LogError("Failed to find Ship game object.");
-            return null;
-        }
-
-        cachedShipGameObject = shipGameObject;
-
-        return shipGameObject;
-    }
+    private static readonly Dictionary<int, float> cachedSpawnOffsetXByItemId = [];
 
     public static Vector3? GetBaseSpawnPosition()
     {
@@ -109,14 +89,6 @@ internal static class ItemSpawnUtils
         {
             // Invalid state
             Logger.LogError("Item.spawnPrefab is null.");
-            return false;
-        }
-
-        var shipGameObject = GetShipGameObject();
-        if (shipGameObject == null)
-        {
-            // Invalid state
-            Logger.LogError("Failed to get Ship game object.");
             return false;
         }
 

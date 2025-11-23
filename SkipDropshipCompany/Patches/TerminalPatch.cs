@@ -1,3 +1,5 @@
+#nullable enable
+
 using BepInEx.Logging;
 using HarmonyLib;
 using SkipDropshipCompany.Utils;
@@ -7,7 +9,7 @@ namespace SkipDropshipCompany.Patches;
 [HarmonyPatch(typeof(Terminal))]
 internal class TerminalPatch
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
     [HarmonyPatch(nameof(Terminal.SyncGroupCreditsClientRpc))]
     [HarmonyPrefix]

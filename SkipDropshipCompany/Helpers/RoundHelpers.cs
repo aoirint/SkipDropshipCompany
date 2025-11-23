@@ -1,4 +1,5 @@
-using System.Linq;
+#nullable enable
+
 using BepInEx.Logging;
 using SkipDropshipCompany.Utils;
 
@@ -6,7 +7,7 @@ namespace SkipDropshipCompany.Helpers;
 
 internal static class RoundHelpers
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
     public static bool IsInFirstDayOrbit()
     {

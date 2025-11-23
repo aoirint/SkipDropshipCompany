@@ -1,3 +1,5 @@
+#nullable enable
+
 using System.Linq;
 using BepInEx.Logging;
 using UnityEngine;
@@ -6,11 +8,11 @@ namespace SkipDropshipCompany.Utils;
 
 internal static class TerminalUtils
 {
-    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger!;
 
-    private static Terminal cachedTerminal;
+    private static Terminal? cachedTerminal;
 
-    public static Terminal GetTerminal()
+    public static Terminal? GetTerminal()
     {
         if (cachedTerminal != null)
         {
@@ -30,7 +32,7 @@ internal static class TerminalUtils
         return terminal;
     }
 
-    public static Item GetBuyableItemByIndex(int index)
+    public static Item? GetBuyableItemByIndex(int index)
     {
         var terminal = GetTerminal();
         if (terminal == null)

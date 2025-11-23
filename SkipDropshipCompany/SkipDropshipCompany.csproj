@@ -28,7 +28,6 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
 
-
   <PropertyGroup>
     <ModInfoTemplate>
       $([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)/../Templates/ModInfo.template.cs'))

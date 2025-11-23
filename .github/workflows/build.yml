@@ -102,4 +102,4 @@ jobs:
             echo "| Time Duration | ${TIME_DURATION_S}s |"
             echo "| Artifact | ${ARTIFACT_LINK_MARKDOWN} |"
             echo "| Artifact Digest | ${ARTIFACT_DIGEST_MARKDOWN} |"
-          fi
+          } >> "${GITHUB_STEP_SUMMARY}"

@@ -36,7 +36,7 @@ Each item type will be placed with a small offset to avoid overlapping.
 
 | Name | Type | Default | Description |
 |:--------|:-----|:--------|:------------|
-| Requires rerouting on the first day | bool | false | If true, rerouting to the company will be required to skip the dropship on the first day. |
+| RequireReroutingOnFirstDay | bool | false | If true, rerouting to the company will be required to skip the dropship on the first day. |
 
 ## FAQ
 

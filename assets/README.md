@@ -93,8 +93,6 @@ This mod just spawns the purchased items directly on your ship instead of the dr
 
 This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
 
-## Credit
+## Credits
 
-Highly inspired by the following project.
-
-- [Nexor/InstantBuy](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/)
+- Highly inspired by [Nexor/InstantBuy](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/).

@@ -56,4 +56,4 @@ No test has been done for them. It is recommended to use Lethal Company v73 or l
 
 Highly inspired by the following project.
 
-- [InstantBuy by nexor-source](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/)
+- [Nexor/InstantBuy](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/)

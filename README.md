@@ -49,6 +49,20 @@ Copy a DLL file into `lib/` from `C:/Program Files (x86)/Steam/steamapps/common/
 dotnet format
 ```
 
+## GitHub Actions
+
+The repository uses GitHub Actions for CI.
+
+The version of the actions are pinned with [pinact](https://github.com/suzuki-shunsuke/pinact).
+
+```powershell
+# Pin
+pinact run
+
+# Update
+pinact run --update
+```
+
 ## Build
 
 ```powershell

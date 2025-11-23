@@ -32,7 +32,7 @@ To update the lock file after modifying your package references, run:
 dotnet restore --use-lock-file
 ```
 
-## GitHub Actions
+## GitHub Actions management
 
 The repository uses GitHub Actions for CI.
 

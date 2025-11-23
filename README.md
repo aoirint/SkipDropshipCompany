@@ -10,8 +10,6 @@ Install .NET SDK 9.0.
 
 - <https://dotnet.microsoft.com/en-us/download/dotnet/9.0>
 
-Install Lethal Company v73 via Steam.
-
 Restore NuGet packages.
 
 ```powershell

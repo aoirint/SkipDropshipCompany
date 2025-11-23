@@ -59,7 +59,7 @@ jobs:
           # Package format
           # https://thunderstore.io/c/lethal-company/create/docs/
 
-          mv ./SkipDropshipCompany/bin/Release/netstandard2.1/SkipDropshipCompany.dll  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
+          mv ./SkipDropshipCompany/bin/Release/netstandard2.1/com.aoirint.SkipDropshipCompany.dll  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
 
           cp ./assets/manifest.json  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/manifest.json"
           cp ./assets/icon.png  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"

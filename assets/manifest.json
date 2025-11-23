@@ -2,7 +2,7 @@
     "name": "SkipDropshipCompany",
     "version_number": "0.0.0",
     "website_url": "https://github.com/aoirint/SkipDropshipCompany",
-    "description": "Skip the dropship to purchase items when you're on the Company or in other limited situations.",
+    "description": "Skips the dropship to purchase items when you're on the Company or in other limited situations.",
     "dependencies": [
         "BepInEx-BepInExPack-5.4.2304"
     ]

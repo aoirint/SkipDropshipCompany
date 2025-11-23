@@ -1,6 +1,6 @@
 # SkipDropshipCompany
 
-A Lethal Company mod that skip the dropship to purchase items when you're on the Company or in other limited situations.
+A Lethal Company mod that skips the dropship to purchase items when you're on the Company or in other limited situations.
 
 This mod works for v73+. Maybe works for the earlier versions, but not tested.
 

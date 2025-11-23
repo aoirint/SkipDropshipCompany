@@ -1,6 +1,6 @@
 # SkipDropshipCompany
 
-A Lethal Company mod that skip the dropship when you're on the Company or in other limited situations.
+A Lethal Company mod that skips the dropship when you're on the Company or in other limited situations.
 
 - [User guide](./assets/README.md)
 

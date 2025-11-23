@@ -30,4 +30,4 @@ jobs:
         run: dotnet restore --locked-mode
 
       - name: Run dotnet format
-        run: dotnet format --verify-no-changes
+        run: dotnet format --no-restore --verify-no-changes

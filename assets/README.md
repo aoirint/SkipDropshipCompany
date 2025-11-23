@@ -26,7 +26,7 @@ Host only. Clients do not need to install this mod, but it's safe to install on 
 
 If clients (including non-modded) purchase items, the direct ship delivery feature will also work for them.
 
-## Where the items spawns
+## Where the items spawn
 
 Purchased items will spawn inside your ship, near the default item position for the out-of-bounds items.
 
@@ -93,13 +93,13 @@ This mod stores the purchased items on the ship directly.
 
 ## Differences from [FlipMods/FasterItemDropship](https://thunderstore.io/c/lethal-company/p/FlipMods/FasterItemDropship/)
 
-`FlipMods/FasterItemDropship` reduces the waiting time for the dropship to arrive after purchasing an item.
+`FlipMods/FasterItemDropship` reduces the waiting time for the dropship to arrive after purchasing items.
 
 This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
 
 ## Differences from [zoomstv/FasterRocket](https://thunderstore.io/c/lethal-company/p/zoomstv/FasterRocket/)
 
-`zoomstv/FasterRocket` reduces the waiting time for the dropship to arrive after landing on a moon.
+`zoomstv/FasterRocket` reduces the waiting time for the dropship to arrive after purchasing items.
 
 This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
 

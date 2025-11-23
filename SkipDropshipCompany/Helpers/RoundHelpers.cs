@@ -8,7 +8,7 @@ internal static class RoundHelpers
 {
     internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
-    public static bool IsInFirstDayOrbitAndRoutingToCompany()
+    public static bool IsInFirstDayOrbit()
     {
         if (!RoundUtils.IsInOrbit())
         {
@@ -21,6 +21,18 @@ internal static class RoundHelpers
         {
             // Not first day
             Logger.LogDebug("Not first day.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static bool IsInFirstDayOrbitAndRoutingToCompany()
+    {
+        if (!IsInFirstDayOrbit())
+        {
+            // Not in first day orbit
+            Logger.LogDebug("Not in first day orbit.");
             return false;
         }
 

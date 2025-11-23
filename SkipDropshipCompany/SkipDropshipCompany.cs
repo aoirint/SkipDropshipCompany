@@ -1,16 +1,16 @@
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using QuickPurchaseCompany.Managers;
+using SkipDropshipCompany.Managers;
 
-namespace QuickPurchaseCompany;
+namespace SkipDropshipCompany;
 
 [BepInPlugin(MOD_GUID, MOD_NAME, MOD_VERSION)]
 [BepInProcess("Lethal Company.exe")]
-public class QuickPurchaseCompany : BaseUnityPlugin
+public class SkipDropshipCompany : BaseUnityPlugin
 {
-    public const string MOD_GUID = "com.aoirint.quickpurchasecompany";
-    public const string MOD_NAME = "Quick Purchase Company";
+    public const string MOD_GUID = "com.aoirint.SkipDropshipCompany";
+    public const string MOD_NAME = "SkipDropshipCompany";
     public const string MOD_VERSION = "0.1.0";
 
     internal static new ManualLogSource Logger { get; private set; }

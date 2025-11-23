@@ -2,11 +2,11 @@ using System.Linq;
 using BepInEx.Logging;
 using UnityEngine;
 
-namespace QuickPurchaseCompany.Utils;
+namespace SkipDropshipCompany.Utils;
 
 internal static class TerminalUtils
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     private static Terminal cachedTerminal;
 

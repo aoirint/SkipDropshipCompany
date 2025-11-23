@@ -1,14 +1,14 @@
 using BepInEx.Logging;
 
-namespace QuickPurchaseCompany.Helpers;
+namespace SkipDropshipCompany.Helpers;
 
 internal static class LandingHistoryHelpers
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     public static bool AddLandingHistory(string sceneName)
     {
-        var landingHistoryManager = QuickPurchaseCompany.landingHistoryManager;
+        var landingHistoryManager = SkipDropshipCompany.landingHistoryManager;
         if (landingHistoryManager == null)
         {
             Logger.LogError("LandingHistoryManager is null.");
@@ -28,7 +28,7 @@ internal static class LandingHistoryHelpers
 
     public static bool ClearLandingHistory()
     {
-        var landingHistoryManager = QuickPurchaseCompany.landingHistoryManager;
+        var landingHistoryManager = SkipDropshipCompany.landingHistoryManager;
         if (landingHistoryManager == null)
         {
             Logger.LogError("LandingHistoryManager is null.");

@@ -1,12 +1,12 @@
 using System.Linq;
 using BepInEx.Logging;
-using QuickPurchaseCompany.Utils;
+using SkipDropshipCompany.Utils;
 
-namespace QuickPurchaseCompany.Helpers;
+namespace SkipDropshipCompany.Helpers;
 
 internal static class RoundHelpers
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     public static bool IsFirstDayOrbit()
     {
@@ -78,7 +78,7 @@ internal static class RoundHelpers
             return false;
         }
 
-        var landingHistoryManager = QuickPurchaseCompany.landingHistoryManager;
+        var landingHistoryManager = SkipDropshipCompany.landingHistoryManager;
         if (landingHistoryManager == null)
         {
             Logger.LogError("LandingHistoryManager is null.");

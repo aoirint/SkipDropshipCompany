@@ -5,11 +5,11 @@ using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace QuickPurchaseCompany.Utils;
+namespace SkipDropshipCompany.Utils;
 
 internal static class ItemSpawnUtils
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     private static GameObject cachedShipGameObject;
 

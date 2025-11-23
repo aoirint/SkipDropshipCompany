@@ -1,14 +1,14 @@
 using BepInEx.Logging;
 using HarmonyLib;
-using QuickPurchaseCompany.Helpers;
-using QuickPurchaseCompany.Utils;
+using SkipDropshipCompany.Helpers;
+using SkipDropshipCompany.Utils;
 
-namespace QuickPurchaseCompany.Patches;
+namespace SkipDropshipCompany.Patches;
 
 [HarmonyPatch(typeof(StartOfRound))]
 internal class StartOfRoundPatch
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     [HarmonyPatch(nameof(StartOfRound.StartGame))]
     [HarmonyPostfix]

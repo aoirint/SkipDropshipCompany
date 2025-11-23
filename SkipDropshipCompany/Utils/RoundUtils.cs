@@ -1,11 +1,11 @@
 using System.Linq;
 using BepInEx.Logging;
 
-namespace QuickPurchaseCompany.Utils;
+namespace SkipDropshipCompany.Utils;
 
 internal static class RoundUtils
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     public static bool IsInOrbit()
     {

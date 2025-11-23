@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>QuickPurchaseCompany</AssemblyName>
-    <Product>QuickPurchaseCompany</Product>
+    <AssemblyName>SkipDropshipCompany</AssemblyName>
+    <Product>SkipDropshipCompany</Product>
     <!-- APP_VERSION_MARKER -->
     <Version>0.0.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -13,7 +13,7 @@
       https://nuget.bepinex.dev/v3/index.json;
       https://nuget.samboy.dev/v3/index.json
     </RestoreAdditionalProjectSources>
-    <RootNamespace>QuickPurchaseCompany</RootNamespace>
+    <RootNamespace>SkipDropshipCompany</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

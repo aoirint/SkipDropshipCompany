@@ -1,12 +1,12 @@
-# QuickPurchaseCompany
+# SkipDropshipCompany
 
-A Lethal Company mod that speeds up item purchases when you're on the Company or in other limited situations only.
+A Lethal Company mod that skip the dropship when you're on the Company or in other limited situations.
 
 ## Features
 
-### Instant Item Delivery
+### Direct Ship Delivery
 
-Purchased items are spawned directly on the ship.
+Purchased items are delivered directly to your ship instead of being delivered by dropship.
 
 #### When It Activates
 
@@ -18,7 +18,7 @@ This feature activates when any of these conditions are met:
 
 ## Credit
 
-Inspired by the following project.
+Highly inspired by the following project.
 
 - [InstantBuy by nexor-source](https://github.com/nexor-source/InstantBuy)
 

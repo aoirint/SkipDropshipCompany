@@ -1,11 +1,11 @@
 using BepInEx.Logging;
 using Unity.Netcode;
 
-namespace QuickPurchaseCompany.Utils;
+namespace SkipDropshipCompany.Utils;
 
 internal static class NetworkUtils
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     public static bool IsServer()
     {

@@ -74,7 +74,7 @@ runs:
       shell: bash
       run: |
         APP_VERSION="${{ steps.app-version.outputs.version }}"
-        sed -i "/APP_VERSION_MARKER/{n; s|<Version>.*</Version>|<Version>${APP_VERSION}</Version>|;}" QuickPurchaseCompany/QuickPurchaseCompany.csproj
+        sed -i "/APP_VERSION_MARKER/{n; s|<Version>.*</Version>|<Version>${APP_VERSION}</Version>|;}" SkipDropshipCompany/SkipDropshipCompany.csproj
 
     - name: Generate git version
       id: git-version

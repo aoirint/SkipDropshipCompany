@@ -25,14 +25,14 @@ jobs:
         id: generate-version
         uses: ./.github/actions/generate-version
         with:
-          csproj_file: "QuickPurchaseCompany/QuickPurchaseCompany.csproj"
+          csproj_file: "SkipDropshipCompany/SkipDropshipCompany.csproj"
 
       - name: Setup .NET
         uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
         with:
           dotnet-version: '9.x'
           cache: true
-          cache-dependency-path: QuickPurchaseCompany/packages.lock.json
+          cache-dependency-path: SkipDropshipCompany/packages.lock.json
 
       - name: Restore NuGet packages
         run: dotnet restore --locked-mode
@@ -52,11 +52,11 @@ jobs:
       - name: Create artifact
         run: |
           TMP_ARTIFACT_DIR=./tmp_artifacts
-          ARTIFACT_STEM=QuickPurchaseCompany-v${{ steps.generate-version.outputs.app_version }}
+          ARTIFACT_STEM=SkipDropshipCompany-v${{ steps.generate-version.outputs.app_version }}
 
           mkdir -p "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}"
 
-          mv ./QuickPurchaseCompany/bin/Release/netstandard2.1/QuickPurchaseCompany.dll  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
+          mv ./SkipDropshipCompany/bin/Release/netstandard2.1/SkipDropshipCompany.dll  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
 
           cd "${TMP_ARTIFACT_DIR}"
 

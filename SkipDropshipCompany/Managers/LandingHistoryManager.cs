@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using BepInEx.Logging;
 
-namespace QuickPurchaseCompany.Managers;
+namespace SkipDropshipCompany.Managers;
 
 internal class LandingHistoryManager
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     const int LANDING_HISTORY_SIZE = 1;
 

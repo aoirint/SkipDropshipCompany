@@ -1,13 +1,13 @@
 using BepInEx.Logging;
 using HarmonyLib;
-using QuickPurchaseCompany.Utils;
+using SkipDropshipCompany.Utils;
 
-namespace QuickPurchaseCompany.Patches;
+namespace SkipDropshipCompany.Patches;
 
 [HarmonyPatch(typeof(Terminal))]
 internal class TerminalPatch
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     [HarmonyPatch(nameof(Terminal.SyncGroupCreditsClientRpc))]
     [HarmonyPrefix]
@@ -19,7 +19,7 @@ internal class TerminalPatch
             return;
         }
 
-        var instantPurchaseManager = QuickPurchaseCompany.instantPurchaseManager;
+        var instantPurchaseManager = SkipDropshipCompany.instantPurchaseManager;
         if (instantPurchaseManager == null)
         {
             Logger.LogError("InstantPurchaseManager is null.");
@@ -68,7 +68,7 @@ internal class TerminalPatch
             return;
         }
 
-        var instantPurchaseManager = QuickPurchaseCompany.instantPurchaseManager;
+        var instantPurchaseManager = SkipDropshipCompany.instantPurchaseManager;
         if (instantPurchaseManager == null)
         {
             Logger.LogError("InstantPurchaseManager is null.");

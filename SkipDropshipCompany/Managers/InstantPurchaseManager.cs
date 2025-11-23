@@ -2,10 +2,10 @@
 
 using System.Collections.Generic;
 using BepInEx.Logging;
-using QuickPurchaseCompany.Helpers;
-using QuickPurchaseCompany.Utils;
+using SkipDropshipCompany.Helpers;
+using SkipDropshipCompany.Utils;
 
-namespace QuickPurchaseCompany.Managers;
+namespace SkipDropshipCompany.Managers;
 
 internal sealed class PrepareInstantPurchaseResult
 {
@@ -39,7 +39,7 @@ internal sealed class SpawnPreparedInstantPurchasedItemsResult
 
 internal class InstantPurchaseManager
 {
-    internal static ManualLogSource Logger => QuickPurchaseCompany.Logger;
+    internal static ManualLogSource Logger => SkipDropshipCompany.Logger;
 
     private PrepareInstantPurchaseResult? preparedInstantPurchaseResult;
 

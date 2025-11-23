@@ -25,7 +25,7 @@ runs:
       id: csproj-version
       shell: bash
       run: |
-        VERSION=$(sed -n '/APP_VERSION_MARKER/{n; s|<Version>\(.*\)</Version>|\1|; p;}' "{{ inputs.csproj_file }}")
+        VERSION=$(sed -n '/APP_VERSION_MARKER/{n; s|<Version>\(.*\)</Version>|\1|; p;}' "${{ inputs.csproj_file }}")
         echo "version=${VERSION}" >> "${GITHUB_OUTPUT}"
 
     - name: Check release mode

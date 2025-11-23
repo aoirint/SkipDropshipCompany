@@ -37,8 +37,10 @@ runs:
         # New version: Latest mode
         # Known version: Edge mode
 
-        CSPROJ_VERSION="v${{ steps.csproj-version.outputs.version }}"
-        if git rev-parse "v${CSPROJ_VERSION}" >/dev/null 2>&1; then
+        CSPROJ_VERSION="${{ steps.csproj-version.outputs.version }}"
+
+        git fetch --tags
+        if git rev-parse "refs/tags/v${CSPROJ_VERSION}" >/dev/null 2>&1; then
           echo "mode=edge" >> "${GITHUB_OUTPUT}"
         elif [[ "${CSPROJ_VERSION}" == *"-"* ]]; then
           echo "mode=prerelease" >> "${GITHUB_OUTPUT}"

@@ -1,0 +1,15 @@
+# 改行コードを CRLF に統一
+* text=auto eol=crlf
+
+# Source code
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.sln text eol=crlf
+
+# Document
+*.md text eol=crlf
+LICENSE text eol=crlf
+
+# Git
+.gitignore text eol=crlf
+.gitattributes text eol=crlf

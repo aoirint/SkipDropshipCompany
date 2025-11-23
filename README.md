@@ -49,6 +49,14 @@ Copy a DLL file into `lib/` from `C:/Program Files (x86)/Steam/steamapps/common/
 dotnet format
 ```
 
+## Package management
+
+To update the lock file after modifying your package references, run:
+
+```powershell
+dotnet restore --use-lock-file
+```
+
 ## GitHub Actions
 
 The repository uses GitHub Actions for CI.

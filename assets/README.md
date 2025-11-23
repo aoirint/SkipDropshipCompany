@@ -36,6 +36,7 @@ Each item type will be placed with a small offset to avoid overlapping.
 
 | Name | Type | Default | Description |
 |:--------|:-----|:--------|:------------|
+| Enabled | bool | true | Set to false to disable this mod. |
 | RequireReroutingOnFirstDay | bool | false | If true, rerouting to the company will be required to skip the dropship on the first day. |
 
 ## FAQ

@@ -22,13 +22,22 @@ public class SkipDropshipCompany : BaseUnityPlugin
 
     internal static LandingHistoryManager landingHistoryManager = new();
 
-    internal static ConfigEntry<bool>? isFirstDayRerouteRequiredConfig;
+    internal static ConfigEntry<bool>? EnabledConfig;
+
+    internal static ConfigEntry<bool>? RequireReroutingOnFirstDayConfig;
 
     private void Awake()
     {
         Logger = base.Logger;
 
-        isFirstDayRerouteRequiredConfig = Config.Bind(
+        EnabledConfig = Config.Bind(
+            "General",
+            "Enabled",
+            true,
+            "Set to false to disable this mod."
+        );
+
+        RequireReroutingOnFirstDayConfig = Config.Bind(
             "General",
             "RequireReroutingOnFirstDay",
             false,

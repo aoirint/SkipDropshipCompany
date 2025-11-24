@@ -103,6 +103,12 @@ This mod just spawns the purchased items directly on your ship instead of the dr
 
 This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
 
+## Differences from [dozyote/EarlyDropship](https://thunderstore.io/c/lethal-company/p/dozyote/EarlyDropship/)
+
+`zoomstv/FasterRocket` reduces the waiting time for the dropship to arrive after purchasing items in orbit.
+
+This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
+
 ## Credits
 
 - Highly inspired by [Nexor/InstantBuy](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/).

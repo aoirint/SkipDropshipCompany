@@ -6,9 +6,9 @@ A Lethal Company mod that skips the dropship when you're on the Company or in ot
 
 ## Development
 
-Install .NET SDK 9.0.
+Install .NET SDK 10.0 or later.
 
-- <https://dotnet.microsoft.com/en-us/download/dotnet/9.0>
+- <https://dotnet.microsoft.com/en-us/download/dotnet/10.0>
 
 Restore NuGet packages.
 
@@ -17,6 +17,9 @@ dotnet restore --locked-mode
 ```
 
 ## Code format
+
+- Language version: [C# 13.0](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-13)
+- Target framework: [.NET standard 2.1](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-1)
 
 ```powershell
 dotnet format

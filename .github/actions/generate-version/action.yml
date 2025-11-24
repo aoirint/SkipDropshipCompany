@@ -42,6 +42,9 @@ runs:
         git fetch --tags
         if git rev-parse "refs/tags/v${CSPROJ_VERSION}" >/dev/null 2>&1; then
           echo "mode=edge" >> "${GITHUB_OUTPUT}"
+        elif [[ "${CSPROJ_VERSION}" == "0.0.0" ]]; then
+          # Early development version
+          echo "mode=edge" >> "${GITHUB_OUTPUT}"
         elif [[ "${CSPROJ_VERSION}" == *"-"* ]]; then
           echo "mode=prerelease" >> "${GITHUB_OUTPUT}"
         else

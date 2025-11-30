@@ -132,26 +132,16 @@ jobs:
           name: artifact
           path: ./tmp_artifacts
 
-      - name: Draft release
-        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
-        with:
-          tag: ${{ needs.build.outputs.git_version }}
-          commit: ${{ github.sha }}
-          draft: true
-          generateReleaseNotes: true
-          artifacts: |
-            ./tmp_artifacts/*.zip
-          artifactErrorsFailBuild: true
-          artifactContentType: application/zip
-          allowUpdates: false
-
       - name: Publish release
         uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
         with:
           tag: ${{ needs.build.outputs.git_version }}
           commit: ${{ github.sha }}
-          draft: false
+          immutableCreate: true
           prerelease: ${{ needs.build.outputs.release_mode != 'latest' }}
           makeLatest: ${{ needs.build.outputs.release_mode == 'latest' }}
-          allowUpdates: true
-          updateOnlyUnreleased: true
+          generateReleaseNotes: true
+          artifacts: |
+            ./tmp_artifacts/*.zip
+          artifactErrorsFailBuild: true
+          artifactContentType: application/zip

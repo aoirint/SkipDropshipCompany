@@ -10,10 +10,32 @@ Install .NET SDK 10.0 or later.
 
 - <https://dotnet.microsoft.com/en-us/download/dotnet/10.0>
 
+Install PowerShell 7.
+
+- <https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows>
+
+Install Visual Studio 2022.
+
+- <https://visualstudio.microsoft.com/en-us/vs/>
+
 Restore NuGet packages.
 
 ```powershell
 dotnet restore --locked-mode
+```
+
+Create BeplnEx profiles in `./profiles` directory.
+
+```powershell
+pwsh ./InitProfiles.ps1
+```
+
+Open `SkipDropshipCompany.sln` in Visual Studio.
+
+Launch `HostAndGuest` profile to debug. Or manually run `Debug.ps1`.
+
+```powershell
+pwsh ./Debug.ps1
 ```
 
 ## Code format

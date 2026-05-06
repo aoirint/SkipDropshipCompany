@@ -20,6 +20,17 @@ No gameplay changes are introduced.
 
 - Rebuilt for Lethal Company v81.5.
 - Improved internal implementation structure and release flow.
+- Added the Thunderstore `AI Generated` category to the package metadata:
+    - The Lethal Company Thunderstore community currently provides this
+      category for authors to disclose when a `significant portion` of a mod
+      was created using AI tools.
+    - This project uses the category to disclose AI assistance in project work;
+      it is package metadata rather than a gameplay feature.
+    - The project decided to use this category because:
+        - It has used and expects to keep using AI tools to assist with
+          development and maintenance, and to reduce workload.
+        - The applicable disclosure threshold is not clear.
+    - Human maintainer review remains the project policy.
 
 ### Notes
 

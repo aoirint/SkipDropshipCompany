@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MIT -->
+
 # SkipDropshipCompany
 
 A Lethal Company mod that skips the dropship to purchase items when you're on
@@ -122,6 +124,13 @@ This mod just spawns the purchased items directly on your ship instead of the dr
 ## Credits
 
 - Highly inspired by [Nexor/InstantBuy][instant-buy-package].
+
+## AI Disclosure
+
+Some parts of this project were developed with AI tools based on large language
+models (LLMs), including agent-based tools.
+The project maintainer reviews the code.
+This disclosure is made in compliance with Thunderstore and community policies.
 
 [bepinexpack-package]: https://thunderstore.io/c/lethal-company/p/BepInEx/BepInExPack/
 [early-dropship-package]: https://thunderstore.io/c/lethal-company/p/dozyote/EarlyDropship/

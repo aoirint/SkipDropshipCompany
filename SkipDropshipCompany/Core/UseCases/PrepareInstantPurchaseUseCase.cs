@@ -44,10 +44,12 @@ internal sealed class PrepareInstantPurchaseUseCase
                     preparedResult: null
                 )
             );
+
             return null;
         }
 
         logger.LogDebug("Preparing instant purchase.");
+
         if (!eligibilityUseCase.IsInstantPurchaseAllowed())
         {
             logger.LogDebug("Instant purchase is not allowed in the current game state.");
@@ -59,6 +61,7 @@ internal sealed class PrepareInstantPurchaseUseCase
                     preparedResult: null
                 )
             );
+
             return null;
         }
 
@@ -75,10 +78,12 @@ internal sealed class PrepareInstantPurchaseUseCase
                 preparedResult: result
             )
         );
+
         // Publish only after the success record is emitted. If validation
         // logging throws, the Harmony guard treats the Prefix as fail-open and
         // the Postfix must not see prepared work from that failed notification.
         preparedInstantPurchaseStore.SetPreparedInstantPurchaseResult(result);
+
         return result;
     }
 }

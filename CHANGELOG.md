@@ -22,17 +22,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Notes
 
 - Compatibility:
-    - Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+    - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
-    - BepInExPack v5.4.2305.
-- Older Lethal Company versions are no longer claimed as tested by current
-  release notes.
+        - The v81.5 test environment used BepInExPack v5.4.2305.
+- Older Lethal Company versions are no longer claimed as tested by the current
+  v0.2.0 release notes; Lethal Company v73 compatibility is recorded in the
+  historical `v0.1.x` release entries below.
 
 ## v0.1.7 - 2025-11-23 UTC
 
 ### Fixed
 
 - Fixed some typos in README.
+
+### Notes
+
+- Compatibility:
+    - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
+      `1749099131234587692`).
+        - Backfilled as reference compatibility information while preparing
+          the v0.2.0 release.
 
 ## v0.1.6 - 2025-11-23 UTC
 
@@ -41,8 +50,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added the `Enabled` config option to enable or disable this mod without
   uninstalling it.
 
+### Notes
+
+- Compatibility:
+    - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
+      `1749099131234587692`).
+        - Backfilled as reference compatibility information while preparing
+          the v0.2.0 release.
+
 ## v0.1.4 - 2025-11-23 UTC
 
 ### Added
 
 - Initial Thunderstore release.
+
+### Notes
+
+- Compatibility:
+    - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
+      `1749099131234587692`).
+        - Backfilled as reference compatibility information while preparing
+          the v0.2.0 release.

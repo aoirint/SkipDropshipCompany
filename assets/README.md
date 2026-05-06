@@ -41,7 +41,7 @@ Each item type will be placed with a small offset to avoid overlapping.
 ## Configuration
 
 | Name | Type | Default | Description |
-|:--------|:-----|:--------|:------------|
+| :------ | :--- | :------ | :---------- |
 | Enabled | bool | true | Set to false to disable this mod. |
 | RequireReroutingOnFirstDay | bool | false | If true, rerouting to the company will be required to skip the dropship on the first day. |
 
@@ -58,7 +58,7 @@ The dropship will arrive as usual on that moon in these cases.
 
 You can change the first day behavior in configuration if your first day is
 eclipsed or you are using a mod like
-[stormytuna/EclipseOnly](https://thunderstore.io/c/lethal-company/p/stormytuna/EclipseOnly/).
+[stormytuna/EclipseOnly][eclipse-only-package].
 
 ### Already purchased items before the conditions are met. Will they be delivered directly to the ship?
 
@@ -73,15 +73,15 @@ This behaviour may be changed in the future version since it depends on the base
 
 At least the following versions are assumed to be compatible.
 
-- [FlipMods/FasterItemDropship](https://thunderstore.io/c/lethal-company/p/FlipMods/FasterItemDropship/) v1.3.1
-- [zoomstv/FasterRocket](https://thunderstore.io/c/lethal-company/p/zoomstv/FasterRocket/) v1.0.1
+- [FlipMods/FasterItemDropship][faster-item-dropship-package] v1.3.1
+- [zoomstv/FasterRocket][faster-rocket-package] v1.0.1
 
 ### Does it work for the legacy versions of Lethal Company?
 
 No test has been done for them. It is recommended to use the tested Lethal
 Company v81.5 baseline above.
 
-## Differences from [Nexor/InstantBuy](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/)
+## Differences from [Nexor/InstantBuy][instant-buy-package]
 
 `Nexor/InstantBuy` skips the dropship for all purchases by default.
 
@@ -91,7 +91,7 @@ This mod only skips the dropship when on the Company or in other limited situati
 
 This mod does not have such a configuration option yet.
 
-## Differences from [befuddled_productions/Quick_Buy_Menu](https://thunderstore.io/c/lethal-company/p/befuddled_productions/Quick_Buy_Menu/)
+## Differences from [befuddled_productions/Quick_Buy_Menu][quick-buy-menu-package]
 
 `befuddled_productions/Quick_Buy_Menu` adds some chat commands to purchase items in a faster way.
 
@@ -101,19 +101,19 @@ This mod uses the terminal as usual to purchase items.
 
 This mod stores the purchased items on the ship directly.
 
-## Differences from [FlipMods/FasterItemDropship](https://thunderstore.io/c/lethal-company/p/FlipMods/FasterItemDropship/)
+## Differences from [FlipMods/FasterItemDropship][faster-item-dropship-package]
 
 `FlipMods/FasterItemDropship` reduces the waiting time for the dropship to arrive after purchasing items.
 
 This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
 
-## Differences from [zoomstv/FasterRocket](https://thunderstore.io/c/lethal-company/p/zoomstv/FasterRocket/)
+## Differences from [zoomstv/FasterRocket][faster-rocket-package]
 
 `zoomstv/FasterRocket` reduces the waiting time for the dropship to arrive after purchasing items.
 
 This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
 
-## Differences from [dozyote/EarlyDropship](https://thunderstore.io/c/lethal-company/p/dozyote/EarlyDropship/)
+## Differences from [dozyote/EarlyDropship][early-dropship-package]
 
 `zoomstv/FasterRocket` reduces the waiting time for the dropship to arrive after purchasing items in orbit.
 
@@ -121,6 +121,12 @@ This mod just spawns the purchased items directly on your ship instead of the dr
 
 ## Credits
 
-- Highly inspired by [Nexor/InstantBuy](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/).
+- Highly inspired by [Nexor/InstantBuy][instant-buy-package].
 
 [bepinexpack-package]: https://thunderstore.io/c/lethal-company/p/BepInEx/BepInExPack/
+[early-dropship-package]: https://thunderstore.io/c/lethal-company/p/dozyote/EarlyDropship/
+[eclipse-only-package]: https://thunderstore.io/c/lethal-company/p/stormytuna/EclipseOnly/
+[faster-item-dropship-package]: https://thunderstore.io/c/lethal-company/p/FlipMods/FasterItemDropship/
+[faster-rocket-package]: https://thunderstore.io/c/lethal-company/p/zoomstv/FasterRocket/
+[instant-buy-package]: https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/
+[quick-buy-menu-package]: https://thunderstore.io/c/lethal-company/p/befuddled_productions/Quick_Buy_Menu/

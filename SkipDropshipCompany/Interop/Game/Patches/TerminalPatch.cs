@@ -8,6 +8,9 @@ namespace SkipDropshipCompany.Interop.Game.Patches;
 [HarmonyPatch(typeof(Terminal))]
 internal static class TerminalPatch
 {
+    private const string PrefixCallback = "terminal_sync_group_credits_prefix";
+    private const string PostfixCallback = "terminal_sync_group_credits_postfix";
+
     [HarmonyPatch(nameof(Terminal.SyncGroupCreditsClientRpc))]
     [HarmonyPrefix]
     public static void SyncGroupCreditsClientRpcPrefix(
@@ -16,7 +19,16 @@ internal static class TerminalPatch
         ref int numItemsInShip
     )
     {
-        var result = SkipDropshipCompany.Controller.PrepareTerminalSyncGroupCreditsInstantPurchase();
+        var completed = HarmonyCallbackGuard.TryNotifyHarmonyCallback(
+            PrefixCallback,
+            SkipDropshipCompany.Controller.PrepareTerminalSyncGroupCreditsInstantPurchase,
+            out var result
+        );
+        if (!completed)
+        {
+            return;
+        }
+
         if (result == null)
         {
             return;
@@ -31,6 +43,9 @@ internal static class TerminalPatch
     [HarmonyPostfix]
     public static void SyncGroupCreditsClientRpcPostfix()
     {
-        SkipDropshipCompany.Controller.SpawnTerminalSyncGroupCreditsPreparedItems();
+        HarmonyCallbackGuard.TryNotifyHarmonyCallback(
+            PostfixCallback,
+            () => SkipDropshipCompany.Controller.SpawnTerminalSyncGroupCreditsPreparedItems()
+        );
     }
 }

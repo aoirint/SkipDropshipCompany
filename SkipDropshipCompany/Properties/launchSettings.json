@@ -1,10 +1,3 @@
 {
-  "profiles": {
-    "HostAndGuest": {
-      "commandName": "Executable",
-      "executablePath": "pwsh.exe",
-      "commandLineArgs": "-NoProfile -ExecutionPolicy Bypass -File \"$(SolutionDir)Debug.ps1\"",
-      "workingDirectory": "$(SolutionDir)"
-    }
-  }
+  "profiles": {}
 }

@@ -23,20 +23,14 @@ public class SkipDropshipCompany : BaseUnityPlugin
     {
         var logger = new BepInExPluginLogger(base.Logger);
         var config = BepInExPluginConfig.Bind(Config);
-        var validationLogging = Config.Bind(
-            "Debug",
-            "ValidationLogging",
-            false,
-            "Enable structured validation logs for release validation and troubleshooting."
-        );
-        IValidationLogger validationLogger = validationLogging.Value
+        IValidationLogger validationLogger = config.ValidationLogging
             ? new BepInExValidationLogger(logger, System.DateTime.UtcNow)
             : DisabledValidationLogger.Instance;
 
         validationLogger.Record(
             ValidationLogRecord.PluginLoaded(
                 version: MyPluginInfo.PLUGIN_VERSION,
-                validationLogging: validationLogging.Value,
+                validationLogging: config.ValidationLogging,
                 enabled: config.Enabled,
                 requireReroutingOnFirstDay: config.RequireReroutingOnFirstDay
             )

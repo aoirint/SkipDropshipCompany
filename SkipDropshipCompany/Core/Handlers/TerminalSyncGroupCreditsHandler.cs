@@ -48,6 +48,9 @@ internal sealed class TerminalSyncGroupCreditsHandler
             return null;
         }
 
+        // Prefix preparation partitions the pending order before the base-game
+        // RPC applies its dropship count. The Postfix later consumes the
+        // prepared instant portion and restores the retained dropship order.
         var result = prepareInstantPurchaseUseCase.Execute(boughtItemIndexes: boughtItemIndexes);
         if (result == null)
         {
@@ -67,6 +70,9 @@ internal sealed class TerminalSyncGroupCreditsHandler
 
     public void HandlePostfix()
     {
+        // Postfix work is intentionally driven only by prepared state from the
+        // Prefix. If preparation failed or was not allowed, the base-game order
+        // remains untouched.
         var result = spawnPreparedInstantPurchasedItemsUseCase.Execute();
         if (result == null)
         {

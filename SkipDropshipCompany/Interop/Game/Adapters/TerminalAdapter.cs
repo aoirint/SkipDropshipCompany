@@ -8,6 +8,8 @@ using UnityEngine;
 
 namespace SkipDropshipCompany.Interop.Game.Adapters;
 
+// TerminalAdapter owns the mutable Terminal order list boundary. Caching avoids
+// repeated scene searches during the paired Prefix/Postfix callbacks.
 internal sealed class TerminalAdapter
 {
     private readonly IPluginLogger logger;
@@ -56,6 +58,8 @@ internal sealed class TerminalAdapter
             return false;
         }
 
+        // Replacing the whole list mirrors the base-game field shape and keeps
+        // the retained dropship order explicit after instant delivery spawns.
         terminal.orderedItemsFromTerminal = boughtItemIndexes;
         return true;
     }

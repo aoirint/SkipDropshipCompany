@@ -27,6 +27,9 @@ internal sealed class BepInExValidationLogger : IValidationLogger
 
     public void Record(ValidationLogRecord record)
     {
+        // Validation logs are line-oriented JSON embedded in the normal BepInEx
+        // log stream. Keep the envelope stable so external scripts can filter
+        // by prefix, then compare schema/run/seq/event across mod versions.
         var payload = new Dictionary<string, object?>
         {
             ["schema"] = SchemaVersion,
@@ -49,6 +52,8 @@ internal sealed class BepInExValidationLogger : IValidationLogger
 
     private static string CreateRunId(DateTime startupTimeUtc)
     {
+        // The timestamp makes a run readable in raw logs, while the short
+        // random suffix keeps two launches in the same second distinct.
         var timestamp = startupTimeUtc.ToString("yyyyMMdd'T'HHmmss'Z'", CultureInfo.InvariantCulture);
         var suffix = Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture).Substring(0, 6);
         return timestamp + "-" + suffix;

@@ -6,6 +6,8 @@ using SkipDropshipCompany.Core.State;
 
 namespace SkipDropshipCompany.Interop.Game.Adapters;
 
+// RoundAdapter converts base-game round fields into the small RoundState used
+// by Core policy. Missing singleton data fails closed and logs at this boundary.
 internal sealed class RoundAdapter
 {
     private readonly IPluginLogger logger;
@@ -28,6 +30,8 @@ internal sealed class RoundAdapter
         var isFirstDay = IsFirstDay(startOfRound);
         var isRoutingToCompany = IsRoutingToCompany(startOfRound);
 
+        // Core needs the three policy booleans, not the mutable StartOfRound
+        // object, so each eligibility check works from one round snapshot.
         return new RoundState(
             isInOrbit: isInOrbit,
             isFirstDay: isFirstDay,

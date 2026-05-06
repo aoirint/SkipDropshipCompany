@@ -35,6 +35,8 @@ internal sealed class PluginController
     {
         IGameInterop gameInterop = new GameInterop(logger);
 
+        // Manual wiring is grouped by game-state lifetime: landing history,
+        // prepared terminal purchase state, then the handlers that consume both.
         var landingHistoryStore = new LandingHistoryStore(logger);
         var preparedInstantPurchaseStore = new PreparedInstantPurchaseStore();
         var instantPurchaseEligibilityUseCase = new InstantPurchaseEligibilityUseCase(
@@ -90,6 +92,8 @@ internal sealed class PluginController
         );
     }
 
+    // Base-game Harmony callbacks use these narrow methods to keep patch
+    // classes free of use-case and store details.
     public void HandleStartGame()
     {
         roundCallbackHandler.HandleStartGame();

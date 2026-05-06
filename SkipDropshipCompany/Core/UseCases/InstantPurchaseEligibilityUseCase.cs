@@ -7,6 +7,9 @@ using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.UseCases;
 
+// Eligibility is a pure policy layer around current round state, config, and
+// one-entry landing history. It records both the boolean decision and the reason
+// token used for validation.
 internal sealed class InstantPurchaseEligibilityUseCase
 {
     private readonly IPluginConfig config;
@@ -70,6 +73,9 @@ internal sealed class InstantPurchaseEligibilityUseCase
             isInOrbitAndLastLandedOnCompanyAndRoutingToCompany
         );
 
+        // Compute the reason from the same booleans used for the decision so
+        // validation logs explain the selected policy path without re-reading
+        // mutable game state.
         validationLogger.Record(
             ValidationLogRecord.InstantPurchaseEligibilityDecision(
                 roundState: roundState,

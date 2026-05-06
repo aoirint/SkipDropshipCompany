@@ -1,8 +1,11 @@
+# SPDX-License-Identifier: MIT
 name: Generate Version
 description: "Generate application and git version based on csproj version and git tags."
 
 inputs:
   csproj_file:
+    # This file must contain APP_VERSION_MARKER immediately before <Version>;
+    # the marker avoids broad XML edits while keeping the action shell-only.
     description: 'csproj file path'
     required: true
 
@@ -16,6 +19,9 @@ outputs:
   git_version:
     description: 'Git tag version'
     value: ${{ steps.git-version.outputs.version }}
+  manifest_version:
+    description: 'Thunderstore manifest version_number'
+    value: ${{ steps.manifest-version.outputs.version }}
 
 runs:
   using: "composite"
@@ -25,25 +31,24 @@ runs:
       id: csproj-version
       shell: bash
       run: |
-        # Read the version from the next line after !!APP_VERSION_MARKER!! in the csproj file
-        # tr and xargs for trimming whitespace, line endings
-        CSPROJ_VERSION=$(sed -n '/!!APP_VERSION_MARKER!!/{n; s|<Version>\(.*\)</Version>|\1|; p;}' "${{ inputs.csproj_file }}" | tr -d '\r' | xargs)
+        # Read only the marker-adjacent Version element so unrelated XML
+        # metadata does not affect release classification.
+        CSPROJ_VERSION=$(sed -n '/APP_VERSION_MARKER/{n; s|<Version>\(.*\)</Version>|\1|; p;}' "${{ inputs.csproj_file }}" | tr -d '\r' | xargs)
         echo "version=${CSPROJ_VERSION}" >> "${GITHUB_OUTPUT}"
 
     - name: Check release mode
       id: release-mode
       shell: bash
       run: |
-        # New version: Latest mode
-        # Known version: Edge mode
-
         CSPROJ_VERSION="${{ steps.csproj-version.outputs.version }}"
 
+        # Tags are fetched here, not by checkout, because release mode depends
+        # on the remote tag set at the moment the build runs.
         git fetch --tags
         if git rev-parse "refs/tags/v${CSPROJ_VERSION}" >/dev/null 2>&1; then
           echo "mode=edge" >> "${GITHUB_OUTPUT}"
         elif [[ "${CSPROJ_VERSION}" == "0.0.0" ]]; then
-          # Early development version
+          # Keep the placeholder development version from publishing releases.
           echo "mode=edge" >> "${GITHUB_OUTPUT}"
         elif [[ "${CSPROJ_VERSION}" == *"-"* ]]; then
           echo "mode=prerelease" >> "${GITHUB_OUTPUT}"
@@ -55,13 +60,12 @@ runs:
       id: app-version
       shell: bash
       run: |
-        # Edge mode: {csproj_version}-edge.{date}.{short_sha}
-        # Prerelease mode: {csproj_version}-{prerelease}
-        # Latest mode: {csproj_version}
         CSPROJ_VERSION="${{ steps.csproj-version.outputs.version }}"
         RELEASE_MODE="${{ steps.release-mode.outputs.mode }}"
 
         if [ "${RELEASE_MODE}" = "edge" ]; then
+          # Edge artifacts need globally unique SemVer-compatible versions so
+          # repeated main-branch builds do not collide with published packages.
           DATE_STRING=$(date -u "+%Y-%m-%dT%H-%M-%SZ")
           SHA_SHORT="${GITHUB_SHA:0:7}"
           APP_VERSION="${CSPROJ_VERSION}-edge.${DATE_STRING}.${SHA_SHORT}"
@@ -78,15 +82,37 @@ runs:
         APP_VERSION="${{ steps.app-version.outputs.version }}"
         echo "version=v${APP_VERSION}" >> "${GITHUB_OUTPUT}"
 
+    - name: Generate manifest version
+      id: manifest-version
+      shell: bash
+      run: |
+        RELEASE_MODE="${{ steps.release-mode.outputs.mode }}"
+
+        if [ "${RELEASE_MODE}" = "latest" ]; then
+          MANIFEST_VERSION="${{ steps.app-version.outputs.version }}"
+        else
+          # Thunderstore-style package metadata does not carry prerelease or
+          # edge identity. Keep release identity in the project version,
+          # artifact name, and Git tag instead.
+          MANIFEST_VERSION="0.0.0"
+        fi
+
+        echo "version=${MANIFEST_VERSION}" >> "${GITHUB_OUTPUT}"
+
     - name: Replace version in csproj
       shell: bash
       run: |
+        # The generated version is written back before build so the compiled
+        # assembly and package metadata describe the same artifact.
         APP_VERSION="${{ steps.app-version.outputs.version }}"
-        sed -i "/!!APP_VERSION_MARKER!!/{n; s|<Version>.*</Version>|<Version>${APP_VERSION}</Version>|;}" "${{ inputs.csproj_file }}"
+        sed -i "/APP_VERSION_MARKER/{n; s|<Version>.*</Version>|<Version>${APP_VERSION}</Version>|;}" "${{ inputs.csproj_file }}"
 
     - name: Replace version in manifest.json
       shell: bash
       run: |
-        APP_VERSION="${{ steps.app-version.outputs.version }}"
-        jq --arg ver "${APP_VERSION}" '.version_number = $ver' assets/manifest.json > assets/manifest.tmp.json
+        # Thunderstore reads version_number from the manifest inside the zip.
+        # Stable releases use the app version; prerelease and edge artifacts keep
+        # a conservative placeholder because they are GitHub-only artifacts.
+        MANIFEST_VERSION="${{ steps.manifest-version.outputs.version }}"
+        jq --arg ver "${MANIFEST_VERSION}" '.version_number = $ver' assets/manifest.json > assets/manifest.tmp.json
         mv assets/manifest.tmp.json assets/manifest.json

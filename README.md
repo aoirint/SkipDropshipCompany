@@ -18,7 +18,7 @@ Install [Visual Studio 2022][visual-studio-download].
 Install [Docker][docker-install] if you plan to use the documented local
 Markdown lint command.
 
-Install [`actionlint`][actionlint-repo], [ShellCheck][shellcheck-repo], and
+Install [ShellCheck][shellcheck-repo], [`actionlint`][actionlint-repo], and
 [pinact][pinact-repo] if you plan to run GitHub Actions quality checks locally.
 
 Restore NuGet packages.
@@ -81,27 +81,28 @@ GitHub Actions workflows and composite actions are checked with
 
 The local lint pass has two parts:
 
+- ShellCheck checks shell scripts used by repository automation.
 - `actionlint` checks workflow syntax, expressions, runner labels, and composite
   action metadata.
-- ShellCheck checks shell scripts used by repository automation.
 
-CI installs ShellCheck before running actionlint, so actionlint can also inspect
-inline shell scripts in workflows.
+Run ShellCheck before actionlint.
+This keeps actionlint's ShellCheck integration available so actionlint can also
+inspect inline shell scripts in workflows.
 The pyflakes integration remains disabled because this repository does not
 currently contain Python files.
 Revisit that setting if Python scripts are added.
 
 ```powershell
-actionlint -pyflakes=
 shellcheck .github/actions/publish-thunderstore/publish-thunderstore.sh
+actionlint -pyflakes=
 ```
 
 Install these tools from trusted distributions:
 
-- `actionlint`: upstream releases, package-manager integrations, Docker image,
-  or another trusted distribution.
 - ShellCheck: upstream releases, package-manager integrations, Docker image, or
   another trusted distribution.
+- `actionlint`: upstream releases, package-manager integrations, Docker image,
+  or another trusted distribution.
 
 When updating CI, use cooldown-compliant pinned releases.
 The workflow downloads Linux release archives directly and verifies their SHA256

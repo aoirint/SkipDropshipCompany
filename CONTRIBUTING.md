@@ -97,8 +97,8 @@ Run the checks that match your change before opening a pull request:
 ```powershell
 dotnet format
 docker run --rm --network none --user 1000:1000 -v ".:/workdir" davidanson/markdownlint-cli2:v0.22.1@sha256:0ed9a5f4c77ef447da2a2ac6e67caf74b214a7f80288819565e8b7d2ac148fe5
-actionlint -pyflakes=
 shellcheck .github/actions/publish-thunderstore/publish-thunderstore.sh
+actionlint -pyflakes=
 pinact run --check --min-age 7
 DOTNET_CLI_UI_LANGUAGE=en dotnet build
 ```
@@ -111,8 +111,10 @@ Use the commands as follows:
   The Docker command is the documented pinned path, but Docker is not required.
   Another `markdownlint-cli2` installation method is acceptable when it uses the
   repository configuration.
-- Run `actionlint`, `shellcheck`, and `pinact` when changing GitHub Actions
+- Run `shellcheck`, `actionlint`, and `pinact` when changing GitHub Actions
   workflows, composite actions, shell scripts, or related repository automation.
+  ShellCheck should run before actionlint so actionlint can use its ShellCheck
+  integration for inline workflow shell scripts.
 
 On Linux, run the Markdown lint command with `sudo docker` and use
 `--user "$(id -u):$(id -g)"`.

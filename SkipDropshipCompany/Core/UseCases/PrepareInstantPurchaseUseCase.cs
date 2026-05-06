@@ -8,6 +8,12 @@ using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.UseCases;
 
+/// <summary>
+/// Partitions the terminal order into instant-delivery and dropship-retained portions.
+/// </summary>
+/// <remarks>
+/// Preparation does not spawn anything; the later Postfix consumes the prepared result.
+/// </remarks>
 internal sealed class PrepareInstantPurchaseUseCase
 {
     private readonly IGameInterop gameInterop;

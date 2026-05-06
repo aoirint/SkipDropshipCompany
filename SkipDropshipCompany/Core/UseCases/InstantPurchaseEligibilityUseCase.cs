@@ -7,6 +7,13 @@ using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.UseCases;
 
+/// <summary>
+/// Evaluates whether the current round state allows instant purchase.
+/// </summary>
+/// <remarks>
+/// The policy is based on current round state, config, and one-entry landing
+/// history, then records both the decision and validation reason token.
+/// </remarks>
 internal sealed class InstantPurchaseEligibilityUseCase
 {
     private readonly IPluginConfig config;
@@ -70,6 +77,9 @@ internal sealed class InstantPurchaseEligibilityUseCase
             isInOrbitAndLastLandedOnCompanyAndRoutingToCompany
         );
 
+        // Compute the reason from the same booleans used for the decision so
+        // validation logs explain the selected policy path without re-reading
+        // mutable game state.
         validationLogger.Record(
             ValidationLogRecord.InstantPurchaseEligibilityDecision(
                 roundState: roundState,

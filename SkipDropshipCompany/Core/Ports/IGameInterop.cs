@@ -6,6 +6,9 @@ using SkipDropshipCompany.Core.State;
 
 namespace SkipDropshipCompany.Core.Ports;
 
+/// <summary>
+/// Names the game operations the instant-purchase rules need without exposing Unity objects.
+/// </summary>
 internal interface IGameInterop
 {
     bool IsServer();

@@ -7,6 +7,13 @@ using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.UseCases;
 
+/// <summary>
+/// Spawns the instant-delivery portion prepared by the terminal RPC Prefix.
+/// </summary>
+/// <remarks>
+/// Returns the dropship-retained order so the handler can put
+/// Terminal.orderedItemsFromTerminal back into the expected delivery state.
+/// </remarks>
 internal sealed class SpawnPreparedInstantPurchasedItemsUseCase
 {
     private readonly IGameInterop gameInterop;
@@ -93,6 +100,8 @@ internal sealed class SpawnPreparedInstantPurchasedItemsUseCase
             instantBoughtItemIndexes: preparedInstantPurchaseResult.InstantBoughtItemIndexes
         );
 
+        // Clear before reporting success so a later Postfix cannot replay the
+        // same prepared order if terminal restoration or logging is retried.
         preparedInstantPurchaseStore.ClearPreparedInstantPurchaseResult();
         validationLogger.Record(
             ValidationLogRecord.SpawnInstantPurchaseResult(

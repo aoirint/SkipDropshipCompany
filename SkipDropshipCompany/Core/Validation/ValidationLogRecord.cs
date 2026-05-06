@@ -54,8 +54,13 @@ internal enum ValidationLogTerminalOrderRestoreResult
     Success
 }
 
+/// <summary>
+/// Immutable validation event description with stable event names and fields.
+/// </summary>
 internal sealed class ValidationLogRecord
 {
+    // Call sites choose semantic events through named factories; this type owns
+    // the stable field names and token spelling.
     private ValidationLogRecord(string eventName, Dictionary<string, object?>? fields = null)
     {
         EventName = eventName;
@@ -244,6 +249,8 @@ internal sealed class ValidationLogRecord
 
     public static ValidationLogScene ToValidationScene(string? sceneName)
     {
+        // Scene names come from the base game, but validation logs keep only
+        // closed scene categories so runs can be compared across environments.
         if (sceneName == null)
         {
             return ValidationLogScene.Unknown;
@@ -256,6 +263,8 @@ internal sealed class ValidationLogRecord
 
     private static string ToValidationRoleToken(ValidationLogRole role)
     {
+        // Unknown enum values fall back to schema-safe tokens instead of
+        // leaking numeric values into validation output.
         return role switch
         {
             ValidationLogRole.Server => "server",

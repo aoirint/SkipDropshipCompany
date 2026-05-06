@@ -10,6 +10,13 @@ using UnityEngine;
 
 namespace SkipDropshipCompany.Interop.Game.Adapters;
 
+/// <summary>
+/// Owns Unity-side spawning for instant-delivered buyable items.
+/// </summary>
+/// <remarks>
+/// Core chooses item indexes; this adapter resolves prefabs, placement, and
+/// NetworkObject spawning inside the ship.
+/// </remarks>
 internal sealed class ItemSpawnAdapter
 {
     private readonly IPluginLogger logger;
@@ -81,6 +88,8 @@ internal sealed class ItemSpawnAdapter
         grabbableObject.isInShipRoom = true;
         grabbableObject.hasHitGround = true;
 
+        // The object must be spawned after its ship/elevator flags are set so
+        // clients receive the direct-delivery state instead of a falling item.
         var networkObject = gameObject.GetComponent<NetworkObject>();
         if (networkObject == null)
         {
@@ -120,6 +129,8 @@ internal sealed class ItemSpawnAdapter
             return cachedOffsetX;
         }
 
+        // Deterministic per-item spread makes validation and repeated purchases
+        // easier to reason about than Unity random state.
         // Range for out-of-bounds items in the base game.
         const float offsetXRange = 0.7f;
 

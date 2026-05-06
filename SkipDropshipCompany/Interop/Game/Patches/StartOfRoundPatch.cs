@@ -8,8 +8,9 @@ namespace SkipDropshipCompany.Interop.Game.Patches;
 [HarmonyPatch(typeof(StartOfRound))]
 internal static class StartOfRoundPatch
 {
-    // For the base game, StartGame enters the round-start lifecycle. The
-    // Postfix runs after that lifecycle step without changing the base call.
+    /// <summary>
+    /// Records landing history after the base-game round-start lifecycle enters.
+    /// </summary>
     [HarmonyPatch(nameof(StartOfRound.StartGame))]
     [HarmonyPostfix]
     public static void StartGamePostfix()
@@ -20,9 +21,9 @@ internal static class StartOfRoundPatch
         );
     }
 
-    // For the base game, ResetShip clears ship and round state for the next
-    // lifecycle phase. The Postfix runs after the reset without making the base
-    // reset depend on SDC callback success.
+    /// <summary>
+    /// Clears landing history after the base-game ship reset completes.
+    /// </summary>
     [HarmonyPatch(nameof(StartOfRound.ResetShip))]
     [HarmonyPostfix]
     public static void ResetShipPostfix()

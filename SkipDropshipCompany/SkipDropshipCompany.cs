@@ -41,6 +41,7 @@ public class SkipDropshipCompany : BaseUnityPlugin
             logger: logger,
             validationLogger: validationLogger
         );
+
         // Startup order matters: configure the guard after the controller is
         // wired and before patching so the first callback can be diagnosed.
         HarmonyCallbackGuard.Configure(

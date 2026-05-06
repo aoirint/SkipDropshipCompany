@@ -7,6 +7,13 @@ namespace SkipDropshipCompany.Interop.Game.Patches;
 
 internal static class HarmonyCallbackGuard
 {
+    private static HarmonyCallbackDiagnosticReporter? diagnosticReporter;
+
+    public static void Configure(HarmonyCallbackDiagnosticReporter reporter)
+    {
+        diagnosticReporter = reporter;
+    }
+
     public static bool TryNotifyHarmonyCallback(string callback, Action notify)
     {
         try
@@ -40,7 +47,7 @@ internal static class HarmonyCallbackGuard
     {
         try
         {
-            SkipDropshipCompany.CallbackDiagnostics.RecordException(callback, exception);
+            diagnosticReporter?.RecordCallbackException(callback: callback, exception: exception);
         }
         catch
         {

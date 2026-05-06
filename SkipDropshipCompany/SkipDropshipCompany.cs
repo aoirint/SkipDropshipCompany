@@ -16,11 +16,8 @@ namespace SkipDropshipCompany;
 public class SkipDropshipCompany : BaseUnityPlugin
 {
     private static PluginController? controller;
-    private static CallbackDiagnosticReporter? callbackDiagnostics;
 
     internal static PluginController Controller => controller!;
-
-    internal static CallbackDiagnosticReporter CallbackDiagnostics => callbackDiagnostics!;
 
     private void Awake()
     {
@@ -39,14 +36,16 @@ public class SkipDropshipCompany : BaseUnityPlugin
             )
         );
 
-        callbackDiagnostics = new CallbackDiagnosticReporter(
-            logger: logger,
-            validationLogger: validationLogger
-        );
         controller = PluginController.Create(
             config: config,
             logger: logger,
             validationLogger: validationLogger
+        );
+        HarmonyCallbackGuard.Configure(
+            new HarmonyCallbackDiagnosticReporter(
+                logger: logger,
+                validationLogger: validationLogger
+            )
         );
 
         HarmonyPatchInstaller.Install();

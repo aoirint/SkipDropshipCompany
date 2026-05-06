@@ -8,16 +8,13 @@ namespace SkipDropshipCompany.Interop.Game.Patches;
 [HarmonyPatch(typeof(StartOfRound))]
 internal static class StartOfRoundPatch
 {
-    private const string StartGameCallback = "start_game_postfix";
-    private const string ResetShipCallback = "reset_ship_postfix";
-
     [HarmonyPatch(nameof(StartOfRound.StartGame))]
     [HarmonyPostfix]
     public static void StartGamePostfix()
     {
         HarmonyCallbackGuard.TryNotifyHarmonyCallback(
-            StartGameCallback,
-            SkipDropshipCompany.Controller.HandleStartGame
+            callback: HarmonyCallbackTokens.StartOfRoundStartGamePostfix,
+            notify: SkipDropshipCompany.Controller.HandleStartGame
         );
     }
 
@@ -26,8 +23,8 @@ internal static class StartOfRoundPatch
     public static void ResetShipPostfix()
     {
         HarmonyCallbackGuard.TryNotifyHarmonyCallback(
-            ResetShipCallback,
-            SkipDropshipCompany.Controller.HandleResetShip
+            callback: HarmonyCallbackTokens.StartOfRoundResetShipPostfix,
+            notify: SkipDropshipCompany.Controller.HandleResetShip
         );
     }
 }

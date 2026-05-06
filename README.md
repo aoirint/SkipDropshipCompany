@@ -84,8 +84,10 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build --configuration Release
 1. Replace version in `SkipDropshipCompany/SkipDropshipCompany.csproj` as semver format, e.g. `1.2.3`.
 2. Commit and push the changes.
 3. CI will create a GitHub Release automatically.
-4. Download the release artifact from the GitHub Release page.
-5. Upload the artifact to Thunderstore. **NOTE: prerelease version is not supported, e.g. `1.2.3-beta.1`.**
+4. Stable releases are published to Thunderstore automatically when the
+   `THUNDERSTORE_TOKEN` repository secret is configured.
+5. Prereleases are kept as GitHub prereleases only because Thunderstore package
+   metadata does not support prerelease versions such as `1.2.3-beta.1`.
 
 ## Debugging
 

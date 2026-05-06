@@ -8,9 +8,9 @@ namespace SkipDropshipCompany.Interop.Game.Patches;
 [HarmonyPatch(typeof(Terminal))]
 internal static class TerminalPatch
 {
-    // SyncGroupCreditsClientRpc applies the synchronized group credits and the
-    // dropship item count during the base RPC body. The Prefix can still adjust
-    // only the count argument before the base game observes it.
+    // For the base game, SyncGroupCreditsClientRpc is the client-side RPC that
+    // applies synchronized group credits and the dropship item count. The Prefix
+    // can only change the count argument before that base-game apply step.
     [HarmonyPatch(nameof(Terminal.SyncGroupCreditsClientRpc))]
     [HarmonyPrefix]
     public static void SyncGroupCreditsClientRpcPrefix(
@@ -40,9 +40,9 @@ internal static class TerminalPatch
         numItemsInShip = result.DropShipBoughtItemIndexes.Count;
     }
 
-    // The base RPC does not consume orderedItemsFromTerminal as the delivery
-    // source. Later dropship flow reads that order, so the Postfix restores the
-    // retained dropship order after the credit/count synchronization returns.
+    // For the base game, the later dropship delivery flow, not this RPC, reads
+    // orderedItemsFromTerminal as the delivery source. The Postfix restores the
+    // retained order after the RPC finishes its credit/count synchronization.
     [HarmonyPatch(nameof(Terminal.SyncGroupCreditsClientRpc))]
     [HarmonyPostfix]
     public static void SyncGroupCreditsClientRpcPostfix()

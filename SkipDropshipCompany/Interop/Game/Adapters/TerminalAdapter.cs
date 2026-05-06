@@ -37,7 +37,7 @@ internal sealed class TerminalAdapter
         return buyableItemsList.ElementAtOrDefault(index);
     }
 
-    public List<int>? GetOrderedItemsFromTerminal()
+    public List<int>? GetOrderedItemIndexes()
     {
         var terminal = GetTerminal();
         if (terminal == null)
@@ -48,7 +48,7 @@ internal sealed class TerminalAdapter
         return terminal.orderedItemsFromTerminal;
     }
 
-    public bool SetOrderedItemsFromTerminal(List<int> boughtItemIndexes)
+    public bool SetOrderedItemIndexes(List<int> boughtItemIndexes)
     {
         var terminal = GetTerminal();
         if (terminal == null)

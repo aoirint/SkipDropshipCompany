@@ -14,9 +14,9 @@ internal interface IGameInterop
 
     string? GetCurrentLevelSceneName();
 
-    List<int>? GetOrderedItemsFromTerminal();
+    List<int>? GetTerminalOrderedItemIndexes();
 
-    bool SetOrderedItemsFromTerminal(List<int> boughtItemIndexes);
+    bool SetTerminalOrderedItemIndexes(List<int> boughtItemIndexes);
 
     bool SpawnBuyableItemInShip(int buyableItemIndex);
 }

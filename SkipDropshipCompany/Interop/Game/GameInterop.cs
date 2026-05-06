@@ -38,14 +38,14 @@ internal sealed class GameInterop : IGameInterop
         return roundAdapter.GetCurrentLevelSceneName();
     }
 
-    public List<int>? GetOrderedItemsFromTerminal()
+    public List<int>? GetTerminalOrderedItemIndexes()
     {
-        return terminalAdapter.GetOrderedItemsFromTerminal();
+        return terminalAdapter.GetOrderedItemIndexes();
     }
 
-    public bool SetOrderedItemsFromTerminal(List<int> boughtItemIndexes)
+    public bool SetTerminalOrderedItemIndexes(List<int> boughtItemIndexes)
     {
-        return terminalAdapter.SetOrderedItemsFromTerminal(boughtItemIndexes);
+        return terminalAdapter.SetOrderedItemIndexes(boughtItemIndexes);
     }
 
     public bool SpawnBuyableItemInShip(int buyableItemIndex)

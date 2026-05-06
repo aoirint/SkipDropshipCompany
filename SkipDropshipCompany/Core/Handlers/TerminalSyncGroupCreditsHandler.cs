@@ -29,9 +29,9 @@ internal sealed class TerminalSyncGroupCreditsHandler
         this.logger = logger;
     }
 
-    public PrepareInstantPurchaseResult? HandlePrefix()
+    public PrepareInstantPurchaseResult? PrepareInstantPurchase()
     {
-        var boughtItemIndexes = gameInterop.GetOrderedItemsFromTerminal();
+        var boughtItemIndexes = gameInterop.GetTerminalOrderedItemIndexes();
         if (boughtItemIndexes == null)
         {
             logger.LogError("Terminal.orderedItemsFromTerminal is null.");
@@ -55,7 +55,7 @@ internal sealed class TerminalSyncGroupCreditsHandler
         return result;
     }
 
-    public SpawnPreparedInstantPurchasedItemsResult? HandlePostfix()
+    public SpawnPreparedInstantPurchasedItemsResult? SpawnPreparedItemsAndRestoreDropshipOrder()
     {
         var result = spawnPreparedInstantPurchasedItemsUseCase.Execute();
         if (result == null)
@@ -64,7 +64,7 @@ internal sealed class TerminalSyncGroupCreditsHandler
             return null;
         }
 
-        if (!gameInterop.SetOrderedItemsFromTerminal(result.DropShipBoughtItemIndexes))
+        if (!gameInterop.SetTerminalOrderedItemIndexes(result.DropShipBoughtItemIndexes))
         {
             logger.LogError("Failed to restore Terminal.orderedItemsFromTerminal.");
             return null;

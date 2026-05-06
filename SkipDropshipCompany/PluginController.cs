@@ -99,13 +99,13 @@ internal sealed class PluginController
         roundCallbackHandler.HandleResetShip();
     }
 
-    public PrepareInstantPurchaseResult? HandleTerminalSyncGroupCreditsClientRpcPrefix()
+    public PrepareInstantPurchaseResult? PrepareTerminalSyncGroupCreditsInstantPurchase()
     {
-        return terminalSyncGroupCreditsHandler.HandlePrefix();
+        return terminalSyncGroupCreditsHandler.PrepareInstantPurchase();
     }
 
-    public SpawnPreparedInstantPurchasedItemsResult? HandleTerminalSyncGroupCreditsClientRpcPostfix()
+    public SpawnPreparedInstantPurchasedItemsResult? SpawnTerminalSyncGroupCreditsPreparedItems()
     {
-        return terminalSyncGroupCreditsHandler.HandlePostfix();
+        return terminalSyncGroupCreditsHandler.SpawnPreparedItemsAndRestoreDropshipOrder();
     }
 }

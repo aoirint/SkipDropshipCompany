@@ -16,7 +16,7 @@ internal static class TerminalPatch
         ref int numItemsInShip
     )
     {
-        var result = SkipDropshipCompany.Controller.HandleTerminalSyncGroupCreditsClientRpcPrefix();
+        var result = SkipDropshipCompany.Controller.PrepareTerminalSyncGroupCreditsInstantPurchase();
         if (result == null)
         {
             return;
@@ -31,6 +31,6 @@ internal static class TerminalPatch
     [HarmonyPostfix]
     public static void SyncGroupCreditsClientRpcPostfix()
     {
-        SkipDropshipCompany.Controller.HandleTerminalSyncGroupCreditsClientRpcPostfix();
+        SkipDropshipCompany.Controller.SpawnTerminalSyncGroupCreditsPreparedItems();
     }
 }

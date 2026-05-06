@@ -14,8 +14,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- Added opt-in structured validation logging and a release-validation runbook
-  for v0.2.0 release-candidate checks.
+- Added opt-in structured validation logging guidance for v0.2.0
+  release-candidate checks.
 - Ported internal repository, build, release, and documentation maintenance
   practices from CruiserJumpPractice's `v0.2.0` preparation work.
 - Updated the tested compatibility baseline to Lethal Company v81.5.

@@ -24,9 +24,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Compatibility:
     - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
-    - BepInExPack v5.4.2305.
-- Older Lethal Company versions are no longer claimed as tested by current
-  release notes; Lethal Company v73 compatibility is recorded in the
+        - The v81.5 test environment used BepInExPack v5.4.2305.
+- Older Lethal Company versions are no longer claimed as tested by the current
+  v0.2.0 release notes; Lethal Company v73 compatibility is recorded in the
   historical `v0.1.x` release entries below.
 
 ## v0.1.7 - 2025-11-23 UTC
@@ -41,7 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
       `1749099131234587692`).
         - Backfilled as reference compatibility information while preparing
-          the Lethal Company v81.5 release.
+          the v0.2.0 release.
 
 ## v0.1.6 - 2025-11-23 UTC
 
@@ -56,7 +56,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
       `1749099131234587692`).
         - Backfilled as reference compatibility information while preparing
-          the Lethal Company v81.5 release.
+          the v0.2.0 release.
 
 ## v0.1.4 - 2025-11-23 UTC
 
@@ -70,4 +70,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
       `1749099131234587692`).
         - Backfilled as reference compatibility information while preparing
-          the Lethal Company v81.5 release.
+          the v0.2.0 release.

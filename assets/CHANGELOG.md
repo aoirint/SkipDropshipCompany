@@ -39,7 +39,7 @@ No gameplay changes are introduced.
     - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
       `1749099131234587692`).
         - Backfilled as reference compatibility information while preparing
-          the Lethal Company v81.5 release.
+          the v0.2.0 release.
 
 ## v0.1.6 - 2025-11-23 UTC
 
@@ -54,7 +54,7 @@ No gameplay changes are introduced.
     - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
       `1749099131234587692`).
         - Backfilled as reference compatibility information while preparing
-          the Lethal Company v81.5 release.
+          the v0.2.0 release.
 
 ## v0.1.4 - 2025-11-23 UTC
 
@@ -68,7 +68,7 @@ No gameplay changes are introduced.
     - Compatible with Lethal Company v73 (2025-10-04 UTC, Manifest ID:
       `1749099131234587692`).
         - Backfilled as reference compatibility information while preparing
-          the Lethal Company v81.5 release.
+          the v0.2.0 release.
 
 [contributing]: https://github.com/aoirint/SkipDropshipCompany/blob/main/CONTRIBUTING.md
 [github-changelog]: https://github.com/aoirint/SkipDropshipCompany/blob/main/CHANGELOG.md

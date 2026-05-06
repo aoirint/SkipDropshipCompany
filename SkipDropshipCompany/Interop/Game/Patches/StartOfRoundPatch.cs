@@ -14,7 +14,7 @@ internal static class StartOfRoundPatch
     {
         HarmonyCallbackGuard.TryNotifyHarmonyCallback(
             callback: HarmonyCallbackTokens.StartOfRoundStartGamePostfix,
-            notify: SkipDropshipCompany.Controller.HandleStartGame
+            notify: static () => SkipDropshipCompany.Controller.HandleStartGame()
         );
     }
 
@@ -24,7 +24,7 @@ internal static class StartOfRoundPatch
     {
         HarmonyCallbackGuard.TryNotifyHarmonyCallback(
             callback: HarmonyCallbackTokens.StartOfRoundResetShipPostfix,
-            notify: SkipDropshipCompany.Controller.HandleResetShip
+            notify: static () => SkipDropshipCompany.Controller.HandleResetShip()
         );
     }
 }

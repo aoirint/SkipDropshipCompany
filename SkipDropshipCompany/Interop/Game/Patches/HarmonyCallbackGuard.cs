@@ -23,7 +23,7 @@ internal static class HarmonyCallbackGuard
         }
         catch (Exception exception)
         {
-            RecordCallbackException(callback, exception);
+            TryRecordCallbackException(callback: callback, exception: exception);
             return false;
         }
     }
@@ -38,12 +38,12 @@ internal static class HarmonyCallbackGuard
         catch (Exception exception)
         {
             result = default;
-            RecordCallbackException(callback, exception);
+            TryRecordCallbackException(callback: callback, exception: exception);
             return false;
         }
     }
 
-    private static void RecordCallbackException(string callback, Exception exception)
+    private static void TryRecordCallbackException(string callback, Exception exception)
     {
         try
         {

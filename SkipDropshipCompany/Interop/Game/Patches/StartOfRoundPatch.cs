@@ -10,9 +10,9 @@ internal static class StartOfRoundPatch
 {
     [HarmonyPatch(nameof(StartOfRound.StartGame))]
     [HarmonyPostfix]
-    public static void StartGamePostfix(StartOfRound __instance)
+    public static void StartGamePostfix()
     {
-        SkipDropshipCompany.Controller.HandleStartGame(__instance.currentLevel?.sceneName);
+        SkipDropshipCompany.Controller.HandleStartGame();
     }
 
     [HarmonyPatch(nameof(StartOfRound.ResetShip))]

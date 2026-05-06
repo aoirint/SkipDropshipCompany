@@ -16,14 +16,14 @@ internal static class TerminalPatch
         ref int numItemsInShip
     )
     {
-        var result = SkipDropshipCompany.Controller.PrepareInstantPurchase(
-            __instance.orderedItemsFromTerminal
-        );
+        var result = SkipDropshipCompany.Controller.HandleTerminalSyncGroupCreditsClientRpcPrefix();
         if (result == null)
         {
             return;
         }
 
+        // Harmony requires this ref mutation at the patch boundary so the base
+        // RPC sees the dropship-only item count.
         numItemsInShip = result.DropShipBoughtItemIndexes.Count;
     }
 
@@ -35,12 +35,14 @@ internal static class TerminalPatch
         ref int numItemsInShip
     )
     {
-        var result = SkipDropshipCompany.Controller.SpawnPreparedInstantPurchasedItems();
+        var result = SkipDropshipCompany.Controller.HandleTerminalSyncGroupCreditsClientRpcPostfix();
         if (result == null)
         {
             return;
         }
 
+        // The Terminal instance is supplied by Harmony here; restoring this
+        // base-game field remains a patch-boundary adaptation.
         __instance.orderedItemsFromTerminal = result.DropShipBoughtItemIndexes;
     }
 }

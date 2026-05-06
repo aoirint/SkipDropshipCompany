@@ -4,6 +4,14 @@ A Lethal Company mod that skips the dropship when you're on the Company or in ot
 
 - [User guide](./assets/README.md)
 
+## Project policy
+
+- Human maintainer review remains required for releases and behavior changes.
+- AI tools may assist repository maintenance. Significant AI assistance should
+  be disclosed in pull requests and release-facing notes when applicable.
+- Report bugs, compatibility problems, and release-note corrections in
+  [GitHub Issues][github-issues].
+
 ## Development
 
 Install .NET SDK 10.0 or later.
@@ -41,7 +49,8 @@ pwsh ./Debug.ps1
 ## Code format
 
 - Language version: [C# 13.0](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-13)
-- Target framework: [.NET standard 2.1](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-1)
+- Target framework:
+  [.NET standard 2.1](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-1)
 
 ```powershell
 dotnet format
@@ -106,7 +115,8 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build --configuration Release
 1. Install BepInEx: https://docs.bepinex.dev/articles/user_guide/installation/index.html
 2. Launch `Lethal Company.exe` and exit to generate the BepInEx config files.
 3. Open `C:/Program Files (x86)/Steam/steamapps/common/Lethal Company/BepInEx/config/BepInEx.cfg`.
-4. Copy the DLL file into `C:/Program Files (x86)/Steam/steamapps/common/Lethal Company/BepInEx/plugins/` from `bin/Debug/netstandard2.1/`.
+4. Copy the DLL file from `bin/Debug/netstandard2.1/` into
+   `C:/Program Files (x86)/Steam/steamapps/common/Lethal Company/BepInEx/plugins/`.
 5. Set `Logging.Console.Enabled` to `true`.
 6. Set `Logging.Console.LogLevels` to `All`.
 7. Launch `Lethal Company.exe` again.
@@ -238,3 +248,5 @@ TODO: Add test scenarios for the configuration options.
 11. Issue a command: `help`.
 12. Confirm that the terminal does not show `purchased items on route.`.
 13. Confirm that two walkies are spawned on the ship.
+
+[github-issues]: https://github.com/aoirint/SkipDropshipCompany/issues

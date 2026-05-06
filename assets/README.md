@@ -1,6 +1,7 @@
 # SkipDropshipCompany
 
-A Lethal Company mod that skips the dropship to purchase items when you're on the Company or in other limited situations.
+A Lethal Company mod that skips the dropship to purchase items when you're on
+the Company or in other limited situations.
 
 ## Compatibility
 
@@ -55,13 +56,16 @@ You can still use it.
 
 The dropship will arrive as usual on that moon in these cases.
 
-You can change the first day behavior in configuration if your first day is eclipsed or you are using a mod like [stormytuna/EclipseOnly](https://thunderstore.io/c/lethal-company/p/stormytuna/EclipseOnly/).
+You can change the first day behavior in configuration if your first day is
+eclipsed or you are using a mod like
+[stormytuna/EclipseOnly](https://thunderstore.io/c/lethal-company/p/stormytuna/EclipseOnly/).
 
 ### Already purchased items before the conditions are met. Will they be delivered directly to the ship?
 
 No. Only items purchased after the conditions are met will be delivered directly to the ship.
 
-However, if you purchase additional items before the dropship arrives, they will be delivered together with the previous ones to the ship.
+However, if you purchase additional items before the dropship arrives, they will
+be delivered together with the previous ones to the ship.
 
 This behaviour may be changed in the future version since it depends on the base game implementation.
 

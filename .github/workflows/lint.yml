@@ -31,14 +31,14 @@ jobs:
     steps:
       # Checkout is required before every lint check because both dotnet format
       # and Markdown lint read repository-local configuration and source files.
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup .NET
         # Keep dotnet-version aligned with build.yml per the README .NET and
         # C# tooling update policy. The cache path is intentionally the project
         # lock file; update it only if the lock file moves or projects are
         # added.
-        uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
+        uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
         with:
           dotnet-version: '10.x'
           cache: true

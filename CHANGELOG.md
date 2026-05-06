@@ -1,31 +1,33 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-This changelog is the user-facing release notes for Thunderstore.
+# Changelog
 
-For internal implementation details and developer-facing release history, see
-the [GitHub changelog][github-changelog].
+All notable changes to this project are documented in this file.
 
-If you find a release-note error, encounter a bug, or want to report another
-project issue, see [CONTRIBUTING.md][contributing], then report it in
-[GitHub Issues][github-issues].
+This changelog is the canonical developer-facing release history. The
+Thunderstore-facing package changelog in `assets/CHANGELOG.md` is derived from
+stable release entries in this file and rewritten for users.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
-This release rebuilds SkipDropshipCompany for Lethal Company v81.5 and includes
-internal improvements.
-
-No gameplay changes are introduced.
-
 ### Changed
 
-- Rebuilt for Lethal Company v81.5.
-- Improved internal implementation structure and release flow.
+- Ported internal repository, build, release, and documentation maintenance
+  practices from CruiserJumpPractice's `v0.2.0` preparation work.
+- Updated the tested compatibility baseline to Lethal Company v81.5.
+- Prepared stable-release automation for GitHub Releases and Thunderstore.
 
 ### Notes
 
 - Compatibility:
     - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
+        - The v81.5 test environment used BepInExPack v5.4.2305.
+- Older Lethal Company versions are no longer claimed as tested by the current
+  v0.2.0 release notes; Lethal Company v73 compatibility is recorded in the
+  historical `v0.1.x` release entries below.
 
 ## v0.1.7 - 2025-11-23 UTC
 
@@ -60,7 +62,7 @@ No gameplay changes are introduced.
 
 ### Added
 
-- Initial release on Thunderstore.
+- Initial Thunderstore release.
 
 ### Notes
 
@@ -69,7 +71,3 @@ No gameplay changes are introduced.
       `1749099131234587692`).
         - Backfilled as reference compatibility information while preparing
           the v0.2.0 release.
-
-[contributing]: https://github.com/aoirint/SkipDropshipCompany/blob/main/CONTRIBUTING.md
-[github-changelog]: https://github.com/aoirint/SkipDropshipCompany/blob/main/CHANGELOG.md
-[github-issues]: https://github.com/aoirint/SkipDropshipCompany/issues

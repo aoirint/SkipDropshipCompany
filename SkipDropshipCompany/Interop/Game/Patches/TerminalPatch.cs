@@ -56,7 +56,7 @@ internal static class TerminalPatch
     {
         try
         {
-            SkipDropshipCompany.Controller.RecordCallbackException(callback, exception);
+            SkipDropshipCompany.CallbackDiagnostics.RecordException(callback, exception);
         }
         catch
         {

@@ -44,7 +44,7 @@ internal static class StartOfRoundPatch
     {
         try
         {
-            SkipDropshipCompany.Controller.RecordCallbackException(callback, exception);
+            SkipDropshipCompany.CallbackDiagnostics.RecordException(callback, exception);
         }
         catch
         {

@@ -262,6 +262,8 @@ nearby SkipDropshipCompany error lines when asking for validation help.
 
 Validation records intentionally avoid player names, lobby identifiers, account
 identifiers, machine names, profile paths, tokens, and raw item identifiers.
+Callback exception records include only stable callback tokens and exception
+type names.
 
 ### r2modman
 

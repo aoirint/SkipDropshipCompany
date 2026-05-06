@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 #nullable enable
 
-using System;
 using SkipDropshipCompany.Core.Handlers;
 using SkipDropshipCompany.Core.Ports;
 using SkipDropshipCompany.Core.State;
@@ -16,20 +15,14 @@ namespace SkipDropshipCompany;
 // policy behind this boundary.
 internal sealed class PluginController
 {
-    private readonly IPluginLogger logger;
-    private readonly IValidationLogger validationLogger;
     private readonly RoundCallbackHandler roundCallbackHandler;
     private readonly TerminalSyncGroupCreditsHandler terminalSyncGroupCreditsHandler;
 
     private PluginController(
-        IPluginLogger logger,
-        IValidationLogger validationLogger,
         RoundCallbackHandler roundCallbackHandler,
         TerminalSyncGroupCreditsHandler terminalSyncGroupCreditsHandler
     )
     {
-        this.logger = logger;
-        this.validationLogger = validationLogger;
         this.roundCallbackHandler = roundCallbackHandler;
         this.terminalSyncGroupCreditsHandler = terminalSyncGroupCreditsHandler;
     }
@@ -82,8 +75,6 @@ internal sealed class PluginController
         );
 
         return new PluginController(
-            logger: logger,
-            validationLogger: validationLogger,
             roundCallbackHandler: new RoundCallbackHandler(
                 gameInterop: gameInterop,
                 recordLandingUseCase: recordLandingUseCase,
@@ -97,16 +88,6 @@ internal sealed class PluginController
                 validationLogger: validationLogger
             )
         );
-    }
-
-    public void RecordCallbackException(string callback, Exception exception)
-    {
-        logger.LogError(
-            "SkipDropshipCompany callback exception." +
-            $" callback={callback}" +
-            $" exception_type={exception.GetType().FullName ?? exception.GetType().Name}"
-        );
-        validationLogger.Record(ValidationLogRecord.CallbackException(callback, exception));
     }
 
     public void HandleStartGame()

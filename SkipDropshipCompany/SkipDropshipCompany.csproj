@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Runtime dependencies -->
-    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <!-- Compile-only plugin framework dependency -->
+    <PackageReference Include="BepInEx.Core" Version="[5.4.21]" IncludeAssets="compile" />
 
     <!-- Development dependencies -->
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />

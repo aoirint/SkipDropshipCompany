@@ -67,7 +67,6 @@ internal sealed class PrepareInstantPurchaseUseCase
             instantBoughtItemIndexes: boughtItemIndexes
         );
 
-        preparedInstantPurchaseStore.SetPreparedInstantPurchaseResult(result);
         validationLogger.Record(
             ValidationLogRecord.PrepareInstantPurchaseResult(
                 role: ValidationLogRole.Server,
@@ -76,6 +75,7 @@ internal sealed class PrepareInstantPurchaseUseCase
                 preparedResult: result
             )
         );
+        preparedInstantPurchaseStore.SetPreparedInstantPurchaseResult(result);
         return result;
     }
 }

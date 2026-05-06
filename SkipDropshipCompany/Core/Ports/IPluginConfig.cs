@@ -8,4 +8,6 @@ internal interface IPluginConfig
     bool Enabled { get; }
 
     bool RequireReroutingOnFirstDay { get; }
+
+    bool ValidationLogging { get; }
 }

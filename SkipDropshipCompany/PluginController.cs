@@ -105,8 +105,8 @@ internal sealed class PluginController
         return terminalSyncGroupCreditsHandler.PrepareInstantPurchase();
     }
 
-    public SpawnPreparedInstantPurchasedItemsResult? SpawnTerminalSyncGroupCreditsPreparedItems()
+    public void SpawnTerminalSyncGroupCreditsPreparedItems()
     {
-        return terminalSyncGroupCreditsHandler.SpawnPreparedItemsAndRestoreDropshipOrder();
+        terminalSyncGroupCreditsHandler.SpawnPreparedItemsAndRestoreDropshipOrder();
     }
 }

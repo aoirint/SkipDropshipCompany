@@ -45,10 +45,7 @@ internal static class TerminalPatch
     {
         HarmonyCallbackGuard.TryNotifyHarmonyCallback(
             PostfixCallback,
-            static () =>
-            {
-                _ = SkipDropshipCompany.Controller.SpawnTerminalSyncGroupCreditsPreparedItems();
-            }
+            SkipDropshipCompany.Controller.SpawnTerminalSyncGroupCreditsPreparedItems
         );
     }
 }

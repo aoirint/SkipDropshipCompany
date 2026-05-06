@@ -33,7 +33,7 @@ internal sealed class TerminalSyncGroupCreditsHandler
         this.validationLogger = validationLogger;
     }
 
-    public PrepareInstantPurchaseResult? PrepareInstantPurchase()
+    public PrepareInstantPurchaseResult? HandlePrefix()
     {
         var boughtItemIndexes = gameInterop.GetTerminalOrderedItemIndexes();
         if (boughtItemIndexes == null)
@@ -65,13 +65,13 @@ internal sealed class TerminalSyncGroupCreditsHandler
         return result;
     }
 
-    public SpawnPreparedInstantPurchasedItemsResult? SpawnPreparedItemsAndRestoreDropshipOrder()
+    public void HandlePostfix()
     {
         var result = spawnPreparedInstantPurchasedItemsUseCase.Execute();
         if (result == null)
         {
             logger.LogDebug("Spawning prepared instant purchased items failed or none to spawn.");
-            return null;
+            return;
         }
 
         if (!gameInterop.SetTerminalOrderedItemIndexes(result.DropShipBoughtItemIndexes))
@@ -84,7 +84,7 @@ internal sealed class TerminalSyncGroupCreditsHandler
                     dropshipItemCount: result.DropShipBoughtItemIndexes.Count
                 )
             );
-            return null;
+            return;
         }
 
         validationLogger.Record(
@@ -95,7 +95,6 @@ internal sealed class TerminalSyncGroupCreditsHandler
             )
         );
         logger.LogDebug("Spawned all prepared instant purchased items.");
-        return result;
     }
 
     private ValidationLogRole GetRole()

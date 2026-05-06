@@ -16,16 +16,18 @@ namespace SkipDropshipCompany;
 public class SkipDropshipCompany : BaseUnityPlugin
 {
     private static PluginController? controller;
-    private static CallbackDiagnosticReporter? callbackDiagnostics;
 
+    // Game callback types are constructed outside the plugin startup path.
+    // This static entry exposes one plugin-level controller instead of
+    // scattering use cases across callback classes.
     internal static PluginController Controller => controller!;
-
-    internal static CallbackDiagnosticReporter CallbackDiagnostics => callbackDiagnostics!;
 
     private void Awake()
     {
         var logger = new BepInExPluginLogger(base.Logger);
+
         var config = BepInExPluginConfig.Bind(Config);
+
         IValidationLogger validationLogger = config.ValidationLogging
             ? new BepInExValidationLogger(logger, System.DateTime.UtcNow)
             : DisabledValidationLogger.Instance;
@@ -39,18 +41,29 @@ public class SkipDropshipCompany : BaseUnityPlugin
             )
         );
 
-        callbackDiagnostics = new CallbackDiagnosticReporter(
-            logger: logger,
-            validationLogger: validationLogger
-        );
+        // Create the workflow facade after BepInEx adapters are bound so Core
+        // stays behind ports.
         controller = PluginController.Create(
             config: config,
             logger: logger,
             validationLogger: validationLogger
         );
 
+        // Startup order matters: configure the guard after the controller is
+        // wired and before patching so the first callback can be diagnosed.
+        HarmonyCallbackGuard.Configure(
+            new HarmonyCallbackDiagnosticReporter(
+                logger: logger,
+                validationLogger: validationLogger
+            )
+        );
+
+        // Startup order matters: construct the controller before patching so the first game
+        // callback can enter a fully wired plugin boundary.
         HarmonyPatchInstaller.Install();
 
-        logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!");
+        logger.LogInfo(
+            $"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!"
+        );
     }
 }

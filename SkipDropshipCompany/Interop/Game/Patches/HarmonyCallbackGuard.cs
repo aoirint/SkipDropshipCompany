@@ -28,7 +28,11 @@ internal static class HarmonyCallbackGuard
         }
     }
 
-    public static bool TryNotifyHarmonyCallback<T>(string callback, Func<T> notify, out T? result)
+    public static bool TryNotifyHarmonyCallback<T>(
+        string callback,
+        Func<T> notify,
+        out T? result
+    )
     {
         try
         {

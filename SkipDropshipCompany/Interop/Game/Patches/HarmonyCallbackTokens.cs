@@ -6,9 +6,9 @@ namespace SkipDropshipCompany.Interop.Game.Patches;
 internal static class HarmonyCallbackTokens
 {
     public const string TerminalSyncGroupCreditsClientRpcPrefix =
-        "terminal_sync_group_credits_prefix";
+        "terminal_sync_group_credits_client_rpc_prefix";
     public const string TerminalSyncGroupCreditsClientRpcPostfix =
-        "terminal_sync_group_credits_postfix";
-    public const string StartOfRoundStartGamePostfix = "start_game_postfix";
-    public const string StartOfRoundResetShipPostfix = "reset_ship_postfix";
+        "terminal_sync_group_credits_client_rpc_postfix";
+    public const string StartOfRoundStartGamePostfix = "start_of_round_start_game_postfix";
+    public const string StartOfRoundResetShipPostfix = "start_of_round_reset_ship_postfix";
 }

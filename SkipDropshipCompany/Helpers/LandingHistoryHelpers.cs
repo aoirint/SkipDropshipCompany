@@ -12,12 +12,7 @@ internal static class LandingHistoryHelpers
 
     public static bool AddLandingHistory(string sceneName)
     {
-        var landingHistoryManager = SkipDropshipCompany.landingHistoryManager;
-        if (landingHistoryManager == null)
-        {
-            Logger.LogError("LandingHistoryManager is null.");
-            return false;
-        }
+        var landingHistoryManager = SkipDropshipCompany.Controller.LandingHistoryManager;
 
         Logger.LogDebug($"Adding landing history. sceneName={sceneName}");
         if (!landingHistoryManager.AddLandingHistory(sceneName: sceneName))
@@ -32,12 +27,7 @@ internal static class LandingHistoryHelpers
 
     public static bool ClearLandingHistory()
     {
-        var landingHistoryManager = SkipDropshipCompany.landingHistoryManager;
-        if (landingHistoryManager == null)
-        {
-            Logger.LogError("LandingHistoryManager is null.");
-            return false;
-        }
+        var landingHistoryManager = SkipDropshipCompany.Controller.LandingHistoryManager;
 
         Logger.LogDebug("Clearing landing history.");
         if (!landingHistoryManager.ClearLandingHistory())
@@ -52,12 +42,7 @@ internal static class LandingHistoryHelpers
 
     public static bool IsLastLandedOnCompany()
     {
-        var landingHistoryManager = SkipDropshipCompany.landingHistoryManager;
-        if (landingHistoryManager == null)
-        {
-            Logger.LogError("LandingHistoryManager is null.");
-            return false;
-        }
+        var landingHistoryManager = SkipDropshipCompany.Controller.LandingHistoryManager;
 
         var landingHistory = landingHistoryManager.GetLandingHistory();
         if (landingHistory == null)

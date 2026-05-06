@@ -21,12 +21,7 @@ internal class TerminalPatch
             return;
         }
 
-        var instantPurchaseManager = SkipDropshipCompany.instantPurchaseManager;
-        if (instantPurchaseManager == null)
-        {
-            Logger.LogError("InstantPurchaseManager is null.");
-            return;
-        }
+        var instantPurchaseManager = SkipDropshipCompany.Controller.InstantPurchaseManager;
 
         var orderedItemsFromTerminal = __instance.orderedItemsFromTerminal;
         if (orderedItemsFromTerminal == null)
@@ -70,12 +65,7 @@ internal class TerminalPatch
             return;
         }
 
-        var instantPurchaseManager = SkipDropshipCompany.instantPurchaseManager;
-        if (instantPurchaseManager == null)
-        {
-            Logger.LogError("InstantPurchaseManager is null.");
-            return;
-        }
+        var instantPurchaseManager = SkipDropshipCompany.Controller.InstantPurchaseManager;
 
         Logger.LogDebug("Spawning prepared instant purchased items.");
 

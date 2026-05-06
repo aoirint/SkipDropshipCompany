@@ -47,15 +47,14 @@ internal class InstantPurchaseManager
     {
         Logger.LogDebug("Checking if instant purchase is allowed.");
 
-        var enabled = SkipDropshipCompany.EnabledConfig?.Value ?? true;
+        var enabled = SkipDropshipCompany.Controller.EnabledConfig.Value;
         if (!enabled)
         {
             Logger.LogDebug("Not enabled.");
             return false;
         }
 
-        var isFirstDayRerouteRequiredConfig = SkipDropshipCompany.RequireReroutingOnFirstDayConfig;
-        var isFirstDayRerouteRequired = isFirstDayRerouteRequiredConfig?.Value ?? false;
+        var isFirstDayRerouteRequired = SkipDropshipCompany.Controller.RequireReroutingOnFirstDayConfig.Value;
 
         Logger.LogDebug($"Configs: isFirstDayRerouteRequired={isFirstDayRerouteRequired}");
 

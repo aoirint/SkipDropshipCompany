@@ -1,8 +1,9 @@
+// SPDX-License-Identifier: MIT
 #nullable enable
 
 using HarmonyLib;
 
-namespace SkipDropshipCompany.Patches;
+namespace SkipDropshipCompany.Interop.Game.Patches;
 
 internal static class HarmonyPatchInstaller
 {

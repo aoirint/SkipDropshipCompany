@@ -1,8 +1,9 @@
+// SPDX-License-Identifier: MIT
 #nullable enable
 
 using BepInEx;
-using BepInEx.Logging;
-using SkipDropshipCompany.Patches;
+using SkipDropshipCompany.Interop;
+using SkipDropshipCompany.Interop.Game.Patches;
 
 namespace SkipDropshipCompany;
 
@@ -14,17 +15,16 @@ public class SkipDropshipCompany : BaseUnityPlugin
 {
     private static PluginController? controller;
 
-    internal static new ManualLogSource? Logger { get; private set; }
-
     internal static PluginController Controller => controller!;
 
     private void Awake()
     {
-        Logger = base.Logger;
-        controller = PluginController.Create(Config);
+        var logger = new BepInExPluginLogger(base.Logger);
+        var config = BepInExPluginConfig.Bind(Config);
+        controller = PluginController.Create(config: config, logger: logger);
 
         HarmonyPatchInstaller.Install();
 
-        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!");
+        logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!");
     }
 }

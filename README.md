@@ -3,6 +3,7 @@
 A Lethal Company mod that skips the dropship when you're on the Company or in other limited situations.
 
 - [User guide](./assets/README.md)
+- [Release validation runbook](./docs/release-validation.md)
 
 ## Project policy
 

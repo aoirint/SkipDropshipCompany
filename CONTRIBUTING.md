@@ -100,6 +100,10 @@ docker run --rm --network none --user 1000:1000 -v ".:/workdir" davidanson/markd
 DOTNET_CLI_UI_LANGUAGE=en dotnet build
 ```
 
+The Docker command is the documented pinned Markdown lint path, but Docker is
+not required. Another `markdownlint-cli2` installation method is acceptable when
+it uses the repository configuration.
+
 On Linux, run the Markdown lint command with `sudo docker` and use
 `--user "$(id -u):$(id -g)"`.
 

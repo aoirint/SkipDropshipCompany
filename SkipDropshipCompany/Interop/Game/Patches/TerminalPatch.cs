@@ -32,8 +32,8 @@ internal static class TerminalPatch
             return;
         }
 
-        // Harmony requires this ref mutation at the patch boundary so the base
-        // RPC sees the dropship-only item count.
+        // Keep Harmony ref mutation outside the guard. A failed notification
+        // must leave the original base-game RPC argument untouched.
         numItemsInShip = result.DropShipBoughtItemIndexes.Count;
     }
 

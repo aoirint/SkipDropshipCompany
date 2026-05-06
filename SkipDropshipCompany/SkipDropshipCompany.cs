@@ -41,6 +41,8 @@ public class SkipDropshipCompany : BaseUnityPlugin
             logger: logger,
             validationLogger: validationLogger
         );
+        // Startup order matters: configure the guard after the controller is
+        // wired and before patching so the first callback can be diagnosed.
         HarmonyCallbackGuard.Configure(
             new HarmonyCallbackDiagnosticReporter(
                 logger: logger,
@@ -48,6 +50,8 @@ public class SkipDropshipCompany : BaseUnityPlugin
             )
         );
 
+        // Startup order matters: construct the controller before patching so the first game
+        // callback can enter a fully wired plugin boundary.
         HarmonyPatchInstaller.Install();
 
         logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!");

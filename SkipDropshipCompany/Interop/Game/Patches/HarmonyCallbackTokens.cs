@@ -5,6 +5,8 @@ namespace SkipDropshipCompany.Interop.Game.Patches;
 
 internal static class HarmonyCallbackTokens
 {
+    // Tokens are stable validation identifiers, not display text. Use
+    // class_method_patchkind naming so SDC and CJP diagnostics stay comparable.
     public const string TerminalSyncGroupCreditsClientRpcPrefix =
         "terminal_sync_group_credits_client_rpc_prefix";
     public const string TerminalSyncGroupCreditsClientRpcPostfix =

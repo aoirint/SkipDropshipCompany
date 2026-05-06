@@ -23,6 +23,8 @@ internal sealed class HarmonyCallbackDiagnosticReporter
 
     public void RecordCallbackException(string callback, Exception exception)
     {
+        // Keep structured validation diagnostics compact and environment-safe:
+        // no exception messages, stack traces, Unity object data, or local paths.
         var exceptionType = exception.GetType().FullName ?? exception.GetType().Name;
         logger.LogError(
             $"Harmony callback exception: callback={callback}, exception_type={exceptionType}"

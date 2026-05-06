@@ -15,7 +15,8 @@ Install [PowerShell 7][powershell-install].
 
 Install [Visual Studio 2022][visual-studio-download].
 
-Install [Docker][docker-install] for local Markdown linting.
+Install [Docker][docker-install] if you plan to use the documented local
+Markdown lint command.
 
 Restore NuGet packages.
 
@@ -46,10 +47,14 @@ including diagnostics that cannot be automatically fixed.
 
 ### Markdown lint
 
-Markdown is checked with `markdownlint-cli2`. The project uses the pinned Docker
-image below so contributors do not need a local Node.js project.
+Markdown is checked with
+[`markdownlint-cli2`][markdownlint-cli2-repo].
+The pinned Docker image below is the documented local command so contributors do
+not need a local Node.js project, but Docker is not required.
+Other installation methods are acceptable when they run the same
+`markdownlint-cli2` version with this repository's configuration.
 The image's default working directory is `/workdir`, so mount the repository
-there. Run it without network access and as a non-root user.
+there. Run the Docker command without network access and as a non-root user.
 
 On Windows with PowerShell, use UID/GID `1000:1000`:
 
@@ -63,7 +68,7 @@ On Linux, use `sudo docker` and pass the host user's UID and GID:
 sudo docker run --rm --network none --user "$(id -u):$(id -g)" -v ".:/workdir" davidanson/markdownlint-cli2:v0.22.1@sha256:0ed9a5f4c77ef447da2a2ac6e67caf74b214a7f80288819565e8b7d2ac148fe5
 ```
 
-When updating Markdown lint tooling, update both the local Docker image and the
+When updating Markdown lint tooling, update the documented local command and the
 CI action together after the repository cooldown period has elapsed.
 
 ## Package management
@@ -432,6 +437,7 @@ TODO: Add test scenarios for the configuration options.
 [dotnet-sdk-msbuild-vs]: https://learn.microsoft.com/en-us/dotnet/core/porting/versioning-sdk-msbuild-vs
 [github-actions-docs]: https://docs.github.com/en/actions
 [lethal-company-steam]: https://store.steampowered.com/app/1966720/Lethal_Company/
+[markdownlint-cli2-repo]: https://github.com/DavidAnson/markdownlint-cli2
 [netstandard-2-1-docs]: https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-1
 [pinact-repo]: https://github.com/suzuki-shunsuke/pinact
 [powershell-install]: https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows

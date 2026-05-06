@@ -18,6 +18,9 @@ Install [Visual Studio 2022][visual-studio-download].
 Install [Docker][docker-install] if you plan to use the documented local
 Markdown lint command.
 
+Install [ShellCheck][shellcheck-repo], [`actionlint`][actionlint-repo], and
+[pinact][pinact-repo] if you plan to run GitHub Actions quality checks locally.
+
 Restore NuGet packages.
 
 ```powershell
@@ -70,6 +73,72 @@ sudo docker run --rm --network none --user "$(id -u):$(id -g)" -v ".:/workdir" d
 
 When updating Markdown lint tooling, update the documented local command and the
 CI action together after the repository cooldown period has elapsed.
+
+### GitHub Actions lint
+
+GitHub Actions workflows and composite actions are checked with
+[`actionlint`][actionlint-repo].
+
+The local lint pass has two parts:
+
+- ShellCheck checks shell scripts used by repository automation.
+- `actionlint` checks workflow syntax, expressions, runner labels, and composite
+  action metadata.
+
+Run ShellCheck before actionlint.
+This keeps actionlint's ShellCheck integration available so actionlint can also
+inspect inline shell scripts in workflows.
+The pyflakes integration remains disabled because this repository does not
+currently contain Python files.
+Revisit that setting if Python scripts are added.
+
+```powershell
+shellcheck .github/actions/publish-thunderstore/publish-thunderstore.sh
+actionlint -pyflakes=
+```
+
+Install these tools from trusted distributions:
+
+- ShellCheck: upstream releases, package-manager integrations, Docker image, or
+  another trusted distribution.
+- `actionlint`: upstream releases, package-manager integrations, Docker image,
+  or another trusted distribution.
+
+When updating CI, use cooldown-compliant pinned releases.
+The workflow downloads Linux release archives directly and verifies their SHA256
+values before running them.
+It caches only the archives, not the extracted executables, so cached downloads
+are still verified before use.
+
+### GitHub Actions pinning
+
+GitHub Actions and reusable workflows are checked with [pinact][pinact-repo] so
+external actions stay pinned to full commit SHAs with synchronized version
+comments.
+
+```powershell
+pinact run --check --min-age 7
+```
+
+For local fixes or maintenance updates, use the same cooldown setting:
+
+```powershell
+# Pin or refresh version comments.
+pinact run --min-age 7
+
+# Update pinned actions after the repository cooldown period.
+pinact run --update --min-age 7
+```
+
+Set `GITHUB_TOKEN` when possible so pinact can query GitHub's API with normal
+authenticated rate limits.
+Install pinact from its upstream releases, package-manager integrations, or
+another trusted distribution.
+
+CI downloads the Linux amd64 release archive directly and verifies its SHA256
+before running pinact.
+It caches only the archive, not the extracted executable, so cached downloads
+are still verified before use.
 
 ## Package management
 
@@ -132,7 +201,7 @@ The repository uses [GitHub Actions][github-actions-docs] for CI.
 
 ### Action pinning
 
-The version of the actions are pinned with [pinact][pinact-repo].
+Action versions are pinned with [pinact][pinact-repo].
 Actions and other executable CI tooling should be updated after the repository
 cooldown period has elapsed. Keep SHA pins and version comments synchronized
 when updating pinned actions.
@@ -436,11 +505,13 @@ TODO: Add test scenarios for the configuration options.
 [dotnet-sdk-download]: https://dotnet.microsoft.com/en-us/download/dotnet/10.0
 [dotnet-sdk-msbuild-vs]: https://learn.microsoft.com/en-us/dotnet/core/porting/versioning-sdk-msbuild-vs
 [github-actions-docs]: https://docs.github.com/en/actions
+[actionlint-repo]: https://github.com/rhysd/actionlint
 [lethal-company-steam]: https://store.steampowered.com/app/1966720/Lethal_Company/
 [markdownlint-cli2-repo]: https://github.com/DavidAnson/markdownlint-cli2
 [netstandard-2-1-docs]: https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-1
 [pinact-repo]: https://github.com/suzuki-shunsuke/pinact
 [powershell-install]: https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows
 [r2modman-package]: https://thunderstore.io/c/lethal-company/p/ebkr/r2modman/
+[shellcheck-repo]: https://github.com/koalaman/shellcheck
 [thunderstore-lethal-company-community]: https://thunderstore.io/c/lethal-company/
 [visual-studio-download]: https://visualstudio.microsoft.com/en-us/vs/

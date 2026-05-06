@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: MIT
+interface:
+  display_name: "Release Note Workflow"
+  short_description: "Derive user-facing stable release notes."
+  default_prompt: >-
+    Derive or review stable user-facing release notes from canonical changelog
+    entries, then check version, tag, publication-channel, workflow, and
+    verification readiness.

@@ -2,7 +2,12 @@
 
 A Lethal Company mod that skips the dropship to purchase items when you're on the Company or in other limited situations.
 
-This mod works for v73+. Maybe works for the earlier versions, but not tested.
+## Compatibility
+
+- Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+  `6423525044216269478`)
+    - Test environment
+        - [BepInExPack][bepinexpack-package] v5.4.2305 (2026-03-17 UTC)
 
 ## What it does
 
@@ -69,7 +74,8 @@ At least the following versions are assumed to be compatible.
 
 ### Does it work for the legacy versions of Lethal Company?
 
-No test has been done for them. It is recommended to use Lethal Company v73 or later.
+No test has been done for them. It is recommended to use the tested Lethal
+Company v81.5 baseline above.
 
 ## Differences from [Nexor/InstantBuy](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/)
 
@@ -112,3 +118,5 @@ This mod just spawns the purchased items directly on your ship instead of the dr
 ## Credits
 
 - Highly inspired by [Nexor/InstantBuy](https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/).
+
+[bepinexpack-package]: https://thunderstore.io/c/lethal-company/p/BepInEx/BepInExPack/

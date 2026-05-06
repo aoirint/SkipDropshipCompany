@@ -128,6 +128,8 @@ jobs:
       contents: write
 
     steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
       - name: Download build artifact
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
@@ -147,3 +149,29 @@ jobs:
             ./tmp_artifacts/*.zip
           artifactErrorsFailBuild: true
           artifactContentType: application/zip
+
+      - name: Publish stable release to Thunderstore
+        id: publish-thunderstore
+        # Thunderstore does not accept the prerelease versions generated here,
+        # so only stable latest releases are published to the community.
+        if: needs.build.outputs.release_mode == 'latest'
+        uses: ./.github/actions/publish-thunderstore
+        with:
+          artifact_path: ./tmp_artifacts/*.zip
+          token: ${{ secrets.THUNDERSTORE_TOKEN }}
+          namespace: aoirint
+          community: lethal-company
+          community_categories: |
+            mods
+            tweaks-and-quality-of-life
+            ai-generated
+
+      - name: Add Thunderstore summary
+        if: steps.publish-thunderstore.outcome == 'success'
+        run: |
+          {
+            echo "| Metric | Value |"
+            echo "| :----- | :---- |"
+            echo "| Thunderstore Package | [Open](${{ steps.publish-thunderstore.outputs.thunderstore_community_url }}) |"
+            echo "| Thunderstore Download | [Download](${{ steps.publish-thunderstore.outputs.thunderstore_download_url }}) |"
+          } >> "${GITHUB_STEP_SUMMARY}"

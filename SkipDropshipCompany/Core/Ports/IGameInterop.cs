@@ -16,5 +16,7 @@ internal interface IGameInterop
 
     List<int>? GetOrderedItemsFromTerminal();
 
+    bool SetOrderedItemsFromTerminal(List<int> boughtItemIndexes);
+
     bool SpawnBuyableItemInShip(int buyableItemIndex);
 }

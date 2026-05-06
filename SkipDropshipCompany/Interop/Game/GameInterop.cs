@@ -43,6 +43,11 @@ internal sealed class GameInterop : IGameInterop
         return terminalAdapter.GetOrderedItemsFromTerminal();
     }
 
+    public bool SetOrderedItemsFromTerminal(List<int> boughtItemIndexes)
+    {
+        return terminalAdapter.SetOrderedItemsFromTerminal(boughtItemIndexes);
+    }
+
     public bool SpawnBuyableItemInShip(int buyableItemIndex)
     {
         var item = terminalAdapter.GetBuyableItemByIndex(buyableItemIndex);

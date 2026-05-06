@@ -29,20 +29,8 @@ internal static class TerminalPatch
 
     [HarmonyPatch(nameof(Terminal.SyncGroupCreditsClientRpc))]
     [HarmonyPostfix]
-    public static void SyncGroupCreditsClientRpcPostfix(
-        Terminal __instance,
-        int newGroupCredits,
-        ref int numItemsInShip
-    )
+    public static void SyncGroupCreditsClientRpcPostfix()
     {
-        var result = SkipDropshipCompany.Controller.HandleTerminalSyncGroupCreditsClientRpcPostfix();
-        if (result == null)
-        {
-            return;
-        }
-
-        // The Terminal instance is supplied by Harmony here; restoring this
-        // base-game field remains a patch-boundary adaptation.
-        __instance.orderedItemsFromTerminal = result.DropShipBoughtItemIndexes;
+        SkipDropshipCompany.Controller.HandleTerminalSyncGroupCreditsClientRpcPostfix();
     }
 }

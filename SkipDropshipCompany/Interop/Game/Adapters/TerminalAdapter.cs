@@ -48,6 +48,18 @@ internal sealed class TerminalAdapter
         return terminal.orderedItemsFromTerminal;
     }
 
+    public bool SetOrderedItemsFromTerminal(List<int> boughtItemIndexes)
+    {
+        var terminal = GetTerminal();
+        if (terminal == null)
+        {
+            return false;
+        }
+
+        terminal.orderedItemsFromTerminal = boughtItemIndexes;
+        return true;
+    }
+
     private Terminal? GetTerminal()
     {
         if (cachedTerminal != null)

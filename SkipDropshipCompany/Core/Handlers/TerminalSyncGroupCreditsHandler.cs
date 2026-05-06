@@ -64,6 +64,12 @@ internal sealed class TerminalSyncGroupCreditsHandler
             return null;
         }
 
+        if (!gameInterop.SetOrderedItemsFromTerminal(result.DropShipBoughtItemIndexes))
+        {
+            logger.LogError("Failed to restore Terminal.orderedItemsFromTerminal.");
+            return null;
+        }
+
         logger.LogDebug("Spawned all prepared instant purchased items.");
         return result;
     }

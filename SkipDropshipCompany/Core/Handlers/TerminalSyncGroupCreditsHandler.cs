@@ -3,6 +3,7 @@
 
 using SkipDropshipCompany.Core.Ports;
 using SkipDropshipCompany.Core.UseCases;
+using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.Handlers;
 
@@ -15,18 +16,21 @@ internal sealed class TerminalSyncGroupCreditsHandler
     private readonly PrepareInstantPurchaseUseCase prepareInstantPurchaseUseCase;
     private readonly SpawnPreparedInstantPurchasedItemsUseCase spawnPreparedInstantPurchasedItemsUseCase;
     private readonly IPluginLogger logger;
+    private readonly IValidationLogger validationLogger;
 
     public TerminalSyncGroupCreditsHandler(
         IGameInterop gameInterop,
         PrepareInstantPurchaseUseCase prepareInstantPurchaseUseCase,
         SpawnPreparedInstantPurchasedItemsUseCase spawnPreparedInstantPurchasedItemsUseCase,
-        IPluginLogger logger
+        IPluginLogger logger,
+        IValidationLogger validationLogger
     )
     {
         this.gameInterop = gameInterop;
         this.prepareInstantPurchaseUseCase = prepareInstantPurchaseUseCase;
         this.spawnPreparedInstantPurchasedItemsUseCase = spawnPreparedInstantPurchasedItemsUseCase;
         this.logger = logger;
+        this.validationLogger = validationLogger;
     }
 
     public PrepareInstantPurchaseResult? PrepareInstantPurchase()
@@ -35,6 +39,12 @@ internal sealed class TerminalSyncGroupCreditsHandler
         if (boughtItemIndexes == null)
         {
             logger.LogError("Terminal.orderedItemsFromTerminal is null.");
+            validationLogger.Record(
+                ValidationLogRecord.TerminalOrderReadResult(
+                    role: GetRole(),
+                    result: ValidationLogTerminalOrderReadResult.NullOrderedItems
+                )
+            );
             return null;
         }
 
@@ -67,10 +77,29 @@ internal sealed class TerminalSyncGroupCreditsHandler
         if (!gameInterop.SetTerminalOrderedItemIndexes(result.DropShipBoughtItemIndexes))
         {
             logger.LogError("Failed to restore Terminal.orderedItemsFromTerminal.");
+            validationLogger.Record(
+                ValidationLogRecord.TerminalOrderRestoreResult(
+                    role: GetRole(),
+                    result: ValidationLogTerminalOrderRestoreResult.Failed,
+                    dropshipItemCount: result.DropShipBoughtItemIndexes.Count
+                )
+            );
             return null;
         }
 
+        validationLogger.Record(
+            ValidationLogRecord.TerminalOrderRestoreResult(
+                role: GetRole(),
+                result: ValidationLogTerminalOrderRestoreResult.Success,
+                dropshipItemCount: result.DropShipBoughtItemIndexes.Count
+            )
+        );
         logger.LogDebug("Spawned all prepared instant purchased items.");
         return result;
+    }
+
+    private ValidationLogRole GetRole()
+    {
+        return gameInterop.IsServer() ? ValidationLogRole.Server : ValidationLogRole.Client;
     }
 }

@@ -43,6 +43,17 @@ internal enum ValidationLogLandingHistoryResult
     Success
 }
 
+internal enum ValidationLogTerminalOrderReadResult
+{
+    NullOrderedItems
+}
+
+internal enum ValidationLogTerminalOrderRestoreResult
+{
+    Failed,
+    Success
+}
+
 internal sealed class ValidationLogRecord
 {
     private ValidationLogRecord(string eventName, Dictionary<string, object?>? fields = null)
@@ -187,6 +198,38 @@ internal sealed class ValidationLogRecord
         );
     }
 
+    public static ValidationLogRecord TerminalOrderReadResult(
+        ValidationLogRole role,
+        ValidationLogTerminalOrderReadResult result
+    )
+    {
+        return new(
+            "terminal_order_read_result",
+            new()
+            {
+                ["role"] = ToValidationRoleToken(role),
+                ["result"] = ToValidationTerminalOrderReadResultToken(result)
+            }
+        );
+    }
+
+    public static ValidationLogRecord TerminalOrderRestoreResult(
+        ValidationLogRole role,
+        ValidationLogTerminalOrderRestoreResult result,
+        int dropshipItemCount
+    )
+    {
+        return new(
+            "terminal_order_restore_result",
+            new()
+            {
+                ["role"] = ToValidationRoleToken(role),
+                ["result"] = ToValidationTerminalOrderRestoreResultToken(result),
+                ["dropship_item_count"] = dropshipItemCount
+            }
+        );
+    }
+
     public static ValidationLogScene ToValidationScene(string? sceneName)
     {
         if (sceneName == null)
@@ -253,6 +296,29 @@ internal sealed class ValidationLogRecord
             ValidationLogLandingHistoryResult.NullScene => "null_scene",
             ValidationLogLandingHistoryResult.EmptyScene => "empty_scene",
             ValidationLogLandingHistoryResult.Success => "success",
+            _ => "unknown"
+        };
+    }
+
+    private static string ToValidationTerminalOrderReadResultToken(
+        ValidationLogTerminalOrderReadResult result
+    )
+    {
+        return result switch
+        {
+            ValidationLogTerminalOrderReadResult.NullOrderedItems => "null_ordered_items",
+            _ => "unknown"
+        };
+    }
+
+    private static string ToValidationTerminalOrderRestoreResultToken(
+        ValidationLogTerminalOrderRestoreResult result
+    )
+    {
+        return result switch
+        {
+            ValidationLogTerminalOrderRestoreResult.Failed => "failed",
+            ValidationLogTerminalOrderRestoreResult.Success => "success",
             _ => "unknown"
         };
     }

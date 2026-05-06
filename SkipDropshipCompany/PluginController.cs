@@ -84,7 +84,8 @@ internal sealed class PluginController
                 gameInterop: gameInterop,
                 prepareInstantPurchaseUseCase: prepareInstantPurchaseUseCase,
                 spawnPreparedInstantPurchasedItemsUseCase: spawnPreparedInstantPurchasedItemsUseCase,
-                logger: logger
+                logger: logger,
+                validationLogger: validationLogger
             )
         );
     }

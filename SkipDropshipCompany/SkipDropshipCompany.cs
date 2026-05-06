@@ -1,10 +1,9 @@
+// SPDX-License-Identifier: MIT
 #nullable enable
 
 using BepInEx;
-using BepInEx.Configuration;
-using BepInEx.Logging;
-using HarmonyLib;
-using SkipDropshipCompany.Managers;
+using SkipDropshipCompany.Interop;
+using SkipDropshipCompany.Interop.Game.Patches;
 
 namespace SkipDropshipCompany;
 
@@ -14,39 +13,18 @@ namespace SkipDropshipCompany;
 [BepInProcess("Lethal Company.exe")]
 public class SkipDropshipCompany : BaseUnityPlugin
 {
+    private static PluginController? controller;
 
-    internal static new ManualLogSource? Logger { get; private set; }
-
-    internal static Harmony harmony = new(MyPluginInfo.PLUGIN_GUID);
-
-    internal static InstantPurchaseManager instantPurchaseManager = new();
-
-    internal static LandingHistoryManager landingHistoryManager = new();
-
-    internal static ConfigEntry<bool>? EnabledConfig;
-
-    internal static ConfigEntry<bool>? RequireReroutingOnFirstDayConfig;
+    internal static PluginController Controller => controller!;
 
     private void Awake()
     {
-        Logger = base.Logger;
+        var logger = new BepInExPluginLogger(base.Logger);
+        var config = BepInExPluginConfig.Bind(Config);
+        controller = PluginController.Create(config: config, logger: logger);
 
-        EnabledConfig = Config.Bind(
-            "General",
-            "Enabled",
-            true,
-            "Set to false to disable this mod."
-        );
+        HarmonyPatchInstaller.Install();
 
-        RequireReroutingOnFirstDayConfig = Config.Bind(
-            "General",
-            "RequireReroutingOnFirstDay",
-            false,
-            "If true, rerouting to the company will be required to skip the dropship on the first day."
-        );
-
-        harmony.PatchAll();
-
-        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!");
+        logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!");
     }
 }

@@ -10,9 +10,15 @@ project issue, report it in [GitHub Issues][github-issues].
 
 ## Unreleased
 
-- Rebuilds the package for the Lethal Company v81.5 baseline.
-- Improves internal build, release, and documentation maintenance.
-- Adds stable-release automation for Thunderstore publishing.
+This release rebuilds SkipDropshipCompany for Lethal Company v81.5 and includes
+internal improvements.
+
+No gameplay changes are introduced.
+
+### Changed
+
+- Rebuilt for Lethal Company v81.5.
+- Improved internal project maintenance.
 
 ## v0.1.7 - 2025-11-23 UTC
 

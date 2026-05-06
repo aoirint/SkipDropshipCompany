@@ -7,10 +7,16 @@ internal static class HarmonyCallbackTokens
 {
     // Tokens are stable validation identifiers, not display text. Use
     // class_method_patchkind naming so SDC and CJP diagnostics stay comparable.
+    // Keep tokens grouped by patched game class so new callbacks land near
+    // related patches.
+
+    // Terminal callbacks.
     public const string TerminalSyncGroupCreditsClientRpcPrefix =
         "terminal_sync_group_credits_client_rpc_prefix";
     public const string TerminalSyncGroupCreditsClientRpcPostfix =
         "terminal_sync_group_credits_client_rpc_postfix";
+
+    // StartOfRound callbacks.
     public const string StartOfRoundStartGamePostfix = "start_of_round_start_game_postfix";
     public const string StartOfRoundResetShipPostfix = "start_of_round_reset_ship_postfix";
 }

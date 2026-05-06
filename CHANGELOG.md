@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Added opt-in structured validation logging guidance for v0.2.0
   release-candidate checks.
+- Documented the minimal Terminal dropship runtime evidence expected after
+  `SyncGroupCreditsClientRpc`, keeping broad applied-state validation out of
+  the default release-candidate scope.
 - Ported internal repository, build, release, and documentation maintenance
   practices from CruiserJumpPractice's `v0.2.0` preparation work.
 - Updated the tested compatibility baseline to Lethal Company v81.5.

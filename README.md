@@ -263,6 +263,39 @@ nearby SkipDropshipCompany error lines when asking for validation help.
 Validation records intentionally avoid player names, lobby identifiers, account
 identifiers, machine names, profile paths, tokens, and raw item identifiers.
 
+#### Terminal dropship validation evidence
+
+For the `Terminal.SyncGroupCreditsClientRpc` dropship path, the current minimal
+runtime evidence is the branch and callback-boundary evidence emitted by these
+records:
+
+- `prepare_instant_purchase_result`
+    - Confirms whether the callback ran on the server, whether instant purchase
+      was allowed, and the original, dropship, and instant item counts.
+- `spawn_instant_purchase_result`
+    - Confirms whether the server had a prepared purchase to spawn and how many
+      prepared instant items were spawned before success or failure.
+- `terminal_order_read_result`
+    - Confirms the null-order guard when `Terminal.orderedItemsFromTerminal`
+      cannot be read.
+- `terminal_order_restore_result`
+    - Confirms whether the handler restored the dropship order after spawning
+      prepared instant purchases, including the restored dropship item count.
+
+Use these records together with an in-game observation of the purchase result.
+Core logic can be checked through the use cases and game interop boundary:
+`PrepareInstantPurchaseUseCase` branch results and counts,
+`SpawnPreparedInstantPurchasedItemsUseCase` branch results and spawned counts,
+the `TerminalSyncGroupCreditsHandler` null-order read and restore records, and
+fake `IGameInterop` assertions. Harmony prefix/postfix timing,
+`numItemsInShip` effects in the running game, later dropship delivery from the
+restored `orderedItemsFromTerminal`, and spawned object replication remain
+manual in-game validation points.
+
+Do not add broad applied-state validation for this path by default. If a future
+release candidate needs one extra runtime record, prefer a compact Postfix-only
+observation limited to SDC-owned counts and stable result tokens.
+
 ### r2modman
 
 1. Open [r2modman][r2modman-package].

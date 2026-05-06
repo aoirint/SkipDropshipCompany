@@ -27,10 +27,10 @@ permissions:
 # Keep each tool version directly beside its archive SHA256. They are reviewed
 # and updated as one supply-chain-sensitive pair.
 env:
-  ACTIONLINT_VERSION: 1.7.12
-  ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
   SHELLCHECK_VERSION: 0.11.0
   SHELLCHECK_SHA256: b7af85e41cc99489dcc21d66c6d5f3685138f06d34651e6d34b42ec6d54fe6f6
+  ACTIONLINT_VERSION: 1.7.12
+  ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
   PINACT_VERSION: 3.9.2
   PINACT_SHA256: 6adcc8a2217e4114e0841f8bca0cddf9958a9c52e3e89760c35b791cdba1a916
 

@@ -75,6 +75,9 @@ internal sealed class PrepareInstantPurchaseUseCase
                 preparedResult: result
             )
         );
+        // Publish only after the success record is emitted. If validation
+        // logging throws, the Harmony guard treats the Prefix as fail-open and
+        // the Postfix must not see prepared work from that failed notification.
         preparedInstantPurchaseStore.SetPreparedInstantPurchaseResult(result);
         return result;
     }

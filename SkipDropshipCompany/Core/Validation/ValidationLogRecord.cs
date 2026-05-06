@@ -90,6 +90,18 @@ internal sealed class ValidationLogRecord
         return new("controller_created");
     }
 
+    public static ValidationLogRecord CallbackException(string callback, string exceptionType)
+    {
+        return new(
+            "callback_exception",
+            new()
+            {
+                ["callback"] = callback,
+                ["exception_type"] = exceptionType
+            }
+        );
+    }
+
     public static ValidationLogRecord InstantPurchaseEligibilityDecision(
         RoundState roundState,
         bool enabled,

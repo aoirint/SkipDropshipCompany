@@ -17,12 +17,17 @@ public class SkipDropshipCompany : BaseUnityPlugin
 {
     private static PluginController? controller;
 
+    // Game callback types are constructed outside the plugin startup path.
+    // This static entry exposes one plugin-level controller instead of
+    // scattering use cases across callback classes.
     internal static PluginController Controller => controller!;
 
     private void Awake()
     {
         var logger = new BepInExPluginLogger(base.Logger);
+
         var config = BepInExPluginConfig.Bind(Config);
+
         IValidationLogger validationLogger = config.ValidationLogging
             ? new BepInExValidationLogger(logger, System.DateTime.UtcNow)
             : DisabledValidationLogger.Instance;
@@ -36,6 +41,8 @@ public class SkipDropshipCompany : BaseUnityPlugin
             )
         );
 
+        // Create the workflow facade after BepInEx adapters are bound so Core
+        // stays behind ports.
         controller = PluginController.Create(
             config: config,
             logger: logger,
@@ -55,6 +62,8 @@ public class SkipDropshipCompany : BaseUnityPlugin
         // callback can enter a fully wired plugin boundary.
         HarmonyPatchInstaller.Install();
 
-        logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!");
+        logger.LogInfo(
+            $"Plugin {MyPluginInfo.PLUGIN_NAME} v{MyPluginInfo.PLUGIN_VERSION} is loaded!"
+        );
     }
 }

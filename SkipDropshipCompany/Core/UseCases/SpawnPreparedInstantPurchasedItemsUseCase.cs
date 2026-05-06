@@ -7,9 +7,13 @@ using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.UseCases;
 
-// Spawning consumes the prepared Prefix result after the base-game credit/count
-// RPC completes. It returns the dropship-retained order so the handler can put
-// Terminal.orderedItemsFromTerminal back into the expected delivery state.
+/// <summary>
+/// Spawns the instant-delivery portion prepared by the terminal RPC Prefix.
+/// </summary>
+/// <remarks>
+/// Returns the dropship-retained order so the handler can put
+/// Terminal.orderedItemsFromTerminal back into the expected delivery state.
+/// </remarks>
 internal sealed class SpawnPreparedInstantPurchasedItemsUseCase
 {
     private readonly IGameInterop gameInterop;

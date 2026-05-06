@@ -8,9 +8,13 @@ using SkipDropshipCompany.Interop.Game.Adapters;
 
 namespace SkipDropshipCompany.Interop.Game;
 
-// GameInterop is the game-facing implementation of the mod operations requested
-// by Core. It presents one SDC-oriented surface while focused adapters handle
-// networking, round state, terminal order state, and item spawning.
+/// <summary>
+/// Game-facing implementation of the mod operations requested by Core.
+/// </summary>
+/// <remarks>
+/// Presents one SDC-oriented surface while focused adapters handle networking,
+/// round state, terminal order state, and item spawning.
+/// </remarks>
 internal sealed class GameInterop : IGameInterop
 {
     private readonly NetworkAdapter networkAdapter;
@@ -51,6 +55,9 @@ internal sealed class GameInterop : IGameInterop
         return terminalAdapter.SetOrderedItemIndexes(boughtItemIndexes);
     }
 
+    /// <summary>
+    /// Spawns the buyable item represented by a terminal item index inside the ship.
+    /// </summary>
     public bool SpawnBuyableItemInShip(int buyableItemIndex)
     {
         // Core works with terminal item indexes because that is what the

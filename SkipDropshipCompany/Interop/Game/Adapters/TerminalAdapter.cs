@@ -8,8 +8,12 @@ using UnityEngine;
 
 namespace SkipDropshipCompany.Interop.Game.Adapters;
 
-// TerminalAdapter owns the mutable Terminal order list boundary. Caching avoids
-// repeated scene searches during the paired Prefix/Postfix callbacks.
+/// <summary>
+/// Owns the mutable Terminal order-list boundary.
+/// </summary>
+/// <remarks>
+/// Caching avoids repeated scene searches during the paired Prefix/Postfix callbacks.
+/// </remarks>
 internal sealed class TerminalAdapter
 {
     private readonly IPluginLogger logger;

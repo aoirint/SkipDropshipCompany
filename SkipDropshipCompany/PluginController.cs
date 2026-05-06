@@ -10,9 +10,12 @@ using SkipDropshipCompany.Interop.Game;
 
 namespace SkipDropshipCompany;
 
-// The controller is the plugin-facing facade. Harmony patches report game
-// callbacks here, while Core use cases own the purchase and landing-history
-// policy behind this boundary.
+/// <summary>
+/// Plugin-facing facade for game callbacks reported by Harmony patches.
+/// </summary>
+/// <remarks>
+/// Core use cases own the purchase and landing-history policy behind this boundary.
+/// </remarks>
 internal sealed class PluginController
 {
     private readonly RoundCallbackHandler roundCallbackHandler;
@@ -27,6 +30,10 @@ internal sealed class PluginController
         this.terminalSyncGroupCreditsHandler = terminalSyncGroupCreditsHandler;
     }
 
+    /// <summary>
+    /// Builds the plugin controller and manually wires concrete integrations to
+    /// Core ports.
+    /// </summary>
     public static PluginController Create(
         IPluginConfig config,
         IPluginLogger logger,
@@ -92,23 +99,33 @@ internal sealed class PluginController
         );
     }
 
-    // Base-game Harmony callbacks use these narrow methods to keep patch
-    // classes free of use-case and store details.
+    /// <summary>
+    /// Handles the base-game round-start callback.
+    /// </summary>
     public void HandleStartGame()
     {
         roundCallbackHandler.HandleStartGame();
     }
 
+    /// <summary>
+    /// Handles the base-game ship-reset callback.
+    /// </summary>
     public void HandleResetShip()
     {
         roundCallbackHandler.HandleResetShip();
     }
 
+    /// <summary>
+    /// Handles the Prefix side of Terminal.SyncGroupCreditsClientRpc.
+    /// </summary>
     public PrepareInstantPurchaseResult? HandleTerminalSyncGroupCreditsClientRpcPrefix()
     {
         return terminalSyncGroupCreditsHandler.HandlePrefix();
     }
 
+    /// <summary>
+    /// Handles the Postfix side of Terminal.SyncGroupCreditsClientRpc.
+    /// </summary>
     public void HandleTerminalSyncGroupCreditsClientRpcPostfix()
     {
         terminalSyncGroupCreditsHandler.HandlePostfix();

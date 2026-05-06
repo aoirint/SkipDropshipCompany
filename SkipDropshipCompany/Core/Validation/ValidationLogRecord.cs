@@ -54,10 +54,13 @@ internal enum ValidationLogTerminalOrderRestoreResult
     Success
 }
 
+/// <summary>
+/// Immutable validation event description with stable event names and fields.
+/// </summary>
 internal sealed class ValidationLogRecord
 {
-    // Records are built through named factories so call sites choose semantic
-    // events, while this type owns the stable field names and token spelling.
+    // Call sites choose semantic events through named factories; this type owns
+    // the stable field names and token spelling.
     private ValidationLogRecord(string eventName, Dictionary<string, object?>? fields = null)
     {
         EventName = eventName;

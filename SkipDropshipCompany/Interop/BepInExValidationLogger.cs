@@ -10,6 +10,9 @@ using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Interop;
 
+/// <summary>
+/// Writes structured validation events into the normal BepInEx log stream.
+/// </summary>
 internal sealed class BepInExValidationLogger : IValidationLogger
 {
     private const int SchemaVersion = 1;
@@ -25,6 +28,9 @@ internal sealed class BepInExValidationLogger : IValidationLogger
         runId = CreateRunId(startupTimeUtc);
     }
 
+    /// <summary>
+    /// Records one validation event as a prefixed, line-oriented JSON payload.
+    /// </summary>
     public void Record(ValidationLogRecord record)
     {
         // Validation logs are line-oriented JSON embedded in the normal BepInEx

@@ -7,9 +7,13 @@ using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.Handlers;
 
-// Terminal SyncGroupCreditsClientRpc handling is callback coordination. The
-// Harmony patch owns method-shape adaptation; this handler owns game-state reads
-// and use-case dispatch.
+/// <summary>
+/// Coordinates Terminal.SyncGroupCreditsClientRpc Prefix/Postfix handling.
+/// </summary>
+/// <remarks>
+/// The Harmony patch owns method-shape adaptation; this handler owns game-state
+/// reads and use-case dispatch.
+/// </remarks>
 internal sealed class TerminalSyncGroupCreditsHandler
 {
     private readonly IGameInterop gameInterop;
@@ -33,6 +37,9 @@ internal sealed class TerminalSyncGroupCreditsHandler
         this.validationLogger = validationLogger;
     }
 
+    /// <summary>
+    /// Prepares instant purchase state before the base-game terminal RPC applies.
+    /// </summary>
     public PrepareInstantPurchaseResult? HandlePrefix()
     {
         var boughtItemIndexes = gameInterop.GetTerminalOrderedItemIndexes();
@@ -68,6 +75,9 @@ internal sealed class TerminalSyncGroupCreditsHandler
         return result;
     }
 
+    /// <summary>
+    /// Spawns prepared instant purchases and restores retained dropship order.
+    /// </summary>
     public void HandlePostfix()
     {
         // Postfix work is intentionally driven only by prepared state from the

@@ -7,9 +7,13 @@ using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.UseCases;
 
-// Eligibility is a pure policy layer around current round state, config, and
-// one-entry landing history. It records both the boolean decision and the reason
-// token used for validation.
+/// <summary>
+/// Evaluates whether the current round state allows instant purchase.
+/// </summary>
+/// <remarks>
+/// The policy is based on current round state, config, and one-entry landing
+/// history, then records both the decision and validation reason token.
+/// </remarks>
 internal sealed class InstantPurchaseEligibilityUseCase
 {
     private readonly IPluginConfig config;

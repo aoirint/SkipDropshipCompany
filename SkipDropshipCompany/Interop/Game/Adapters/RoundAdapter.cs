@@ -6,8 +6,12 @@ using SkipDropshipCompany.Core.State;
 
 namespace SkipDropshipCompany.Interop.Game.Adapters;
 
-// RoundAdapter converts base-game round fields into the small RoundState used
-// by Core policy. Missing singleton data fails closed and logs at this boundary.
+/// <summary>
+/// Converts base-game round fields into the small RoundState used by Core policy.
+/// </summary>
+/// <remarks>
+/// Missing singleton data fails closed and logs at this boundary.
+/// </remarks>
 internal sealed class RoundAdapter
 {
     private readonly IPluginLogger logger;

@@ -9,15 +9,20 @@ internal static class HarmonyCallbackGuard
 {
     private static HarmonyCallbackDiagnosticReporter? diagnosticReporter;
 
-    // Configure from plugin startup before Harmony patches are installed so the
-    // guard can keep patch classes free of logger and validation dependencies.
+    /// <summary>
+    /// Configures diagnostics before Harmony patches are installed.
+    /// </summary>
     public static void Configure(HarmonyCallbackDiagnosticReporter reporter)
     {
         diagnosticReporter = reporter;
     }
 
-    // Returns whether the controller notification completed without throwing.
-    // A false result says nothing about whether diagnostic recording succeeded.
+    /// <summary>
+    /// Runs a patch notification and records diagnostics if the callback throws.
+    /// </summary>
+    /// <returns>
+    /// Whether the controller notification completed without throwing.
+    /// </returns>
     public static bool TryNotifyHarmonyCallback(string callback, Action notify)
     {
         try
@@ -32,8 +37,9 @@ internal static class HarmonyCallbackGuard
         }
     }
 
-    // Use this overload when a patch needs the notification result to decide a
-    // patch-boundary side effect, such as mutating a Harmony ref argument.
+    /// <summary>
+    /// Runs a patch notification that returns a value needed for a patch side effect.
+    /// </summary>
     public static bool TryNotifyHarmonyCallback<T>(
         string callback,
         Func<T> notify,

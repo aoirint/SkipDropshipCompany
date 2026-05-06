@@ -10,9 +10,13 @@ using UnityEngine;
 
 namespace SkipDropshipCompany.Interop.Game.Adapters;
 
-// ItemSpawnAdapter owns the Unity-side recreation of dropship delivery items.
-// Core chooses item indexes; this adapter resolves prefabs, placement, and
-// NetworkObject spawning inside the ship.
+/// <summary>
+/// Owns Unity-side spawning for instant-delivered buyable items.
+/// </summary>
+/// <remarks>
+/// Core chooses item indexes; this adapter resolves prefabs, placement, and
+/// NetworkObject spawning inside the ship.
+/// </remarks>
 internal sealed class ItemSpawnAdapter
 {
     private readonly IPluginLogger logger;

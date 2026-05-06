@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #nullable enable
 
+using System;
 using System.Collections.Generic;
 using SkipDropshipCompany.Core.State;
 using SkipDropshipCompany.Core.UseCases;
@@ -88,6 +89,18 @@ internal sealed class ValidationLogRecord
     public static ValidationLogRecord ControllerCreated()
     {
         return new("controller_created");
+    }
+
+    public static ValidationLogRecord CallbackException(string callback, Exception exception)
+    {
+        return new(
+            "callback_exception",
+            new()
+            {
+                ["callback"] = callback,
+                ["exception_type"] = exception.GetType().FullName ?? exception.GetType().Name
+            }
+        );
     }
 
     public static ValidationLogRecord InstantPurchaseEligibilityDecision(

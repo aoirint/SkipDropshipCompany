@@ -20,6 +20,8 @@
     <!-- Compile-only game dependencies -->
     <PackageReference Include="BepInEx.Core" Version="[5.4.21]" IncludeAssets="compile" />
     <PackageReference Include="LethalCompany.GameLibs.Steam" Version="[81.0.5-ngd.0]" IncludeAssets="compile" />
+    <!-- Use the JSON serializer explicitly; it is already present as a transitive dependency of LethalCompany.GameLibs.Steam. -->
+    <PackageReference Include="Newtonsoft.Json" Version="[13.0.3]" IncludeAssets="compile" />
     <PackageReference Include="UnityEngine.Modules" Version="[2022.3.62]" IncludeAssets="compile" />
 
     <!-- Build/development-only dependencies -->

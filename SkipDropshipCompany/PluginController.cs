@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using SkipDropshipCompany.Core.Ports;
 using SkipDropshipCompany.Core.State;
 using SkipDropshipCompany.Core.UseCases;
+using SkipDropshipCompany.Core.Validation;
 using SkipDropshipCompany.Interop.Game;
 
 namespace SkipDropshipCompany;
@@ -35,7 +36,11 @@ internal sealed class PluginController
         this.logger = logger;
     }
 
-    public static PluginController Create(IPluginConfig config, IPluginLogger logger)
+    public static PluginController Create(
+        IPluginConfig config,
+        IPluginLogger logger,
+        IValidationLogger validationLogger
+    )
     {
         IGameInterop gameInterop = new GameInterop(logger);
 
@@ -45,31 +50,38 @@ internal sealed class PluginController
             config: config,
             gameInterop: gameInterop,
             landingHistoryStore: landingHistoryStore,
-            logger: logger
+            logger: logger,
+            validationLogger: validationLogger
         );
         var prepareInstantPurchaseUseCase = new PrepareInstantPurchaseUseCase(
             gameInterop: gameInterop,
             eligibilityUseCase: instantPurchaseEligibilityUseCase,
             preparedInstantPurchaseStore: preparedInstantPurchaseStore,
-            logger: logger
+            logger: logger,
+            validationLogger: validationLogger
         );
         var spawnPreparedInstantPurchasedItemsUseCase =
             new SpawnPreparedInstantPurchasedItemsUseCase(
                 gameInterop: gameInterop,
                 preparedInstantPurchaseStore: preparedInstantPurchaseStore,
-                logger: logger
+                logger: logger,
+                validationLogger: validationLogger
             );
+
+        validationLogger.Record(ValidationLogRecord.ControllerCreated());
 
         return new PluginController(
             recordLandingUseCase: new RecordLandingUseCase(
                 gameInterop: gameInterop,
                 landingHistoryStore: landingHistoryStore,
-                logger: logger
+                logger: logger,
+                validationLogger: validationLogger
             ),
             clearLandingHistoryUseCase: new ClearLandingHistoryUseCase(
                 gameInterop: gameInterop,
                 landingHistoryStore: landingHistoryStore,
-                logger: logger
+                logger: logger,
+                validationLogger: validationLogger
             ),
             prepareInstantPurchaseUseCase: prepareInstantPurchaseUseCase,
             spawnPreparedInstantPurchasedItemsUseCase: spawnPreparedInstantPurchasedItemsUseCase,

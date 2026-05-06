@@ -2,6 +2,8 @@
 #nullable enable
 
 using BepInEx;
+using SkipDropshipCompany.Core.Ports;
+using SkipDropshipCompany.Core.Validation;
 using SkipDropshipCompany.Interop;
 using SkipDropshipCompany.Interop.Game.Patches;
 
@@ -21,7 +23,24 @@ public class SkipDropshipCompany : BaseUnityPlugin
     {
         var logger = new BepInExPluginLogger(base.Logger);
         var config = BepInExPluginConfig.Bind(Config);
-        controller = PluginController.Create(config: config, logger: logger);
+        IValidationLogger validationLogger = config.ValidationLogging
+            ? new BepInExValidationLogger(logger, System.DateTime.UtcNow)
+            : DisabledValidationLogger.Instance;
+
+        validationLogger.Record(
+            ValidationLogRecord.PluginLoaded(
+                version: MyPluginInfo.PLUGIN_VERSION,
+                validationLogging: config.ValidationLogging,
+                enabled: config.Enabled,
+                requireReroutingOnFirstDay: config.RequireReroutingOnFirstDay
+            )
+        );
+
+        controller = PluginController.Create(
+            config: config,
+            logger: logger,
+            validationLogger: validationLogger
+        );
 
         HarmonyPatchInstaller.Install();
 

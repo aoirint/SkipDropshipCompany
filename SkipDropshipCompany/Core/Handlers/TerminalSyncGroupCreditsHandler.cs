@@ -33,7 +33,7 @@ internal sealed class TerminalSyncGroupCreditsHandler
         this.validationLogger = validationLogger;
     }
 
-    public PrepareInstantPurchaseResult? PrepareInstantPurchase()
+    public PrepareInstantPurchaseResult? HandlePrefix()
     {
         var boughtItemIndexes = gameInterop.GetTerminalOrderedItemIndexes();
         if (boughtItemIndexes == null)
@@ -65,7 +65,7 @@ internal sealed class TerminalSyncGroupCreditsHandler
         return result;
     }
 
-    public void SpawnPreparedItemsAndRestoreDropshipOrder()
+    public void HandlePostfix()
     {
         var result = spawnPreparedInstantPurchasedItemsUseCase.Execute();
         if (result == null)

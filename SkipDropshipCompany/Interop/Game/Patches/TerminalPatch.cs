@@ -21,7 +21,7 @@ internal static class TerminalPatch
     {
         var completed = HarmonyCallbackGuard.TryNotifyHarmonyCallback(
             PrefixCallback,
-            SkipDropshipCompany.Controller.PrepareTerminalSyncGroupCreditsInstantPurchase,
+            SkipDropshipCompany.Controller.HandleTerminalSyncGroupCreditsClientRpcPrefix,
             out var result
         );
         if (!completed)
@@ -45,7 +45,7 @@ internal static class TerminalPatch
     {
         HarmonyCallbackGuard.TryNotifyHarmonyCallback(
             PostfixCallback,
-            SkipDropshipCompany.Controller.SpawnTerminalSyncGroupCreditsPreparedItems
+            SkipDropshipCompany.Controller.HandleTerminalSyncGroupCreditsClientRpcPostfix
         );
     }
 }

@@ -7,6 +7,12 @@ using SkipDropshipCompany.Core.Ports;
 
 namespace SkipDropshipCompany.Core.State;
 
+/// <summary>
+/// One-entry rolling history of the latest landed scene.
+/// </summary>
+/// <remarks>
+/// Only the most recent landing matters for the company reroute rule.
+/// </remarks>
 internal sealed class LandingHistoryStore
 {
     private const int LandingHistorySize = 1;

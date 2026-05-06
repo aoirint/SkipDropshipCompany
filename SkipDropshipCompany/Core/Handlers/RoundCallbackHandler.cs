@@ -6,8 +6,13 @@ using SkipDropshipCompany.Core.UseCases;
 
 namespace SkipDropshipCompany.Core.Handlers;
 
-// Round callbacks are coordination points. Interop detects base-game timing,
-// while Core snapshots the current game state and updates landing history.
+/// <summary>
+/// Coordinates round lifecycle callbacks with landing-history use cases.
+/// </summary>
+/// <remarks>
+/// Interop detects base-game timing, while Core snapshots the current game
+/// state and updates landing history.
+/// </remarks>
 internal sealed class RoundCallbackHandler
 {
     private readonly IGameInterop gameInterop;

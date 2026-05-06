@@ -3,6 +3,9 @@
 
 namespace SkipDropshipCompany.Core.State;
 
+/// <summary>
+/// Plain snapshot of the round state needed for instant-purchase eligibility.
+/// </summary>
 internal sealed class RoundState
 {
     public RoundState(bool isInOrbit, bool isFirstDay, bool isRoutingToCompany)

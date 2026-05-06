@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using SkipDropshipCompany.Core.Ports;
 using SkipDropshipCompany.Core.State;
+using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.UseCases;
 
@@ -13,18 +14,21 @@ internal sealed class PrepareInstantPurchaseUseCase
     private readonly InstantPurchaseEligibilityUseCase eligibilityUseCase;
     private readonly PreparedInstantPurchaseStore preparedInstantPurchaseStore;
     private readonly IPluginLogger logger;
+    private readonly IValidationLogger validationLogger;
 
     public PrepareInstantPurchaseUseCase(
         IGameInterop gameInterop,
         InstantPurchaseEligibilityUseCase eligibilityUseCase,
         PreparedInstantPurchaseStore preparedInstantPurchaseStore,
-        IPluginLogger logger
+        IPluginLogger logger,
+        IValidationLogger validationLogger
     )
     {
         this.gameInterop = gameInterop;
         this.eligibilityUseCase = eligibilityUseCase;
         this.preparedInstantPurchaseStore = preparedInstantPurchaseStore;
         this.logger = logger;
+        this.validationLogger = validationLogger;
     }
 
     public PrepareInstantPurchaseResult? Execute(List<int> boughtItemIndexes)
@@ -32,6 +36,14 @@ internal sealed class PrepareInstantPurchaseUseCase
         if (!gameInterop.IsServer())
         {
             logger.LogDebug("Not the server. Skipping instant purchase logic.");
+            validationLogger.Record(
+                ValidationLogRecord.PrepareInstantPurchaseResult(
+                    role: ValidationLogRole.Client,
+                    result: ValidationLogPrepareResult.NoServer,
+                    originalItemCount: boughtItemIndexes.Count,
+                    preparedResult: null
+                )
+            );
             return null;
         }
 
@@ -39,6 +51,14 @@ internal sealed class PrepareInstantPurchaseUseCase
         if (!eligibilityUseCase.IsInstantPurchaseAllowed())
         {
             logger.LogDebug("Instant purchase is not allowed in the current game state.");
+            validationLogger.Record(
+                ValidationLogRecord.PrepareInstantPurchaseResult(
+                    role: ValidationLogRole.Server,
+                    result: ValidationLogPrepareResult.NotAllowed,
+                    originalItemCount: boughtItemIndexes.Count,
+                    preparedResult: null
+                )
+            );
             return null;
         }
 
@@ -48,6 +68,14 @@ internal sealed class PrepareInstantPurchaseUseCase
         );
 
         preparedInstantPurchaseStore.SetPreparedInstantPurchaseResult(result);
+        validationLogger.Record(
+            ValidationLogRecord.PrepareInstantPurchaseResult(
+                role: ValidationLogRole.Server,
+                result: ValidationLogPrepareResult.Success,
+                originalItemCount: boughtItemIndexes.Count,
+                preparedResult: result
+            )
+        );
         return result;
     }
 }

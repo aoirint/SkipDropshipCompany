@@ -3,6 +3,7 @@
 
 using SkipDropshipCompany.Core.Ports;
 using SkipDropshipCompany.Core.State;
+using SkipDropshipCompany.Core.Validation;
 
 namespace SkipDropshipCompany.Core.UseCases;
 
@@ -12,18 +13,21 @@ internal sealed class InstantPurchaseEligibilityUseCase
     private readonly IGameInterop gameInterop;
     private readonly LandingHistoryStore landingHistoryStore;
     private readonly IPluginLogger logger;
+    private readonly IValidationLogger validationLogger;
 
     public InstantPurchaseEligibilityUseCase(
         IPluginConfig config,
         IGameInterop gameInterop,
         LandingHistoryStore landingHistoryStore,
-        IPluginLogger logger
+        IPluginLogger logger,
+        IValidationLogger validationLogger
     )
     {
         this.config = config;
         this.gameInterop = gameInterop;
         this.landingHistoryStore = landingHistoryStore;
         this.logger = logger;
+        this.validationLogger = validationLogger;
     }
 
     public bool IsInstantPurchaseAllowed()
@@ -33,6 +37,7 @@ internal sealed class InstantPurchaseEligibilityUseCase
         if (!config.Enabled)
         {
             logger.LogDebug("Not enabled.");
+            validationLogger.Record(ValidationLogRecord.InstantPurchaseEligibilityConfigDisabled());
             return false;
         }
 
@@ -43,8 +48,12 @@ internal sealed class InstantPurchaseEligibilityUseCase
         var isLandedOnCompany = IsLandedOnCompany(roundState);
         var isInFirstDayOrbit = IsInFirstDayOrbit(roundState);
         var isInFirstDayOrbitAndRoutingToCompany = IsInFirstDayOrbitAndRoutingToCompany(roundState);
+        var lastLandedOnCompany = roundState.IsInOrbit && landingHistoryStore.IsLastLandedOnCompany();
         var isInOrbitAndLastLandedOnCompanyAndRoutingToCompany =
-            IsInOrbitAndLastLandedOnCompanyAndRoutingToCompany(roundState);
+            IsInOrbitAndLastLandedOnCompanyAndRoutingToCompany(
+                roundState,
+                lastLandedOnCompany
+            );
 
         logger.LogDebug(
             "Flags:" +
@@ -54,12 +63,32 @@ internal sealed class InstantPurchaseEligibilityUseCase
             $" isInOrbitAndLastLandedOnCompanyAndRoutingToCompany={isInOrbitAndLastLandedOnCompanyAndRoutingToCompany}"
         );
 
-        return (
+        var allowed = (
             isLandedOnCompany ||
             (!isFirstDayRerouteRequired && isInFirstDayOrbit) ||
             isInFirstDayOrbitAndRoutingToCompany ||
             isInOrbitAndLastLandedOnCompanyAndRoutingToCompany
         );
+
+        validationLogger.Record(
+            ValidationLogRecord.InstantPurchaseEligibilityDecision(
+                roundState: roundState,
+                enabled: true,
+                requireReroutingOnFirstDay: isFirstDayRerouteRequired,
+                lastLandedOnCompany: lastLandedOnCompany,
+                allowed: allowed,
+                reason: GetEligibilityReason(
+                    isLandedOnCompany: isLandedOnCompany,
+                    isFirstDayRerouteRequired: isFirstDayRerouteRequired,
+                    isInFirstDayOrbit: isInFirstDayOrbit,
+                    isInFirstDayOrbitAndRoutingToCompany: isInFirstDayOrbitAndRoutingToCompany,
+                    isInOrbitAndLastLandedOnCompanyAndRoutingToCompany:
+                        isInOrbitAndLastLandedOnCompanyAndRoutingToCompany
+                )
+            )
+        );
+
+        return allowed;
     }
 
     private bool IsInFirstDayOrbit(RoundState roundState)
@@ -113,7 +142,10 @@ internal sealed class InstantPurchaseEligibilityUseCase
         return true;
     }
 
-    private bool IsInOrbitAndLastLandedOnCompanyAndRoutingToCompany(RoundState roundState)
+    private bool IsInOrbitAndLastLandedOnCompanyAndRoutingToCompany(
+        RoundState roundState,
+        bool lastLandedOnCompany
+    )
     {
         if (!roundState.IsInOrbit)
         {
@@ -121,7 +153,7 @@ internal sealed class InstantPurchaseEligibilityUseCase
             return false;
         }
 
-        if (!landingHistoryStore.IsLastLandedOnCompany())
+        if (!lastLandedOnCompany)
         {
             logger.LogDebug("Last landed level is not company.");
             return false;
@@ -134,5 +166,36 @@ internal sealed class InstantPurchaseEligibilityUseCase
         }
 
         return true;
+    }
+
+    private static string GetEligibilityReason(
+        bool isLandedOnCompany,
+        bool isFirstDayRerouteRequired,
+        bool isInFirstDayOrbit,
+        bool isInFirstDayOrbitAndRoutingToCompany,
+        bool isInOrbitAndLastLandedOnCompanyAndRoutingToCompany
+    )
+    {
+        if (isLandedOnCompany)
+        {
+            return "landed_on_company";
+        }
+
+        if (!isFirstDayRerouteRequired && isInFirstDayOrbit)
+        {
+            return "first_day_orbit";
+        }
+
+        if (isInFirstDayOrbitAndRoutingToCompany)
+        {
+            return "first_day_orbit_routing_to_company";
+        }
+
+        if (isInOrbitAndLastLandedOnCompanyAndRoutingToCompany)
+        {
+            return "orbit_after_company_landing";
+        }
+
+        return "conditions_not_met";
     }
 }

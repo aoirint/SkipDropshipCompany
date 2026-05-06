@@ -6,6 +6,7 @@ A [Lethal Company][lethal-company-steam] mod that skips the dropship when
 you're on the Company or in other limited situations.
 
 - [User guide](./assets/README.md)
+- [Release validation runbook](./docs/release-validation.md)
 
 ## Development
 
@@ -245,6 +246,23 @@ that can publish to that team.
 because Thunderstore does not support them.**
 
 ## Debugging
+
+### Validation logging
+
+Structured validation logs are disabled by default. To enable them for release
+validation, open the generated SkipDropshipCompany config file and set:
+
+```ini
+[Debug]
+ValidationLogging = true
+```
+
+Enabled validation records use one JSON object per log line after the stable
+`[SDC_VALIDATION]` prefix. Share only the relevant `[SDC_VALIDATION]` lines plus
+nearby SkipDropshipCompany error lines when asking for validation help.
+
+Validation records intentionally avoid player names, lobby identifiers, account
+identifiers, machine names, profile paths, tokens, and raw item identifiers.
 
 ### r2modman
 

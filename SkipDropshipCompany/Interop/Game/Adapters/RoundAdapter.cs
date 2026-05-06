@@ -35,6 +35,18 @@ internal sealed class RoundAdapter
         );
     }
 
+    public string? GetCurrentLevelSceneName()
+    {
+        var startOfRound = StartOfRound.Instance;
+        if (startOfRound == null)
+        {
+            logger.LogError("StartOfRound.Instance is null.");
+            return null;
+        }
+
+        return startOfRound.currentLevel?.sceneName;
+    }
+
     private bool IsFirstDay(StartOfRound startOfRound)
     {
         var gameStats = startOfRound.gameStats;

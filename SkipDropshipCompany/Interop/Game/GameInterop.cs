@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #nullable enable
 
+using System.Collections.Generic;
 using SkipDropshipCompany.Core.Ports;
 using SkipDropshipCompany.Core.State;
 using SkipDropshipCompany.Interop.Game.Adapters;
@@ -30,6 +31,21 @@ internal sealed class GameInterop : IGameInterop
     public RoundState GetRoundState()
     {
         return roundAdapter.GetRoundState();
+    }
+
+    public string? GetCurrentLevelSceneName()
+    {
+        return roundAdapter.GetCurrentLevelSceneName();
+    }
+
+    public List<int>? GetTerminalOrderedItemIndexes()
+    {
+        return terminalAdapter.GetOrderedItemIndexes();
+    }
+
+    public bool SetTerminalOrderedItemIndexes(List<int> boughtItemIndexes)
+    {
+        return terminalAdapter.SetOrderedItemIndexes(boughtItemIndexes);
     }
 
     public bool SpawnBuyableItemInShip(int buyableItemIndex)

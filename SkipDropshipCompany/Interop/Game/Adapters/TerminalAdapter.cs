@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #nullable enable
 
+using System.Collections.Generic;
 using System.Linq;
 using SkipDropshipCompany.Core.Ports;
 using UnityEngine;
@@ -34,6 +35,29 @@ internal sealed class TerminalAdapter
         }
 
         return buyableItemsList.ElementAtOrDefault(index);
+    }
+
+    public List<int>? GetOrderedItemIndexes()
+    {
+        var terminal = GetTerminal();
+        if (terminal == null)
+        {
+            return null;
+        }
+
+        return terminal.orderedItemsFromTerminal;
+    }
+
+    public bool SetOrderedItemIndexes(List<int> boughtItemIndexes)
+    {
+        var terminal = GetTerminal();
+        if (terminal == null)
+        {
+            return false;
+        }
+
+        terminal.orderedItemsFromTerminal = boughtItemIndexes;
+        return true;
     }
 
     private Terminal? GetTerminal()

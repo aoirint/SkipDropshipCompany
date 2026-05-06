@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 name: Lint
 
 on:
@@ -22,12 +23,21 @@ defaults:
 
 jobs:
   lint:
+    # Keep this hard-coded to ubuntu-slim while lint steps only need GitHub
+    # Actions, .NET, and standard shell tooling. Revisit this runner if a future
+    # lint tool requires packages that are only available on ubuntu-latest.
     runs-on: ubuntu-slim
 
     steps:
+      # Checkout is required before every lint check because both dotnet format
+      # and Markdown lint read repository-local configuration and source files.
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup .NET
+        # Keep dotnet-version aligned with build.yml per the README .NET and
+        # C# tooling update policy. The cache path is intentionally the project
+        # lock file; update it only if the lock file moves or projects are
+        # added.
         uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
         with:
           dotnet-version: '10.x'
@@ -35,12 +45,22 @@ jobs:
           cache-dependency-path: SkipDropshipCompany/packages.lock.json
 
       - name: Restore NuGet packages
+        # Restore once in locked mode so later checks are deterministic and can
+        # use --no-restore without silently changing dependency resolution.
         run: dotnet restore --locked-mode
 
       - name: Run dotnet format
+        # dotnet format is the aggregate check here: it verifies whitespace,
+        # built-in code style, and fixable analyzer diagnostics. Build still
+        # reports Roslyn analyzer diagnostics, including non-fixable ones.
         run: dotnet format --no-restore --verify-no-changes
 
       - name: Run markdownlint-cli2
+        # Run Markdown lint after the C# checks because Markdown formatting
+        # failures are usually straightforward to fix, while C# formatter or
+        # analyzer failures tend to need earlier maintainer attention. Use the
+        # official action so CI stays on the slim runner without Docker or a
+        # checked-in Node.js project.
         uses: DavidAnson/markdownlint-cli2-action@ce4853d43830c74c1753b39f3cf40f71c2031eb9 # v23.0.0
         with:
           config: .markdownlint-cli2.yaml

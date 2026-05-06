@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 name: Build
 
 on:
@@ -11,6 +12,8 @@ defaults:
 
 jobs:
   build:
+    # Build keeps ubuntu-latest because packaging currently relies on
+    # runner-provided shell tools such as jq and 7z.
     runs-on: ubuntu-latest
 
     outputs:
@@ -20,6 +23,8 @@ jobs:
       manifest_version: ${{ steps.generate-version.outputs.manifest_version }}
 
     steps:
+      # Checkout is required before generating versions because the local
+      # composite action reads project files and fetches tags from this clone.
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Generate version
@@ -29,6 +34,8 @@ jobs:
           csproj_file: "SkipDropshipCompany/SkipDropshipCompany.csproj"
 
       - name: Setup .NET
+        # Keep dotnet-version aligned with lint.yml per the README .NET and
+        # C# tooling update policy.
         uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
         with:
           dotnet-version: '10.x'
@@ -36,6 +43,8 @@ jobs:
           cache-dependency-path: SkipDropshipCompany/packages.lock.json
 
       - name: Restore NuGet packages
+        # Restore once in locked mode so build uses the committed dependency
+        # graph and does not rewrite package resolution in CI.
         run: dotnet restore --locked-mode
 
       - name: Record start time
@@ -57,7 +66,8 @@ jobs:
 
           mkdir -p "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}"
 
-          # Package format
+          # Keep this layout as the Thunderstore package root; consumers expect
+          # the DLL, manifest, icon, docs, changelog, and license at zip root.
           # https://thunderstore.io/c/lethal-company/create/docs/
 
           mv ./SkipDropshipCompany/bin/Release/netstandard2.1/com.aoirint.SkipDropshipCompany.dll  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
@@ -77,6 +87,8 @@ jobs:
  
       - name: Upload artifact
         id: upload-artifact
+        # The package is already a zip file, so upload it without recompressing
+        # to keep the digest and download size tied to the release payload.
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: artifact
@@ -120,14 +132,20 @@ jobs:
   release:
     needs:
       - build
+    # Edge builds are validation artifacts only; GitHub releases are created
+    # only for new project versions that should receive a tag.
     if: needs.build.outputs.release_mode != 'edge'
 
+    # Keep this on ubuntu-slim: release publishing only needs standard shell tools
+    # included in that image, and does not require ubuntu-latest's larger toolset.
     runs-on: ubuntu-slim
 
     permissions:
       contents: write
 
     steps:
+      # Checkout is needed even though the package is downloaded, because the
+      # Thunderstore publisher is a repository-local composite action.
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Download build artifact
@@ -137,6 +155,8 @@ jobs:
           path: ./tmp_artifacts
 
       - name: Publish release
+        # Create immutable releases so an already-published version cannot be
+        # silently replaced by a later workflow run for the same tag.
         uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
         with:
           tag: ${{ needs.build.outputs.git_version }}

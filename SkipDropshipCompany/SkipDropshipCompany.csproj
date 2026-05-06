@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: MIT -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -10,17 +11,18 @@
     <Version>0.1.7</Version>
     <!-- Target framework. https://learn.microsoft.com/en-us/dotnet/standard/frameworks -->
     <TargetFramework>netstandard2.1</TargetFramework>
-    <!-- C# language version. https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version -->
+    <!-- C# language version.
+         https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version -->
     <LangVersion>13.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Compile-time only dependencies -->
+    <!-- Compile-only game dependencies -->
     <PackageReference Include="BepInEx.Core" Version="[5.4.21]" IncludeAssets="compile" />
     <PackageReference Include="LethalCompany.GameLibs.Steam" Version="[81.0.5-ngd.0]" IncludeAssets="compile" />
     <PackageReference Include="UnityEngine.Modules" Version="[2022.3.62]" IncludeAssets="compile" />
 
-    <!-- Development dependencies -->
+    <!-- Build/development-only dependencies -->
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" PrivateAssets="all" />
   </ItemGroup>

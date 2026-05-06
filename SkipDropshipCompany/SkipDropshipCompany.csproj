@@ -12,14 +12,6 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <!-- C# language version. https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version -->
     <LangVersion>13.0</LangVersion>
-    <RestoreAdditionalProjectSources>
-      https://api.nuget.org/v3/index.json;
-      https://nuget.bepinex.dev/v3/index.json
-    </RestoreAdditionalProjectSources>
-    <CoreCompileDependsOn>
-      GenerateModInfo;
-      $(CoreCompileDependsOn)
-    </CoreCompileDependsOn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,31 +27,4 @@
     <PackageReference Include="UnityEngine.Modules" Version="2022.3.62" IncludeAssets="compile" />
   </ItemGroup>
 
-  <!-- Code generation -->
-  <ItemGroup>
-    <Compile Remove="Generated\**\*.cs" />
-  </ItemGroup>
-  <Target Name="GenerateModInfo">
-    <PropertyGroup>
-      <ModInfoTemplate>
-        $([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)/../Templates/ModInfo.template.cs'))
-      </ModInfoTemplate>
-      <ModInfoOut>
-        $([System.String]::Copy('$(ModInfoTemplate)')
-            .Replace('__CSPROJ_ASSEMBLY_NAME__', '$(AssemblyName)')
-            .Replace('__CSPROJ_PRODUCT__', '$(Product)')
-            .Replace('__CSPROJ_VERSION__', '$(Version)')
-        )
-      </ModInfoOut>
-      <ModInfoFile>$(MSBuildProjectDirectory)/Generated/ModInfo.g.cs</ModInfoFile>
-    </PropertyGroup>
-    <WriteLinesToFile
-        File="$(ModInfoFile)"
-        Overwrite="true"
-        Lines="$(ModInfoOut)"
-    />
-    <ItemGroup>
-      <Compile Include="$(ModInfoFile)" />
-    </ItemGroup>
-  </Target>
 </Project>

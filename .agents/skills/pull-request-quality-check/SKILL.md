@@ -1,5 +1,4 @@
 ---
-# SPDX-License-Identifier: MIT
 name: pull-request-quality-check
 description: Quality-check repository pull requests, review comments, replies, and PR-thread notes.
 ---

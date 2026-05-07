@@ -1,5 +1,3 @@
-<!-- SPDX-License-Identifier: MIT -->
-
 # Fallback Pull Request Body
 
 Use this fallback only when the repository has no applicable pull request

@@ -1,5 +1,3 @@
-<!-- SPDX-License-Identifier: MIT -->
-
 <!--
 If significant AI assistance affected this pull request, put this alert at the
 very top of the PR body:

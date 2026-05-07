@@ -1,5 +1,4 @@
 ---
-# SPDX-License-Identifier: MIT
 name: git-worktree-workflow
 description: Use Git worktrees for repository implementation tasks unless explicitly told not to.
 ---

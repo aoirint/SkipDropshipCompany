@@ -1,5 +1,3 @@
-<!-- SPDX-License-Identifier: MIT -->
-
 # SkipDropshipCompany
 
 A [Lethal Company][lethal-company-steam] mod that skips the dropship when

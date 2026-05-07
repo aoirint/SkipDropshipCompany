@@ -1,5 +1,3 @@
-<!-- SPDX-License-Identifier: MIT -->
-
 # Agent Skill Authoring Best Practices
 
 ## Purpose

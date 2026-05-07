@@ -1,5 +1,4 @@
 ---
-# SPDX-License-Identifier: MIT
 name: release-note-workflow
 description: >-
   Create, update, or review user-facing release notes. Use when deriving stable

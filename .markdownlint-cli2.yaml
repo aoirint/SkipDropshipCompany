@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: MIT
 ---
 # Lint every committed Markdown document by default so docs, release notes, and
 # GitHub templates follow one repository-wide style.
@@ -39,6 +38,6 @@ config:
   MD024:
     siblings_only: true
 
-  # Top-level SPDX comments and PR-template guidance need to appear before the
-  # first visible heading, so do not require the first line to be an H1.
+  # PR-template guidance needs to appear before the first visible heading, so
+  # do not require the first line to be an H1.
   MD041: false

@@ -1,10 +1,9 @@
 ---
-# SPDX-License-Identifier: MIT
 name: code-quality-check
 description: >-
   Quality-check source code, generated code, tests, scripts,
   configuration-as-code, examples, dependencies, downloaded tools, CI actions,
-  SPDX/license notices, and supply-chain-sensitive changes.
+  and supply-chain-sensitive changes.
 ---
 
 # Code Quality Check
@@ -29,8 +28,6 @@ validation expectations.
 - Use `security-check` when changes introduce or update security-sensitive behavior,
   external dependencies, downloaded tools, CI actions, containers, vendored artifacts, or other
   supply-chain-sensitive paths.
-- Keep license notices machine-readable, accurate to the file's provenance, and consistent with
-  SPDX best practices.
 
 ## Workflow
 
@@ -150,20 +147,6 @@ If the decision still matters after the code is cleaned up, record it with a con
 the relevant code. If the decision affects public behavior, configuration, operations, or release
 notes, also update the appropriate docs or changelog.
 
-## SPDX License Notices
-
-When adding new source, scripts, examples, generated-code templates, or other reusable text files,
-check whether a license notice is expected by the file type or neighboring files.
-
-Use the repository's existing notice convention for straightforward project-local files. If the
-file has copied, adapted, generated, vendored, downloaded, dual-licensed, copyleft-sensitive, or
-otherwise external provenance, read
-[references/spdx-license-notices.md](references/spdx-license-notices.md) before editing the header.
-
-Do not guess when provenance, license compatibility, or required attribution is uncertain. Preserve
-existing notices, keep the current project convention where possible, and record the uncertainty in
-the final summary or PR notes for maintainer review.
-
 ## Verification Discipline
 
 - Start with the narrowest check that exercises the changed behavior, then run the broader
@@ -190,8 +173,8 @@ At minimum:
   adoption.
 - Report a blocker or documented maintainer exception when release age, provenance, runtime
   behavior, or cooldown compliance cannot be verified.
-- For copied, generated, vendored, or downloaded files, verify that the SPDX notice matches the
-  upstream license and record the source, version or commit, and validation method when relevant.
+- For copied, generated, vendored, or downloaded files, record the source, version or commit, and
+  validation method when relevant.
 
 ## Output Checklist
 
@@ -199,8 +182,6 @@ At minimum:
 - Important design intent is captured near the code, docs, or PR notes.
 - Comments explain non-obvious intent and do not repeat obvious code behavior.
 - Stale or misleading comments were removed.
-- New reusable files either follow the repository's SPDX notice convention, deliberately inherit an
-  existing nearby convention, or have a documented reason for omitting/changing the notice.
 - Language-specific formatting, linting, typing, and tests were run or any skipped check has a
   concrete reason.
 - Missing files, commands, metadata, or provenance were reported as assumptions, target-change

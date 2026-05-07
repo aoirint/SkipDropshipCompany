@@ -1,5 +1,4 @@
 ---
-# SPDX-License-Identifier: MIT
 name: github-actions-quality-check
 description: >-
   Quality-check GitHub Actions workflows, composite actions, action pinning,

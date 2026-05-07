@@ -1,5 +1,3 @@
-<!-- SPDX-License-Identifier: MIT -->
-
 # SkipDropshipCompany
 
 A Lethal Company mod that skips the dropship to purchase items when you're on

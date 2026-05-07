@@ -1,5 +1,4 @@
 ---
-# SPDX-License-Identifier: MIT
 name: gitignore-workflow
 description: "Create or update .gitignore files. Use when editing ignore rules."
 ---
@@ -15,8 +14,6 @@ description: "Create or update .gitignore files. Use when editing ignore rules."
 - Keep project-specific ignore rules explicit and easy to review.
 - Merge upstream template content from `github/gitignore` without losing local rules.
 - Record external-template provenance with commit-hash URLs for reproducibility.
-- Review upstream license and SPDX expectations before copying, adapting, or refreshing external
-  template content.
 - Avoid introducing regressions, for example accidentally tracking generated files.
 - Support both minimal edits and full template refreshes.
 - Work across mixed-language repositories.
@@ -29,14 +26,11 @@ description: "Create or update .gitignore files. Use when editing ignore rules."
    external material:
    - Use `security-check` for network-fetch safety, source provenance, pinning, and any blocker
      decision.
-   - Use `code-quality-check` SPDX guidance for copied, adapted, downloaded, generated, or vendored
-     text, including upstream license-notice expectations.
 4. Verify the upstream template source before fetching or copying:
-   - Confirm the exact repository, template path, commit hash, and upstream license or notice
-     requirements.
+   - Confirm the exact repository, template path, and commit hash.
    - Prefer reviewer-visible commit-hash URLs over branch, tag, or `latest` references.
-   - Report a blocker instead of fetching or copying when provenance, license compatibility,
-     required attribution, or the safe network path cannot be verified.
+   - Report a blocker instead of fetching or copying when provenance or the safe network path
+     cannot be verified.
 5. Merge sections in a deterministic order requested by the user or a safe default order.
 6. Validate with `git status` that ignored/generated files behave as expected.
 7. Summarize behavior-impacting changes, especially `.env`, lockfiles, build artifacts, caches, and
@@ -83,14 +77,13 @@ curl -fsSL "https://raw.githubusercontent.com/github/gitignore/$hash/Python.giti
 
 For other templates, replace paths with exact file paths from `github/gitignore`.
 For example, use `Global/VisualStudioCode.gitignore`.
-If the command, source repository, template path, commit hash, upstream license, or required notice
-cannot be verified, stop and report the blocker instead of fetching or copying template content.
+If the command, source repository, template path, or commit hash cannot be verified, stop and report
+the blocker instead of fetching or copying template content.
 
 ## Safety Checks
 
 - Do not remove project-specific entries unless explicitly requested.
 - Keep duplicate patterns if they come from upstream templates; avoid semantic edits to upstream blocks.
-- Preserve upstream notices or attribution required by the reviewed template license.
 - Preserve `.env` handling intentionally. If behavior changes, call it out in the summary.
 - Never include secrets or real environment values in `.gitignore` comments.
 - If files are already tracked, mention that `.gitignore` alone does not untrack them.
@@ -100,7 +93,6 @@ cannot be verified, stop and report the blocker instead of fetching or copying t
 
 - `.gitignore` updated in requested format.
 - All upstream template URLs include commit hashes, exact paths, and reviewed provenance.
-- Upstream license/SPDX requirements were reviewed, preserved when needed, or reported as a blocker.
 - Network fetches were either avoided, performed through a pinned and verified source, or blocked
   with the reason recorded.
 - `git status --short` reviewed after edits.

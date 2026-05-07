@@ -1,5 +1,4 @@
 ---
-# SPDX-License-Identifier: MIT
 name: document-quality-check
 description: >-
   Quality-check documentation, comments, release notes, issue text, pull request

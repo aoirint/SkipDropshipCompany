@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 #nullable enable
 
 namespace SkipDropshipCompany.Interop.Game.Patches;

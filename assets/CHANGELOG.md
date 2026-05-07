@@ -1,5 +1,3 @@
-<!-- SPDX-License-Identifier: MIT -->
-
 This changelog is the user-facing release notes for Thunderstore.
 
 For internal implementation details and developer-facing release history, see

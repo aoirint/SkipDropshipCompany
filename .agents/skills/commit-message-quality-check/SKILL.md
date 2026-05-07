@@ -1,5 +1,4 @@
 ---
-# SPDX-License-Identifier: MIT
 name: commit-message-quality-check
 description: >-
   Quality-check repository commit messages. Use when creating or updating commit

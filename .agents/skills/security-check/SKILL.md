@@ -1,5 +1,4 @@
 ---
-# SPDX-License-Identifier: MIT
 name: security-check
 description: >-
   Check repository work for practical security risks, including secrets,

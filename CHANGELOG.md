@@ -10,6 +10,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+## v0.2.1 - 2026-05-08 UTC
+
+### Fixed
+
+- Prepared `v0.2.1` as a patch release for the stable `v0.2.0` package
+  content.
+    - The `v0.2.0` GitHub release tag already exists.
+    - The `v0.2.0` release workflow failed before Thunderstore publication
+      because the repository `THUNDERSTORE_TOKEN` secret was unavailable to
+      the upload step.
+
+### Notes
+
+- This is a publication recovery release.
+    - It is expected to match `v0.2.0` in gameplay behavior.
+    - It is expected to keep the same compatibility baseline and package
+      metadata intent as `v0.2.0`.
+    - The only intended difference from `v0.2.0` is the published release
+      version.
+
 ## v0.2.0 - 2026-05-08 UTC
 
 ### Changed

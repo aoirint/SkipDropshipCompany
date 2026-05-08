@@ -8,8 +8,9 @@
     <RootNamespace>SkipDropshipCompany</RootNamespace>
     <!-- !!APP_VERSION_MARKER!! -->
     <Version>0.2.0-alpha.2</Version>
-    <!-- BepInEx 5 validates plugin metadata as System.Version, which rejects
-         SemVer prerelease strings such as 0.2.0-alpha.2. Keep the loader-facing
+    <!-- Port the CruiserJumpPractice prerelease metadata guard: BepInEx 5
+         validates plugin metadata as System.Version, which rejects SemVer
+         prerelease strings such as 0.2.0-alpha.2. Keep the loader-facing
          metadata conservative while release automation carries the prerelease
          identity. -->
     <BepInExPluginVersion>0.0.0</BepInExPluginVersion>

@@ -14,7 +14,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
-- Fixed prerelease artifacts being rejected by BepInEx 5 before plugin startup:
+- Fixed prerelease artifacts being rejected by BepInEx 5 before plugin startup
+  by porting CruiserJumpPractice's prerelease metadata guard:
     - `v0.2.0-alpha.1` validation was blocked because BepInEx skipped the
       plugin type when the loader-facing version contained the SemVer
       prerelease suffix.

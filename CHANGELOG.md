@@ -16,17 +16,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Prepared `v0.2.1` as a patch release for the stable `v0.2.0` package
   content.
-- The `v0.2.0` GitHub release tag already exists, but the release workflow
-  stopped before Thunderstore publication.
-- The failed workflow reached the Thunderstore upload step without an
-  available repository `THUNDERSTORE_TOKEN` secret.
+    - The `v0.2.0` GitHub release tag already exists.
+    - The `v0.2.0` release workflow stopped before Thunderstore publication.
+    - The failed workflow reached the Thunderstore upload step without an
+      available repository `THUNDERSTORE_TOKEN` secret.
 
 ### Notes
 
 - This is a publication recovery release.
-- It is expected to match `v0.2.0` in gameplay behavior, compatibility
-  baseline, and package metadata intent.
-- The intended release-version difference is `v0.2.1`.
+    - It is expected to match `v0.2.0` in gameplay behavior.
+    - It is expected to keep the same compatibility baseline and package
+      metadata intent as `v0.2.0`.
+    - The intended release-version difference is `v0.2.1`.
 
 ## v0.2.0 - 2026-05-08 UTC
 

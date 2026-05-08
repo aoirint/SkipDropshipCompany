@@ -1,7 +1,7 @@
 # SkipDropshipCompany
 
-A Lethal Company mod that skips the dropship to purchase items when you're on
-the Company or in other limited situations.
+A Lethal Company mod that skips the dropship for item purchases on the Company
+and in some limited situations.
 
 ## Compatibility
 
@@ -85,7 +85,8 @@ Company v81.5 baseline above.
 
 `Nexor/InstantBuy` skips the dropship for all purchases by default.
 
-This mod only skips the dropship when on the Company or in other limited situations.
+This mod only skips the dropship for item purchases on the Company and in some
+limited situations.
 
 `Nexor/InstantBuy` can be configured to disable specified items from instant purchases.
 

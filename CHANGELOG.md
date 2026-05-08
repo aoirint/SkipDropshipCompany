@@ -27,7 +27,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     - It is expected to match `v0.2.0` in gameplay behavior.
     - It is expected to keep the same compatibility baseline and package
       metadata intent as `v0.2.0`.
-    - The intended release-version difference is `v0.2.1`.
+    - The only intended difference from `v0.2.0` is the published release
+      version.
 
 ## v0.2.0 - 2026-05-08 UTC
 

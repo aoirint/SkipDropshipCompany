@@ -35,14 +35,6 @@ No gameplay changes are introduced.
 - Compatibility:
     - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
-- Validation:
-    - Release-candidate validation passed for host-side direct delivery, normal
-      dropship fallback cases, ejection reset behavior, mixed queued purchases,
-      and configuration options.
-    - A purchase initiated by a client player was not separately tested before
-      this stable release. The maintainer accepted this residual risk because
-      client-side logs confirmed clients did not run server-side delivery
-      logic, and the mod is documented as host-authoritative.
 
 ## v0.1.7 - 2025-11-23 UTC
 

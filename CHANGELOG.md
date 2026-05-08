@@ -14,16 +14,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
-- Prepared a patch release to publish the stable `v0.2.0` package content
-  under `v0.2.1` after the `v0.2.0` release workflow stopped during
-  Thunderstore publication because the repository `THUNDERSTORE_TOKEN` secret
-  was unavailable to Actions.
+- Prepared `v0.2.1` as a patch release for the stable `v0.2.0` package
+  content.
+- The `v0.2.0` GitHub release tag already exists, but the release workflow
+  stopped before Thunderstore publication.
+- The failed workflow reached the Thunderstore upload step without an
+  available repository `THUNDERSTORE_TOKEN` secret.
 
 ### Notes
 
-- This release is a publication recovery release. It is expected to have the
-  same gameplay behavior, compatibility baseline, and package metadata intent
-  as `v0.2.0`, except for the release version.
+- This is a publication recovery release.
+- It is expected to match `v0.2.0` in gameplay behavior, compatibility
+  baseline, and package metadata intent.
+- The intended release-version difference is `v0.2.1`.
 
 ## v0.2.0 - 2026-05-08 UTC
 

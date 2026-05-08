@@ -55,7 +55,16 @@ jobs:
         run: echo "time_ms=$(date +%s%3N)" >> "${GITHUB_OUTPUT}"
 
       - name: Run dotnet build
-        run: dotnet build --no-restore --configuration Release
+        run: |
+          dotnet_build_args=(--no-restore --configuration Release)
+          if [ "${{ steps.generate-version.outputs.release_mode }}" != "latest" ]; then
+            # BepInEx 5 validates plugin metadata as System.Version, which
+            # rejects SemVer prerelease and edge strings. Keep release identity
+            # in Version, and scope the loader-facing fallback to this build.
+            dotnet_build_args+=(/p:BepInExPluginVersion=0.0.0)
+          fi
+
+          dotnet build "${dotnet_build_args[@]}"
 
       - name: Record end time
         id: end-time

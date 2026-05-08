@@ -18,10 +18,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     - `v0.2.0-alpha.1` validation was blocked because BepInEx skipped the
       plugin type when the loader-facing version contained the SemVer
       prerelease suffix.
-    - The release workflow now writes non-stable BepInEx plugin metadata as
-      `0.0.0`, which keeps the metadata compatible with BepInEx 5's
-      `System.Version` validation without making that fallback part of the
-      source project file.
+    - The release workflow now passes non-stable BepInEx plugin metadata as
+      `0.0.0` to the CI build, which keeps the metadata compatible with
+      BepInEx 5's `System.Version` validation without making that fallback
+      part of the source project file.
     - The project version now prepares the next validation artifact as
       `v0.2.0-alpha.2`; GitHub release tags and artifact names continue to
       carry the prerelease identity.

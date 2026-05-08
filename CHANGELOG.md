@@ -10,6 +10,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+## v0.2.0 - 2026-05-08 UTC
+
+### Changed
+
+- Rebuilt the current stable release line for Lethal Company v81.5 after
+  release-candidate validation.
+- Ported internal repository, build, release, and documentation maintenance
+  practices from CruiserJumpPractice's `v0.2.0` preparation work.
+- Prepared stable-release automation for GitHub Releases and Thunderstore.
+- Added opt-in structured validation logging guidance for release-candidate
+  checks. This is disabled by default and is intended to keep future validation
+  evidence concise.
+
+### Fixed
+
+- Fixed prerelease validation artifacts being rejected by BepInEx 5 before
+  plugin startup. The stable `v0.2.0` release uses valid loader-facing metadata
+  from `<Version>0.2.0</Version>`, while non-stable CI artifacts keep their
+  prerelease identity in GitHub release tags and artifact names.
+
+### Notes
+
+- Compatibility:
+    - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+      `6423525044216269478`).
+        - The v81.5 validation environment used BepInExPack v5.4.2305.
+- Validation:
+    - `v0.2.0-alpha.2` real-game validation passed for host-side direct
+      delivery, normal dropship fallback cases, ejection reset behavior, mixed
+      queued purchases, and configuration spot checks.
+    - The maintainer accepted missing client-initiated purchase coverage as a
+      residual validation risk for this stable release. Client-side logs
+      confirmed clients loaded the mod and did not run server-side
+      instant-delivery logic.
+- Older Lethal Company versions are no longer claimed as tested by the current
+  v0.2.0 release notes; Lethal Company v73 compatibility is recorded in the
+  historical `v0.1.x` release entries below.
+
 ## v0.2.0-alpha.2 - 2026-05-08 UTC
 
 ### Fixed

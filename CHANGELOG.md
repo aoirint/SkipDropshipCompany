@@ -17,9 +17,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Prepared `v0.2.1` as a patch release for the stable `v0.2.0` package
   content.
     - The `v0.2.0` GitHub release tag already exists.
-    - The `v0.2.0` release workflow stopped before Thunderstore publication.
-    - The failure was caused by the repository `THUNDERSTORE_TOKEN` secret
-      being unavailable to the Thunderstore upload step.
+    - The `v0.2.0` release workflow failed before Thunderstore publication
+      because the repository `THUNDERSTORE_TOKEN` secret was unavailable to
+      the upload step.
 
 ### Notes
 

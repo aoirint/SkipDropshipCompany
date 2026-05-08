@@ -10,6 +10,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+## v0.2.0-alpha.2 - 2026-05-08 UTC
+
+### Fixed
+
+- Fixed prerelease artifacts being rejected by BepInEx 5 before plugin startup:
+    - `v0.2.0-alpha.1` validation was blocked because BepInEx skipped the
+      plugin type when the loader-facing version contained the SemVer
+      prerelease suffix.
+    - The BepInEx plugin metadata version is now pinned to `0.0.0`, which keeps
+      the metadata compatible with BepInEx 5's `System.Version` validation.
+    - The project version now prepares the next validation artifact as
+      `v0.2.0-alpha.2`; GitHub release tags and artifact names continue to
+      carry the prerelease identity.
+
 ## v0.2.0-alpha.1 - 2026-05-06 UTC
 
 ### Changed

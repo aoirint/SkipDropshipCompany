@@ -7,6 +7,25 @@ If you find a release-note error, encounter a bug, or want to report another
 project issue, see [CONTRIBUTING.md][contributing], then report it in
 [GitHub Issues][github-issues].
 
+## v0.2.1 - 2026-05-08 UTC
+
+This release republishes the `v0.2.0` stable package content as `v0.2.1`
+after the previous publication run stopped before uploading to Thunderstore.
+
+No gameplay changes are introduced.
+
+### Fixed
+
+- Prepared a new stable package version so Thunderstore can receive the
+  Lethal Company v81.5 release once the repository publishing secret is
+  configured.
+
+### Notes
+
+- Compatibility:
+    - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+      `6423525044216269478`).
+
 ## v0.2.0 - 2026-05-08 UTC
 
 This release rebuilds SkipDropshipCompany for Lethal Company v81.5 and includes

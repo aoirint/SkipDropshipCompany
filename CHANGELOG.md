@@ -18,8 +18,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   content.
     - The `v0.2.0` GitHub release tag already exists.
     - The `v0.2.0` release workflow stopped before Thunderstore publication.
-    - The failed workflow reached the Thunderstore upload step without an
-      available repository `THUNDERSTORE_TOKEN` secret.
+    - The failure was caused by the repository `THUNDERSTORE_TOKEN` secret
+      being unavailable to the Thunderstore upload step.
 
 ### Notes
 

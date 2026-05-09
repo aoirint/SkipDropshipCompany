@@ -92,7 +92,7 @@ behavior.
 
 `Nexor/InstantBuy` supports the vanilla Company moon (Gordion) and some modded
 Company moons while `Company Only` is enabled.
-It does not support dedicated orbit cases.
+It does not support the orbit.
 
 This mod only supports the vanilla Company moon and limited orbit cases
 currently.

@@ -10,6 +10,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+## v0.2.5 - 2026-05-09 UTC
+
+### Fixed
+
+- Clarified the Thunderstore documentation comparison with `Nexor/InstantBuy`.
+    - `Nexor/InstantBuy` is documented as defaulting to Company moons, with
+      other moons available by disabling its `Company Only` option.
+    - The comparison now separates moon-scope configuration, Company moon
+      coverage, Company-orbit behavior, and item-exclusion configuration.
+    - SkipDropshipCompany's documented direct-delivery scope is limited to the
+      vanilla Company moon and limited orbit cases around the Company.
+
+### Notes
+
+- No gameplay or binary behavior changes are intended in this release.
+
 ## v0.2.4 - 2026-05-09 UTC
 
 ### Fixed

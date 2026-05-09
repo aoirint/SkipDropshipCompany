@@ -31,7 +31,6 @@ No gameplay changes are introduced.
 - Compatibility:
     - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
-    - `HQHQTeam/HQoL` v1.0.14 is assumed to be compatible.
 
 ## v0.2.1 - 2026-05-08 UTC
 

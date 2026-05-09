@@ -45,10 +45,13 @@ No gameplay changes are introduced.
 ### Changed
 
 - Clarified how this mod differs from `Nexor/InstantBuy`:
-    - `Nexor/InstantBuy` works only on Company moons by default since its
-      Thunderstore v0.0.8 release.
-    - `Nexor/InstantBuy` can be configured to run on other moons by disabling
-      its `Company Only` option.
+    - `Nexor/InstantBuy` can be configured to work only on Company moons since
+      its Thunderstore v0.0.8 release.
+        - Correction added in v0.2.4: this wording was incomplete.
+          `Nexor/InstantBuy` works only on Company moons by default since
+          v0.0.8 because its `Company Only` option defaults to enabled.
+          Users can configure it to run on other moons by disabling that
+          option.
     - SkipDropshipCompany has no configuration except for the first-day option
       to change its direct-delivery behavior.
 - Added `HQHQTeam/HQoL` to the compatibility notes and comparison section.

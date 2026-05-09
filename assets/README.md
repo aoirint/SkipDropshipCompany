@@ -85,10 +85,10 @@ Company v81.5 baseline above.
 
 `Nexor/InstantBuy` skips the dropship for all purchases by default.
 
-`Nexor/InstantBuy` can be configured to skip the dropship only on the Company since v0.0.8 (2026-01-24).
+`Nexor/InstantBuy` can be configured to work only on Company moons since v0.0.8 (2026-01-24 UTC).
 
-This mod always skips the dropship for item purchases on the Company and in some
-limited situations.
+This mod has no configuration to change that behavior: it always skips the
+dropship for item purchases on the Company and in some limited situations.
 
 ## Differences from [befuddled_productions/Quick_Buy_Menu][quick-buy-menu-package]
 

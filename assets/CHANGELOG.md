@@ -16,10 +16,13 @@ No gameplay changes are introduced.
 ### Fixed
 
 - Clarified the comparison with `Nexor/InstantBuy`.
-  `Nexor/InstantBuy` support for some modded Company moons is now documented
-  separately from its configurable `Company Only` setting.
-  SkipDropshipCompany is documented as currently supporting the vanilla Company
-  moon (`Gordion`) plus the limited orbit cases described in the README.
+  `Nexor/InstantBuy` is documented as defaulting to Company moons, with other
+  moons available by disabling its `Company Only` option.
+  Its support for some modded Company moons is documented as a separate
+  comparison point.
+  SkipDropshipCompany is documented as currently supporting only the vanilla
+  Company moon (`Gordion`), plus the limited orbit cases described in the
+  README.
 
 ## v0.2.4 - 2026-05-09 UTC
 

@@ -7,6 +7,18 @@ If you find a release-note error, encounter a bug, or want to report another
 project issue, see [CONTRIBUTING.md][contributing], then report it in
 [GitHub Issues][github-issues].
 
+## v0.2.5 - 2026-05-09 UTC
+
+This release updates the Thunderstore documentation.
+
+No gameplay changes are introduced.
+
+### Fixed
+
+- Clarified the comparison with `Nexor/InstantBuy`.
+  SkipDropshipCompany now describes its scope as the Company (vanilla-only)
+  plus the limited orbit cases described in the README.
+
 ## v0.2.4 - 2026-05-09 UTC
 
 This release updates the Thunderstore documentation.

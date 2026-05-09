@@ -10,6 +10,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+## v0.2.5 - 2026-05-09 UTC
+
+### Fixed
+
+- Clarified the Thunderstore documentation comparison with `Nexor/InstantBuy`.
+    - SkipDropshipCompany now describes its scope as the Company
+      (vanilla-only) plus the limited orbit cases described in the README.
+
+### Notes
+
+- No gameplay or binary behavior changes are intended in this release.
+
 ## v0.2.4 - 2026-05-09 UTC
 
 ### Fixed

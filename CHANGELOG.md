@@ -10,12 +10,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+## v0.2.2 - 2026-05-09 UTC
+
+### Added
+
+- Added `HQHQTeam/HQoL` to the documented compatibility notes and comparison
+  section because its faster company dropship feature overlaps with the same
+  delivery flow this mod changes.
+
+### Changed
+
+- Clarified the comparison with `Nexor/InstantBuy` to reflect its
+  Thunderstore-published Company moons configuration in v0.0.8.
+
+### Fixed
+
+- Corrected the `dozyote/EarlyDropship` comparison so it describes
+  `EarlyDropship` instead of `zoomstv/FasterRocket`.
+
+### Notes
+
+- No gameplay or binary behavior changes are intended in this release.
+- Compatibility:
+    - The existing Lethal Company v81.5 compatibility baseline is unchanged.
+    - `HQHQTeam/HQoL` v1.0.14 is documented as assumed compatible.
+
 ## v0.2.1 - 2026-05-08 UTC
 
 ### Fixed
 
-- Prepared `v0.2.1` as a patch release for the stable `v0.2.0` package
-  content.
+- Recovered Thunderstore publication for the stable `v0.2.0` package content
+  as `v0.2.1`.
     - The `v0.2.0` GitHub release tag already exists.
     - The `v0.2.0` release workflow failed before Thunderstore publication
       because the repository `THUNDERSTORE_TOKEN` secret was unavailable to

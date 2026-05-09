@@ -10,6 +10,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+## v0.2.3 - 2026-05-09 UTC
+
+### Fixed
+
+- Restored the `Nexor/InstantBuy` comparison note about excluding specified
+  items from instant purchases.
+    - The note was unintentionally removed while updating the Company moons
+      configuration comparison for `v0.2.2`.
+    - SkipDropshipCompany still does not have an equivalent item-exclusion
+      configuration option.
+
+### Notes
+
+- No gameplay or binary behavior changes are intended in this release.
+
 ## v0.2.2 - 2026-05-09 UTC
 
 ### Added

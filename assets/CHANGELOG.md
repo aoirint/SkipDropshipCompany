@@ -18,8 +18,8 @@ No gameplay changes are introduced.
 - Clarified how this mod differs from `Nexor/InstantBuy`:
     - `Nexor/InstantBuy` can be configured to work only on Company moons since
       its Thunderstore v0.0.8 release.
-    - SkipDropshipCompany has no configuration to change its direct-delivery
-      behavior.
+    - SkipDropshipCompany has no configuration except for the first-day option
+      to change its direct-delivery behavior.
 - Added `HQHQTeam/HQoL` to the compatibility notes and comparison section.
   `HQHQTeam/HQoL` includes a faster company dropship feature, while
   SkipDropshipCompany skips the dropship delivery and places purchased items on

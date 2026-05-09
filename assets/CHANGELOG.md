@@ -20,6 +20,7 @@ No gameplay changes are introduced.
   moons available by disabling its `Company Only` option.
   Its support for some modded Company moons is documented as a separate
   comparison point.
+  The limited orbit cases are documented as specific to SkipDropshipCompany.
   SkipDropshipCompany is documented as currently supporting only the vanilla
   Company moon (`Gordion`), plus the limited orbit cases described in the
   README.

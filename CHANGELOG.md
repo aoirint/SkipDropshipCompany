@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
       other moons available by disabling its `Company Only` option.
     - `Nexor/InstantBuy` support for some modded Company moons is documented as
       a separate comparison point.
+    - The limited orbit cases are documented as specific to SkipDropshipCompany.
     - SkipDropshipCompany is documented as currently supporting only the
       vanilla Company moon (`Gordion`), plus the limited orbit cases described
       in the README.

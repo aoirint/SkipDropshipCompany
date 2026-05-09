@@ -91,9 +91,9 @@ This mod has no configuration except for the first-day option to change that
 behavior: it skips the dropship for item purchases on the Company
 (vanilla-only) and in the limited orbit cases listed above.
 
-`Nexor/InstantBuy` supports some modded Company moons in its Company-moon scope.
+`Nexor/InstantBuy` also supports some modded Company moons while `Company Only` is enabled.
 
-This mod's Company scope is the Company (vanilla-only).
+This mod targets the Company (vanilla-only).
 
 `Nexor/InstantBuy` can be configured to exclude specified items from instant purchases.
 

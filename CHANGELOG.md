@@ -15,8 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 
 - Clarified the Thunderstore documentation comparison with `Nexor/InstantBuy`.
-    - The configurable `Company Only` scope is documented separately from
-      modded Company moon coverage.
+    - `Nexor/InstantBuy` support for some modded Company moons is documented
+      separately from its configurable `Company Only` setting.
     - SkipDropshipCompany is documented as working on the Company
       (vanilla-only) plus the limited orbit cases described in the README.
 

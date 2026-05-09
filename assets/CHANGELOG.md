@@ -16,8 +16,8 @@ No gameplay changes are introduced.
 ### Fixed
 
 - Clarified the comparison with `Nexor/InstantBuy`.
-  The configurable `Company Only` scope is now documented separately from
-  modded Company moon coverage.
+  `Nexor/InstantBuy` support for some modded Company moons is now documented
+  separately from its configurable `Company Only` setting.
   SkipDropshipCompany is documented as working on the Company (vanilla-only)
   plus the limited orbit cases described in the README.
 

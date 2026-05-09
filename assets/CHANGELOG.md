@@ -20,9 +20,9 @@ No gameplay changes are introduced.
   moons available by disabling its `Company Only` option.
   SkipDropshipCompany is documented as not having an equivalent moon-scope
   configuration.
-  Its support for the vanilla Company moon (`Gordion`) and some modded Company
-  moons is documented as a separate comparison point; it can also apply while
-  the ship is still in orbit when routed to a supported Company moon.
+  It is documented as having a Company-only feature for the vanilla Company
+  moon (`Gordion`), some modded Company moons, and orbit while routed to those
+  moons.
   SkipDropshipCompany is documented as currently supporting only the vanilla
   Company moon and limited orbit cases.
 

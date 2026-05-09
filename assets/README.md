@@ -123,7 +123,7 @@ This mod just spawns the purchased items directly on your ship instead of the dr
 
 ## Differences from [dozyote/EarlyDropship][early-dropship-package]
 
-`zoomstv/FasterRocket` reduces the waiting time for the dropship to arrive after purchasing items in orbit.
+`dozyote/EarlyDropship` delivers items purchased in orbit before the ship lands.
 
 This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
 

@@ -17,13 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Clarified the Thunderstore documentation comparison with `Nexor/InstantBuy`.
     - `Nexor/InstantBuy` is documented as defaulting to Company moons, with
       other moons available by disabling its `Company Only` option.
-    - SkipDropshipCompany is documented as not having an equivalent moon-scope
-      configuration.
-    - `Nexor/InstantBuy` is documented as having a Company-only feature for the
-      vanilla Company moon (`Gordion`), some modded Company moons, and orbit
-      while routed to those moons.
-    - SkipDropshipCompany is documented as currently supporting only the
-      vanilla Company moon and limited orbit cases.
+    - The comparison now separates moon-scope configuration, Company moon
+      coverage, Company-orbit behavior, and item-exclusion configuration.
+    - SkipDropshipCompany's documented direct-delivery scope is limited to the
+      vanilla Company moon and limited orbit cases around the Company.
 
 ### Notes
 

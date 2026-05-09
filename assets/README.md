@@ -90,11 +90,12 @@ It can be configured to run on other moons by disabling its `Company Only` optio
 This mod has no equivalent moon-scope configuration.
 Its first-day option only changes first-day orbit behavior.
 
-`Nexor/InstantBuy` has a Company-only feature for the vanilla Company moon
-(Gordion), some modded Company moons, and orbit while routed to those moons.
+`Nexor/InstantBuy` applies direct delivery to the vanilla Company moon
+(Gordion), some modded Company moons, and orbit around those Company moons
+while `Company Only` is enabled.
 
-This mod only supports the vanilla Company moon and limited orbit cases
-currently.
+This mod always limits direct delivery to the vanilla Company moon and limited
+orbit cases around the Company.
 
 `Nexor/InstantBuy` can be configured to exclude specified items from instant purchases.
 

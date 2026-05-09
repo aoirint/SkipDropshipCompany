@@ -7,6 +7,32 @@ If you find a release-note error, encounter a bug, or want to report another
 project issue, see [CONTRIBUTING.md][contributing], then report it in
 [GitHub Issues][github-issues].
 
+## v0.2.2 - 2026-05-09 UTC
+
+This release updates the Thunderstore documentation.
+
+No gameplay changes are introduced.
+
+### Changed
+
+- Clarified how this mod differs from `Nexor/InstantBuy`:
+    - `Nexor/InstantBuy` can be configured to work only on Company moons since
+      its Thunderstore v0.0.8 release.
+    - SkipDropshipCompany has no configuration to change its direct-delivery
+      behavior.
+- Added `HQHQTeam/HQoL` to the compatibility notes and comparison section.
+  `HQHQTeam/HQoL` includes a faster company dropship feature, while
+  SkipDropshipCompany skips the dropship delivery and places purchased items on
+  the ship directly.
+- Corrected the `dozyote/EarlyDropship` comparison.
+
+### Notes
+
+- Compatibility:
+    - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+      `6423525044216269478`).
+    - `HQHQTeam/HQoL` v1.0.14 is assumed to be compatible.
+
 ## v0.2.1 - 2026-05-08 UTC
 
 This release rebuilds SkipDropshipCompany for Lethal Company v81.5 and includes

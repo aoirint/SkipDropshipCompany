@@ -79,7 +79,7 @@ At least the following versions are assumed to be compatible.
 
 ### Does it work for the legacy versions of Lethal Company?
 
-No test has been done for them. It is recommended to use the tested Lethal
+No test has been done for them. It is recommended to use the intended Lethal
 Company v81.5 baseline above.
 
 ## Differences from [Nexor/InstantBuy][instant-buy-package]

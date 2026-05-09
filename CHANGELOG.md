@@ -10,6 +10,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+### Fixed
+
+- Corrected the Thunderstore README comparison with `Nexor/InstantBuy`.
+    - `Nexor/InstantBuy` works only on Company moons by default since v0.0.8
+      because its `Company Only` option defaults to enabled.
+    - Users can configure `Nexor/InstantBuy` to run on other moons by disabling
+      that option.
+
 ## v0.2.3 - 2026-05-09 UTC
 
 ### Fixed

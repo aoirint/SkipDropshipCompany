@@ -7,6 +7,20 @@ If you find a release-note error, encounter a bug, or want to report another
 project issue, see [CONTRIBUTING.md][contributing], then report it in
 [GitHub Issues][github-issues].
 
+## v0.2.4 - 2026-05-09 UTC
+
+This release updates the Thunderstore documentation.
+
+No gameplay changes are introduced.
+
+### Fixed
+
+- Corrected the comparison with `Nexor/InstantBuy`.
+  `Nexor/InstantBuy` works only on Company moons by default since v0.0.8
+  because its `Company Only` option defaults to enabled.
+  Users can still configure `Nexor/InstantBuy` to run on other moons by
+  disabling that option.
+
 ## v0.2.3 - 2026-05-09 UTC
 
 This release updates the Thunderstore documentation.
@@ -31,8 +45,10 @@ No gameplay changes are introduced.
 ### Changed
 
 - Clarified how this mod differs from `Nexor/InstantBuy`:
-    - `Nexor/InstantBuy` can be configured to work only on Company moons since
-      its Thunderstore v0.0.8 release.
+    - `Nexor/InstantBuy` works only on Company moons by default since its
+      Thunderstore v0.0.8 release.
+    - `Nexor/InstantBuy` can be configured to run on other moons by disabling
+      its `Company Only` option.
     - SkipDropshipCompany has no configuration except for the first-day option
       to change its direct-delivery behavior.
 - Added `HQHQTeam/HQoL` to the compatibility notes and comparison section.

@@ -7,6 +7,21 @@ If you find a release-note error, encounter a bug, or want to report another
 project issue, see [CONTRIBUTING.md][contributing], then report it in
 [GitHub Issues][github-issues].
 
+## v0.2.3 - 2026-05-09 UTC
+
+This release updates the Thunderstore documentation.
+
+No gameplay changes are introduced.
+
+### Fixed
+
+- Restored the `Nexor/InstantBuy` comparison note about excluding specified
+  items from instant purchases.
+  The note was unintentionally removed while updating the Company moons
+  comparison for `v0.2.2`.
+  SkipDropshipCompany does not have an equivalent item-exclusion configuration
+  option.
+
 ## v0.2.2 - 2026-05-09 UTC
 
 This release updates the Thunderstore documentation.

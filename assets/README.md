@@ -92,6 +92,10 @@ This mod has no configuration except for the first-day option to change that
 behavior: it always skips the dropship for item purchases on the Company and in
 some limited situations.
 
+`Nexor/InstantBuy` can be configured to exclude specified items from instant purchases.
+
+This mod does not have such a configuration option yet.
+
 ## Differences from [befuddled_productions/Quick_Buy_Menu][quick-buy-menu-package]
 
 `befuddled_productions/Quick_Buy_Menu` adds some chat commands to purchase items in a faster way.

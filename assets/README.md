@@ -88,8 +88,8 @@ Company v81.5 baseline above.
 It can be configured to run on other moons by disabling its `Company Only` option.
 
 This mod has no configuration except for the first-day option to change that
-behavior: it skips the dropship for item purchases on the Company
-(vanilla-only) and in the limited orbit cases listed above.
+behavior: it skips the dropship for item purchases on the Company and in the
+limited orbit cases listed above.
 
 `Nexor/InstantBuy` also supports some modded Company moons while `Company Only` is enabled.
 

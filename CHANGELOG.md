@@ -21,8 +21,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
       configuration.
     - `Nexor/InstantBuy` support for the vanilla Company moon (`Gordion`) and
       some modded Company moons is documented as a separate comparison point;
-      its Company-moon check can also apply while orbiting a supported Company
-      moon.
+      it can also apply while the ship is still in orbit when routed to a
+      supported Company moon.
     - SkipDropshipCompany is documented as currently supporting only the
       vanilla Company moon and limited orbit cases.
 

@@ -17,6 +17,8 @@ No gameplay changes are introduced.
 
 - Restored the `Nexor/InstantBuy` comparison note about excluding specified
   items from instant purchases.
+  The note was unintentionally removed while updating the Company moons
+  comparison for `v0.2.2`.
   SkipDropshipCompany does not have an equivalent item-exclusion configuration
   option.
 

@@ -93,7 +93,7 @@ behavior: it skips the dropship for item purchases on the Company
 
 `Nexor/InstantBuy` also supports some modded Company moons while `Company Only` is enabled.
 
-This mod targets the Company (vanilla-only).
+This mod only supports the vanilla Company moon (Gordion) currently.
 
 `Nexor/InstantBuy` can be configured to exclude specified items from instant purchases.
 

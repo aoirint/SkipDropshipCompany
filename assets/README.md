@@ -69,12 +69,13 @@ be delivered together with the previous ones to the ship.
 
 This behaviour may be changed in the future version since it depends on the base game implementation.
 
-### Is it compatible with FasterItemDropship/LC_FasterRocket?
+### Is it compatible with FasterItemDropship/LC_FasterRocket/HQoL?
 
 At least the following versions are assumed to be compatible.
 
 - [FlipMods/FasterItemDropship][faster-item-dropship-package] v1.3.1
 - [zoomstv/FasterRocket][faster-rocket-package] v1.0.1
+- [HQHQTeam/HQoL][hqol-package] v1.0.14
 
 ### Does it work for the legacy versions of Lethal Company?
 

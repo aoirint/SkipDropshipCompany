@@ -24,6 +24,9 @@ No gameplay changes are introduced.
   `HQHQTeam/HQoL` includes a faster company dropship feature, while
   SkipDropshipCompany skips the dropship delivery and places purchased items on
   the ship directly.
+
+### Fixed
+
 - Corrected the `dozyote/EarlyDropship` comparison.
 
 ### Notes

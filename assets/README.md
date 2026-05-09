@@ -112,6 +112,15 @@ This mod just spawns the purchased items directly on your ship instead of the dr
 
 This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
 
+## Differences from [HQHQTeam/HQoL][hqol-package]
+
+`HQHQTeam/HQoL` is a collection of High Quota quality-of-life changes.
+
+Its faster company dropship feature reduces the waiting time for the dropship to
+arrive after item purchases or Cruiser orders.
+
+This mod just spawns the purchased items directly on your ship instead of the dropship delivery.
+
 ## Differences from [dozyote/EarlyDropship][early-dropship-package]
 
 `zoomstv/FasterRocket` reduces the waiting time for the dropship to arrive after purchasing items in orbit.
@@ -134,5 +143,6 @@ This disclosure is made in compliance with Thunderstore and community policies.
 [eclipse-only-package]: https://thunderstore.io/c/lethal-company/p/stormytuna/EclipseOnly/
 [faster-item-dropship-package]: https://thunderstore.io/c/lethal-company/p/FlipMods/FasterItemDropship/
 [faster-rocket-package]: https://thunderstore.io/c/lethal-company/p/zoomstv/FasterRocket/
+[hqol-package]: https://thunderstore.io/c/lethal-company/p/HQHQTeam/HQoL/
 [instant-buy-package]: https://thunderstore.io/c/lethal-company/p/Nexor/InstantBuy/
 [quick-buy-menu-package]: https://thunderstore.io/c/lethal-company/p/befuddled_productions/Quick_Buy_Menu/

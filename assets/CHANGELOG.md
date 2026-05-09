@@ -9,7 +9,7 @@ project issue, see [CONTRIBUTING.md][contributing], then report it in
 
 ## v0.2.3 - 2026-05-09 UTC
 
-This release restores missing Thunderstore documentation.
+This release updates the Thunderstore documentation.
 
 No gameplay changes are introduced.
 

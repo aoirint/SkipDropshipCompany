@@ -8,7 +8,7 @@ Do not edit the PNG by hand.
 
 - Keep the SVG viewport and background at 256×256.
 - Keep text centered unless the design intentionally requires another layout.
-- Use the XCF-derived source font with the family and weight below:
+- Use the source font with the family and weight below:
 
   ```svg
   font-family="'源柔ゴシック', 'Gen Jyuu Gothic', sans-serif"

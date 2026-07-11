@@ -21,6 +21,20 @@ Do not edit the PNG by hand.
 - Do not regenerate the committed PNG unless the source font is installed and
   selected by the renderer.
 
+## Source and integrity
+
+Download the font from the [Gen Jyuu Gothic distribution page](http://jikasei.me/font/genjyuu/).
+The values below identify the release archive and its extracted Bold font file
+used for icon rendering.
+
+| Artifact | SHA-256 |
+| :------- | :------ |
+| `genjyuugothic-20150607.7z` | `1997876351985AC9E2EA7A7A809C91E3FDAEF878ECE5B830F2512C882C3E49DB` |
+| `GenJyuuGothic-Bold.ttf` | `17B20D90579A9A3F0A973AF0D4D0CC3C9FDFBBAB0E0A67C69B1877B1F08B1EBE` |
+
+Verify the archive before extraction, then verify the extracted font file before
+using it to regenerate `assets/icon.png`.
+
 ## Detecting font fallback
 
 Browsers can silently substitute another font when the requested source font

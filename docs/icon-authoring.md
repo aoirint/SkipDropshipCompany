@@ -18,19 +18,18 @@ Do not edit the PNG by hand.
   `Bold` is a font weight, not part of the browser-recognized family name.
   Using `Gen Jyuu Gothic Bold` as a family name falls back to another font and
   loses the rounded glyph shapes.
-- Keep a generic fallback so the SVG remains readable when the source font is
-  unavailable. Regenerate the committed PNG only on a machine where the source
-  font is installed.
+- Do not regenerate the committed PNG unless the source font is installed and
+  selected by the renderer.
 
 ## Detecting font fallback
 
-Browsers can silently substitute `sans-serif` when the requested source font
+Browsers can silently substitute another font when the requested source font
 is unavailable. `document.fonts.check()` alone does not detect this because it
-can report success when a fallback font can render the text.
+can report success when a substituted font can render the text.
 
 Before regenerating `assets/icon.png`, compare rasterized probe text for the
-source family and the generic fallback. Run this in a browser console on the
-machine used for rendering:
+source family and a generic comparison font. Run this in a browser console on
+the machine used for rendering:
 
 ```js
 const probe = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789";
@@ -48,17 +47,16 @@ function render(font) {
 }
 
 const source = render("700 54px 'Gen Jyuu Gothic'");
-const fallback = render("700 54px sans-serif");
-const differs = source.some((value, index) => value !== fallback[index]);
+const comparison = render("700 54px sans-serif");
+const differs = source.some((value, index) => value !== comparison[index]);
 
 if (!differs) {
   throw new Error("Gen Jyuu Gothic was not selected; do not regenerate the PNG.");
 }
 ```
 
-This comparison detects the unintended generic-font fallback seen during
-authoring. It is a preflight check, not a guarantee that every environment has
-identical text rendering.
+This comparison detects an unintended substituted font. It is a preflight
+check, not a guarantee that every environment has identical text rendering.
 
 ## Regenerating the PNG
 
@@ -99,7 +97,7 @@ finally {
 
 ## Verification
 
-1. Confirm the source-family probe differs from its generic fallback.
+1. Confirm the source-family probe differs from the generic comparison font.
 2. Confirm `assets/icon.png` is 256×256.
 3. Inspect the generated PNG at native size for correct font selection,
    centered layout, smooth edges, and unwanted color fringes.

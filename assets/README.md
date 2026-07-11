@@ -5,7 +5,7 @@ and in some limited situations.
 
 ## Compatibility
 
-- Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+- Lethal Company v81 (2026-04-17 UTC, Manifest ID:
   `6423525044216269478`)
     - Test environment
         - [BepInExPack][bepinexpack-package] v5.4.2305 (2026-03-17 UTC)
@@ -80,7 +80,7 @@ At least the following versions are assumed to be compatible.
 ### Does it work for the legacy versions of Lethal Company?
 
 No test has been done for them. It is recommended to use the intended Lethal
-Company v81.5 baseline above.
+Company v81 baseline above.
 
 ## Differences from [Nexor/InstantBuy][instant-buy-package]
 

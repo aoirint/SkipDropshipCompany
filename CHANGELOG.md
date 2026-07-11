@@ -77,7 +77,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - No gameplay or binary behavior changes are intended in this release.
 - Compatibility:
-    - The existing Lethal Company v81.5 compatibility baseline is unchanged.
+    - The existing Lethal Company v81 compatibility baseline is unchanged.
     - `HQHQTeam/HQoL` v1.0.14 is documented as assumed compatible.
 
 ## v0.2.1 - 2026-05-08 UTC
@@ -104,7 +104,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- Rebuilt the current stable release line for Lethal Company v81.5 after
+- Rebuilt the current stable release line for Lethal Company v81 after
   release-candidate validation.
 - Ported internal repository, build, release, and documentation maintenance
   practices from CruiserJumpPractice's `v0.2.0` preparation work.
@@ -123,9 +123,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Notes
 
 - Compatibility:
-    - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+    - Compatible with Lethal Company v81 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
-        - The v81.5 validation environment used BepInExPack v5.4.2305.
+        - The v81 validation environment used BepInExPack v5.4.2305.
 - Validation:
     - `v0.2.0-alpha.2` real-game validation passed for host-side direct
       delivery, normal dropship fallback cases, ejection reset behavior, mixed
@@ -162,15 +162,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   release-candidate checks.
 - Ported internal repository, build, release, and documentation maintenance
   practices from CruiserJumpPractice's `v0.2.0` preparation work.
-- Updated the tested compatibility baseline to Lethal Company v81.5.
+- Updated the tested compatibility baseline to Lethal Company v81.
 - Prepared stable-release automation for GitHub Releases and Thunderstore.
 
 ### Notes
 
 - Compatibility:
-    - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+    - Compatible with Lethal Company v81 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
-        - The v81.5 test environment used BepInExPack v5.4.2305.
+        - The v81 test environment used BepInExPack v5.4.2305.
 - Older Lethal Company versions are no longer claimed as tested by the current
   v0.2.0 release notes; Lethal Company v73 compatibility is recorded in the
   historical `v0.1.x` release entries below.

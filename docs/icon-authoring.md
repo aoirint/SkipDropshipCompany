@@ -33,7 +33,7 @@ source family and the generic fallback. Run this in a browser console on the
 machine used for rendering:
 
 ```js
-const probe = "Cruiser Jump Practice Skip Dropship Company";
+const probe = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789";
 const canvas = document.createElement("canvas");
 const context = canvas.getContext("2d", { willReadFrequently: true });
 canvas.width = 2048;

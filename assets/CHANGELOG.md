@@ -82,19 +82,19 @@ No gameplay changes are introduced.
 ### Notes
 
 - Compatibility:
-    - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+    - Compatible with Lethal Company v81 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
 
 ## v0.2.1 - 2026-05-08 UTC
 
-This release rebuilds SkipDropshipCompany for Lethal Company v81.5 and includes
+This release rebuilds SkipDropshipCompany for Lethal Company v81 and includes
 internal improvements.
 
 No gameplay changes are introduced.
 
 ### Changed
 
-- Rebuilt for Lethal Company v81.5.
+- Rebuilt for Lethal Company v81.
 - Improved internal implementation structure and release flow.
 - Added the Thunderstore `AI Generated` category to the package metadata:
     - The Lethal Company Thunderstore community currently provides this
@@ -111,7 +111,7 @@ No gameplay changes are introduced.
 ### Notes
 
 - Compatibility:
-    - Compatible with Lethal Company v81.5 (2026-04-17 UTC, Manifest ID:
+    - Compatible with Lethal Company v81 (2026-04-17 UTC, Manifest ID:
       `6423525044216269478`).
 
 ## v0.1.7 - 2025-11-23 UTC

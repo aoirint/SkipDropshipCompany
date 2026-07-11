@@ -273,7 +273,7 @@ Use the compact marker format at the start of the description:
 - `[v<version>]`
 - `[v<older-version>/<newer-version>]`
 
-For example, use `[v73/v81.5]` when the marker intentionally covers both Lethal
+For example, use `[v73/v81]` when the marker intentionally covers both Lethal
 Company versions.
 
 Marker versions mean tested or maintainer-confirmed Lethal Company versions
@@ -287,8 +287,8 @@ When updating the marker:
 - Replace any existing leading marker with the new marker.
 - Preserve the base description after the marker:
   `[v<version-or-versions>] <description without the compatibility marker>`.
-- Treat single-version markers such as `[v81.5]` and slash-separated markers
-  such as `[v73/v81.5]` as the same leading compatibility marker.
+- Treat single-version markers such as `[v81]` and slash-separated markers
+  such as `[v73/v81]` as the same leading compatibility marker.
 - Keep exactly one leading compatibility marker group in the manifest
   description.
 

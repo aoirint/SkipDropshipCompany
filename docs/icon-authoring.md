@@ -22,6 +22,44 @@ Do not edit the PNG by hand.
   unavailable. Regenerate the committed PNG only on a machine where the source
   font is installed.
 
+## Detecting font fallback
+
+Browsers can silently substitute `sans-serif` when the requested source font
+is unavailable. `document.fonts.check()` alone does not detect this because it
+can report success when a fallback font can render the text.
+
+Before regenerating `assets/icon.png`, compare rasterized probe text for the
+source family and the generic fallback. Run this in a browser console on the
+machine used for rendering:
+
+```js
+const probe = "Cruiser Jump Practice Skip Dropship Company";
+const canvas = document.createElement("canvas");
+const context = canvas.getContext("2d", { willReadFrequently: true });
+canvas.width = 2048;
+canvas.height = 128;
+
+function render(font) {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "#fff";
+  context.font = font;
+  context.fillText(probe, 0, 80);
+  return context.getImageData(0, 0, canvas.width, canvas.height).data.slice();
+}
+
+const source = render("700 54px 'Gen Jyuu Gothic'");
+const fallback = render("700 54px sans-serif");
+const differs = source.some((value, index) => value !== fallback[index]);
+
+if (!differs) {
+  throw new Error("Gen Jyuu Gothic was not selected; do not regenerate the PNG.");
+}
+```
+
+This comparison detects the unintended generic-font fallback seen during
+authoring. It is a preflight check, not a guarantee that every environment has
+identical text rendering.
+
 ## Regenerating the PNG
 
 Render at four times the target resolution, then resize with high-quality
@@ -61,7 +99,8 @@ finally {
 
 ## Verification
 
-1. Confirm `assets/icon.png` is 256×256.
-2. Inspect the generated PNG at native size for correct font selection,
+1. Confirm the source-family probe differs from its generic fallback.
+2. Confirm `assets/icon.png` is 256×256.
+3. Inspect the generated PNG at native size for correct font selection,
    centered layout, smooth edges, and unwanted color fringes.
-3. Keep the SVG and generated PNG together in the same commit.
+4. Keep the SVG and generated PNG together in the same commit.

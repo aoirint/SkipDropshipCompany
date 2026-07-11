@@ -29,8 +29,8 @@ used for icon rendering.
 
 | Artifact | SHA-256 |
 | :------- | :------ |
-| `genjyuugothic-20150607.7z` | `1997876351985AC9E2EA7A7A809C91E3FDAEF878ECE5B830F2512C882C3E49DB` |
-| `GenJyuuGothic-Bold.ttf` | `17B20D90579A9A3F0A973AF0D4D0CC3C9FDFBBAB0E0A67C69B1877B1F08B1EBE` |
+| `genjyuugothic-20150607.7z` | `1997876351985ac9e2ea7a7a809c91e3fdaef878ece5b830f2512c882c3e49db` |
+| `GenJyuuGothic-Bold.ttf` | `17b20d90579a9a3f0a973af0d4d0cc3c9fdfbbab0e0a67c69b1877b1f08b1ebe` |
 
 Verify the archive before extraction, then verify the extracted font file before
 using it to regenerate `assets/icon.png`.

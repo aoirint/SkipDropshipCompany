@@ -1,9 +1,10 @@
 ---
 name: changelog-workflow
 description: >-
-  Create and update a canonical developer changelog. Use when adding
+  Create and maintain canonical developer release changelogs. Use when adding
   developer-facing release history, maintaining Keep a Changelog sections, or
-  preparing canonical version entries.
+  preparing canonical version entries; not for user-facing release-note writing
+  or publishing.
 ---
 
 # Changelog Workflow
@@ -106,7 +107,28 @@ Reference:
      Preserve changelog-specific nuance such as compatibility confidence,
      dependency relationships, and whether a statement is original, backfilled,
      inferred, superseded, or withdrawn.
-8. If the user asks for user-facing release notes, verify or prepare only the
+   - Keep the detailed prerelease entry as its own historical record. The
+     stable entry should summarize stable promotion, packaging, and durable
+     user impact instead of copying prerelease implementation detail wholesale.
+8. For compatibility labels and other package metadata, distinguish repository
+   history from public package history before choosing changelog wording.
+   - Check what the target publication channel's existing packages actually
+     exposed to users; local metadata, documentation, and GitHub-only
+     prereleases are not substitutes for that history.
+   - When a stable package introduces a label that no earlier public package
+     exposed, record it as added package metadata under `Changed`, even if it
+     replaces temporary repository or prerelease wording.
+     Do not place that bullet under `Added`: the package metadata changed, but
+     the label is not a new product capability. For example:
+     `### Changed` followed by `- Added the v100 compatibility label to the
+     package.`
+   - Use `Fixed` only when correcting metadata or behavior that was already
+     exposed in a public package. Keep temporary or prerelease-only correction
+     context in the canonical history, not in user-facing wording.
+   - Avoid Issue and pull-request identifiers in changelog bullets by default.
+     Use durable factual wording; include an identifier only when the
+     maintainer explicitly needs the link as historical context.
+9. If the user asks for user-facing release notes, verify or prepare only the
    canonical source material here, then use the appropriate release-note
    workflow for the user-facing rewrite and release-readiness checks.
    - Update the canonical changelog only when the source material is missing,

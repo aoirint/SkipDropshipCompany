@@ -2,5 +2,5 @@ interface:
   display_name: "Skill Quality Check"
   short_description: "Quality-check Agent Skills."
   default_prompt: >-
-    Quality-check this Agent Skill for trigger clarity, structure, progressive
+    Use $skill-quality-check to review this Agent Skill for trigger clarity, structure, progressive
     disclosure, domain separation, and scenario validation readiness.

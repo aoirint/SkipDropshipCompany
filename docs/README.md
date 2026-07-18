@@ -14,6 +14,12 @@
   base-game member declarations or behaviour analysis into it; link to the
   relevant domain document instead.
 
+## Focused procedure
+
+- [Icon authoring](icon-authoring.md) describes the package icon source and
+  regeneration workflow. It remains a standalone document because it is the
+  only operational procedure in this repository.
+
 Start with [architecture/README.md](architecture/README.md) for the mod design,
 and [domain/README.md](domain/README.md) for supporting knowledge.
 

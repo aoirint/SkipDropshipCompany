@@ -89,10 +89,14 @@ For every meaningful external-integration choice, use:
 <conditions, effects, and rationale>
 ```
 
-Make the recommended option explicit only when the source evidence supports
-it. Explain why the alternatives do not meet the same state, timing, ownership,
-or synchronization boundary. Do not put this mod's UX, feature policy, or
-internal model in a domain document.
+Create an implementation-choice section only when two or more credible
+integration patterns exist. Do not invent strawman alternatives merely to fill
+the structure. When source evidence establishes one safe target path, document
+its target, preconditions, behaviour, failure mode, and change checks without
+an artificial decision section. Make a recommended option explicit only when
+the source evidence supports it; explain why each documented alternative does
+not meet the same state, timing, ownership, or synchronization boundary. Do
+not put this mod's UX, feature policy, or internal model in a domain document.
 
 ## Write architecture documents
 
@@ -140,7 +144,8 @@ Before handing off, verify all of the following:
 - Each architecture document has a distinct developer question and links to
   the domain knowledge it uses.
 - Version-specific domain facts name their target version/build.
-- Implementation choices use H3 decisions and H4 options, with reasons.
+- Every documented implementation choice has credible H3 decisions and H4
+  options with reasons; no alternatives are fabricated for structure alone.
 - All relative Markdown links resolve and no removed document is referenced.
 - The repository instructions and documentation indexes describe the final
   layout.

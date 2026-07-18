@@ -14,7 +14,7 @@
 | Purchasable items | `public Item[] buyableItemsList` | Resolves a pending item index to the item definition used for direct spawning. |
 | Pending order | `public List<int> orderedItemsFromTerminal` | Ordered item indexes awaiting dropship processing. Preserve list order when retaining a portion of an order. |
 | Dropship count | `public int numberOfItemsInDropship` | The count supplied by credit synchronization. |
-| Credit synchronization | `public void SyncGroupCreditsClientRpc(int newGroupCredits, int numItemsInShip)` | Prefix before the base game updates terminal state; postfix after it has done so. |
+| Credit synchronization | `public void SyncGroupCreditsClientRpc(int newGroupCredits, int numItemsInShip)` | RPC send/receive boundary carrying credits and dropship count. |
 
 ### `Item` and `GrabbableObject`
 
@@ -22,18 +22,24 @@
 | --- | --- | --- |
 | Item identity | `public int itemId` | Identifies the item definition independently of a spawned object instance. |
 | Item prefab | `public GameObject spawnPrefab` | Prefab instantiated for an immediate item delivery. |
-| Falling state | `public float fallTime` | Set to `0f` before spawn so the new item begins in the expected placement state. |
-| Ship flags | `public bool isInElevator`, `public bool isInShipRoom` | Set before network spawn so clients receive a ship-contained item. |
-| Ground state | `public bool hasHitGround` | Set for an immediately placed item rather than a falling delivery. |
+| Falling state | `public float fallTime` | Controls the base `GrabbableObject` falling update. |
+| Ship flags | `public bool isInElevator`, `public bool isInShipRoom` | Ordinary fields describing current ship/elevator membership. |
+| Ground state | `public bool hasHitGround` | Ordinary field describing whether the object has reached ground. |
 
 ### `StartOfRound`
 
 | Member | Declaration | Role |
 | --- | --- | --- |
 | Ship parent | `public Transform elevatorTransform` | Parent the direct-delivery item to the ship elevator. |
-| Spawn positions | `public Transform[] playerSpawnPositions` | Index `1` is the base position used by the v81 out-of-bounds delivery path. |
-| Round start | `public void StartGame()` | Postfix point for recording that a landing lifecycle began. |
-| Ship reset | `public void ResetShip()` | Postfix point for clearing landing state after the base reset. |
+| Spawn positions | `public Transform[] playerSpawnPositions` | Index `1` is used by the v81 saved ship-item recovery path when a saved position is outside ship bounds. |
+| Round start | `public void StartGame()` | Postfix point for a selected-destination snapshot before physical landing. |
+| Ship reset | `public void ResetShip()` | Base reset lifecycle boundary. |
+
+### `Unity.Netcode.NetworkObject`
+
+| Member | Declaration | Role |
+| --- | --- | --- |
+| Network spawn | `public void Spawn(bool destroyWithScene = false)` | Spawns the item's network object. |
 
 ## Implementation choices
 
@@ -41,7 +47,7 @@
 
 #### Patch `Terminal.SyncGroupCreditsClientRpc(int, int)` with prefix and postfix — recommended
 
-At this boundary the pending index list and synchronized dropship count are
+At this boundary the pending index list and outgoing dropship count are
 available in one terminal lifecycle step. Use the prefix for preparation and
 the postfix for spawning and retained-order restoration.
 
@@ -92,20 +98,22 @@ A cached value can describe a prior round rather than the round being handled.
 
 #### Instantiate `Item.spawnPrefab` below `elevatorTransform`, then spawn its `NetworkObject` — recommended
 
-Resolve the ordered index through `buyableItemsList`, instantiate its prefab at
-the v81 ship-side spawn position, and set `fallTime`, `isInElevator`,
-`isInShipRoom`, and `hasHitGround` before `NetworkObject.Spawn(false)`. This
-matches the base game's ship-contained object state at replication time.
+Resolve the ordered index through `buyableItemsList`, instantiate its prefab
+near `playerSpawnPositions[1]`, then call `NetworkObject.Spawn(false)`. The
+v81 saved ship-item recovery path sets `fallTime`, `isInElevator`, and
+`isInShipRoom` as local object state; it does not establish their network
+replication. A mod must supply separate evidence or synchronization for these
+ordinary fields.
 
 #### Call a dropship-delivery path or spawn the prefab without a `NetworkObject`
 
-The dropship path retains the delayed delivery behaviour this mod is changing.
+The dropship path retains the base game's delayed delivery behaviour.
 A local-only prefab is not replicated to clients as a purchased game object.
 
-#### Spawn before setting the ship and falling flags
+#### Choose a different local field-setting order
 
-Clients can receive the object before the direct-delivery state is applied,
-leaving a falling or non-ship-contained item visible during synchronization.
+The base recovery path offers one local ordering example, but the appropriate
+order and any client-visible effect depend on the mod's own synchronization.
 
 ## Order and landing lifecycle
 
@@ -114,25 +122,30 @@ index `Terminal.buyableItemsList`; they are not spawned item instances. A
 split-delivery implementation must preserve the retained indexes and their
 order, then assign the retained list back after the terminal RPC.
 
-`Terminal.SyncGroupCreditsClientRpc(int, int)` is the boundary where the game
-applies synchronized credits and dropship count. Use a prefix to snapshot and
-partition `orderedItemsFromTerminal`; use a postfix to spawn the immediate
-portion and restore the retained dropship portion. A credit-sync callback alone
-does not establish that a physical delivery has landed.
+`Terminal.SyncGroupCreditsClientRpc(int, int)` is an RPC send/receive boundary.
+On client execution, the game updates credits, conditionally updates
+`numberOfItemsInDropship` when the argument is not `-1`, and clears the credit
+cooldown. Server/host invocation serializes and sends the arguments instead.
+Use a prefix to snapshot and partition `orderedItemsFromTerminal`; use a
+postfix to spawn the immediate portion and restore the retained dropship
+portion. A credit-sync callback alone does not establish that a physical
+delivery has landed.
 
-`StartOfRound.StartGame()` and `StartOfRound.ResetShip()` bracket the local
-landing history: record after the former completes, and clear after the latter
-completes. Destination-sensitive behaviour must query the current round
-destination when deciding whether a purchase is eligible; do not reuse a
-previous-level decision.
+`StartOfRound.StartGame()` is an early selected-destination snapshot, not the
+physical landing boundary. `StartOfRound.ResetShip()` is a base-game reset
+lifecycle boundary suitable for a postfix. Destination-sensitive behaviour
+must query the current round destination when deciding whether a purchase is
+eligible; do not reuse a previous-level decision.
 
 ## Change checklist
 
-1. Patch `SyncGroupCreditsClientRpc(int, int)` with both prefix and postfix;
-   do not target a same-named overload by name alone.
+1. Patch the `SyncGroupCreditsClientRpc` name with both prefix and postfix, as
+   in the current Harmony attribute target; add signature-specific targeting if
+   a same-named overload is introduced.
 2. Preserve `orderedItemsFromTerminal` values and ordering.
 3. Keep preparation, instant spawning, and retained-list restoration as
    separate stages around the base RPC.
-4. Clear landing history in a `ResetShip()` postfix, not before base reset.
+4. Use a `ResetShip()` postfix as the lifecycle boundary for any mod-owned
+   reset policy.
 5. Resolve item indexes through `buyableItemsList`, and set ship/falling flags
    before spawning the item's `NetworkObject`.

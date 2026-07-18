@@ -71,6 +71,13 @@ not include local paths, machine-specific data, or substantial decompiled
 source text. Replace findings in the existing concern document when its target
 version changes; do not create a version-suffixed copy by default.
 
+Trace behaviour beyond a member name. Record the execution side and ordering of
+an RPC or callback, ownership gates, deferred application, and whether a field
+is actually synchronized rather than merely set before a network call. When a
+generic trigger reaches a game method through serialized events, inspect and
+document that asset binding. Do not present an intended cleanup, snapshot, or
+failure path as current behaviour when the implementation has not reached it.
+
 Separate these sections when applicable:
 
 1. **Target**: product/version/build scope.
@@ -119,6 +126,12 @@ its rationale without explaining a new base-game fact, add or extend the domain
 document first, then link to it. Keep operational procedures out of
 architecture unless they are part of the runtime design.
 
+Put mod-selected timing gates, placement/order choices, configuration routing,
+retry or partial-failure outcomes, and unavailable-dependency policy in
+architecture. Describe the current implementation precisely, including a
+known limitation or replay path, rather than silently documenting a preferred
+design.
+
 ## Migrate and maintain safely
 
 1. Plan the destination and canonical owner of every section before editing.
@@ -144,8 +157,12 @@ Before handing off, verify all of the following:
 - Each architecture document has a distinct developer question and links to
   the domain knowledge it uses.
 - Version-specific domain facts name their target version/build.
+- Domain claims distinguish serialized asset bindings, execution side, ownership
+  gates, and proven synchronization from mod policy or unverified propagation.
 - Every documented implementation choice has credible H3 decisions and H4
   options with reasons; no alternatives are fabricated for structure alone.
+- Architecture describes the actual timing, retry, failure, and cleanup paths;
+  it labels any intended-but-unimplemented path as such.
 - All relative Markdown links resolve and no removed document is referenced.
 - The repository instructions and documentation indexes describe the final
   layout.

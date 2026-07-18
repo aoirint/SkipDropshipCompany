@@ -22,6 +22,15 @@
 | Round start | `public void StartGame()` | Postfix point for recording that a landing lifecycle began. |
 | Ship reset | `public void ResetShip()` | Postfix point for clearing landing state after the base reset. |
 
+## Implementation choices
+
+| Decision | Options | Recommended approach | Why |
+| --- | --- | --- | --- |
+| Split a pending order | Patch purchase entry; patch `SyncGroupCreditsClientRpc(int, int)`; patch a later item-spawn path | Use prefix and postfix around `SyncGroupCreditsClientRpc(int, int)`. | At this boundary the pending index list and synchronized dropship count are available in one terminal lifecycle step; a later spawn path has already lost the clean preparation boundary. |
+| Retain dropship items | Mutate the existing list in place; replace `orderedItemsFromTerminal` with the retained ordered list | Replace the field with the retained list in the postfix. | The base state is represented by the list field itself; assigning the complete retained sequence makes the post-RPC pending state explicit. |
+| Track landing lifecycle | Infer it from credit synchronization; record in `StartGame()` and clear in `ResetShip()` | Use postfices on `StartGame()` and `ResetShip()`. | Credit synchronization represents terminal state, not a completed landing; the round methods give explicit start and reset boundaries. |
+| Choose a destination for eligibility | Reuse a previous destination; query the current round destination at decision time | Query the current round destination. | Company and moon delivery behaviour differs, and a cached prior destination can describe the wrong round. |
+
 ## Order and landing lifecycle
 
 `Terminal.orderedItemsFromTerminal` is the pending purchase list. Its values

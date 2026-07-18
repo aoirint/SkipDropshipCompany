@@ -10,6 +10,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+### Fixed
+
+- Corrected the Thunderstore `Server-side` category slug from `server-side` to
+  `serverside`.
+    - The public Lethal Company category API exposes `serverside` as the slug.
+    - The invalid slug caused the v0.2.6 Thunderstore submission to be
+      rejected after its GitHub Release was created.
+
 ## v0.2.6 - 2026-07-18 UTC
 
 ### Changed

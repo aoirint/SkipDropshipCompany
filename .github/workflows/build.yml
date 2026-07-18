@@ -195,7 +195,7 @@ jobs:
           community: lethal-company
           community_categories: |
             mods
-            server-side
+            serverside
             tweaks-and-quality-of-life
             ai-generated
 

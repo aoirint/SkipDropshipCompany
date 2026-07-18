@@ -14,6 +14,11 @@ uses. Add a new domain document when an architecture document needs knowledge
 not already documented there. Do not duplicate base-game analysis in
 architecture documents.
 
+## Documentation Skill
+
+Use `.agents/skills/maintain-mod-documentation/` when creating, restructuring,
+maintaining, or reviewing developer documentation.
+
 ## Icon Assets
 
 When changing `assets/icon.svg` or regenerating `assets/icon.png`, follow

@@ -60,7 +60,10 @@ Do not create a template-shaped file with no distinct question to answer.
 ## Write domain documents
 
 Write one domain document per independently versioned external concern. Record
-the target version/build when the facts are version-specific. Group relevant
+the target version/build when the facts are version-specific, and keep that
+scope canonical in its `Target` section. Do not repeat it in prose, tables,
+headings, or filenames unless comparing versions, distinguishing parallel
+targets, or describing a version-specific difference. Group relevant
 implementation members by owning type and give names, signatures, field types,
 and roles sufficient for Harmony or reflection access.
 
@@ -156,7 +159,9 @@ Before handing off, verify all of the following:
 - Architecture documents do not duplicate external implementation analysis.
 - Each architecture document has a distinct developer question and links to
   the domain knowledge it uses.
-- Version-specific domain facts name their target version/build.
+- Version-specific domain facts name their target version/build in `Target`;
+  other version references are necessary for a comparison, parallel target, or
+  version-specific difference.
 - Domain claims distinguish serialized asset bindings, execution side, ownership
   gates, and proven synchronization from mod policy or unverified propagation.
 - Every documented implementation choice has credible H3 decisions and H4

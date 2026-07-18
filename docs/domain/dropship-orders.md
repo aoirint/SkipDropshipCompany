@@ -31,7 +31,7 @@
 | Member | Declaration | Role |
 | --- | --- | --- |
 | Ship parent | `public Transform elevatorTransform` | Parent the direct-delivery item to the ship elevator. |
-| Spawn positions | `public Transform[] playerSpawnPositions` | Index `1` is used by the v81 saved ship-item recovery path when a saved position is outside ship bounds. |
+| Spawn positions | `public Transform[] playerSpawnPositions` | Index `1` is used by the saved ship-item recovery path when a saved position is outside ship bounds. |
 | Round start | `public void StartGame()` | Postfix point for a selected-destination snapshot before physical landing. |
 | Ship reset | `public void ResetShip()` | Base reset lifecycle boundary. |
 
@@ -100,7 +100,7 @@ A cached value can describe a prior round rather than the round being handled.
 
 Resolve the ordered index through `buyableItemsList`, instantiate its prefab
 near `playerSpawnPositions[1]`, then call `NetworkObject.Spawn(false)`. The
-v81 saved ship-item recovery path sets `fallTime`, `isInElevator`, and
+The saved ship-item recovery path sets `fallTime`, `isInElevator`, and
 `isInShipRoom` as local object state; it does not establish their network
 replication. A mod must supply separate evidence or synchronization for these
 ordinary fields.

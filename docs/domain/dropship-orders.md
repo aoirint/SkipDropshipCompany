@@ -6,6 +6,11 @@ This document records the order and landing concepts used for Lethal Company
 v81. Recheck target-version evidence before changing behavior that depends on
 Terminal order state or ship-reset timing.
 
+The claims are `direct_static` observations from the v81 decompilation's
+`Terminal.cs` and `StartOfRound.cs`. The matching v81 asset root was inspected;
+this document does not infer serialized item or scene configuration. Callback
+ordering and successful item delivery remain runtime-dependent.
+
 ## Order state
 
 The Terminal keeps ordered item indexes as the pending purchase state. Treat

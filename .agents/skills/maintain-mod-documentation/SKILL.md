@@ -43,6 +43,11 @@ knowledge requires a new domain document first. Add `operations/` only when
 there are operational documents that benefit from a shared index; do not move
 a single focused procedure just to fill the directory.
 
+When a new procedure means two or more operational documents need shared
+discovery, create the indexed `operations/` directory and move existing
+standalone operational documents there in the same link-preserving change.
+Otherwise, keep one focused procedure at its existing direct location.
+
 Make `domain/README.md` and `architecture/README.md` indexes, not duplicate
 summaries. Each index names the question answered by every document.
 

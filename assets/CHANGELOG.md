@@ -7,6 +7,18 @@ If you find a release-note error, encounter a bug, or want to report another
 project issue, see [CONTRIBUTING.md][contributing], then report it in
 [GitHub Issues][github-issues].
 
+## v0.2.7 - 2026-07-18 UTC
+
+This release restores Thunderstore publication after v0.2.6 was published only
+on GitHub.
+
+No gameplay changes are introduced.
+
+### Fixed
+
+- Corrected the `Server-side` Thunderstore category key so the package can be
+  submitted to the Lethal Company community.
+
 ## v0.2.6 - 2026-07-18 UTC
 
 This release updates package metadata and documentation.

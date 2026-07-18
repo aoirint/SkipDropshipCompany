@@ -1,9 +1,10 @@
 ---
 name: release-note-workflow
 description: >-
-  Create, update, or review user-facing release notes. Use when deriving stable
-  release notes from a canonical changelog or checking release-note readiness
-  before publication.
+  Create, update, or review user-facing stable release notes and release-note
+  readiness. Use when deriving notes from a canonical changelog or checking
+  readiness before publication; not for canonical changelog authoring or
+  publishing.
 ---
 
 # Release Note Workflow
@@ -80,6 +81,21 @@ description: >-
      Keep exact prerelease identifiers in the canonical developer changelog.
 6. Rewrite the stable entries around user-visible behavior, installation,
    compatibility, update impact, security, and known limitations.
+   - Before wording package metadata changes, compare the planned package with
+     existing packages in the target publication channel. Do not infer public
+     history from local metadata, repository documentation, or GitHub-only
+     prerelease artifacts.
+   - If the planned stable package is the first public package with a
+     compatibility label, describe the label as added package metadata under
+     `Changed`. Do not describe temporary repository or prerelease wording as
+     a correction to users.
+     Do not put the bullet under `Added`: the label changes package metadata,
+     not product capability. For example: `### Changed` followed by
+     `- Added the v100 compatibility label to the package.`
+   - Use `Fixed` for a compatibility-label correction only when the incorrect
+     label was already exposed by a public package. Keep the repository or
+     prerelease correction history in the canonical developer changelog when
+     it matters to maintainers.
    - Use `document-quality-check` for explanatory prose. Preserve
      release-note-specific nuance such as compatibility confidence, dependency
      relationships, and whether context is original, backfilled, inferred,
@@ -137,6 +153,10 @@ description: >-
      users.
    - Put `Notes` after all change-category sections within each release entry
      unless the publication channel explicitly requires another order.
+   - Omit test dependencies, diagnostic settings, Issue identifiers, and
+     pull-request identifiers from user-facing notes by default. Include them
+     only when they change installation, update behavior, compatibility, or a
+     maintainer explicitly requests the reference.
 10. Before publication, verify:
    - The user-facing release-note file has a stable version heading at
      the top, not `Unreleased`, and does not contain placeholder release

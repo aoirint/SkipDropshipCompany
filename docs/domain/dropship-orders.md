@@ -24,12 +24,56 @@
 
 ## Implementation choices
 
-| Decision | Options | Recommended approach | Why |
-| --- | --- | --- | --- |
-| Split a pending order | Patch purchase entry; patch `SyncGroupCreditsClientRpc(int, int)`; patch a later item-spawn path | Use prefix and postfix around `SyncGroupCreditsClientRpc(int, int)`. | At this boundary the pending index list and synchronized dropship count are available in one terminal lifecycle step; a later spawn path has already lost the clean preparation boundary. |
-| Retain dropship items | Mutate the existing list in place; replace `orderedItemsFromTerminal` with the retained ordered list | Replace the field with the retained list in the postfix. | The base state is represented by the list field itself; assigning the complete retained sequence makes the post-RPC pending state explicit. |
-| Track landing lifecycle | Infer it from credit synchronization; record in `StartGame()` and clear in `ResetShip()` | Use postfices on `StartGame()` and `ResetShip()`. | Credit synchronization represents terminal state, not a completed landing; the round methods give explicit start and reset boundaries. |
-| Choose a destination for eligibility | Reuse a previous destination; query the current round destination at decision time | Query the current round destination. | Company and moon delivery behaviour differs, and a cached prior destination can describe the wrong round. |
+### Split a pending order
+
+#### Patch `Terminal.SyncGroupCreditsClientRpc(int, int)` with prefix and postfix — recommended
+
+At this boundary the pending index list and synchronized dropship count are
+available in one terminal lifecycle step. Use the prefix for preparation and
+the postfix for spawning and retained-order restoration.
+
+#### Patch purchase entry
+
+This occurs before the synchronization boundary, so it does not observe the
+terminal state after the base RPC applies its update.
+
+#### Patch a later item-spawn path
+
+The later path has already lost the clean preparation boundary for the pending
+order and its synchronized count.
+
+### Retain dropship items
+
+#### Replace `orderedItemsFromTerminal` with the retained ordered list — recommended
+
+The list field is the base representation of pending state. Assigning the
+complete retained sequence makes that state explicit after the base RPC.
+
+#### Mutate the existing list in place
+
+This can yield the same elements, but leaves the retained post-RPC state less
+explicit and makes ownership of the sequence harder to reason about.
+
+### Track landing lifecycle
+
+#### Record in `StartGame()` and clear in `ResetShip()` postfices — recommended
+
+The two round methods supply explicit lifecycle start and reset boundaries.
+
+#### Infer landing from credit synchronization
+
+Credit synchronization represents terminal state, not a completed landing.
+
+### Choose a destination for eligibility
+
+#### Query the current round destination at decision time — recommended
+
+Company and moon delivery behaviour differs, and this uses the destination
+that actually applies to the current round.
+
+#### Reuse a previous destination
+
+A cached value can describe a prior round rather than the round being handled.
 
 ## Order and landing lifecycle
 

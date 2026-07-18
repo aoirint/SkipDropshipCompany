@@ -21,19 +21,21 @@ No gameplay changes are introduced.
 
 ## v0.2.6 - 2026-07-18 UTC
 
-This release updates package metadata and documentation.
+This release includes internal improvements and some documentation corrections.
 
 No gameplay changes are introduced.
 
 ### Changed
 
-- The package is now categorized as `server-side` on Thunderstore, making its
-  host-side delivery behavior easier to discover.
+- Updated the package icon's editable source from GIMP XCF to SVG. The package
+  icon may have minor rendering differences.
+- Added `Server-side` Thunderstore category configuration to stable package
+  submissions.
 
 ### Fixed
 
-- Corrected the Lethal Company compatibility label to v81 based on the public
-  depot history.
+- Corrected the inaccurate `v81.5` Lethal Company compatibility label to match
+  the in-game v81 label.
 
 ### Notes
 

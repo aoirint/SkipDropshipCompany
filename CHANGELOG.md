@@ -24,21 +24,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- Added the `server-side` Thunderstore category to stable package submissions.
+- Added `Server-side` Thunderstore category configuration to stable package
+  submissions.
+- Updated the editable package-icon source from GIMP XCF to SVG. The package
+  icon may have minor rendering differences.
 
 ### Fixed
 
-- Corrected the Lethal Company compatibility label to v81 throughout
-  documentation, changelogs, and Thunderstore metadata, based on the public
-  depot history.
+- Corrected the inaccurate `v81.5` Lethal Company compatibility label to match
+  the in-game v81 label throughout documentation, changelogs, and Thunderstore
+  metadata.
 
 ### Notes
 
 - No gameplay or binary behavior changes are intended.
 - Compatibility: Lethal Company v81 (2026-04-17 UTC, Manifest ID:
   `6423525044216269478`).
-- The editable package-icon source is now SVG. The packaged PNG retains its
-  established appearance.
 
 ## v0.2.5 - 2026-05-09 UTC
 

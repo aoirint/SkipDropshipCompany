@@ -7,6 +7,23 @@ If you find a release-note error, encounter a bug, or want to report another
 project issue, see [CONTRIBUTING.md][contributing], then report it in
 [GitHub Issues][github-issues].
 
+## v0.2.8 - 2026-07-18 UTC
+
+This release updates the v0.2.6 release notes included in the package.
+
+No gameplay changes are introduced.
+
+### Changed
+
+- Clarified the v0.2.6 notes for internal improvements, the package-icon source
+  update, Thunderstore category configuration, and the Lethal Company v81 label
+  correction.
+
+### Notes
+
+- Compatibility: Lethal Company v81 (2026-04-17 UTC, Manifest ID:
+  `6423525044216269478`).
+
 ## v0.2.7 - 2026-07-18 UTC
 
 This release restores Thunderstore publication after v0.2.6 was published only

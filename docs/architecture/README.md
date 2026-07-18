@@ -7,4 +7,3 @@ documented in [../domain/dropship-orders.md](../domain/dropship-orders.md).
   retained-order restoration.
 - [Layer boundaries](layer-boundaries.md) defines state ownership and the Core
   and Interop responsibilities.
-

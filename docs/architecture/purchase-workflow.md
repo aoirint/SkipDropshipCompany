@@ -36,4 +36,3 @@ A missing terminal order is an unavailable game read and stops the purchase
 flow. A failed preparation is not retried by the postfix. This avoids treating
 a partial order as empty or spawning an instant item without a matching
 retained-order decision.
-

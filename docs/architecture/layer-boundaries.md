@@ -22,4 +22,3 @@ methods delegate to `PluginController`; they do not contain purchase policy.
 New game access belongs behind an `IGameInterop` operation implemented by an
 Interop adapter. New purchase policy belongs in a Core use case rather than in
 a Harmony callback.
-

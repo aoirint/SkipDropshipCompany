@@ -22,4 +22,3 @@
 
 Start with [architecture/README.md](architecture/README.md) for the mod design,
 and [domain/README.md](domain/README.md) for supporting knowledge.
-

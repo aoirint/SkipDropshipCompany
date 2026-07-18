@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+## v0.2.6 - 2026-07-18 UTC
+
 ### Changed
 
 - Added the `server-side` Thunderstore category to stable package submissions.

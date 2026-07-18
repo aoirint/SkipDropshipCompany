@@ -7,13 +7,20 @@
 
 ## Patch and access targets
 
-| Type | Member | Declaration | Use |
-| --- | --- | --- | --- |
-| `Terminal` | Pending order | `public List<int> orderedItemsFromTerminal` | Ordered item indexes awaiting dropship processing. Preserve list order when retaining a portion of an order. |
-| `Terminal` | Dropship count | `public int numberOfItemsInDropship` | The count supplied by credit synchronization. |
-| `Terminal` | Credit synchronization | `public void SyncGroupCreditsClientRpc(int newGroupCredits, int numItemsInShip)` | Prefix before the base game updates terminal state; postfix after it has done so. |
-| `StartOfRound` | Round start | `public void StartGame()` | Postfix point for recording that a landing lifecycle began. |
-| `StartOfRound` | Ship reset | `public void ResetShip()` | Postfix point for clearing landing state after the base reset. |
+### `Terminal`
+
+| Member | Declaration | Role |
+| --- | --- | --- |
+| Pending order | `public List<int> orderedItemsFromTerminal` | Ordered item indexes awaiting dropship processing. Preserve list order when retaining a portion of an order. |
+| Dropship count | `public int numberOfItemsInDropship` | The count supplied by credit synchronization. |
+| Credit synchronization | `public void SyncGroupCreditsClientRpc(int newGroupCredits, int numItemsInShip)` | Prefix before the base game updates terminal state; postfix after it has done so. |
+
+### `StartOfRound`
+
+| Member | Declaration | Role |
+| --- | --- | --- |
+| Round start | `public void StartGame()` | Postfix point for recording that a landing lifecycle began. |
+| Ship reset | `public void ResetShip()` | Postfix point for clearing landing state after the base reset. |
 
 ## Order and landing lifecycle
 

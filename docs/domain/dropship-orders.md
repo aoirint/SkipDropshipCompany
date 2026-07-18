@@ -1,40 +1,44 @@
 # Dropship Orders
 
-## Evidence scope
+## Target
 
-This document records the order and landing concepts used for Lethal Company
-v81. Recheck target-version evidence before changing behavior that depends on
-Terminal order state or ship-reset timing.
+- Game: Lethal Company v81
+- Steam manifest ID: `6423525044216269478`
 
-The relevant implementation includes `Terminal` order state and
-`StartOfRound` ship-reset handling.
+## Patch and access targets
 
-## Order state
+| Type | Member | Declaration | Use |
+| --- | --- | --- | --- |
+| `Terminal` | Pending order | `public List<int> orderedItemsFromTerminal` | Ordered item indexes awaiting dropship processing. Preserve list order when retaining a portion of an order. |
+| `Terminal` | Dropship count | `public int numberOfItemsInDropship` | The count supplied by credit synchronization. |
+| `Terminal` | Credit synchronization | `public void SyncGroupCreditsClientRpc(int newGroupCredits, int numItemsInShip)` | Prefix before the base game updates terminal state; postfix after it has done so. |
+| `StartOfRound` | Round start | `public void StartGame()` | Postfix point for recording that a landing lifecycle began. |
+| `StartOfRound` | Ship reset | `public void ResetShip()` | Postfix point for clearing landing state after the base reset. |
 
-The Terminal keeps ordered item indexes as the pending purchase state. Treat
-that list as authoritative until the game processes the order. Preserve item
-indexes and their order when transferring or restoring pending purchases; a
-missing list is an unavailable state, not an empty order.
+## Order and landing lifecycle
 
-## Landing lifecycle
+`Terminal.orderedItemsFromTerminal` is the pending purchase list. Its values
+are indexes into the terminal's purchasable-item data, not spawned item
+instances. A split-delivery implementation must preserve the retained indexes
+and their order, then assign the retained list back after the terminal RPC.
 
-Ship-reset and Terminal credit synchronization are distinct callbacks. A
-purchase flow that changes delivery timing must preserve the relationship
-between pending order state, a recorded landing, and the next round reset.
+`Terminal.SyncGroupCreditsClientRpc(int, int)` is the boundary where the game
+applies synchronized credits and dropship count. Use a prefix to snapshot and
+partition `orderedItemsFromTerminal`; use a postfix to spawn the immediate
+portion and restore the retained dropship portion. A credit-sync callback alone
+does not establish that a physical delivery has landed.
 
-Do not assume that a credit synchronization by itself proves an item has
-landed. Keep order preparation separate from item spawning so a failed or
-late game callback cannot duplicate an order.
-
-## Company destination
-
-The company scene has different delivery implications from a moon. Any
-eligibility rule that depends on a first-day reroute or company destination
-must use the current round destination, not a cached prior-level assumption.
+`StartOfRound.StartGame()` and `StartOfRound.ResetShip()` bracket the local
+landing history: record after the former completes, and clear after the latter
+completes. Destination-sensitive behaviour must query the current round
+destination when deciding whether a purchase is eligible; do not reuse a
+previous-level decision.
 
 ## Change checklist
 
-1. Preserve pending item indexes without reordering.
-2. Distinguish unavailable Terminal state from an empty order.
-3. Tie item spawning to one confirmed lifecycle point.
-4. Re-evaluate destination-specific behavior after each round transition.
+1. Patch `SyncGroupCreditsClientRpc(int, int)` with both prefix and postfix;
+   do not target a same-named overload by name alone.
+2. Preserve `orderedItemsFromTerminal` values and ordering.
+3. Keep preparation, instant spawning, and retained-list restoration as
+   separate stages around the base RPC.
+4. Clear landing history in a `ResetShip()` postfix, not before base reset.

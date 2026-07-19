@@ -5,8 +5,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/apm-usage
   is_virtual: true
@@ -32,8 +32,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/changelog-workflow
   is_virtual: true
@@ -51,8 +51,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/code-quality-check
   is_virtual: true
@@ -70,8 +70,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/commit-message-quality-check
   is_virtual: true
@@ -89,8 +89,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/document-quality-check
   is_virtual: true
@@ -108,8 +108,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/git-worktree-workflow
   is_virtual: true
@@ -127,8 +127,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/github-actions-quality-check
   is_virtual: true
@@ -146,8 +146,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/gitignore-workflow
   is_virtual: true
@@ -165,8 +165,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/issue-quality-check
   is_virtual: true
@@ -184,8 +184,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/lethal-company-analyze
   is_virtual: true
@@ -217,8 +217,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/mod-documentation-quality-check
   is_virtual: true
@@ -236,8 +236,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/pull-request-quality-check
   is_virtual: true
@@ -257,8 +257,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/release-note-workflow
   is_virtual: true
@@ -276,8 +276,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/rollout-workflow
   is_virtual: true
@@ -295,8 +295,8 @@ dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: eb2b77dd95907112571d8647bbd3a743dad5ee23
-  resolved_ref: eb2b77dd95907112571d8647bbd3a743dad5ee23
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
   version: unknown
   virtual_path: .apm/skills/security-check
   is_virtual: true

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unity Game Analysis"
+  short_description: "Trace Unity code and serialized assets"
+  default_prompt: "Use $unity-game-analyze to trace this behavior through the target Unity build's decompiled code and serialized assets."

@@ -9,8 +9,9 @@ directly.
 - `apm.yml` pins the selected public
   [aoirint/skills](https://github.com/aoirint/skills); `apm.lock.yaml` records
   their resolved commits and content hashes.
-- The initial pin is an explicit maintainer-approved exception to the normal
-  seven-day dependency cooldown.
+- A maintainer may explicitly direct this repository to use the current
+  `aoirint/skills` main commit before the normal seven-day cooldown. Record the
+  exception in the pull request and retain an exact full commit pin.
 - To restore the committed Skill set, run `apm install --frozen` from the
   repository root, then run `apm audit --ci`.
 - Make all Skill changes in the public
@@ -40,8 +41,10 @@ architecture documents.
 
 ## Documentation Skill
 
-Use `.agents/skills/mod-documentation-quality-check/` when creating, restructuring,
-maintaining, or reviewing developer documentation.
+Use `.agents/skills/software-documentation-maintenance/` when creating, restructuring,
+maintaining, or reviewing developer documentation. Use
+`.agents/skills/prose-quality-check/` when refining explanatory wording after the
+document owner and technical evidence are established.
 
 ## Icon Assets
 

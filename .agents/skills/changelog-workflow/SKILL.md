@@ -17,7 +17,7 @@ Maintain the repository's canonical developer changelog, usually `CHANGELOG.md`.
 6. Source compatibility, support, environment, and migration claims. Mark unsourced claims as missing input or draft material; distinguish confirmed, best-effort, limited-check, and known-issue evidence. Group paired tools and dependencies with the product/version they qualify.
 7. Preserve historical accuracy. Mark backfilled metadata as backfilled, retain meaningful prerelease history, attach withdrawn or superseded notes to the affected entry, and use complete prerelease versions when they matter.
 8. Describe public package metadata from actual publication-channel history, not local or GitHub-only artifacts. Treat a newly public compatibility label as `Changed`; use `Fixed` only for a correction already exposed publicly.
-9. Write concise factual bullets. Avoid issue or PR identifiers unless the maintainer needs the durable link. Use `document-quality-check` for prose changes that risk losing confidence, relationship, or historical-status nuance.
+9. Write concise factual bullets. Avoid issue or PR identifiers unless the maintainer needs the durable link. Use `prose-quality-check` for prose changes that risk losing confidence, relationship, or historical-status nuance.
 
 ## Handoff and boundaries
 

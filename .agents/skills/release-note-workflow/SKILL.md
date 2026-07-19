@@ -15,7 +15,7 @@ Derive user-facing stable notes from the canonical developer changelog; do not c
 4. Rewrite for users: behavior, installation or update impact, compatibility, breaking changes, removals, deprecations, security, known limitations, and one sourced reason or background sentence per user-visible change. Mark insufficiently sourced items as draft rather than inventing rationale.
 5. Describe public package metadata using the target publication channel's history. A first public compatibility label is `Changed`, while `Fixed` requires a publicly exposed incorrect label. Keep internal correction history in the changelog.
 6. Use `Notes`, after change categories, for compatibility and limitation metadata unless the channel requires another layout. Source claims, preserve confidence levels, and group paired tools or dependencies with their tested product/version. Exclude test dependencies, diagnostics, and issue/PR IDs unless users need them.
-7. Use `document-quality-check` for nuanced prose and `security-check` for security- or supply-chain-sensitive content.
+7. Use `prose-quality-check` for nuanced prose and `security-check` for security- or supply-chain-sensitive content.
 
 ## Check readiness
 

@@ -1,23 +1,23 @@
 ---
 name: lethal-company-analyze
-description: Investigate version-specific Lethal Company mechanics using decompiled code, Unity assets, seeded RNG, and runtime evidence; produce reproducible, bounded reports. Use for mechanics questions, full-seed enumeration, sealed-result reuse, code/asset reconciliation, Terminal or HUD behavior, version comparisons, statistical prediction, or serialized overrides.
+description: Investigate version-specific Lethal Company mechanics using verified Unity-build evidence, seeded RNG, exhaustive or sampled computation, and runtime observation; produce reproducible, bounded gameplay reports. Use for mechanics questions, full-seed enumeration, sealed-result reuse, Terminal or HUD endpoint interpretation, version comparisons, statistical prediction, or playable-strategy evaluation. Use unity-game-analyze for the underlying decompiled-code and serialized-asset trace.
 ---
 
 # Lethal Company Analysis
 
 ## Establish scope
 
-1. Record the exact game version, Steam manifest/build identifier, platform, mod state, source paths, and evidence date.
-2. Inventory and hash the assembly/decompilation and asset roots before drawing conclusions. Run `scripts/inventory_build.py` when a stable file manifest is useful.
-3. Keep evidence from different builds in separate inventories. Analyze each build independently before comparing them.
+1. Record the exact game version, Steam manifest/build identifier, platform, mod state, evidence handoff, and evidence date.
+2. Use `unity-game-analyze` when the question requires tracing decompiled code, serialized assets, prefab/scene overrides, load paths, or callback reachability. Consume its target-build inventory and bounded evidence handoff instead of recreating Unity tracing rules here.
+3. Keep evidence from different builds separate. Complete the Unity trace and mechanics analysis independently in each build before comparing them.
 
 ## Build the evidence model
 
-1. Start from the user-visible behavior and trace it through the entrypoint, call path, fields, and referenced assets.
-2. Read [unity-and-rng.md](references/unity-and-rng.md) when the mechanic uses Unity serialization, `System.Random`, `UnityEngine.Random`, object enumeration, spawning, NavMesh, networking, or synchronization.
-3. Search both code and serialized assets. Resolve applicable serialized overrides using the routed Unity guidance, then separately test whether the resolved object/value can affect the declared endpoint window.
-4. Read [evidence-policy.md](references/evidence-policy.md) before designing the evidence ledger, classifying claims, or resolving conflicting sources.
-5. Record claim-level locators and hashes. Use the policy's exact classes: `direct_static`, `exact_derived`, `counterfactual_model`, `sample_estimate`, `runtime_observed`, and `unknown_runtime`.
+1. Define the player-visible behavior, decision, population, and observation window before interpreting the Unity evidence.
+2. Verify that the `unity-game-analyze` handoff covers every code path, effective serialized value, object identity, load/reachability condition, role, and runtime unknown needed by the mechanic. Route missing trace evidence back to that Skill; do not fill it with a gameplay model.
+3. Read [rng-and-runtime-modeling.md](references/rng-and-runtime-modeling.md) when the mechanic uses `System.Random`, `UnityEngine.Random`, object enumeration, spawning, NavMesh, networking, synchronization, or before/after UI observations.
+4. Read [evidence-policy.md](references/evidence-policy.md) before designing the mechanics evidence ledger, classifying claims, or resolving conflicting sources.
+5. Record claim-level locators, source handoff hashes, and derivation hashes. Use the policy's exact classes: `direct_static`, `exact_derived`, `counterfactual_model`, `sample_estimate`, `runtime_observed`, and `unknown_runtime`.
 
 ## Define endpoints before computation
 

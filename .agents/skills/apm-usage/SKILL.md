@@ -1,48 +1,94 @@
 ---
 name: apm-usage
-description: Set up, pin, deploy, audit, and update APM-managed agent dependencies safely. Use when creating or editing apm.yml or apm.lock.yaml, installing APM, adding an Agent Skill, plugin, or MCP dependency, validating a pinned deployment, or preparing a cooldown-aware update proposal.
+description: Select a reviewed APM CLI version, then set up, pin, deploy, audit, and update APM-managed agent dependencies safely. Use when creating or editing apm.yml or apm.lock.yaml, choosing or installing APM, adding an Agent Skill, plugin, or MCP dependency, validating a pinned deployment, or preparing a cooldown-aware update proposal.
 ---
 
 # APM Usage
 
-Keep agent context reproducible and reviewable. Reuse an existing APM
-installation; do not update it incidentally. Require a seven-day cooldown,
-full commit pins, lockfile hashes, and review for every changed third-party
-dependency.
+Keep agent context reproducible and reviewable. Select the newest reviewed APM
+release that has completed the seven-day cooldown; filesystem location and
+local recency do not establish eligibility. Require full commit pins, lockfile
+hashes, and review for every changed third-party dependency.
 
 ## 1. Inspect before changing
 
-1. Locate `apm`, `apm.yml`, `apm.lock.yaml`, `apm-policy.yml`, existing agent
-   directories, and repository guidance. Run `apm --version` if the binary is
-   already available.
-2. If `apm.yml` exists, preserve it. Do not run `apm init --yes`, because it
+1. Locate `apm.yml`, `apm.lock.yaml`, `apm-policy.yml`, existing agent
+   directories, and repository guidance. Read `apm_version` and
+   `lockfile_version` from an existing lockfile before running a mutating APM
+   command; treat them as compatibility evidence, not an instruction to keep an
+   older CLI forever.
+2. Read [the bootstrap manifest](references/apm-bootstrap.json). Its version is
+   the newest APM release whose provenance, artifacts, checksums, publication
+   date, and seven-day cooldown this Skill has reviewed. Do not prefer a newer
+   local `current`, `PATH`, project-local, or legacy executable merely because
+   it is easier to find.
+3. Inventory `apm` on `PATH`, project-local copies, and locations reported by
+   the current official installation documentation and the platform's command
+   resolver. Record each resolved executable and `--version`; path precedence
+   does not override cooldown eligibility.
+
+   Select the manifest version when it is already installed and invoke an
+   off-PATH copy by absolute path. Do not modify PATH to satisfy one repository
+   task. If the selected version is absent, use the verified temporary-artifact
+   flow in section 2 instead of installing it implicitly.
+4. If the lockfile records a newer APM version than the latest eligible version,
+   do not silently downgrade, rewrite, install, or audit the project. Report the
+   compatibility blocker and require either a reviewed bootstrap refresh after
+   cooldown or a documented maintainer exception for that exact version.
+5. If the selected eligible version is newer than the lockfile generator,
+   follow the official lockfile migration guidance. Capture the pre-command
+   lockfile, run `apm install` as an explicit migration step, and separate
+   schema-only churn from dependency, hash, target, or deployed-file changes.
+   Restore and stop if an allegedly read-only or frozen command rewrites the
+   lockfile unexpectedly.
+6. If `apm.yml` exists, preserve it. Do not run `apm init --yes`, because it
    overwrites an existing manifest.
-3. If no manifest exists, inspect the repository's agent targets and run
+7. If no manifest exists, inspect the repository's agent targets and run
    interactive `apm init` from the project root. Select only the targets the
    project actually uses; review the generated `apm.yml` before adding deps.
-4. Treat agent dependencies as supply-chain-sensitive code. Check the
+8. Treat the CLI and agent dependencies as supply-chain-sensitive code. Check the
    repository policy and any organization policy before proceeding.
 
-## 2. Install APM safely when it is absent
+## 2. Obtain the selected eligible APM version safely
 
-Prefer the installed project or user copy when it satisfies the task. Do not
-run a floating one-line installer or `apm self-update` merely to obtain a newer
-version.
+Reuse an installed copy only when its exact version matches the selected
+reviewed release. Do not run an unpinned installer or `apm self-update` merely
+to obtain whatever version is newest upstream.
 
-Read [the bootstrap manifest](references/apm-bootstrap.json) and follow the
-matching section of [the OS installation template](references/apm-install.md).
-The manifest is the single source of truth for the pinned version, release
-date, assets, and SHA-256 values.
+Treat installation, self-update, PATH changes, and replacement of the active
+APM binary as user-environment changes. A request to maintain one repository
+does not authorize them.
 
-When a new APM installation is required:
+Read [the bootstrap manifest](references/apm-bootstrap.json), then consult the
+current [official installation guide](https://microsoft.github.io/apm/getting-started/installation/),
+[`apm self-update` reference](https://microsoft.github.io/apm/reference/cli/self-update/),
+and installer source in the
+[official APM repository](https://github.com/microsoft/apm). Do not reproduce
+their commands, paths, environment variables, or installer behavior in this
+Skill: those are upstream-owned and may change. The manifest remains this
+Skill's source of truth for the reviewed version, release date, artifacts, and
+SHA-256 values.
 
-1. Confirm that no usable `apm` is already on `PATH`, then follow only the
-   matching OS section in the reference. Verify its hard-coded SHA-256 before
-   extraction or execution. Never set `APM_SKIP_CHECKSUM=1`.
-2. Install to a user-writable, dedicated APM directory unless the project
-   explicitly requires an administrator-managed location. Verify with
-   `apm --version` and record the exact version.
-3. For an enterprise mirror, use HTTPS, set `APM_NO_DIRECT_FALLBACK=1`, and
+When the selected version is not installed:
+
+1. Download the exact official release archive named in the bootstrap manifest
+   to a unique operating-system temporary directory. Verify its hard-coded
+   SHA-256 before extraction, extract the complete bundle, and invoke the
+   packaged executable by absolute path. Do not add it to PATH, copy a shim,
+   place it in the repository, or alter the active APM installation.
+2. Confirm `--version` exactly matches the manifest. If the official artifact
+   is not portable on the current platform, cannot preserve its adjacent
+   runtime files, or fails integrity verification, stop instead of inventing an
+   installation layout or choosing an ineligible version.
+3. Remove only the validated task-specific temporary directory after the work
+   finishes. Record the archive source, expected and observed SHA-256,
+   executable path, and version in the handoff.
+4. If the user explicitly requests a persistent installation, then consult the
+   current official sources above and use their documented version-pin and
+   integrity mechanisms. Let the official installer own its layout. Do not
+   alter PATH or replace an active binary without explicit authorization for
+   those specific environment changes.
+5. For an enterprise mirror, use HTTPS, set `APM_NO_DIRECT_FALLBACK=1`, and
    verify that the mirror serves the identical reviewed artifact and checksum.
    Do not treat this as a substitute for review of the artifact.
 
@@ -51,15 +97,27 @@ When a new APM installation is required:
 Do not change the bootstrap manifest automatically. Use this proposal flow:
 
 1. Record the current and candidate tags, release URLs, publication dates,
-   platform assets, SHA-256 values, and the candidate eligibility date.
-2. Require the candidate's publication date plus seven full days and explicit
-   maintainer approval.
-3. Run `uv run --locked --script scripts/propose_bootstrap_update.py` to collect an eligible
-   candidate without changing files. Attach its JSON output to the proposal.
-4. After approval, run the same command with `--write --confirm-version <candidate>`.
-   It updates only `references/apm-bootstrap.json` and refuses an unconfirmed
-   or mismatched version.
-5. Review the manifest diff and the matching OS template before committing.
+   platform assets, SHA-256 values, and the candidate cooldown date. Start with
+   the newest candidate that has completed the cooldown, not merely the newest
+   published or locally installed version.
+2. Treat cooldown as a minimum gate, not adoption approval. Review provenance,
+   release notes, installer and artifact integrity, and compatibility from the
+   current official sources. Require explicit maintainer approval.
+3. Run
+   `uv run --no-project --no-config --locked --script <apm-usage-skill>/scripts/propose_bootstrap_update.py`
+   to isolate the locked helper from the consumer repository's uv configuration
+   and collect an eligible candidate without changing files. Attach its JSON
+   output to the proposal.
+4. After approval, obtain the candidate through section 2's temporary
+   artifact flow and run representative lock, frozen-install, audit, and
+   deployed-output checks without changing the active installation or PATH.
+   A reproducible resolver, lock migration, install, audit, or output failure
+   rejects the candidate even after cooldown; keep the current bootstrap and
+   record the evidence instead of trying a newer unreviewed release.
+5. If the candidate passes, run the same isolated command with
+   `--write --confirm-version <candidate>`. It updates only
+   `references/apm-bootstrap.json` and refuses an unconfirmed or mismatched
+   version. Review the manifest diff before committing.
 
 Do not use `apm self-update` to perform this refresh.
 
@@ -69,6 +127,9 @@ Do not use `apm self-update` to perform this refresh.
 | --- | --- |
 | [Official APM repository](https://github.com/microsoft/apm) | Verify supported configuration, CLI behavior, and upstream guidance. |
 | [APM documentation](https://microsoft.github.io/apm/) | Consult the maintained usage and reference documentation. |
+| [Official installation guide](https://microsoft.github.io/apm/getting-started/installation/) | Use the supported version pin and installer-managed locations. |
+| [Official migration guide](https://microsoft.github.io/apm/troubleshooting/migration/) | Handle lockfile schema and CLI upgrades without inventing a migration path. |
+| [`apm self-update` reference](https://microsoft.github.io/apm/reference/cli/self-update/) | Distinguish CLI updates from dependency updates and confirm official rollback behavior. |
 | [APM releases](https://github.com/microsoft/apm/releases) | Review release tags, publication dates, assets, and release notes. |
 | [GitHub Releases API](https://api.github.com/repos/microsoft/apm/releases?per_page=30) | Obtain machine-readable release metadata; this is the endpoint used by the proposal script. |
 | [APM security policy](https://github.com/microsoft/apm/security/policy) | Follow the upstream vulnerability-reporting process. |
@@ -113,6 +174,24 @@ or MCP dependency:
    `apm audit --ci` to the project's existing CI when the user requests CI
    enforcement.
 
+### 3.1 Maintain a packaged Skill collection
+
+Apply this section only when a repository publishes Skill copies in both an
+authoring target such as `.agents/skills/` and a package directory such as
+`.apm/skills/`.
+
+1. Identify the canonical source and each distributed copy. Use a supported
+   generator when one exists; otherwise update every copy in the same change.
+2. Compare relative file sets and content hashes before release. A missing,
+   extra, or different file is a release blocker, not a cosmetic discrepancy.
+3. After `apm install --frozen`, record the installer-reported target and
+   verify the named Skill at that actual target, rather than assuming a
+   configured or conventional directory was used.
+4. If `apm audit --ci` resolves a different target root, do not call the audit
+   a pass or failure without direct evidence. Record the discrepancy, verify
+   the installed file and lockfile hashes directly, and report the observed
+   behavior for follow-up.
+
 ## 4. Propose updates; do not silently apply them
 
 Pinned dependencies stay unchanged until a maintainer approves an update.
@@ -154,6 +233,12 @@ Before handoff, reconcile `THIRD_PARTY_NOTICES.md` with the reviewed lockfile:
 ## Completion checklist
 
 - `apm.yml` is present and was not overwritten accidentally.
+- The selected APM CLI was the newest reviewed release that completed the
+  seven-day cooldown; its absolute path and version were recorded.
+- No PATH, active APM installation, or other user-environment state changed
+  without explicit authorization.
+- Any lock-format migration was explicit and reviewed separately from resolved
+  dependency changes; unexpected lockfile writes were restored and reported.
 - Every remote dependency is pinned to a reviewed full commit SHA.
 - `apm.lock.yaml` is committed and contains the expected resolved commits and
   content hashes.
@@ -162,5 +247,10 @@ Before handoff, reconcile `THIRD_PARTY_NOTICES.md` with the reviewed lockfile:
 - Each committed APM-deployed third-party skill has one current
   `THIRD_PARTY_NOTICES.md` entry, including its license and required notices;
   removed skills have no stale entry unless a copy remains.
-- Deployment used `apm install --frozen`, and `apm audit --ci` passed.
+- Packaged collections have matching canonical and distributed file sets and
+  content hashes; the named installed Skill was checked at the
+  installer-reported target.
+- Deployment used `apm install --frozen`; `apm audit --ci` passed in the
+  verified target context, or any target-resolution discrepancy is documented
+  with direct installation and lockfile evidence.
 - Updates have a reviewable, cooldown-aware proposal before application.

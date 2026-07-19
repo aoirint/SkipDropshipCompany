@@ -1,0 +1,207 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    # Build keeps ubuntu-latest because packaging currently relies on
+    # runner-provided shell tools such as jq and 7z.
+    runs-on: ubuntu-latest
+
+    outputs:
+      release_mode: ${{ steps.generate-version.outputs.release_mode }}
+      app_version: ${{ steps.generate-version.outputs.app_version }}
+      git_version: ${{ steps.generate-version.outputs.git_version }}
+      manifest_version: ${{ steps.generate-version.outputs.manifest_version }}
+
+    steps:
+      # Checkout is required before generating versions because the local
+      # composite action reads project files and fetches tags from this clone.
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Generate version
+        id: generate-version
+        uses: ./.github/actions/generate-version
+        with:
+          csproj_file: "@@PROJECT_DIRECTORY@@/@@PROJECT_FILE@@"
+
+      - name: Setup .NET
+        # Keep dotnet-version aligned with lint.yml per the README .NET and
+        # C# tooling update policy.
+        uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
+        with:
+          dotnet-version: '10.x'
+          cache: true
+          cache-dependency-path: @@PROJECT_DIRECTORY@@/packages.lock.json
+
+      - name: Restore NuGet packages
+        # Restore once in locked mode so build uses the committed dependency
+        # graph and does not rewrite package resolution in CI.
+        run: dotnet restore --locked-mode
+
+      - name: Record start time
+        id: start-time
+        run: echo "time_ms=$(date +%s%3N)" >> "${GITHUB_OUTPUT}"
+
+      - name: Run dotnet build
+        run: |
+          dotnet_build_args=(--no-restore --configuration Release)
+          if [ "${{ steps.generate-version.outputs.release_mode }}" != "latest" ]; then
+            # BepInEx 5 validates plugin metadata as System.Version, which
+            # rejects SemVer prerelease and edge strings. Keep release identity
+            # in Version, and scope the loader-facing fallback to this build.
+            dotnet_build_args+=(/p:BepInExPluginVersion=0.0.0)
+          fi
+
+          dotnet build "${dotnet_build_args[@]}"
+
+      - name: Record end time
+        id: end-time
+        if: always()
+        run: echo "time_ms=$(date +%s%3N)" >> "${GITHUB_OUTPUT}"
+
+      - name: Create artifact
+        run: |
+          TMP_ARTIFACT_DIR=./tmp_artifacts
+          ARTIFACT_STEM=@@PROJECT_DIRECTORY@@-v${{ steps.generate-version.outputs.app_version }}
+
+          mkdir -p "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}"
+
+          # Keep this layout as the Thunderstore package root; consumers expect
+          # the DLL, manifest, icon, docs, changelog, and license at zip root.
+          # https://thunderstore.io/c/lethal-company/create/docs/
+
+          mv ./@@PROJECT_DIRECTORY@@/bin/Release/netstandard2.1/@@PLUGIN_ASSEMBLY@@  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
+
+          cp ./assets/manifest.json  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/manifest.json"
+          cp ./assets/icon.png  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
+          cp ./assets/README.md  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
+          cp ./assets/CHANGELOG.md  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
+          cp ./LICENSE  "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}/"
+
+          cd "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}"
+
+          7z a -r "../${ARTIFACT_STEM}.zip" .
+
+          cd ..
+          rm -rf "${ARTIFACT_STEM:?}/"
+
+      - name: Upload artifact
+        id: upload-artifact
+        # The package is already a zip file, so upload it without recompressing
+        # to keep the digest and download size tied to the release payload.
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: artifact
+          path: ./tmp_artifacts/*.zip
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+      - name: Create summary
+        if: always()
+        run: |
+          TIME_DURATION_MS=$(( ${{ steps.end-time.outputs.time_ms }} - ${{ steps.start-time.outputs.time_ms }} ))
+          TIME_DURATION_S=$(( TIME_DURATION_MS / 1000 )).$(( TIME_DURATION_MS % 1000 ))
+
+          GIT_VERSION_MARKDOWN=${{ steps.generate-version.outputs.git_version }}
+          if [ "${{ steps.generate-version.outputs.release_mode }}" != "edge" ]; then
+            GIT_VERSION_MARKDOWN="[${{ steps.generate-version.outputs.git_version }}](https://github.com/${GITHUB_REPOSITORY}/releases/tag/${{ steps.generate-version.outputs.git_version }})"
+          fi
+
+          ARTIFACT_LINK_MARKDOWN=
+          ARTIFACT_DIGEST_MARKDOWN=
+          if [ "${{ steps.upload-artifact.outcome }}" = "success" ]; then
+            ARTIFACT_LINK_MARKDOWN="[Download](${{ steps.upload-artifact.outputs.artifact-url }})"
+            ARTIFACT_DIGEST_MARKDOWN="\`${{ steps.upload-artifact.outputs.artifact-digest }}\`"
+          fi
+
+          {
+            echo "| Metric | Value |"
+            echo "| :----- | :---- |"
+            echo "| Result | ${{ job.status == 'success' && '✅' || '❌' }} |"
+            echo "| Commit Hash | [${GITHUB_SHA:0:7}](https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}) |"
+            echo "| Release Mode | ${{ steps.generate-version.outputs.release_mode }} |"
+            echo "| App Version | ${{ steps.generate-version.outputs.app_version }} |"
+            echo "| Git Version | ${GIT_VERSION_MARKDOWN} |"
+            echo "| Manifest Version | ${{ steps.generate-version.outputs.manifest_version }} |"
+            echo "| Time Duration | ${TIME_DURATION_S}s |"
+            echo "| Artifact | ${ARTIFACT_LINK_MARKDOWN} |"
+            echo "| Artifact Digest | ${ARTIFACT_DIGEST_MARKDOWN} |"
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+  release:
+    needs:
+      - build
+    # Edge builds are validation artifacts only; GitHub releases are created
+    # only for new project versions that should receive a tag.
+    if: needs.build.outputs.release_mode != 'edge'
+
+    # Keep this on ubuntu-slim: release publishing only needs standard shell tools
+    # included in that image, and does not require ubuntu-latest's larger toolset.
+    runs-on: ubuntu-slim
+
+    permissions:
+      contents: write
+
+    steps:
+      # Checkout is needed even though the package is downloaded, because the
+      # Thunderstore publisher is a repository-local composite action.
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Download build artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: artifact
+          path: ./tmp_artifacts
+
+      - name: Publish release
+        # Create immutable releases so an already-published version cannot be
+        # silently replaced by a later workflow run for the same tag.
+        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
+        with:
+          tag: ${{ needs.build.outputs.git_version }}
+          commit: ${{ github.sha }}
+          immutableCreate: true
+          prerelease: ${{ needs.build.outputs.release_mode != 'latest' }}
+          makeLatest: ${{ needs.build.outputs.release_mode == 'latest' }}
+          generateReleaseNotes: true
+          artifacts: |
+            ./tmp_artifacts/*.zip
+          artifactErrorsFailBuild: true
+          artifactContentType: application/zip
+
+      - name: Publish stable release to Thunderstore
+        id: publish-thunderstore
+        # Thunderstore does not accept the prerelease versions generated here,
+        # so only stable latest releases are published to the community.
+        if: needs.build.outputs.release_mode == 'latest'
+        uses: ./.github/actions/publish-thunderstore
+        with:
+          artifact_path: ./tmp_artifacts/*.zip
+          token: ${{ secrets.THUNDERSTORE_TOKEN }}
+          namespace: @@THUNDERSTORE_NAMESPACE@@
+          community: @@THUNDERSTORE_COMMUNITY@@
+          community_categories: |
+            @@THUNDERSTORE_CATEGORIES@@
+
+      - name: Add Thunderstore summary
+        if: steps.publish-thunderstore.outcome == 'success'
+        run: |
+          {
+            echo "| Metric | Value |"
+            echo "| :----- | :---- |"
+            echo "| Thunderstore Package | [Open](${{ steps.publish-thunderstore.outputs.thunderstore_community_url }}) |"
+            echo "| Thunderstore Download | [Download](${{ steps.publish-thunderstore.outputs.thunderstore_download_url }}) |"
+          } >> "${GITHUB_STEP_SUMMARY}"

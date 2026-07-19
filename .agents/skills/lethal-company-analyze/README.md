@@ -2,7 +2,7 @@
 
 ## Overview
 
-Investigate version-specific Lethal Company mechanics with reproducible evidence.
+Analyze version-specific Lethal Company mechanics, RNG, and gameplay implications.
 
 ## Install
 

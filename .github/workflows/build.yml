@@ -208,5 +208,3 @@ jobs:
             echo "| Thunderstore Package | [Open](${{ steps.publish-thunderstore.outputs.thunderstore_community_url }}) |"
             echo "| Thunderstore Download | [Download](${{ steps.publish-thunderstore.outputs.thunderstore_download_url }}) |"
           } >> "${GITHUB_STEP_SUMMARY}"
-
-

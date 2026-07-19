@@ -210,5 +210,3 @@ jobs:
         with:
           config: .markdownlint-cli2.yaml
           globs: "**/*.md"
-
-

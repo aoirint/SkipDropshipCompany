@@ -1,4 +1,4 @@
 interface:
   display_name: "Lethal Company Analysis"
-  short_description: "Investigate mechanics with reproducible evidence"
-  default_prompt: "Use $lethal-company-analyze to investigate this Lethal Company mechanic with reproducible, explicitly bounded evidence."
+  short_description: "Analyze Lethal Company mechanics and RNG"
+  default_prompt: "Use $lethal-company-analyze to analyze this Lethal Company mechanic and its gameplay implications from verified Unity-build evidence."

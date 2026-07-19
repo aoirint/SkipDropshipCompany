@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Documentation Maintenance"
+  short_description: "Maintain coherent software documentation systems"
+  default_prompt: "Use $software-documentation-maintenance to structure and maintain this repository's documentation system."

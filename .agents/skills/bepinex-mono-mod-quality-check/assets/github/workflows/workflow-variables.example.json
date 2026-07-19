@@ -1,0 +1,11 @@
+{
+  "project_directory": "ExampleMod",
+  "project_file": "ExampleMod.csproj",
+  "plugin_assembly": "com.example.ExampleMod.dll",
+  "thunderstore_namespace": "example-team",
+  "thunderstore_community": "example-community",
+  "thunderstore_categories": [
+    "mods",
+    "clientside"
+  ]
+}

@@ -27,7 +27,7 @@ Omit an alert only when assistance was not significant.
 3. Make titles concise and specific to the problem or task. Include an affected area when useful; avoid vague titles and do not impose Conventional Commits unless repository policy requires it.
 4. Keep the body or reply concise. Use only useful sections: `Summary`, `Details`, `Acceptance Criteria`, `Verification`, `Notes`, `Findings`, or `Next Steps`. For bugs, state expected and actual behavior and known useful reproduction steps. Cross-link durable follow-up origin context when it helps triage.
 5. Write in English except for exact source material. Use bullets, backticks for technical names, explicit uncertainty and verification limits, and summaries rather than large logs or diffs. Never describe AI-performed work as manual.
-6. Use `document-quality-check` for nuanced explanatory prose and `security-check` for security- or supply-chain-sensitive content.
+6. Use `prose-quality-check` for nuanced explanatory prose and `security-check` for security- or supply-chain-sensitive content.
 
 ## Thread notes and CLI safety
 

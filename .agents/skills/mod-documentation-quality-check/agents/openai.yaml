@@ -1,4 +1,0 @@
-interface:
-  display_name: "Mod Documentation Quality Check"
-  short_description: "Maintain clear, scalable mod developer docs"
-  default_prompt: "Use $mod-documentation-quality-check to structure and update this mod's developer documentation."

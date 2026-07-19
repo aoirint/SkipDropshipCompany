@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "templates": [
+    {
+      "id": "repository-gitattributes",
+      "source": "repository/.gitattributes",
+      "destination": ".gitattributes",
+      "comparison": "text-normalized-newlines"
+    },
+    {
+      "id": "repository-contributing",
+      "source": "repository/CONTRIBUTING.md",
+      "destination": "CONTRIBUTING.md",
+      "comparison": "text-normalized-newlines"
+    },
+    {
+      "id": "github-pull-request-template",
+      "source": "github/pull_request_template.md",
+      "destination": ".github/pull_request_template.md",
+      "comparison": "text-normalized-newlines"
+    },
+    {
+      "id": "github-generate-version",
+      "source": "github/actions/generate-version/action.yml",
+      "destination": ".github/actions/generate-version/action.yml",
+      "comparison": "text-normalized-newlines"
+    },
+    {
+      "id": "github-publish-thunderstore-action",
+      "source": "github/actions/publish-thunderstore/action.yml",
+      "destination": ".github/actions/publish-thunderstore/action.yml",
+      "comparison": "text-normalized-newlines"
+    },
+    {
+      "id": "github-publish-thunderstore-script",
+      "source": "github/actions/publish-thunderstore/publish-thunderstore.sh",
+      "destination": ".github/actions/publish-thunderstore/publish-thunderstore.sh",
+      "comparison": "bytes"
+    }
+  ]
+}

@@ -1,22 +1,3 @@
-# Fallback Pull Request Body
-
-Use this fallback only when the repository has no applicable pull request
-template. If a repository template exists, the live template takes precedence.
-Apply repository-specific requirements only when they are present in current
-repository guidance. Do not infer a CLA, checklist, sign-off, or other policy
-from this generic scaffold.
-
-## Contents
-
-- [Fallback Scaffold](#fallback-scaffold)
-
-## Fallback Scaffold
-
-Keep the universal headings below. When a section has no applicable content,
-write `None` or `Not applicable` instead of removing the heading. Add a
-repository-specific section only when current repository guidance requires it.
-
-````markdown
 <!--
 If significant AI assistance affected this pull request, put this alert at the
 very top of the PR body:
@@ -121,4 +102,14 @@ Paste the relevant output here.
 ### Screenshots / videos
 -->
 
-````
+## Checklist
+
+<!--
+Check this item before submitting.
+Pull requests cannot be merged without Contribution License Agreement
+confirmation from CONTRIBUTING.md.
+-->
+
+As the pull request author, I have checked all required items:
+
+- [ ] I have read `CONTRIBUTING.md` and agree to the Contribution License Agreement.

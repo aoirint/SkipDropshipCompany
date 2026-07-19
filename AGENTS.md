@@ -13,6 +13,9 @@ directly.
   seven-day dependency cooldown.
 - To restore the committed Skill set, run `apm install --frozen` from the
   repository root, then run `apm audit --ci`.
+- Make all Skill changes in the public
+  [aoirint/skills](https://github.com/aoirint/skills) repository. This
+  repository only selects, pins, and deploys those Skills.
 - To update a Skill dependency, review its source, commit pin, license, and
   cooldown first. Update `apm.yml`, run `apm lock`, review `apm.lock.yaml`,
   run `apm install --frozen` and `apm audit --ci`, then commit the manifest,

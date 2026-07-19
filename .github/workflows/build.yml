@@ -96,7 +96,7 @@ jobs:
 
           cd ..
           rm -rf "${ARTIFACT_STEM:?}/"
- 
+
       - name: Upload artifact
         id: upload-artifact
         # The package is already a zip file, so upload it without recompressing

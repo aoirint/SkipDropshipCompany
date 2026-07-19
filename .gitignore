@@ -3,8 +3,12 @@
 /profiles
 /build
 /SkipDropshipCompany/Generated/
+
 # Local Git worktrees used by coding agents
 /.agents/worktrees/
+
+# APM dependencies
+apm_modules/
 
 # https://github.com/github/gitignore/blob/86922aee426c32ffb6098f9a38c42da75169501e/VisualStudio.gitignore
 ## Ignore Visual Studio temporary files, build results, and
@@ -435,7 +439,3 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
-
-
-# APM dependencies
-apm_modules/

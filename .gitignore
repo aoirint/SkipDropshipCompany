@@ -3,6 +3,7 @@
 /profiles
 /build
 /SkipDropshipCompany/Generated/
+
 # Local Git worktrees used by coding agents
 /.agents/worktrees/
 

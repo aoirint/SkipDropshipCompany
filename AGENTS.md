@@ -6,8 +6,9 @@ directly.
 
 ## APM-managed Skills
 
-- `apm.yml` pins the public [aoirint/skills](https://github.com/aoirint/skills)
-  collection; `apm.lock.yaml` records its resolved commit and content hash.
+- `apm.yml` pins the selected public
+  [aoirint/skills](https://github.com/aoirint/skills); `apm.lock.yaml` records
+  their resolved commits and content hashes.
 - The initial pin is an explicit maintainer-approved exception to the normal
   seven-day dependency cooldown.
 - To restore the committed Skill set, run `apm install --frozen` from the

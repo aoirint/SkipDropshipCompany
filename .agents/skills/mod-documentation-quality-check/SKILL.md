@@ -1,9 +1,9 @@
 ---
-name: maintain-mod-documentation
-description: Create, restructure, and maintain scalable developer documentation for a software mod or plugin. Use when organizing docs into game/framework domain knowledge and mod-specific architecture, documenting implementation decisions, replacing monolithic architecture documents, or establishing repository rules for developer documentation.
+name: mod-documentation-quality-check
+description: Create and maintain developer documentation for software mods and plugins, separating external domain knowledge, mod architecture, and operations. Use when restructuring docs, documenting integrations or decisions, replacing monolithic architecture guides, or establishing documentation rules.
 ---
 
-# Maintain Mod Documentation
+# Mod Documentation Quality Check
 
 Build documentation that lets a developer change a mod without rediscovering
 its external dependencies or guessing the mod's own design.

@@ -1,0 +1,315 @@
+lockfile_version: '1'
+generated_at: '2026-07-19T00:25:13.623295+00:00'
+apm_version: 0.24.1
+dependencies:
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/apm-usage
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/apm-usage
+  - .agents/skills/apm-usage/README.md
+  - .agents/skills/apm-usage/SKILL.md
+  - .agents/skills/apm-usage/agents/openai.yaml
+  - .agents/skills/apm-usage/references/apm-bootstrap.json
+  - .agents/skills/apm-usage/references/apm-install.md
+  - .agents/skills/apm-usage/scripts/propose_bootstrap_update.py
+  - .agents/skills/apm-usage/scripts/propose_bootstrap_update.py.lock
+  deployed_file_hashes:
+    .agents/skills/apm-usage/README.md: sha256:70351aaebf54291433dfcff86280e87edc757ff4e93e506aa1e8f06a0b913f06
+    .agents/skills/apm-usage/SKILL.md: sha256:6e68e4ce80360e7dfc7b985878233e7e73d79d080227dd32a1beb9fef14fc200
+    .agents/skills/apm-usage/agents/openai.yaml: sha256:63e080cbffe50033ef8b46e24d4436ef40bc1206a79d055814262ae053c946a4
+    .agents/skills/apm-usage/references/apm-bootstrap.json: sha256:3f0be975b2c72da161bc9e65eb57b66f0b0554827d21b37017928e4e858a5c17
+    .agents/skills/apm-usage/references/apm-install.md: sha256:25132995b7a2ba2ce5092e543d5c8449d5c78a312f68a39a7338e112d018850d
+    .agents/skills/apm-usage/scripts/propose_bootstrap_update.py: sha256:e29c8a695d1a0d8f9c44b612a58c9462e55f754ef8b739ff7f01d4e1dc2d7530
+    .agents/skills/apm-usage/scripts/propose_bootstrap_update.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
+  content_hash: sha256:44aa99a101ae1c4e39adc8d5dbdbe669bdad08c68b1a7cf074c0f495fcdb0221
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/changelog-workflow
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/changelog-workflow
+  - .agents/skills/changelog-workflow/README.md
+  - .agents/skills/changelog-workflow/SKILL.md
+  - .agents/skills/changelog-workflow/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/changelog-workflow/README.md: sha256:7ef8167d26522d95f62b9f11d752487d62b6bfdae05850315189fbe2a19fed83
+    .agents/skills/changelog-workflow/SKILL.md: sha256:8fa4f9cddba329396cda8ea00f5e1ac3bb377f0f229c34f80a57b48f04b5f615
+    .agents/skills/changelog-workflow/agents/openai.yaml: sha256:6264e6dbd0433ab63370e15033ecb94da8dd131c4edcb1d3f2b9abdeb4f680f1
+  content_hash: sha256:6a1875b3aa3b652348126387e5ed2964d9747598cf9f920275dae93470df0b3d
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/code-quality-check
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/code-quality-check
+  - .agents/skills/code-quality-check/README.md
+  - .agents/skills/code-quality-check/SKILL.md
+  - .agents/skills/code-quality-check/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/code-quality-check/README.md: sha256:b2cfd8bf9c3c7bd16cf86718877fa025396d15a380de88045122c4d162682cc2
+    .agents/skills/code-quality-check/SKILL.md: sha256:43cb6ff0a685e68af90fdc3e724a628312c755c7c94057809845375b0cc544cf
+    .agents/skills/code-quality-check/agents/openai.yaml: sha256:69a8a75579e3b47dc69a176417b97441adf81bc54984d3f6bc114e47a68bc9b3
+  content_hash: sha256:c690a6bec876ca506ea3d0a953cc0feaba0a1561d87a5d19c1ebea0542fca2e2
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/commit-message-quality-check
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/commit-message-quality-check
+  - .agents/skills/commit-message-quality-check/README.md
+  - .agents/skills/commit-message-quality-check/SKILL.md
+  - .agents/skills/commit-message-quality-check/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/commit-message-quality-check/README.md: sha256:c23949080d05f47cce728410ca3190225397aa41ac2015c6f02ee478ec412a24
+    .agents/skills/commit-message-quality-check/SKILL.md: sha256:8f3a31aee818171304a58684b8ef01a237ef0863f6fc09718eb1d693ea8464da
+    .agents/skills/commit-message-quality-check/agents/openai.yaml: sha256:faffd948a0989dcfc87dcd3b0580c4a7003d01ef436e66dab9f280df57de652c
+  content_hash: sha256:816d929c6c0105899fa53e481393704c9d4bbaa8e518b318e109f95f85c40edb
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/document-quality-check
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/document-quality-check
+  - .agents/skills/document-quality-check/README.md
+  - .agents/skills/document-quality-check/SKILL.md
+  - .agents/skills/document-quality-check/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/document-quality-check/README.md: sha256:91e189d68ff9b7ee0205345176c2f8a616c00762136bb4b31a3b809df90a9ea8
+    .agents/skills/document-quality-check/SKILL.md: sha256:58c652ba15b5ddb57497c78c10e5c49fafdbfe386791e64489835351cc037855
+    .agents/skills/document-quality-check/agents/openai.yaml: sha256:63ba78ceeea9d777d2280e8273fc9d3ab6e38548b163d8fb5fdfc534dd701d5c
+  content_hash: sha256:41579392c7bd3a731726e493ffc9d2b4d40d08e5690f954702b2cf73469ef480
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/git-worktree-workflow
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/git-worktree-workflow
+  - .agents/skills/git-worktree-workflow/README.md
+  - .agents/skills/git-worktree-workflow/SKILL.md
+  - .agents/skills/git-worktree-workflow/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/git-worktree-workflow/README.md: sha256:fa6483b5919a01b84fa0d6ffcbaae20b84ed3807e18029e8807e61b0ee4f9de9
+    .agents/skills/git-worktree-workflow/SKILL.md: sha256:e6e453e43e2036309381cf11ded6499de03281e1b7bbb43b6aba05de59d6ba5b
+    .agents/skills/git-worktree-workflow/agents/openai.yaml: sha256:3eb9da73e7a041e77d82f0d5c3a8c67e914575cff8651b71d077db30fe3da99a
+  content_hash: sha256:13451e6e6a3d3720aa7ca59c65ac8acedacbc2c2678e989be1e01ced4c7e58ae
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/github-actions-quality-check
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/github-actions-quality-check
+  - .agents/skills/github-actions-quality-check/README.md
+  - .agents/skills/github-actions-quality-check/SKILL.md
+  - .agents/skills/github-actions-quality-check/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/github-actions-quality-check/README.md: sha256:a0767309bb84d170bc30070099a9f091b4c67cc00f790da88799685ab6bbaf5e
+    .agents/skills/github-actions-quality-check/SKILL.md: sha256:44fabfcb02b665796cc523b19516cfa3fc1713a106d5c69ebd2520a75e83377a
+    .agents/skills/github-actions-quality-check/agents/openai.yaml: sha256:63b8022771cf5e036033c39fd700adf14b1ab23f7df78699474e472a7c28e73d
+  content_hash: sha256:4d884aadb278aed97ac251c87566be8993737040b4a957538913c8a92a2a2d9a
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/gitignore-workflow
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/gitignore-workflow
+  - .agents/skills/gitignore-workflow/README.md
+  - .agents/skills/gitignore-workflow/SKILL.md
+  - .agents/skills/gitignore-workflow/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/gitignore-workflow/README.md: sha256:0de188ebcdd40ea1aec701410e1c2182049b66bc4ec4d83a3bf55685b4267d47
+    .agents/skills/gitignore-workflow/SKILL.md: sha256:727549890e7d5e54534098c36aa793dee3e491da307120a8c59ba6a42e8ce456
+    .agents/skills/gitignore-workflow/agents/openai.yaml: sha256:f6a9b176003028588ff4c1d9ee4e23c625892d00b65086bf4b6b26a3f896030d
+  content_hash: sha256:97bc59c75f621ab746d770d76a544c4575b37be7f6665c486d874f40d4808170
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/issue-quality-check
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/issue-quality-check
+  - .agents/skills/issue-quality-check/README.md
+  - .agents/skills/issue-quality-check/SKILL.md
+  - .agents/skills/issue-quality-check/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/issue-quality-check/README.md: sha256:c4b5915483347d84053b37076071b9f5367caa38e75ed5d1821d0cbe201cc59c
+    .agents/skills/issue-quality-check/SKILL.md: sha256:ff8f3c5e5c3e7455a99cf9f5e59c6087943b6936d1fe55c02c1abcc5a79a858a
+    .agents/skills/issue-quality-check/agents/openai.yaml: sha256:e54aa6bbae7cf7d2cf57a95e5749cc1527238295e420ac00d96902ce114e9cdb
+  content_hash: sha256:8f8a9d6721db23e088649847db62a48258609e00b1f3e6b60c152565ddacbe53
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/lethal-company-analyze
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/lethal-company-analyze
+  - .agents/skills/lethal-company-analyze/README.md
+  - .agents/skills/lethal-company-analyze/SKILL.md
+  - .agents/skills/lethal-company-analyze/agents/openai.yaml
+  - .agents/skills/lethal-company-analyze/references/efficient-full-enumeration.md
+  - .agents/skills/lethal-company-analyze/references/evidence-policy.md
+  - .agents/skills/lethal-company-analyze/references/exhaustive-seeds-and-lineage.md
+  - .agents/skills/lethal-company-analyze/references/reporting-and-review.md
+  - .agents/skills/lethal-company-analyze/references/unity-and-rng.md
+  - .agents/skills/lethal-company-analyze/scripts/inventory_build.py
+  - .agents/skills/lethal-company-analyze/scripts/inventory_build.py.lock
+  deployed_file_hashes:
+    .agents/skills/lethal-company-analyze/README.md: sha256:b8d50ccb0f54aec564f485143c017f7a3cfbf2e813515837c80899ae5b759c93
+    .agents/skills/lethal-company-analyze/SKILL.md: sha256:b8337d3476070463c9487beb39dbab9b32e843e536dc3798ae19590570e971b5
+    .agents/skills/lethal-company-analyze/agents/openai.yaml: sha256:3c047dc9bf01f069621924ec6064bde17bcf37bd15bbbcefac82624fcbd3ca55
+    .agents/skills/lethal-company-analyze/references/efficient-full-enumeration.md: sha256:afdfc6f9704c7cb4d957eccb7e9301972d3e9afea5657363a6fdabc5a010071a
+    .agents/skills/lethal-company-analyze/references/evidence-policy.md: sha256:cca856ad89f907d429609fb0a6560c3050cc0a30fe8e400fc049f70296dc27f8
+    .agents/skills/lethal-company-analyze/references/exhaustive-seeds-and-lineage.md: sha256:9c377e08e66f842c7f565615f7ac57aee937a8425bc8f3b8d623ca3cb5dcae18
+    .agents/skills/lethal-company-analyze/references/reporting-and-review.md: sha256:8a3c186da5bf6e2adc8184159f6cafffea2bbbf0ddfe529ccec842ff6dfec4c8
+    .agents/skills/lethal-company-analyze/references/unity-and-rng.md: sha256:a351ef0d2d663580734d6dc7a72be3bfa2bae0ca29052d6c710fdf6ea3462eab
+    .agents/skills/lethal-company-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
+    .agents/skills/lethal-company-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
+  content_hash: sha256:3d92f3113f3c1c819edc92d73c9e5b9ea6d0614ac1a80b75c4b3f9b6a04fa5f5
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/mod-documentation-quality-check
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/mod-documentation-quality-check
+  - .agents/skills/mod-documentation-quality-check/README.md
+  - .agents/skills/mod-documentation-quality-check/SKILL.md
+  - .agents/skills/mod-documentation-quality-check/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/mod-documentation-quality-check/README.md: sha256:3633f9849a3eee1c8ff75e0f71c0817137a13805b6c6288e4df0bbd23c4ba3a2
+    .agents/skills/mod-documentation-quality-check/SKILL.md: sha256:e02d165a32dc1666299c2403fd539884f5eb93168d12655e56014e9b5d3587d8
+    .agents/skills/mod-documentation-quality-check/agents/openai.yaml: sha256:0d812f6a8f7f8fd36878d7448473d911f33feec422418b51500d71d274818fce
+  content_hash: sha256:668e2ba8cc80451bc03cdee07fbc296a0f4c807f1e351606821ef83aa6af4b66
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/pull-request-quality-check
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/pull-request-quality-check
+  - .agents/skills/pull-request-quality-check/README.md
+  - .agents/skills/pull-request-quality-check/SKILL.md
+  - .agents/skills/pull-request-quality-check/agents/openai.yaml
+  - .agents/skills/pull-request-quality-check/references/fallback-pr-body.md
+  deployed_file_hashes:
+    .agents/skills/pull-request-quality-check/README.md: sha256:5c15de701adc508b9dd828846317f47b0f5b925c5a8842b6c32b4d9e3946e11f
+    .agents/skills/pull-request-quality-check/SKILL.md: sha256:e717f318ddd2d48eece10565adce167784c6d5401860c961fdb8ef7ce885c644
+    .agents/skills/pull-request-quality-check/agents/openai.yaml: sha256:1ddb931336ca5ce10b9accf92787e36168c1c71a4b999bd85f130144e778bfa4
+    .agents/skills/pull-request-quality-check/references/fallback-pr-body.md: sha256:34a6301a37d682b3f0d9aaf1b4cd9e4e5522c283db66ddc79b8c01ae997904a7
+  content_hash: sha256:6fc6d8ad0f08828a1e88a219b2e208b9205125d248a082deef86285f4e9ec708
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/release-note-workflow
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/release-note-workflow
+  - .agents/skills/release-note-workflow/README.md
+  - .agents/skills/release-note-workflow/SKILL.md
+  - .agents/skills/release-note-workflow/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/release-note-workflow/README.md: sha256:2317bd380a014d3d7b469d95f2d2b8a36f6f4eccad947c265e3653e35a9f6394
+    .agents/skills/release-note-workflow/SKILL.md: sha256:66670061065cf187bd03c908193baf042dab2db52b06b5e81f9632222f7ddf3b
+    .agents/skills/release-note-workflow/agents/openai.yaml: sha256:4413fdfcae90efd6d4de975f2e7c53625bdf1e214a32e1b54a65fff9f6258453
+  content_hash: sha256:642d89e85dd510357e00d7d71c3da1cc1a4c9bb61344bb51e7fd4062c959dabd
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/rollout-workflow
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/rollout-workflow
+  - .agents/skills/rollout-workflow/README.md
+  - .agents/skills/rollout-workflow/SKILL.md
+  - .agents/skills/rollout-workflow/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/rollout-workflow/README.md: sha256:0112ca12803eefba888d18c3f83def9ee5f139fe6cb763893f653e5979b97e97
+    .agents/skills/rollout-workflow/SKILL.md: sha256:388562861550934c88ba19566fc6d1b9fbe9f528a44d62de4c7337bac327d225
+    .agents/skills/rollout-workflow/agents/openai.yaml: sha256:543a7befd986c51540ef35603fe63830f5032dc02b31f89e7f2179df3b3ca5dc
+  content_hash: sha256:71b730178f4094bca2de38c3c3c2b6cc3400b87f22a62990470c8fb5dce78729
+- repo_url: aoirint/skills
+  name: skills
+  host: github.com
+  resolved_commit: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  resolved_ref: 4a3d0ce268903edf3d305858fa91fbee88cef33f
+  version: unknown
+  virtual_path: .apm/skills/security-check
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/security-check
+  - .agents/skills/security-check/README.md
+  - .agents/skills/security-check/SKILL.md
+  - .agents/skills/security-check/agents/openai.yaml
+  - .agents/skills/security-check/references/external-code-execution.md
+  deployed_file_hashes:
+    .agents/skills/security-check/README.md: sha256:d321689b998388180ac852fdb6374ab3b79bec508a53d00461a9db79fb246d2e
+    .agents/skills/security-check/SKILL.md: sha256:7562de775c028cdb048616910378df51e17ad7517d24849a9b735c53053c4933
+    .agents/skills/security-check/agents/openai.yaml: sha256:87edf0cc1e8717194d0c536f2d5ac0cc1ac9ec04402311d34e953d2e2b23fa19
+    .agents/skills/security-check/references/external-code-execution.md: sha256:87ca817baa02ef6b955e5878f0cd79c875abdb0be6e0177cfce158968e628bc3
+  content_hash: sha256:4a998e17130e13c18d32373afe44e59329ed8463fc20303fff63e0af1ac9147a

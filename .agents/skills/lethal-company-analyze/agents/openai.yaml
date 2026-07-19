@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lethal Company Analysis"
+  short_description: "Investigate mechanics with reproducible evidence"
+  default_prompt: "Use $lethal-company-analyze to investigate this Lethal Company mechanic with reproducible, explicitly bounded evidence."

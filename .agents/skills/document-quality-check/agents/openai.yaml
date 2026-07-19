@@ -1,4 +1,4 @@
 interface:
   display_name: "Document Quality Check"
-  short_description: "Quality-check explanatory prose."
-  default_prompt: "Use $document-quality-check to review this prose for readability, structure, audience fit, and preserved nuance."
+  short_description: "Review explanatory prose quality."
+  default_prompt: "Use $document-quality-check to revise this prose for readability, structure, audience fit, and preserved nuance."

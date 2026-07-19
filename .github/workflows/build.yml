@@ -96,7 +96,6 @@ jobs:
 
           cd ..
           rm -rf "${ARTIFACT_STEM:?}/"
- 
       - name: Upload artifact
         id: upload-artifact
         # The package is already a zip file, so upload it without recompressing
@@ -195,7 +194,7 @@ jobs:
           community: lethal-company
           community_categories: |
             mods
-            clientside
+            serverside
             tweaks-and-quality-of-life
             ai-generated
 

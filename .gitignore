@@ -1,3 +1,6 @@
+# APM dependencies
+apm_modules/
+
 # Project specific files
 /work
 /profiles

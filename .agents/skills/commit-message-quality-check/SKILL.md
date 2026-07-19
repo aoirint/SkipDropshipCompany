@@ -1,16 +1,12 @@
 ---
 name: commit-message-quality-check
 description: >-
-  Quality-check repository commit messages. Use when creating or updating commit
-  messages.
+  Review or draft repository commit messages for Conventional Commits format,
+  accurate change summaries, breaking-change footers, and required attribution
+  trailers. Use before creating, amending, or validating a commit.
 ---
 
 # Commit Message Quality Check
-
-## When to Use
-
-- Use this skill when creating, updating, reviewing, or validating a commit
-  message for this repository.
 
 ## Goals
 
@@ -27,7 +23,7 @@ Reference:
 
 ## Workflow
 
-1. Read the proposed commit message and, when available, the staged diff or
+1. Read the proposed message and, when available, the staged diff or
    commit diff it describes.
 2. Verify the first-line format, blank-line structure, body placement, and
    footer placement.
@@ -64,7 +60,7 @@ Verify the blank-line structure:
 
 ## Components
 
-- `type`: required noun that communicates the kind of change.
+- `type`: required token that communicates the kind of change.
 - `scope`: optional noun in parentheses that names the affected area, such as
   `interop`, `build`, `docs`, or `input`.
 - `!`: optional marker immediately before `:` for a breaking change.

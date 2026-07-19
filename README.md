@@ -19,6 +19,18 @@ Markdown lint command.
 Install [ShellCheck][shellcheck-repo], [`actionlint`][actionlint-repo], and
 [pinact][pinact-repo] if you plan to run GitHub Actions quality checks locally.
 
+## Agent Skills
+
+Install [APM](https://github.com/microsoft/apm) to restore the repository-local
+Codex Skills pinned in `apm.lock.yaml`.
+
+```powershell
+apm install --frozen
+apm audit --ci
+```
+
+See [AGENTS.md](./AGENTS.md) for the Skill update procedure.
+
 Restore NuGet packages.
 
 ```powershell

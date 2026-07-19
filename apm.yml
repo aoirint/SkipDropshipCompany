@@ -1,0 +1,17 @@
+name: skip-dropship-company
+version: 1.0.0
+description: APM-managed Agent Skills for SkipDropshipCompany
+author: aoirint
+license: MIT
+# Which agent platforms to deploy to.
+# Resolution order: --target flag > this field > auto-detect from filesystem.
+# Accepted values: vscode, agents, copilot, claude, cursor, opencode, codex,
+# gemini, antigravity, windsurf, kiro, agent-skills, all
+targets:
+- codex
+dependencies:
+  apm:
+  - aoirint/skills#4a3d0ce268903edf3d305858fa91fbee88cef33f
+  mcp: []
+includes: auto
+scripts: {}

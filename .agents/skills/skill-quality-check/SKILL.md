@@ -1,20 +1,13 @@
 ---
 name: skill-quality-check
 description: >-
-  Quality-check Agent Skills for trigger clarity, scope, structure, progressive
-  disclosure, domain separation, validation, and scenario-readiness. Use when
-  creating, updating, reviewing, or splitting Agent Skills, SKILL.md files, skill
-  references, bundled scripts, or skill metadata.
+  Review Agent Skills for trigger clarity, focused scope, metadata alignment,
+  progressive disclosure, and validation readiness. Use when creating, updating,
+  reviewing, or splitting a skill's SKILL.md, references, scripts, assets, or
+  agents/openai.yaml metadata.
 ---
 
 # Skill Quality Check
-
-## When to Use
-
-- Use this skill when creating, updating, or reviewing an Agent Skill.
-- Use this skill before committing changes to any `SKILL.md`, `references/`, `scripts/`,
-  `assets/`, or `agents/openai.yaml` file inside a skill folder.
-- Use this skill with scenario-based validation after creating or substantially revising a skill.
 
 ## Goals
 
@@ -33,7 +26,9 @@ description: >-
 
 ## Workflow
 
-1. Read the changed skill files and nearby related skills.
+1. Read the changed skill files, nearby related skills, and
+   [authoring best practices](references/authoring-best-practices.md) when the change affects
+   triggers, structure, resources, domain separation, or scenario validation.
 2. Check description/body consistency before scenario validation:
    - Compare the `description` trigger promise with the scope actually covered by `SKILL.md`.
    - Reconcile any mismatch before treating scenario results as reliable.
@@ -41,6 +36,9 @@ description: >-
      are in scope, guidance-only, or require explicit confirmation.
 3. Check frontmatter:
    - `name` uses lowercase letters, digits, and hyphens.
+   - When the skill has a clear target, put that target before the action or
+     workflow in `name` (for example, `lethal-company-analyze` or
+     `apm-usage`).
    - `description` states what the skill does and when to use it.
    - Trigger words are front-loaded enough to survive shortened skill lists.
 4. Check scope:
@@ -102,8 +100,3 @@ When validating with scenarios, keep the report categories separate:
   metadata. Record these as assumptions or blockers.
 - **Skill-quality-check ambiguity**: places where this skill did not say what to inspect or how to
   decide. Only these count as unclear points for improving `skill-quality-check` itself.
-
-## Reference Checks
-
-Read [references/authoring-best-practices.md](references/authoring-best-practices.md) when a change
-touches structure, trigger design, bundled resources, domain separation, or scenario validation.

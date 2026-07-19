@@ -1,97 +1,19 @@
 ---
 name: github-actions-quality-check
-description: >-
-  Quality-check GitHub Actions workflows, composite actions, action pinning,
-  runner labels, permissions, triggers, concurrency, secrets, and CI linting
-  changes. Use when creating, editing, reviewing, or documenting GitHub Actions
-  automation.
+description: Quality-check GitHub Actions workflows and composite actions. Use when creating, editing, reviewing, or documenting workflow triggers, permissions, runners, concurrency, action pins, secrets, or CI linting policy.
 ---
 
 # GitHub Actions Quality Check
 
-## When to Use
+## Review automation changes
 
-- Use this skill when work touches `.github/workflows/`, `.github/actions/`,
-  action pinning, runner labels, workflow permissions, triggers, concurrency,
-  repository variables, repository secrets, or CI linting policy.
-- Use it with `security-check` for third-party actions, downloaded tools,
-  secrets, tokens, permissions, publishing, containers, or other supply-chain
-  sensitive changes.
-- Use `document-quality-check` when updating contributor-facing workflow
-  guidance or pull request notes.
+1. Inspect changed workflow or action files and the repository guidance that describes them.
+2. Check triggers, branch filters, merge-queue behavior, and `workflow_dispatch` against the intended responsibility.
+3. Check workflow and job `permissions`. Start from `contents: read`, grant only required access, and document unusual write access.
+4. Check concurrency groups and cancellation rules for PRs, pushes, releases, merge queues, and publishing.
+5. Check runner labels, local composite actions, expressions, comments, cache paths, and suppressions. Add `.github/actionlint.yaml` only for deliberate labels or variables that actionlint cannot infer.
+6. Pin third-party actions and reusable workflows to complete commit SHAs with accurate version comments. For external actions, downloaded tools, or containers, use `security-check` to review provenance, release age, pinning, permissions, and runtime behavior.
+7. Run the repository's documented `actionlint`, ShellCheck, and `pinact` checks. Use `pinact run --check --min-age 7` for pin verification and `GITHUB_TOKEN` when available. Check standalone changed automation shell scripts with ShellCheck; if no targets exist, record that scope.
+8. Summarize actionlint, ShellCheck, pinact, other automated checks, AI-assisted inspections, and skipped checks separately. Record any reduced validation scope caused by unavailable optional integrations.
 
-## Goals
-
-- Keep workflows readable, deterministic, least-privilege, and reviewable.
-- Catch workflow syntax, expression, runner-label, and composite-action metadata
-  mistakes before CI runs.
-- Keep third-party actions and reusable workflows pinned to full commit SHAs
-  with accurate version comments.
-- Prefer checks that do not add unnecessary runtime dependencies.
-- Record verification clearly, including any local/CI difference.
-
-## Workflow
-
-1. Inspect the changed workflow or action files and the repository guidance that
-   documents them.
-2. Check triggers, branch filters, merge queue behavior, and `workflow_dispatch`
-   coverage against the intended repository responsibility.
-3. Check `permissions` at workflow and job scope. Prefer `contents: read` unless
-   a job needs broader access, and document any write permission.
-4. Check concurrency groups and cancellation rules for PRs, pushes, releases,
-   merge queues, and publishing jobs.
-5. Check runner labels and local composite actions. Add or update
-   `.github/actionlint.yaml` only for deliberate labels or variables that
-   actionlint cannot infer.
-6. Run actionlint for workflow and action metadata validation. Match the
-   repository's documented command; when optional integrations would add
-   dependencies, disable them explicitly and note the reduced scope. Revisit
-   pyflakes disablement when Python scripts exist in the repository.
-7. Run ShellCheck for standalone shell scripts discovered in the changed
-   automation scope, and keep actionlint's ShellCheck integration enabled when
-   the repository installs ShellCheck.
-8. Run pinact in check mode for action and reusable-workflow pins. Use
-   `GITHUB_TOKEN` when available so API calls use authenticated rate limits.
-9. For new or updated external actions, downloaded tools, or containers, apply
-   `security-check`: verify release age, provenance, pinning, permissions, and
-   runtime behavior before adopting the artifact.
-10. Re-read comments near non-obvious versions, runner choices, cache paths,
-   suppressions, and install commands. Keep comments specific and actionable.
-11. Summarize verification by category: actionlint, ShellCheck, pinact, other
-    automated checks, AI-assisted inspection, and any skipped checks with
-    concrete blockers.
-
-## Command Examples
-
-Use these examples only when they match the repository's documented tooling.
-Discover shell files from the current repository instead of copying a
-repository-specific path from this skill.
-
-```bash
-actionlint -pyflakes=
-mapfile -t shell_files < <(rg --files -g '*.sh' -g '*.bash' .github)
-if ((${#shell_files[@]})); then
-  shellcheck "${shell_files[@]}"
-fi
-pinact run --check --min-age 7
-```
-
-If no shell files are present, rely on actionlint's inline script checks and
-record that the standalone ShellCheck pass had no targets.
-
-When updating action pins, keep the cooldown in the command:
-
-```bash
-pinact run --update --min-age 7
-```
-
-## Review Checklist
-
-- Workflow syntax and expressions were checked with actionlint.
-- Inline workflow shell scripts and standalone shell scripts were checked with
-  ShellCheck.
-- Third-party actions and reusable workflows were checked with pinact.
-- New executable artifacts satisfy the repository cooldown and pinning policy.
-- Permissions and secrets are least-privilege and documented when unusual.
-- Runner labels, variables, and suppressions are configured intentionally.
-- Local documentation and CI behavior describe the same quality checks.
+Use `document-quality-check` for contributor-facing workflow guidance or PR notes. Keep workflows deterministic, least-privilege, and reviewable without adding unnecessary runtime dependencies.

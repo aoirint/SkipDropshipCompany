@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rollout Workflow"
+  short_description: "Roll out canonical changes with minimal drift"
+  default_prompt: "Use $rollout-workflow to propagate this validated primary change to compatible peer repositories."

@@ -1,20 +1,12 @@
 ---
 name: document-quality-check
 description: >-
-  Quality-check documentation, comments, release notes, issue text, pull request
-  text, and Agent Skill prose for readability, structure, audience fit, and
-  preserved nuance.
+  Review or revise explanatory prose for readability, structure, audience fit,
+  and preserved nuance. Use for documentation, comments, release notes, issue
+  and pull request text, changelogs, handoff notes, and Agent Skill prose.
 ---
 
 # Document Quality Check
-
-## When to Use
-
-- Use this skill when creating, updating, or reviewing explanatory prose.
-- Use this skill for documentation, comments, release notes, issue text, pull request text, Agent
-  Skill prose, changelog entries, and handoff notes.
-- Use this skill together with domain-specific skills when those skills own the document type, such
-  as changelogs, release notes, issues, pull requests, or Agent Skills.
 
 ## Goals
 
@@ -26,7 +18,7 @@ description: >-
 
 ## Workflow
 
-1. Classify the text audience before rewriting:
+1. Classify the text audience before revising:
    - Developer-facing.
    - User-facing.
    - Maintainer-facing.
@@ -59,7 +51,7 @@ description: >-
      unconfirmed.
 6. Use as many short sentences or nested bullets as needed.
    - Do not force a fixed sentence count when the content needs a different shape.
-7. Re-read the result as a whole.
+7. Re-read the result as a whole and use the domain-specific skill when one owns the document type.
    - Confirm it still answers the same question as the original wording.
    - Confirm each list or paragraph has one clear job.
    - Confirm the structure did not imply a stronger, weaker, broader, or narrower claim than the

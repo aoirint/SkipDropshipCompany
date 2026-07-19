@@ -21,6 +21,13 @@ directly.
   run `apm install --frozen` and `apm audit --ci`, then commit the manifest,
   lockfile, and generated `.agents/skills/` changes together.
 
+## Pull Request Merges
+
+- Merge pull requests with squash merge.
+- Before confirming the merge, set the squash commit title to
+  `<pull request title> (#<number>)`, including the pull request number as in
+  GitHub's default squash-merge title.
+
 ## Documentation Boundaries
 
 `docs/domain/` contains versioned base-game and reusable implementation

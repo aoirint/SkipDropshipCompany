@@ -48,7 +48,7 @@ facts such as game build, loader version, package host, and release namespace;
 they do not replace this Skill's quality bar.
 
 - Commit an SDK-style project, `nuget.config` with explicit sources and package
-  source mapping, one `packages.lock.json` per resolving project, a narrow
+  source mapping, `global.json` selecting the release SDK, one `packages.lock.json` per resolving project, a narrow
   `.gitignore`, Markdown lint configuration, and contributor documentation.
 - Keep the contributor agreement and the pull-request confirmation internally
   complete. When adopting the bundled contract, deploy
@@ -59,6 +59,10 @@ they do not replace this Skill's quality bar.
   and a no-restore build. For Markdown, workflow, shell, APM, package, or
   release changes, apply the corresponding checks in
   [repository-quality-template.md](references/repository-quality-template.md).
+- Use event-owned CI entry workflows: pull requests (and merge queues when used) validate proposed
+  source, while the integration branch re-runs source validation on its exact commit and directly
+  gates build, retained edge artifacts, and publication through `needs`. Do not add manual dispatch
+  or polling jobs without a documented operator/recovery need.
 - When the target adopts a bundled CI or publishing contract, copy its files
   exactly from this Skill's canonical `assets/` and enforce the manifest's
   exact-content drift checks. Follow
@@ -81,6 +85,12 @@ that procedure with an informal checklist.
 1. Establish the repository contract before proposing changes.
    - Read `AGENTS.md`, `README.md`, `CONTRIBUTING.md`, the project file, lockfile, package assets, and relevant CI or release scripts to find target-specific facts and existing stricter rules. Do not use their absence as a reason to omit this Skill's baseline.
    - Create the evidence ledger from the runbook before selecting a target framework, loader references, plugin identity, package metadata, archive layout, or publish destination. Mark an unavailable fact `blocked`; never fill it from another BepInEx repository.
+   - Treat a requested game-version change as a compatibility alignment. Record
+     the old and target version, Steam manifest/build identifier, matching
+     managed-code and serialized-asset evidence handoff hashes, game-reference
+     package version, every compatibility claim, and the required build and
+     runtime checks. Do not claim the target version when code and asset
+     evidence come from different builds.
    - Classify the request as `setup`, `alignment`, `implementation`, `release-readiness`, or `plan-only`. Execute only the runbook branches enabled by the evidence ledger and request type; record every disabled branch and its concrete reason.
    - For a new repository or a template-alignment review, read [repository-quality-template.md](references/repository-quality-template.md) after the runbook inventory. It is the normative file-by-file standard, not a source of target-specific values.
    - If the evidence ledger enables a contract represented by a bundled template, read [canonical-templates.md](references/canonical-templates.md), select only the applicable template IDs, and use the sync script for both application and CI drift checks. Keep target-specific workflow values in the caller, not in a copied action.
@@ -116,6 +126,11 @@ that procedure with an informal checklist.
 4. Check build and dependency boundaries.
    - Match the target framework and language version to the repository's documented BepInEx and game runtime compatibility; do not upgrade either opportunistically.
    - Keep game and loader references compile-only when the release package relies on the player's installed runtime. Keep development analyzers and code generators private to the project.
+   - When updating a game-specific compile reference, update its resolved
+     package and lockfile to the target game version, then reconcile every
+     version-bearing project, package, changelog, and compatibility document
+     field. A successful compilation proves only API resolution; it does not
+     establish runtime compatibility.
    - Require a committed lockfile for every resolving project and run `dotnet restore --locked-mode`. After restore, run `dotnet format --no-restore --verify-no-changes` and a no-restore build. A missing lockfile or unlocked restore is a reproducibility finding.
    - When a change adds or modifies automated tests, run the repository's documented test command after the locked restore and no-restore build. A separate Core or test project is justified only by its stated test, reuse, build, or dependency-isolation benefit, and must meet the same lockfile and source-mapping rules as every other resolving project.
    - Require `nuget.config` to clear unreviewed default sources and map direct and transitive package patterns to their intended source. Review every new feed, package, lockfile change, CI action, container, or downloaded tool for canonical source, publisher, immutable version or digest, content hash where available, license, transitive effects, and seven-day release age before adoption.
@@ -135,6 +150,7 @@ that procedure with an informal checklist.
    - Trace one release from its source commit through locked restore, build, archived artifact, and release asset. Publish only the artifact produced by that build; do not rebuild a separately checked-out revision in the release job. Create and verify an artifact digest across the build and release jobs.
    - Install the exact SDK selected by `global.json` in CI with a full-SHA-pinned setup action or another pinned, verified mechanism before restore. Do not assume a hosted runner already contains the release-critical SDK.
    - Separate validation artifacts, prereleases, and stable publishing according to the repository's version rules. Gate external package-host publication on the intended stable release mode and require exactly one reviewed package artifact.
+   - Retain every integration-branch edge build as a workflow artifact, with its source commit and digest visible in the workflow summary, even when the edge version is deliberately not published.
    - Default workflow permissions to read-only. Scope `contents: write` and publishing secrets to the release job that needs them, and never expose a publish credential to pull-request validation.
 7. Run the narrowest relevant checks, then widen for the changed surface.
    - For C# or project changes, run locked restore, format verification, and no-restore build. Run the documented tests when automated tests are present or changed. Use the solution or project path required by the repository layout.

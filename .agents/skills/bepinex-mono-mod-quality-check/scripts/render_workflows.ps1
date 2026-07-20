@@ -45,13 +45,16 @@ try {
     $repoRootPath = [IO.Path]::GetFullPath($RepoRoot)
     $variables = Get-Content -LiteralPath $VariablesFile -Raw | ConvertFrom-Json
     $templates = @(
-        @{ Source = 'build.yml.template'; Destination = '.github/workflows/build.yml' },
-        @{ Source = 'lint.yml.template'; Destination = '.github/workflows/lint.yml' },
+        @{ Source = 'pull-request.yml.template'; Destination = '.github/workflows/pull-request.yml' },
+        @{ Source = 'main.yml.template'; Destination = '.github/workflows/main.yml' },
+        @{ Source = 'install-workflow-tools/action.yml.template'; Destination = '.github/actions/install-workflow-tools/action.yml' },
+        @{ Source = 'setup-dotnet/action.yml.template'; Destination = '.github/actions/setup-dotnet/action.yml' },
+        @{ Source = 'lint-source/action.yml.template'; Destination = '.github/actions/lint-source/action.yml' },
         @{ Source = '.gitignore.template'; Destination = '.gitignore' },
         @{ Source = '.markdownlint-cli2.yaml'; Destination = '.markdownlint-cli2.yaml' }
     )
     foreach ($entry in $templates) {
-        $templateRoot = if ($entry.Source -in @('.gitignore.template', '.markdownlint-cli2.yaml')) { Join-Path $skillRoot 'assets/repository' } else { Join-Path $skillRoot 'assets/github/workflows' }
+        $templateRoot = if ($entry.Source -in @('.gitignore.template', '.markdownlint-cli2.yaml')) { Join-Path $skillRoot 'assets/repository' } elseif ($entry.Source -match '/action\.yml\.template$') { Join-Path $skillRoot 'assets/github/actions' } else { Join-Path $skillRoot 'assets/github/workflows' }
         $expected = Get-RenderedTemplate (Join-Path $templateRoot $entry.Source) $variables
         $destination = Join-Path $repoRootPath $entry.Destination
         if ($Apply) {

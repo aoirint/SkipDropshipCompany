@@ -1,0 +1,50 @@
+name: Install workflow lint tools
+description: Install checksum-verified ShellCheck, actionlint, and pinact binaries.
+
+runs:
+  using: composite
+  steps:
+    - name: Install ShellCheck
+      shell: bash
+      run: |
+        version="0.11.0"
+        sha256="b7af85e41cc99489dcc21d66c6d5f3685138f06d34651e6d34b42ec6d54fe6f6"
+        archive="shellcheck-v${version}.linux.x86_64.tar.gz"
+        url="https://github.com/koalaman/shellcheck/releases/download/v${version}/${archive}"
+        archive_path="${RUNNER_TEMP}/${archive}"
+        tool_dir="${RUNNER_TEMP}/shellcheck"
+        curl --fail --silent --show-error --location --retry 3 --retry-delay 2 --retry-connrefused --output "${archive_path}" "${url}"
+        echo "${sha256}  ${archive_path}" | sha256sum --check --strict -
+        mkdir -p "${tool_dir}"
+        tar -xzf "${archive_path}" -C "${tool_dir}" --strip-components=1 "shellcheck-v${version}/shellcheck"
+        echo "${tool_dir}" >> "${GITHUB_PATH}"
+
+    - name: Install actionlint
+      shell: bash
+      run: |
+        version="1.7.12"
+        sha256="8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8"
+        archive="actionlint_${version}_linux_amd64.tar.gz"
+        url="https://github.com/rhysd/actionlint/releases/download/v${version}/${archive}"
+        archive_path="${RUNNER_TEMP}/${archive}"
+        tool_dir="${RUNNER_TEMP}/actionlint"
+        curl --fail --silent --show-error --location --retry 3 --retry-delay 2 --retry-connrefused --output "${archive_path}" "${url}"
+        echo "${sha256}  ${archive_path}" | sha256sum --check --strict -
+        mkdir -p "${tool_dir}"
+        tar -xzf "${archive_path}" -C "${tool_dir}" actionlint
+        echo "${tool_dir}" >> "${GITHUB_PATH}"
+
+    - name: Install pinact
+      shell: bash
+      run: |
+        version="3.9.2"
+        sha256="6adcc8a2217e4114e0841f8bca0cddf9958a9c52e3e89760c35b791cdba1a916"
+        archive="pinact_linux_amd64.tar.gz"
+        url="https://github.com/suzuki-shunsuke/pinact/releases/download/v${version}/${archive}"
+        archive_path="${RUNNER_TEMP}/${archive}"
+        tool_dir="${RUNNER_TEMP}/pinact"
+        curl --fail --silent --show-error --location --retry 3 --retry-delay 2 --retry-connrefused --output "${archive_path}" "${url}"
+        echo "${sha256}  ${archive_path}" | sha256sum --check --strict -
+        mkdir -p "${tool_dir}"
+        tar -xzf "${archive_path}" -C "${tool_dir}" pinact
+        echo "${tool_dir}" >> "${GITHUB_PATH}"

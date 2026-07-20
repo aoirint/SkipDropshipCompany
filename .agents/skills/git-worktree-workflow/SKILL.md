@@ -25,5 +25,9 @@ git worktree add -b <branch-name> .agents/worktrees/<branch-name> origin/main
 2. For each phase, implement the scoped change, run repository-appropriate formatting and verification, then commit it with `commit-message-quality-check`.
 3. Before pushing, review the complete diff, recent commits, scope, and missing verification; run the final relevant checks.
 4. Push and create or update the PR with `pull-request-quality-check` when requested.
+5. Before a PR merge command performs local branch cleanup, check every active
+   worktree. Do not let a hosted-PR CLI switch to the default branch or delete
+   a branch when that branch is checked out by another worktree. Merge first;
+   then perform any safe remote or local branch cleanup as a separate action.
 
 Use documented builds, tests, linters, formatters, or structural validators appropriate to the change. State skipped verification and its reason in the PR body. After a branch is pushed or attached to a PR, add follow-up commits rather than rewriting history unless the user explicitly requests a rewrite.

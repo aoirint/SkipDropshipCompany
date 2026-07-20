@@ -130,15 +130,26 @@ See `$apm-usage` for installation, cooldown, license, and update details.
   repository or organization setting is available. Keep a verified version
   comment next to every third-party action reference. Pin container images by
   digest and verify checksums before executing downloaded tools.
-- Use a dedicated lint workflow for pushes, pull requests, merge queues when
-  used, and manual dispatch. Set read-only workflow permissions, explicit Bash
-  defaults, and a concurrency group that cancels obsolete pull-request runs but
-  never cancels an active release.
+- Use event-owned entry workflows. `Pull Request` handles `pull_request` and
+  `merge_group` when a merge queue uses required checks; it validates proposed
+  source only. `Main` handles protected integration-branch pushes, re-runs the
+  source-quality gate on the exact pushed commit, and uses direct `needs`
+  dependencies to gate build and publication. Do not add `workflow_dispatch`,
+  polling, or a cross-workflow wait job without a documented diagnostic,
+  recovery, or trust-boundary need. Set read-only workflow permissions,
+  explicit Bash defaults, and a concurrency group that cancels obsolete
+  pull-request runs but never cancels an active release.
 - Keep CI stages ordered and reproducible: checkout; install/check external
   linters; actionlint and ShellCheck; action-pin verification; .NET setup;
   locked restore; `dotnet format --no-restore --verify-no-changes`; build; and
   Markdown lint. Run ShellCheck before actionlint when actionlint can use it
   for inline shell validation.
+- Extract a same-runner repeated setup/check sequence into a local Composite
+  Action when it materially reduces duplication, including this shared
+  source-quality sequence. Keep runner choice, job permissions, artifact
+  upload, and release dependencies visible in entry workflows. Introduce a
+  reusable workflow only when job-level matrix, outputs, or permission
+  boundaries make a Composite Action insufficient; document that reason.
 - Keep documentation, checked-in lint/check configuration, and CI in one
   executable contract. Every retained configuration must be consumed by a
   documented local command and an enabled CI step; remove stale configuration
@@ -190,6 +201,10 @@ See `$apm-usage` for installation, cooldown, license, and update details.
   the DLL and required files, calculate a digest, and upload that artifact.
   Release jobs must download and verify this exact artifact instead of building
   a second copy.
+- Upload every integration-branch build, including an unpublished edge build,
+  as a workflow artifact with an identity that includes its resolved version.
+  Record the source commit and artifact digest in the workflow summary so it
+  can be inspected or reused independently of release publication.
 - Keep a small, versioned archive contract in the repository. Define a
   host-neutral base with allowed root paths, an exact intended-plugin-DLL count,
   prohibited runtime/local/build contents, and archive path-safety checks.

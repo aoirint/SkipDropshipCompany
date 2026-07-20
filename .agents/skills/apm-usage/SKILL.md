@@ -191,6 +191,11 @@ authoring target such as `.agents/skills/` and a package directory such as
    a pass or failure without direct evidence. Record the discrepancy, verify
    the installed file and lockfile hashes directly, and report the observed
    behavior for follow-up.
+5. After deployment, review the staged diff as well as the working tree. An
+   installer can rewrite unchanged text with a different line ending; stage
+   only the expected manifest, lockfile, canonical, and deployed outputs, then
+   use `git diff --cached --check` and a content review to distinguish a real
+   generated-file delta from line-ending noise.
 
 ## 4. Propose updates; do not silently apply them
 

@@ -10,6 +10,13 @@ description: Investigate version-specific Lethal Company mechanics using verifie
 1. Record the exact game version, Steam manifest/build identifier, platform, mod state, evidence handoff, and evidence date.
 2. Use `unity-game-analyze` when the question requires tracing decompiled code, serialized assets, prefab/scene overrides, load paths, or callback reachability. Consume its target-build inventory and bounded evidence handoff instead of recreating Unity tracing rules here.
 3. Keep evidence from different builds separate. Complete the Unity trace and mechanics analysis independently in each build before comparing them.
+4. For a game-version upgrade, define a target-build identity tuple before
+   drawing a compatibility conclusion: displayed game version, Steam
+   manifest/build identifier, managed-code inventory/hash, and exported-asset
+   inventory/hash. Accept decompiled managed code and serialized assets only
+   when they identify the same target build; otherwise mark the affected
+   mechanic and compatibility claim `blocked`, rather than combining evidence
+   across builds.
 
 ## Build the evidence model
 

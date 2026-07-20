@@ -59,6 +59,7 @@ recorded in the evidence ledger and completion report.
 | --- | --- | --- |
 | Solution and SDK-style plugin project | explicit `TargetFramework`, `LangVersion`, identity/version synchronization path | `plan-only` has no repository to edit |
 | `nuget.config` | `<clear />`; explicit approved sources; `packageSourceMapping` covering direct, transitive, and framework packages | no NuGet resolution is possible or required, with evidence |
+| `global.json` | exact SDK version used by CI and release builds | no .NET SDK is required, with evidence |
 | `packages.lock.json` | one committed lockfile per resolving project | project resolves no packages, with project-file evidence |
 | `.gitignore` | narrow local/generated rules; never hides source, assets, lockfiles, or docs | none |
 | `README.md` | setup, checks, debugging, packaging, compatibility evidence, release path | none |
@@ -67,7 +68,7 @@ recorded in the evidence ledger and completion report.
 | `.markdownlint-cli2.yaml` | lint committed Markdown, respect `.gitignore`, narrow documented exceptions | none |
 | versioned archive contract | host-neutral root/path/DLL/prohibited-content rules | no package/archive is produced, with evidence |
 | APM files and deployed output | `apm.yml`, lock, generated target as one unit | ledger says APM `no` |
-| GitHub workflows/actions | validation workflow and release workflow only when enabled | ledger says GitHub Actions `no` |
+| GitHub workflows/actions | event-owned pull-request and integration-branch workflows, shared source-quality gate, build/release only when enabled | ledger says GitHub Actions `no` |
 | Host manifest/publish action | exact selected-host extension only | host is `none` or blocked |
 | Canonical-template selection | selected template IDs, canonical-content destinations, documented `-Check` command | no bundled template matches the enabled contract |
 
@@ -251,11 +252,17 @@ independent stages.
 1. If APM is `yes`, preserve/create `apm.yml`, pin remote sources to full SHAs,
    check provenance/license/last-changed-subdirectory cooldown, record third
    party notices, then commit manifest, lockfile, and generated output together.
-2. If GitHub Actions is `yes`, create/align a validation workflow in this order:
-   checkout; external-tool setup and verification; ShellCheck; actionlint;
-   pinact; SDK setup; locked restore; format; no-restore build; tests; Markdown
-   lint; archive validation when relevant. Use read-only permissions, explicit
-   Bash, and PR-only cancellation concurrency.
+2. If GitHub Actions is `yes`, create/align event-owned entry workflows: `Pull
+   Request` for `pull_request` and `merge_group` when used; `Main` for the
+   protected integration-branch push. Both run the same source-quality gate on
+   their checked-out commit. `Main` uses direct `needs` dependencies to gate
+   build, artifact upload, and publication; never substitute API polling or an
+   `await-quality` job. Run source quality in this order: checkout; external-tool
+   setup and verification; ShellCheck; actionlint; pinact; SDK setup; locked
+   restore; format; no-restore build; tests; Markdown lint; archive validation
+   when relevant. Use read-only permissions, explicit Bash, and PR-only
+   cancellation concurrency. Add manual dispatch only for a documented
+   diagnostic or recovery operation.
    Read the SDK version from `global.json` and install it explicitly using a
    full-SHA-pinned setup action or pinned verified equivalent before restore;
    verify `dotnet --version` matches. Do not depend on runner inventory.
@@ -267,11 +274,15 @@ independent stages.
    by digest, and downloaded executable tools by adjacent version and checksum.
    Cache only verified archives and use committed lockfiles as NuGet cache keys.
 4. If GitHub Releases is `yes`, create a build job that creates one archive and
-   digest from the release commit; publish only a downloaded-and-verified copy.
+   digest from the integration-branch commit, then uploads it for every build
+   including unpublished edge builds; publish only a downloaded-and-verified copy.
    The release job alone receives `contents: write`; it creates a draft, adds
    all assets and checksum, then publishes. It fails on an existing tag,
    release, or asset and never rebuilds or replaces an artifact. Require
-   immutable releases where available; otherwise record residual risk.
+   immutable releases where available; otherwise record residual risk. After
+   publication, query the release record and verify its tag, target commit,
+   immutable/prerelease state, exact asset count, asset digest, and each
+   intentionally skipped host-publishing step.
 5. If external publishing is enabled, gate it to the confirmed stable mode,
    exactly one reviewed prebuilt archive, passing digest/archive/runtime checks,
    and a credential scoped to the one publish step. Never expose it to PR jobs.
@@ -320,7 +331,7 @@ not passed; record the command, reason, and resulting risk.
 | Validator/policy fixture | invoke production command/path or the exact shared library it calls | fixture failure proves production enforcement; no duplicated test-only rule implementation |
 | Compatibility/release claim | clean-profile runtime test | record exact game build, BepInEx version, mod set, install path, scenario, result |
 | Structured validation logging requested | inspect representative startup, success, denial/failure, receiver/apply, restoration, and swallowed-exception records | role is observed or neutral rather than asserted; records prove the named outcome with boundary/source, result, and only necessary bounded before/after values; inner and outer swallowed exceptions are recorded; privacy exclusions hold |
-| GitHub Release | repository-setting review and fail-on-existing release path | settings/gaps recorded; no mutable overwrite path |
+| GitHub Release | repository-setting review, fail-on-existing release path, and post-publication release-record inspection | settings/gaps recorded; tag and target commit match; immutability, prerelease/stable mode, asset count, and asset digest match; intentionally skipped host publishing is recorded |
 
 ## 7. Completion report
 

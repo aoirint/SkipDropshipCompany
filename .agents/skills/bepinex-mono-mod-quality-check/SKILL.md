@@ -65,7 +65,9 @@ they do not replace this Skill's quality bar.
   and `release` through `needs`. Keep `lint-source` as a Composite Action name, not a catch-all job
   name. When version or publication state must be resolved, use a read-only `plan` job and make
   `build` depend directly on `lint`, optional `test`, and `plan`; have `release` consume the
-  verified build artifact and any needed plan output. Do not add manual dispatch
+  verified build artifact and any needed plan output. Here, read-only means that planning does not
+  modify tracked source/package files, tags, releases, or other GitHub state and has no write-capable
+  token. It may fetch remote refs needed to classify the current version. Do not add manual dispatch
   or polling jobs without a documented operator/recovery need.
 - When the target adopts a bundled CI or publishing contract, copy its files
   exactly from this Skill's canonical `assets/` and enforce the manifest's

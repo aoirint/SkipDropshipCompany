@@ -9,11 +9,11 @@ upstream license and notices continue to apply.
 - Source: [aoirint/skills](https://github.com/aoirint/skills), selected Skill
   directories under `.apm/skills/`
 - Pinned commit:
-  [`3ce677a99cfb2de5f39766e214c3049e59f825f6`](https://github.com/aoirint/skills/tree/3ce677a99cfb2de5f39766e214c3049e59f825f6)
+  [`7a4042304705253bd5d15f17c3387dc655b11ea0`](https://github.com/aoirint/skills/tree/7a4042304705253bd5d15f17c3387dc655b11ea0)
 - Deployed paths: selected directories under `.agents/skills/`, as recorded in
   `apm.lock.yaml`
 - License: MIT; see the
-  [upstream license](https://github.com/aoirint/skills/blob/3ce677a99cfb2de5f39766e214c3049e59f825f6/LICENSE)
+  [upstream license](https://github.com/aoirint/skills/blob/7a4042304705253bd5d15f17c3387dc655b11ea0/LICENSE)
 - Copyright: Copyright (c) 2026 aoirint
 - Notice: the selected Skill directories contain no additional copyright or
   NOTICE files.

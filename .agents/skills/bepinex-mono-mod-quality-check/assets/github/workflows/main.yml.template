@@ -14,7 +14,7 @@ defaults:
     shell: bash
 
 jobs:
-  source-quality:
+  lint:
     # A merged commit is validated again in this workflow. This direct
     # dependency is the release gate; do not replace it with workflow polling.
     runs-on: ubuntu-slim
@@ -27,7 +27,7 @@ jobs:
       - uses: ./.github/actions/lint-source
 
   build:
-    needs: source-quality
+    needs: lint
     # Build keeps ubuntu-latest because packaging currently relies on
     # runner-provided shell tools such as jq and 7z.
     runs-on: ubuntu-latest

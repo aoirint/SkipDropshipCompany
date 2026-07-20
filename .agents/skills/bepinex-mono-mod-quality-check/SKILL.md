@@ -60,8 +60,12 @@ they do not replace this Skill's quality bar.
   release changes, apply the corresponding checks in
   [repository-quality-template.md](references/repository-quality-template.md).
 - Use event-owned CI entry workflows: pull requests (and merge queues when used) validate proposed
-  source, while the integration branch re-runs source validation on its exact commit and directly
-  gates build, retained edge artifacts, and publication through `needs`. Do not add manual dispatch
+  source with a `lint` job (and a `test` job when the repository has tests), while the integration
+  branch re-runs those jobs on its exact commit and directly gates `build`, retained edge artifacts,
+  and `release` through `needs`. Keep `lint-source` as a Composite Action name, not a catch-all job
+  name. When version or publication state must be resolved, use a read-only `plan` job and make
+  `build` depend directly on `lint`, optional `test`, and `plan`; have `release` consume the
+  verified build artifact and any needed plan output. Do not add manual dispatch
   or polling jobs without a documented operator/recovery need.
 - When the target adopts a bundled CI or publishing contract, copy its files
   exactly from this Skill's canonical `assets/` and enforce the manifest's

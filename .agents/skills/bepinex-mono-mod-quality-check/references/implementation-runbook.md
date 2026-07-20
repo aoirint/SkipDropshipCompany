@@ -68,7 +68,7 @@ recorded in the evidence ledger and completion report.
 | `.markdownlint-cli2.yaml` | lint committed Markdown, respect `.gitignore`, narrow documented exceptions | none |
 | versioned archive contract | host-neutral root/path/DLL/prohibited-content rules | no package/archive is produced, with evidence |
 | APM files and deployed output | `apm.yml`, lock, generated target as one unit | ledger says APM `no` |
-| GitHub workflows/actions | event-owned pull-request and integration-branch workflows, shared source-quality gate, build/release only when enabled | ledger says GitHub Actions `no` |
+| GitHub workflows/actions | event-owned pull-request and integration-branch workflows, shared lint gate, build/release only when enabled | ledger says GitHub Actions `no` |
 | Host manifest/publish action | exact selected-host extension only | host is `none` or blocked |
 | Canonical-template selection | selected template IDs, canonical-content destinations, documented `-Check` command | no bundled template matches the enabled contract |
 
@@ -254,7 +254,7 @@ independent stages.
    party notices, then commit manifest, lockfile, and generated output together.
 2. If GitHub Actions is `yes`, create/align event-owned entry workflows: `Pull
    Request` for `pull_request` and `merge_group` when used; `Main` for the
-   protected integration-branch push. Both run the same source-quality gate on
+   protected integration-branch push. Both run the same lint gate on
    their checked-out commit. `Main` uses direct `needs` dependencies to gate
    build, artifact upload, and publication; never substitute API polling or an
    `await-quality` job. Run source quality in this order: checkout; external-tool

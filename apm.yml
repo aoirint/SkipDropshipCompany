@@ -11,23 +11,23 @@ targets:
 - codex
 dependencies:
   apm:
-  - aoirint/skills/.apm/skills/apm-usage#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/bepinex-mono-mod-quality-check#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/changelog-workflow#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/code-quality-check#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/commit-message-quality-check#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/git-worktree-workflow#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/github-actions-quality-check#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/gitignore-workflow#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/issue-quality-check#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/lethal-company-analyze#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/prose-quality-check#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/pull-request-quality-check#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/release-note-workflow#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/rollout-workflow#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/security-check#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/software-documentation-maintenance#5541a71e3dc445716c9879ad52b4cdfddb6516fe
-  - aoirint/skills/.apm/skills/unity-game-analyze#5541a71e3dc445716c9879ad52b4cdfddb6516fe
+  - aoirint/skills/.apm/skills/apm-usage#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/bepinex-mono-mod-quality-check#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/changelog-workflow#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/code-quality-check#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/commit-message-quality-check#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/git-worktree-workflow#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/github-actions-quality-check#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/gitignore-workflow#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/issue-quality-check#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/lethal-company-analyze#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/prose-quality-check#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/pull-request-quality-check#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/release-note-workflow#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/rollout-workflow#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/security-check#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/software-documentation-maintenance#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
+  - aoirint/skills/.apm/skills/unity-game-analyze#9bdf8eb10cdc28aeb60127daaff3c87db3e6a3bb
   mcp: []
 includes: auto
 scripts: {}

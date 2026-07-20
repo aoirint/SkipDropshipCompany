@@ -30,14 +30,19 @@ them with values copied from another repository.
 exact-sync template IDs: project and package-host values are intentionally
 render variables. Render the paired `pull-request.yml.template`,
 `main.yml.template`, and the local `install-workflow-tools`, `setup-dotnet`,
-and `lint-source` Composite Actions together. The small actions expose their
+`lint-source`, `generate-version`, and `publish-thunderstore` Composite Actions,
+including the publisher script, together. A workflow change that adds or
+changes a local-action reference or input is incomplete until the renderer
+deploys the complete matching action in the same invocation. The small actions expose their
 individual toolchain, environment, and lint responsibilities; `lint-source`
 validates source on the caller's runner;
-`Main` repeats that validation on the pushed
-integration commit, gates its build through `needs`, and retains every build
-artifact including non-published edge output. Do not fold the event boundaries
-back into one trigger-heavy workflow or add manual dispatch without a named
-operator procedure.
+`Main` repeats that validation on the pushed integration commit, resolves
+read-only version and release state in `plan`, then gates build and publication
+through direct `needs`. Build receives the planned identity before it writes
+package source files and retains every artifact, including non-published edge
+output. Keep the workflow default at `contents: read` and grant
+`contents: write` only to the release job. Do not fold the event boundaries back into one trigger-heavy workflow
+or add manual dispatch without a named operator procedure.
 
 ## Initial provenance
 
@@ -85,15 +90,22 @@ agreement in the companion document.
    categories, or policy.
 3. Edit the canonical asset first. Do not promote an unvalidated consumer copy
    merely because it is newer.
-4. Apply the candidate to a scratch consumer and run its parsing, ShellCheck,
+4. Before rendering, snapshot the target's project paths, plugin assembly,
+   Thunderstore namespace, community, and ordered category list. Populate the
+   variables from that snapshot, then compare every value after rendering; a
+   portable rollout must not add, remove, reorder, or replace repository-owned
+   values. Compare structure against a fresh canonical render or normalize only
+   declared token locations. Never globally replace variable values: a value
+   can also occur legitimately in canonical prose, comments, or URLs.
+5. Apply the candidate to a scratch consumer and run its parsing, ShellCheck,
    actionlint, pinact, build, package, archive, and dry-run checks as applicable.
-5. Apply the validated asset to every opted-in consumer with the sync script.
+6. Apply the validated asset to every opted-in consumer with the sync script.
    Keep a target-specific variation outside the template and document why that
    consumer cannot use exact synchronization.
-6. Run `-Check` with the same template selection in every consumer, followed
+7. Run `-Check` with the same template selection in every consumer, followed
    by its repository checks. Every selected file must satisfy the comparison
    mode declared in `template-map.json`; do not weaken that mode downstream.
-7. Commit the canonical change before or with linked rollout PRs. Record the
+8. Commit the canonical change before or with linked rollout PRs. Record the
    canonical commit, consumer list, intentional exclusions, and validation
    results so later maintenance can find the complete rollout set.
 

@@ -256,8 +256,10 @@ independent stages.
    Request` for `pull_request` and `merge_group` when used; `Main` for the
    protected integration-branch push. Both run the same lint gate on
    their checked-out commit. `Main` uses direct `needs` dependencies to gate
-   build, artifact upload, and publication; never substitute API polling or an
-   `await-quality` job. Run source quality in this order: checkout; external-tool
+   read-only `plan`, build, artifact upload, and publication; never substitute
+   API polling or an `await-quality` job. `plan` owns the resolved version and
+   release state; build and release consume its outputs rather than resolving a
+   second identity. Run lint in this order: checkout; external-tool
    setup and verification; ShellCheck; actionlint; pinact; SDK setup; locked
    restore; format; no-restore build; tests; Markdown lint; archive validation
    when relevant. Use read-only permissions, explicit Bash, and PR-only

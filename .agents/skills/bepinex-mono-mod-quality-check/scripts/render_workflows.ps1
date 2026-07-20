@@ -23,7 +23,8 @@ function Get-RenderedTemplate([string] $TemplatePath, [psobject] $Variables) {
         $value = $Variables.$name
         if ($null -eq $value) { throw "Missing workflow variable: $name" }
         if ($name -eq 'thunderstore_categories') {
-            $values = @($value) | ForEach-Object { [string] $_ }
+            # Preserve a one-element JSON array under StrictMode.
+            $values = @(@($value) | ForEach-Object { [string] $_ })
             if ($values.Count -eq 0 -or ($values | Where-Object { [string]::IsNullOrWhiteSpace($_) -or $_ -match "`r|`n" })) { throw "Unsafe workflow variable: $name" }
             $value = $values -join "`n            "
         }
@@ -47,6 +48,9 @@ try {
     $templates = @(
         @{ Source = 'pull-request.yml.template'; Destination = '.github/workflows/pull-request.yml' },
         @{ Source = 'main.yml.template'; Destination = '.github/workflows/main.yml' },
+        @{ Source = 'generate-version/action.yml'; Destination = '.github/actions/generate-version/action.yml' },
+        @{ Source = 'publish-thunderstore/action.yml'; Destination = '.github/actions/publish-thunderstore/action.yml' },
+        @{ Source = 'publish-thunderstore/publish-thunderstore.sh'; Destination = '.github/actions/publish-thunderstore/publish-thunderstore.sh' },
         @{ Source = 'install-workflow-tools/action.yml.template'; Destination = '.github/actions/install-workflow-tools/action.yml' },
         @{ Source = 'setup-dotnet/action.yml.template'; Destination = '.github/actions/setup-dotnet/action.yml' },
         @{ Source = 'lint-source/action.yml.template'; Destination = '.github/actions/lint-source/action.yml' },
@@ -54,7 +58,7 @@ try {
         @{ Source = '.markdownlint-cli2.yaml'; Destination = '.markdownlint-cli2.yaml' }
     )
     foreach ($entry in $templates) {
-        $templateRoot = if ($entry.Source -in @('.gitignore.template', '.markdownlint-cli2.yaml')) { Join-Path $skillRoot 'assets/repository' } elseif ($entry.Source -match '/action\.yml\.template$') { Join-Path $skillRoot 'assets/github/actions' } else { Join-Path $skillRoot 'assets/github/workflows' }
+        $templateRoot = if ($entry.Source -in @('.gitignore.template', '.markdownlint-cli2.yaml')) { Join-Path $skillRoot 'assets/repository' } elseif ($entry.Source -match 'action\.yml(?:\.template)?$' -or $entry.Source -match '^publish-thunderstore/') { Join-Path $skillRoot 'assets/github/actions' } else { Join-Path $skillRoot 'assets/github/workflows' }
         $expected = Get-RenderedTemplate (Join-Path $templateRoot $entry.Source) $variables
         $destination = Join-Path $repoRootPath $entry.Destination
         if ($Apply) {

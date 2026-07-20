@@ -13,7 +13,8 @@ description: Quality-check GitHub Actions workflows and composite actions. Use w
    preserve them unless the requested change explicitly replaces them.
    Design workflow boundaries around events, privilege, and lifecycle rather than around command names:
    - A pull-request entry workflow validates untrusted proposed source and includes `merge_group` when a merge queue uses required checks.
-   - An integration-branch entry workflow re-runs required source validation on the exact pushed commit, then uses direct `needs` dependencies to gate planning, build, artifact upload, and publication.
+   - An integration-branch entry workflow re-runs required source validation on the exact pushed commit. Use a read-only `plan` job only for canonical version or publication state, and make build and publication use direct `needs` dependencies rather than rediscovering that state.
+   - Name jobs for their visible responsibility: use `lint`, optional `test`, optional `plan`, `build`, and `release`. Keep a reusable same-runner command sequence in a precisely named Composite Action such as `lint-source`; do not hide independent lint and test signals behind a broad `source-quality` job.
    - Do not emulate a direct dependency with API polling, an `await-quality` job, or an unrelated workflow that might still fail after publishing.
    - Do not add `workflow_dispatch` by default. Add it only for a documented diagnostic or recovery operation with a defined input, permission, artifact, and cancellation contract.
    - Use `workflow_run` only when its separate trust boundary is necessary and has been security-reviewed; it is not a routine substitute for same-commit `needs` gating.

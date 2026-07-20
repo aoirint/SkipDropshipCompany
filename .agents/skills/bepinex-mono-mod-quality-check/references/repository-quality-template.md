@@ -133,7 +133,7 @@ See `$apm-usage` for installation, cooldown, license, and update details.
 - Use event-owned entry workflows. `Pull Request` handles `pull_request` and
   `merge_group` when a merge queue uses required checks; it validates proposed
   source only. `Main` handles protected integration-branch pushes, re-runs the
-  source-quality gate on the exact pushed commit, and uses direct `needs`
+  lint gate on the exact pushed commit, and uses direct `needs`
   dependencies to gate build and publication. Do not add `workflow_dispatch`,
   polling, or a cross-workflow wait job without a documented diagnostic,
   recovery, or trust-boundary need. Set read-only workflow permissions,
@@ -146,7 +146,7 @@ See `$apm-usage` for installation, cooldown, license, and update details.
   for inline shell validation.
 - Extract a same-runner repeated setup/check sequence into a local Composite
   Action when it materially reduces duplication, including this shared
-  source-quality sequence. Keep runner choice, job permissions, artifact
+  lint sequence. Keep runner choice, job permissions, artifact
   upload, and release dependencies visible in entry workflows. Introduce a
   reusable workflow only when job-level matrix, outputs, or permission
   boundaries make a Composite Action insufficient; document that reason.

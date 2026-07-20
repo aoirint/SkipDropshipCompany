@@ -1,4 +1,4 @@
-name: Build
+name: Main
 
 on:
   push:
@@ -14,7 +14,20 @@ defaults:
     shell: bash
 
 jobs:
+  source-quality:
+    # A merged commit is validated again in this workflow. This direct
+    # dependency is the release gate; do not replace it with workflow polling.
+    runs-on: ubuntu-slim
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/lint-source
+
   build:
+    needs: source-quality
     # Build keeps ubuntu-latest because packaging currently relies on
     # runner-provided shell tools such as jq and 7z.
     runs-on: ubuntu-latest
@@ -37,18 +50,9 @@ jobs:
           csproj_file: "SkipDropshipCompany/SkipDropshipCompany.csproj"
 
       - name: Setup .NET
-        # Keep dotnet-version aligned with lint.yml per the README .NET and
-        # C# tooling update policy.
-        uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
-        with:
-          dotnet-version: '10.x'
-          cache: true
-          cache-dependency-path: SkipDropshipCompany/packages.lock.json
-
-      - name: Restore NuGet packages
-        # Restore once in locked mode so build uses the committed dependency
-        # graph and does not rewrite package resolution in CI.
-        run: dotnet restore --locked-mode
+        # This shared action pins the SDK and restores the same locked graph
+        # used by source validation.
+        uses: ./.github/actions/setup-dotnet
 
       - name: Record start time
         id: start-time
@@ -96,15 +100,17 @@ jobs:
 
           cd ..
           rm -rf "${ARTIFACT_STEM:?}/"
+          sha256sum "${ARTIFACT_STEM}.zip" > SHA256SUMS
 
       - name: Upload artifact
         id: upload-artifact
         # The package is already a zip file, so upload it without recompressing
-        # to keep the digest and download size tied to the release payload.
+        # to keep the digest and download size tied to the release payload. This
+        # runs for edge versions too, so every merged build remains inspectable.
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: artifact
-          path: ./tmp_artifacts/*.zip
+          path: ./tmp_artifacts/*
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
@@ -165,6 +171,11 @@ jobs:
         with:
           name: artifact
           path: ./tmp_artifacts
+
+      - name: Verify downloaded artifact digest
+        run: |
+          cd ./tmp_artifacts
+          sha256sum -c SHA256SUMS
 
       - name: Publish release
         # Create immutable releases so an already-published version cannot be

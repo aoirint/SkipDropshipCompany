@@ -26,11 +26,10 @@ jobs:
 
       - uses: ./.github/actions/lint-source
 
-  build:
-    needs: lint
-    # Build keeps ubuntu-latest because packaging currently relies on
-    # runner-provided shell tools such as jq and 7z.
-    runs-on: ubuntu-latest
+  plan:
+    # Resolve one release identity before build mutates package source files.
+    # Keep planning read-only so edge metadata remains reusable by its consumers.
+    runs-on: ubuntu-slim
 
     outputs:
       release_mode: ${{ steps.generate-version.outputs.release_mode }}
@@ -39,15 +38,43 @@ jobs:
       manifest_version: ${{ steps.generate-version.outputs.manifest_version }}
 
     steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Generate version plan
+        id: generate-version
+        uses: ./.github/actions/generate-version
+        with:
+          csproj_file: "SkipDropshipCompany/SkipDropshipCompany.csproj"
+          write_files: false
+
+  build:
+    needs:
+      - lint
+      - plan
+    # Build keeps ubuntu-latest because packaging currently relies on
+    # runner-provided shell tools such as jq and 7z.
+    runs-on: ubuntu-latest
+
+    outputs:
+      release_mode: ${{ needs.plan.outputs.release_mode }}
+      app_version: ${{ needs.plan.outputs.app_version }}
+      git_version: ${{ needs.plan.outputs.git_version }}
+      manifest_version: ${{ needs.plan.outputs.manifest_version }}
+
+    steps:
       # Checkout is required before generating versions because the local
       # composite action reads project files and fetches tags from this clone.
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Generate version
-        id: generate-version
         uses: ./.github/actions/generate-version
         with:
           csproj_file: "SkipDropshipCompany/SkipDropshipCompany.csproj"
+          release_mode: ${{ needs.plan.outputs.release_mode }}
+          app_version: ${{ needs.plan.outputs.app_version }}
+          manifest_version: ${{ needs.plan.outputs.manifest_version }}
 
       - name: Setup .NET
         # This shared action pins the SDK and restores the same locked graph
@@ -61,7 +88,7 @@ jobs:
       - name: Run dotnet build
         run: |
           dotnet_build_args=(--no-restore --configuration Release)
-          if [ "${{ steps.generate-version.outputs.release_mode }}" != "latest" ]; then
+          if [ "${{ needs.plan.outputs.release_mode }}" != "latest" ]; then
             # BepInEx 5 validates plugin metadata as System.Version, which
             # rejects SemVer prerelease and edge strings. Keep release identity
             # in Version, and scope the loader-facing fallback to this build.
@@ -78,7 +105,7 @@ jobs:
       - name: Create artifact
         run: |
           TMP_ARTIFACT_DIR=./tmp_artifacts
-          ARTIFACT_STEM=SkipDropshipCompany-v${{ steps.generate-version.outputs.app_version }}
+          ARTIFACT_STEM=SkipDropshipCompany-v${{ needs.plan.outputs.app_version }}
 
           mkdir -p "${TMP_ARTIFACT_DIR}/${ARTIFACT_STEM}"
 
@@ -121,9 +148,9 @@ jobs:
           TIME_DURATION_MS=$(( ${{ steps.end-time.outputs.time_ms }} - ${{ steps.start-time.outputs.time_ms }} ))
           TIME_DURATION_S=$(( TIME_DURATION_MS / 1000 )).$(( TIME_DURATION_MS % 1000 ))
 
-          GIT_VERSION_MARKDOWN=${{ steps.generate-version.outputs.git_version }}
-          if [ "${{ steps.generate-version.outputs.release_mode }}" != "edge" ]; then
-            GIT_VERSION_MARKDOWN="[${{ steps.generate-version.outputs.git_version }}](https://github.com/${GITHUB_REPOSITORY}/releases/tag/${{ steps.generate-version.outputs.git_version }})"
+          GIT_VERSION_MARKDOWN=${{ needs.plan.outputs.git_version }}
+          if [ "${{ needs.plan.outputs.release_mode }}" != "edge" ]; then
+            GIT_VERSION_MARKDOWN="[${{ needs.plan.outputs.git_version }}](https://github.com/${GITHUB_REPOSITORY}/releases/tag/${{ needs.plan.outputs.git_version }})"
           fi
 
           ARTIFACT_LINK_MARKDOWN=
@@ -138,10 +165,10 @@ jobs:
             echo "| :----- | :---- |"
             echo "| Result | ${{ job.status == 'success' && '✅' || '❌' }} |"
             echo "| Commit Hash | [${GITHUB_SHA:0:7}](https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}) |"
-            echo "| Release Mode | ${{ steps.generate-version.outputs.release_mode }} |"
-            echo "| App Version | ${{ steps.generate-version.outputs.app_version }} |"
+            echo "| Release Mode | ${{ needs.plan.outputs.release_mode }} |"
+            echo "| App Version | ${{ needs.plan.outputs.app_version }} |"
             echo "| Git Version | ${GIT_VERSION_MARKDOWN} |"
-            echo "| Manifest Version | ${{ steps.generate-version.outputs.manifest_version }} |"
+            echo "| Manifest Version | ${{ needs.plan.outputs.manifest_version }} |"
             echo "| Time Duration | ${TIME_DURATION_S}s |"
             echo "| Artifact | ${ARTIFACT_LINK_MARKDOWN} |"
             echo "| Artifact Digest | ${ARTIFACT_DIGEST_MARKDOWN} |"
@@ -150,9 +177,10 @@ jobs:
   release:
     needs:
       - build
+      - plan
     # Edge builds are validation artifacts only; GitHub releases are created
     # only for new project versions that should receive a tag.
-    if: needs.build.outputs.release_mode != 'edge'
+    if: needs.plan.outputs.release_mode != 'edge'
 
     # Keep this on ubuntu-slim: release publishing only needs standard shell tools
     # included in that image, and does not require ubuntu-latest's larger toolset.
@@ -182,11 +210,11 @@ jobs:
         # silently replaced by a later workflow run for the same tag.
         uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
         with:
-          tag: ${{ needs.build.outputs.git_version }}
+          tag: ${{ needs.plan.outputs.git_version }}
           commit: ${{ github.sha }}
           immutableCreate: true
-          prerelease: ${{ needs.build.outputs.release_mode != 'latest' }}
-          makeLatest: ${{ needs.build.outputs.release_mode == 'latest' }}
+          prerelease: ${{ needs.plan.outputs.release_mode != 'latest' }}
+          makeLatest: ${{ needs.plan.outputs.release_mode == 'latest' }}
           generateReleaseNotes: true
           artifacts: |
             ./tmp_artifacts/*.zip
@@ -197,7 +225,7 @@ jobs:
         id: publish-thunderstore
         # Thunderstore does not accept the prerelease versions generated here,
         # so only stable latest releases are published to the community.
-        if: needs.build.outputs.release_mode == 'latest'
+        if: needs.plan.outputs.release_mode == 'latest'
         uses: ./.github/actions/publish-thunderstore
         with:
           artifact_path: ./tmp_artifacts/*.zip

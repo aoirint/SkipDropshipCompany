@@ -7,6 +7,22 @@ inputs:
     # the marker avoids broad XML edits while keeping the action shell-only.
     description: 'csproj file path'
     required: true
+  release_mode:
+    description: 'Resolved release mode override from the plan job.'
+    required: false
+    default: ''
+  app_version:
+    description: 'Resolved application version override from the plan job.'
+    required: false
+    default: ''
+  manifest_version:
+    description: 'Resolved manifest version override from the plan job.'
+    required: false
+    default: ''
+  write_files:
+    description: 'Whether to write the resolved versions into package source files.'
+    required: false
+    default: 'true'
 
 outputs:
   release_mode:
@@ -43,6 +59,11 @@ runs:
       id: release-mode
       shell: bash
       run: |
+        if [ -n "${{ inputs.release_mode }}" ]; then
+          echo "mode=${{ inputs.release_mode }}" >> "${GITHUB_OUTPUT}"
+          exit 0
+        fi
+
         CSPROJ_VERSION="${{ steps.csproj-version.outputs.version }}"
 
         # Tags are fetched here, not by checkout, because release mode depends
@@ -63,6 +84,11 @@ runs:
       id: app-version
       shell: bash
       run: |
+        if [ -n "${{ inputs.app_version }}" ]; then
+          echo "version=${{ inputs.app_version }}" >> "${GITHUB_OUTPUT}"
+          exit 0
+        fi
+
         CSPROJ_VERSION="${{ steps.csproj-version.outputs.version }}"
         RELEASE_MODE="${{ steps.release-mode.outputs.mode }}"
 
@@ -89,6 +115,11 @@ runs:
       id: manifest-version
       shell: bash
       run: |
+        if [ -n "${{ inputs.manifest_version }}" ]; then
+          echo "version=${{ inputs.manifest_version }}" >> "${GITHUB_OUTPUT}"
+          exit 0
+        fi
+
         RELEASE_MODE="${{ steps.release-mode.outputs.mode }}"
 
         if [ "${RELEASE_MODE}" = "latest" ]; then
@@ -103,6 +134,7 @@ runs:
         echo "version=${MANIFEST_VERSION}" >> "${GITHUB_OUTPUT}"
 
     - name: Replace version in csproj
+      if: inputs.write_files == 'true'
       shell: bash
       run: |
         # The generated version is written back before build so the compiled
@@ -111,6 +143,7 @@ runs:
         sed -i "/APP_VERSION_MARKER/{n; s|<Version>.*</Version>|<Version>${APP_VERSION}</Version>|;}" "${{ inputs.csproj_file }}"
 
     - name: Replace version in manifest.json
+      if: inputs.write_files == 'true'
       shell: bash
       run: |
         # Thunderstore reads version_number from the manifest inside the zip.

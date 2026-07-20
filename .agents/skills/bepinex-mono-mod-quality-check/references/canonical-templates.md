@@ -33,11 +33,12 @@ render variables. Render the paired `pull-request.yml.template`,
 and `lint-source` Composite Actions together. The small actions expose their
 individual toolchain, environment, and lint responsibilities; `lint-source`
 validates source on the caller's runner;
-`Main` repeats that validation on the pushed
-integration commit, gates its build through `needs`, and retains every build
-artifact including non-published edge output. Do not fold the event boundaries
-back into one trigger-heavy workflow or add manual dispatch without a named
-operator procedure.
+`Main` repeats that validation on the pushed integration commit, resolves
+read-only version and release state in `plan`, then gates build and publication
+through direct `needs`. Build receives the planned identity before it writes
+package source files and retains every artifact, including non-published edge
+output. Do not fold the event boundaries back into one trigger-heavy workflow
+or add manual dispatch without a named operator procedure.
 
 ## Initial provenance
 

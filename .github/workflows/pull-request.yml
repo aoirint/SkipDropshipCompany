@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  source-quality:
+  lint:
     # Keep proposed source validation separate from publishing privileges.
     runs-on: ubuntu-slim
 

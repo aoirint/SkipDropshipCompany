@@ -151,19 +151,19 @@ description: >-
      cannot be created by choosing another execution mechanism.
 - Treat package runners as remote-code-execution paths until the exact command
   form is verified:
-  - Confirm the package-manager version supports the needed cooldown or trust
+    - Confirm the package-manager version supports the needed cooldown or trust
     policy.
-  - Confirm the exact configuration path, CLI flag, or environment variable
+    - Confirm the exact configuration path, CLI flag, or environment variable
     used by that command form.
-  - Confirm the policy applies before downloading or executing the package.
-  - Use source-backed and preferably test-backed evidence before documenting
+    - Confirm the policy applies before downloading or executing the package.
+    - Use source-backed and preferably test-backed evidence before documenting
     `npx`, `npm exec`, `pnpm dlx`, or similar commands as acceptable.
 - For Python scripts run with `uv`, enforce the seven-day package cutoff in
   the command or script metadata before dependency resolution:
-  - Prefer a PEP 723 script containing `[tool.uv] exclude-newer = "P7D"` with
+    - Prefer a PEP 723 script containing `[tool.uv] exclude-newer = "P7D"` with
     its adjacent `.py.lock`, and execute it as
     `uv run --locked --script path/to/script.py`.
-  - If a one-off check needs an extra package and no locked script is
+    - If a one-off check needs an extra package and no locked script is
     available, execute `uv run --exclude-newer=P7D --with <package> -- python
     path/to/script.py`. Do not use bare `python`, `pip install`, or
     `uv run --with <package>` without the cutoff.
@@ -172,13 +172,13 @@ description: >-
   installers, bootstrappers, package runners, remote API clients, or tools with
   plugin auto-download behavior.
 - Prefer safer execution methods when available:
-  - Already configured project tools or lockfile-backed dependencies.
-  - Cooldown enforcement that is version-aware and verified for the exact
+    - Already configured project tools or lockfile-backed dependencies.
+    - Cooldown enforcement that is version-aware and verified for the exact
     command.
-  - Pinned and provenance-reviewed container images.
-  - Pinned, hash-verified artifacts with reviewed runtime behavior.
-  - Disabled network access, sandboxing, and least-privilege execution.
-  - Reviewer-visible commands and configuration.
+    - Pinned and provenance-reviewed container images.
+    - Pinned, hash-verified artifacts with reviewed runtime behavior.
+    - Disabled network access, sandboxing, and least-privilege execution.
+    - Reviewer-visible commands and configuration.
 - If release age, provenance, runtime behavior, or cooldown compliance cannot
   be verified, report a blocker instead of trying an unverified fetch-and-run
   command.

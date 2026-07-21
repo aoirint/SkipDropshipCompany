@@ -22,7 +22,10 @@ hashes, and review for every changed third-party dependency.
    date, and seven-day cooldown this Skill has reviewed. Do not prefer a newer
    local `current`, `PATH`, project-local, or legacy executable merely because
    it is easier to find.
-3. Inventory `apm` on `PATH`, project-local copies, and locations reported by
+3. Keep an unpublished consumer project at `version: 0.0.0` in `apm.yml`.
+   Change that version only after its distribution and versioning design is
+   explicitly decided.
+4. Inventory `apm` on `PATH`, project-local copies, and locations reported by
    the current official installation documentation and the platform's command
    resolver. Record each resolved executable and `--version`; path precedence
    does not override cooldown eligibility.
@@ -31,22 +34,28 @@ hashes, and review for every changed third-party dependency.
    off-PATH copy by absolute path. Do not modify PATH to satisfy one repository
    task. If the selected version is absent, use the verified temporary-artifact
    flow in section 2 instead of installing it implicitly.
-4. If the lockfile records a newer APM version than the latest eligible version,
-   do not silently downgrade, rewrite, install, or audit the project. Report the
-   compatibility blocker and require either a reviewed bootstrap refresh after
-   cooldown or a documented maintainer exception for that exact version.
-5. If the selected eligible version is newer than the lockfile generator,
-   follow the official lockfile migration guidance. Capture the pre-command
-   lockfile, run `apm install` as an explicit migration step, and separate
-   schema-only churn from dependency, hash, target, or deployed-file changes.
-   Restore and stop if an allegedly read-only or frozen command rewrites the
-   lockfile unexpectedly.
-6. If `apm.yml` exists, preserve it. Do not run `apm init --yes`, because it
+5. If the lockfile records an older APM version than the selected eligible
+   version, capture it for comparison and regenerate it from scratch with the
+   selected executable. Do not edit `apm_version` by hand: remove only the
+   validated project lockfile, run `apm lock`, review the complete result, and
+   then run the frozen install and audit checks. Treat substantial lock-format
+   churn separately from a dependency update.
+6. If the lockfile records a newer, not-yet-eligible APM version, do not execute
+   that CLI merely to preserve its generator version. Report the mismatch and
+   wait for maintainer direction before the destructive regeneration in step 5.
+   After that direction, capture and regenerate the lock by the same procedure
+   as step 5. Selecting the newest normally eligible CLI is not a cooldown
+   exception.
+7. Use the official lockfile migration guidance to understand schema changes,
+   but do not substitute `apm install` for the from-scratch regeneration in
+   step 5. Restore and stop if a frozen or allegedly read-only command rewrites
+   the lockfile unexpectedly.
+8. If `apm.yml` exists, preserve it. Do not run `apm init --yes`, because it
    overwrites an existing manifest.
-7. If no manifest exists, inspect the repository's agent targets and run
+9. If no manifest exists, inspect the repository's agent targets and run
    interactive `apm init` from the project root. Select only the targets the
    project actually uses; review the generated `apm.yml` before adding deps.
-8. Treat the CLI and agent dependencies as supply-chain-sensitive code. Check the
+10. Treat the CLI and agent dependencies as supply-chain-sensitive code. Check the
    repository policy and any organization policy before proceeding.
 
 ## 2. Obtain the selected eligible APM version safely
@@ -174,7 +183,21 @@ or MCP dependency:
    `apm audit --ci` to the project's existing CI when the user requests CI
    enforcement.
 
-### 3.1 Maintain a packaged Skill collection
+### 3.1 Add the lightweight project-metadata guard
+
+When a repository already has a source-lint composite action, add the
+repository-owned metadata guard described in [CI guards](references/ci-guards.md).
+It verifies the unpublished project version and the lock generator version
+without downloading or executing APM. Keep it in the existing lint job so
+adoption requires one step rather than a new workflow. Do not make consumer CI
+depend on a path inside the deployed Skill; copy the template into the
+repository's own `.github/actions/check-apm-project/` directory.
+
+The metadata guard is not a replacement for `apm install --frozen` or
+`apm audit --ci`. Add those separately when the requested CI policy includes
+dependency replay, deployed-file integrity, or security auditing.
+
+### 3.2 Maintain a packaged Skill collection
 
 Apply this section only when a repository publishes Skill copies in both an
 authoring target such as `.agents/skills/` and a package directory such as
@@ -238,6 +261,8 @@ Before handoff, reconcile `THIRD_PARTY_NOTICES.md` with the reviewed lockfile:
 ## Completion checklist
 
 - `apm.yml` is present and was not overwritten accidentally.
+- An unpublished project keeps `version: 0.0.0` until its distribution and
+  versioning design is approved.
 - The selected APM CLI was the newest reviewed release that completed the
   seven-day cooldown; its absolute path and version were recorded.
 - No PATH, active APM installation, or other user-environment state changed
@@ -246,7 +271,7 @@ Before handoff, reconcile `THIRD_PARTY_NOTICES.md` with the reviewed lockfile:
   dependency changes; unexpected lockfile writes were restored and reported.
 - Every remote dependency is pinned to a reviewed full commit SHA.
 - `apm.lock.yaml` is committed and contains the expected resolved commits and
-  content hashes.
+  content hashes, and its `apm_version` matches the selected eligible CLI.
 - Each adopted release, or the last change to a selected virtual subdirectory,
   met the seven-day cooldown or has a documented maintainer-approved exception.
 - Each committed APM-deployed third-party skill has one current

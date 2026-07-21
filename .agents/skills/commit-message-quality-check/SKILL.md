@@ -17,9 +17,10 @@ description: >-
   underlying code or documentation diff.
 
 Reference:
-- Conventional Commits 1.0.0: https://www.conventionalcommits.org/en/v1.0.0/
+
+- Conventional Commits 1.0.0: <https://www.conventionalcommits.org/en/v1.0.0/>
 - GitHub co-authored commits:
-  https://docs.github.com/articles/creating-a-commit-with-multiple-authors
+  <https://docs.github.com/articles/creating-a-commit-with-multiple-authors>
 
 ## Workflow
 
@@ -64,9 +65,9 @@ Verify the blank-line structure:
 - `scope`: optional noun in parentheses that names the affected area, such as
   `interop`, `build`, `docs`, or `input`.
 - `!`: optional marker immediately before `:` for a breaking change.
-- `description`: required short summary after `: `. Use imperative mood,
-  lowercase after the type unless a proper noun is needed, and no trailing
-  period.
+- `description`: required short summary after `:` and one space. Use imperative
+  mood, lowercase after the type unless a proper noun is needed, and no
+  trailing period.
 - `body`: optional free-form explanation of what changed and why. Start it one
   blank line after the description.
 - `footer`: optional trailer-style metadata. Use tokens such as `Refs`,

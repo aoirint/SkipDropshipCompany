@@ -3,6 +3,14 @@
 Select a runner per job from its actual resource, isolation, tool, and duration requirements. Do
 not copy one workflow-wide label into every job without checking those requirements.
 
+## Contents
+
+- [Start from the oldest supported GA image](#start-from-the-oldest-supported-ga-image)
+- [Prefer `ubuntu-slim` for lightweight jobs](#prefer-ubuntu-slim-for-lightweight-jobs)
+- [Choose a full Ubuntu VM deliberately](#choose-a-full-ubuntu-vm-deliberately)
+- [Operate image retirement as a recurring lifecycle](#operate-image-retirement-as-a-recurring-lifecycle)
+- [Validate the selection](#validate-the-selection)
+
 ## Start from the oldest supported GA image
 
 For a job whose output or validation establishes an OS compatibility floor, choose the oldest
@@ -117,8 +125,8 @@ cutoff, and post-migration verification.
 
 Primary references:
 
-- https://docs.github.com/en/actions/reference/runners/github-hosted-runners
-- https://github.com/actions/runner-images#available-images
-- https://github.com/actions/runner-images#software-and-image-support
-- https://github.com/actions/runner-images/issues?q=is%3Aissue+label%3AAnnouncement
-- https://github.com/actions/runner-images/blob/main/images/ubuntu-slim/ubuntu-slim-Readme.md
+- <https://docs.github.com/en/actions/reference/runners/github-hosted-runners>
+- <https://github.com/actions/runner-images#available-images>
+- <https://github.com/actions/runner-images#software-and-image-support>
+- <https://github.com/actions/runner-images/issues?q=is%3Aissue+label%3AAnnouncement>
+- <https://github.com/actions/runner-images/blob/main/images/ubuntu-slim/ubuntu-slim-Readme.md>

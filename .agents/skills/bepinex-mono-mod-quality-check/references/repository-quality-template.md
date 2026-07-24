@@ -11,6 +11,7 @@ constraint makes it inapplicable, and record that constraint in the review.
 
 ## Contents
 
+- [Repository family alignment](#repository-family-alignment)
 - [Repository foundation](#repository-foundation)
 - [APM-managed agent guidance](#apm-managed-agent-guidance)
 - [NuGet and C# project quality](#nuget-and-c-project-quality)
@@ -21,12 +22,40 @@ constraint makes it inapplicable, and record that constraint in the review.
 - [Thunderstore publishing](#thunderstore-publishing)
 - [Completion review](#completion-review)
 
+## Repository family alignment
+
+- When the maintainer designates peer repositories, review their exact
+  revisions before adding the generic baseline. Treat their shared portable
+  paths, section structure, content, and newline policy as the presumptive
+  family contract.
+- Account for every missing, extra, changed, and newline-different target path
+  in the repository-family delta ledger. Product behavior, runtime, tests,
+  package host, repository visibility, and a distinct maintenance lifecycle are
+  valid reasons only when the exact constraint is recorded.
+- Do not create a one-repository improvement under labels such as "stricter",
+  "cleaner", or "more explicit". Improve the canonical source first and use
+  `rollout-workflow` for compatible peers, or retain the existing shared
+  content unchanged.
+- For a private target, use local or authenticated inspection and keep private
+  source and artifacts out of public review channels. Do not infer permission
+  for a visibility change or public package publication from a public peer's
+  workflow or from a repository migration request.
+- Use a fresh-context comparison after each correction round when convergence
+  review is requested. Stop only when no actionable material difference
+  remains and every intentional difference has a concrete disposition.
+
 ## Repository foundation
 
 - Keep the solution, plugin project, `assets/`, `docs/`, `CHANGELOG.md`,
-  `LICENSE`, `README.md`, and `CONTRIBUTING.md` in intentional, documented
-  roles. Keep base-game evidence separate from mod-specific architecture and
-  operations documentation.
+  `README.md`, and `CONTRIBUTING.md` in intentional, documented roles. Add
+  `LICENSE` only after the maintainer explicitly selects a license, then
+  document its repository and package role. Keep base-game evidence separate
+  from mod-specific architecture and operations documentation.
+- Use license-neutral contribution guidance while the project license or
+  contribution terms are undecided. Add a CLA and its pull-request confirmation
+  only after the maintainer explicitly selects both contracts.
+- When `CONTRIBUTING.md` links `.github/CODEOWNERS`, require that file to exist
+  and identify the active maintainer or owning team.
 - Start `.gitignore` with only project-local paths: game installs, mod-manager
   profiles, generated plugin metadata, local `work/` or `build/` directories,
   and agent worktrees. Do not ignore source, release assets, lockfiles, or
@@ -38,9 +67,6 @@ constraint makes it inapplicable, and record that constraint in the review.
 - Ignore `bin/`, `obj/`, IDE caches, local logs, downloaded game files, and
   local profiles. Never use an ignore rule as a substitute for keeping secrets
   out of the repository.
-- Ignore common local secret/configuration files such as `.env` and nested
-  `.env` variants. If the repository intentionally commits an example, keep a
-  narrow negation for that exact example and confirm it remains visible.
 - Keep an explicit generated-code path only when the build actually produces
   it. Do not use broad `Generated/` or wildcard ignores that can hide authored
   C# files.
@@ -63,6 +89,8 @@ Use APM when the repository uses Codex agent guidance.
 5. After a source or dependency change, run `apm lock`, review the locked refs
    and hashes, run `apm install --frozen`, then `apm audit --ci`. Add the frozen
    install and audit checks to CI when the repository enforces agent setup.
+   Do not make product build, lint, package, or release jobs depend on deployed
+   Skills; those jobs must remain functional when `.agents/skills/` is absent.
 
 See `$apm-usage` for installation, cooldown, license, and update details.
 
@@ -71,6 +99,11 @@ See `$apm-usage` for installation, cooldown, license, and update details.
 - Use an SDK-style plugin project with an explicit target framework and C#
   language version selected for the tested BepInEx and game runtime. Record the
   compatibility reason; do not upgrade it only because a newer SDK exists.
+- Keep repeated build properties in project files until at least two projects
+  actually share them and the repository family uses a common props file. Do
+  not add `Directory.Build.props` merely to centralize a small solution.
+  Preserve the family `global.json` when the build uses .NET; SDK selection is
+  a separate responsibility from MSBuild property centralization.
 - Commit one `packages.lock.json` per project that resolves packages. Restore
   with `dotnet restore --locked-mode` locally and in CI; use `--no-restore` for
   format and build after that successful restore.
@@ -154,6 +187,10 @@ See `$apm-usage` for installation, cooldown, license, and update details.
   executable contract. Every retained configuration must be consumed by a
   documented local command and an enabled CI step; remove stale configuration
   or unsupported promises instead of treating file presence as enforcement.
+- Treat Skill renderers and sync scripts as authoring-time tools. Consumer CI
+  may run committed repository-owned actions and scripts copied or rendered by
+  a Skill, but must not execute `.agents/skills/` or require APM installation to
+  build, lint, package, or release the product.
 - Use `pinact run --check --min-age 7`, `actionlint`, and ShellCheck for
   workflow or composite-action changes. Cache downloaded tool archives only;
   verify their checksum on every extraction. Keep the tool version and checksum
@@ -191,9 +228,10 @@ See `$apm-usage` for installation, cooldown, license, and update details.
   shell. Test changed action scripts with ShellCheck and their calling workflow
   with actionlint and pinact.
 - Add the selected template IDs and `sync_templates.ps1 -Check` command to
-  contributor documentation and CI. A repository that needs a different
-  contract must stop selecting that template and document the concrete reason;
-  an untracked local edit is drift, not customization.
+  contributor documentation for authoring-time review. Do not add it to
+  consumer CI. A repository that needs a different contract must stop selecting
+  that template and document the concrete reason; an untracked local edit is
+  drift, not customization.
 
 ## Release automation
 
@@ -226,15 +264,23 @@ See `$apm-usage` for installation, cooldown, license, and update details.
   package-host tokens to the publishing step and never expose them to pull
   request or untrusted-code workflows.
 - Enable immutable releases where GitHub supports them. Create a draft, attach
-  every asset and checksum, then publish. Automation must fail if the target
-  tag, release, or asset already exists; do not update published artifacts.
+  the exact user-facing assets selected by the repository contract, then
+  publish. Keep checksum files used only for build-to-release handoff
+  verification inside the workflow artifact; expose a checksum sidecar only
+  when the repository explicitly selects it as a release asset. Automation must
+  fail if the target tag, release, or asset already exists; do not update
+  published artifacts.
 - Separate validation artifacts, prereleases, and stable releases. Version
   classification, tag creation, GitHub release visibility, and package-host
   publishing conditions must agree. Use concurrency keyed to the release/tag to
   prevent duplicate publication.
+- Keep a committed publication-authorization input disabled while release and
+  publisher tooling is only being prepared. Require explicit maintainer
+  authorization before enabling it; selecting a stable version is not by itself
+  permission to publish.
 - Inspect the final ZIP before publishing: expected root layout, one intended
-  DLL, manifest, README, changelog, icon, license, and no game/runtime DLLs,
-  local paths, logs, or build intermediates.
+  DLL, manifest, README, changelog, icon, a license only when explicitly
+  selected, and no game/runtime DLLs, local paths, logs, or build intermediates.
 - Inspect the contents of the packaged README/manifest/changelog themselves.
   Required identity, supported game/loader baseline, dependencies, and release
   version must appear in the files users receive and agree with the project and
@@ -247,9 +293,9 @@ See `$apm-usage` for installation, cooldown, license, and update details.
 Apply this section only when the chosen package host is Thunderstore.
 
 - Keep the package ZIP root compatible with Thunderstore's package contract:
-  plugin DLL, `manifest.json`, `README.md`, `CHANGELOG.md`, icon, and license
-  when required by the repository's package policy. Validate the final archive,
-  not just the `assets/` source directory.
+  plugin DLL, `manifest.json`, `README.md`, `CHANGELOG.md`, icon, and an
+  explicitly selected license when required by the repository's package policy.
+  Validate the final archive, not just the `assets/` source directory.
 - Keep `manifest.json` name, version, website, description, and dependency
   strings deliberate. Dependency changes require the compatible loader/game
   baseline, installation impact, rollback risk, and test evidence. Put detailed

@@ -2,8 +2,9 @@
 
 ## Overview
 
-Review BepInEx Mono mod repositories for C# structure, dependencies, APM, GitHub CI, release automation, and conditional
-Thunderstore publishing quality.
+Review BepInEx Mono mod repositories for C# structure, dependencies, APM,
+repository-family alignment, GitHub CI, package readiness, release automation,
+and Thunderstore publishing quality.
 
 ## Install
 

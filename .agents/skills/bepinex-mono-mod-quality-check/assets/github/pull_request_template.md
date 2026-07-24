@@ -107,7 +107,7 @@ Paste the relevant output here.
 <!--
 Check this item before submitting.
 Pull requests cannot be merged without Contribution License Agreement
-confirmation from CONTRIBUTING.md.
+confirmation.
 -->
 
 As the pull request author, I have checked all required items:

@@ -47,5 +47,37 @@ Use `Update Note`, `Discussion Note`, or `Review Note` only when the task reques
 notes. Place `Request addressed: ...` after the required alert; group retrospective notes by meaningful theme, separate
 independently reviewable themes when requested, label inferences, and omit secrets, private paths, and hidden reasoning.
 
-When using `gh`, write Markdown to a temporary file and pass `--body-file`. Verify the stored body with
-`gh pr view --json body`, correct quoting, and remove the temporary file.
+When using `gh`, write Markdown to a temporary file and pass `--body-file`.
+Verify the stored body from the complete `--json body` response, not
+line-oriented `--jq` output. In PowerShell, preserve the response as one raw
+string, decode it, require `body` to be a `[string]`, compare it with the
+candidate, and remove the temporary file.
+
+Before `gh pr merge` creates a squash or merge commit:
+
+1. Resolve the exact PR head SHA and pass it with `--match-head-commit`.
+2. Write the merge body with real line breaks to a temporary file; do not pass
+   an escaped string containing literal `\n` sequences.
+3. Build the complete candidate commit message from the exact subject and body
+   file. Write those exact bytes to a candidate file and reject literal `\n`
+   or `\r\n` text. Pass the candidate file directly to
+   `git interpret-trailers --parse`; do not pipe a shell string that may alter
+   line endings. Require each expected trailer exactly once.
+4. Before merging, test the stored-message verifier itself. Put the candidate
+   message in a JSON fixture shaped like the commit API response, decode it
+   through the same JSON parser planned for post-merge verification, and
+   require `commit.message` to be one string equal to the candidate.
+5. Only after those validations succeed, pass the same body file with
+   `gh pr merge --body-file`.
+6. Verify the stored commit message and trailers after merge. Preserve the
+   multiline value as one string:
+   - Save the full commit API JSON response to a temporary file and parse it as
+     JSON. In PowerShell, use `Get-Content -Raw | ConvertFrom-Json`, then
+     require `commit.message` to be a `[string]`.
+   - Do not assign line-oriented output from
+     `gh api --jq '.commit.message'` directly to a PowerShell variable; a
+     multiline value becomes an array of lines and breaks exact comparison.
+   - Write the decoded `commit.message` string to a file, compare it with the
+     candidate allowing at most terminal-newline normalization, and pass that
+     file directly to `git interpret-trailers --parse`.
+   Treat this as a secondary check, not a substitute for pre-merge validation.

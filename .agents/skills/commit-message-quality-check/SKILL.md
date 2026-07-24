@@ -34,8 +34,26 @@ Reference:
    of repeating the summary.
 5. Check required footer or trailer metadata, including `BREAKING CHANGE` and
    AI agent `Co-authored-by:` trailers when applicable.
-6. Recommend the smallest correction that makes the message valid and accurate.
-7. If the diff contains multiple unrelated logical changes, recommend splitting
+6. Before an operation creates or rewrites a commit, validate the exact
+   candidate message that the operation will receive:
+   - Build it from the same subject and body file or bytes that will be passed
+     to the command or API.
+   - Reject literal `\n` or `\r\n` text where real line breaks are intended.
+   - Write the exact candidate bytes to a temporary file and pass that file
+     directly to `git interpret-trailers --parse`; do not pipe a shell string
+     that may transform line endings. Require every expected trailer to appear
+     exactly once.
+   - For a structured API payload, apply the literal-escape check before
+     serialization and verify that decoding the serialized payload reproduces
+     the validated subject and body. JSON escaping on the wire is not itself a
+     failure.
+   - In PowerShell, do not assign line-oriented native-command output directly
+     when verifying multiline text. Capture the complete structured response
+     as raw text, decode it, assert that the selected value is a `[string]`,
+     and only then compare it with the candidate.
+   - Do not perform the mutation until the candidate passes.
+7. Recommend the smallest correction that makes the message valid and accurate.
+8. If the diff contains multiple unrelated logical changes, recommend splitting
    the commit when practical.
 
 ## Format
@@ -123,6 +141,11 @@ per agent. Put each trailer on its own line in the footer block, with no blank
 lines between consecutive trailer lines. Keep `BREAKING CHANGE` before ordinary
 metadata when it explains the change, and keep co-author trailers at the end
 unless another project rule says otherwise.
+
+For squash merges or other remote commit creation, do not trust an escaped
+command-line string or a post-merge inspection as the primary check. Validate
+the exact pre-mutation payload as described in the workflow, then verify the
+stored commit message after the operation as a secondary check.
 
 ## Type Selection
 

@@ -1,14 +1,14 @@
 # Contributing
 
-Thank you for your interest in improving SkipDropshipCompany. This project
+Thank you for your interest in improving this project. This project
 welcomes focused bug reports, documentation improvements, compatibility notes,
 and small code changes that are easy to review.
 The project maintainer is listed in [CODEOWNERS](./.github/CODEOWNERS).
 
 ## Before you start
 
-- Check the existing [issues](https://github.com/aoirint/SkipDropshipCompany/issues)
-  and [pull requests](https://github.com/aoirint/SkipDropshipCompany/pulls)
+- Check the existing [issues](../../issues)
+  and [pull requests](../../pulls)
   to avoid duplicate work.
 - Open an issue first for larger behavior changes, compatibility changes, or
   anything that may affect release packaging.
@@ -17,7 +17,7 @@ The project maintainer is listed in [CODEOWNERS](./.github/CODEOWNERS).
 
 ## Reporting issues
 
-- Use [GitHub Issues](https://github.com/aoirint/SkipDropshipCompany/issues)
+- Use [GitHub Issues](../../issues)
   for ordinary bug reports, feature requests, compatibility notes, and
   documentation improvement requests.
     - To minimize the personal burden this project places on maintainers,
@@ -28,8 +28,8 @@ The project maintainer is listed in [CODEOWNERS](./.github/CODEOWNERS).
       requests for large or complex features, or compatibility requests for base
       game versions that are no longer current.
 - Before opening a new issue, check the existing
-  [issues](https://github.com/aoirint/SkipDropshipCompany/issues) and
-  [pull requests](https://github.com/aoirint/SkipDropshipCompany/pulls) to avoid
+  [issues](../../issues) and
+  [pull requests](../../pulls) to avoid
   duplicates.
 - When you share logs, screenshots, or other supporting material in a public
   issue, expect maintainers to use that material within a reasonable scope
@@ -84,8 +84,8 @@ dotnet restore --locked-mode
   entries when the behavior changes.
 - Update [CHANGELOG.md](./CHANGELOG.md) for developer-facing changes that should
   appear in release history.
-- Update files under [assets/](./assets/) when the Thunderstore package
-  metadata, icon, README, or release notes change.
+- Update package-facing metadata, documentation, icons, or release notes when
+  the repository's selected package host uses them.
 - Do not commit build output, downloaded game files, local mod manager profiles, or local machine configuration.
 
 ## Verification
@@ -93,22 +93,21 @@ dotnet restore --locked-mode
 Run the checks that match your change before opening a pull request:
 
 ```powershell
-dotnet format
+dotnet format --no-restore --verify-no-changes
 docker run --rm --network none --user 1000:1000 -v ".:/workdir" davidanson/markdownlint-cli2:v0.22.1@sha256:0ed9a5f4c77ef447da2a2ac6e67caf74b214a7f80288819565e8b7d2ac148fe5
-shellcheck .github/actions/publish-thunderstore/publish-thunderstore.sh
+git ls-files '*.sh' | ForEach-Object { shellcheck $_ }
 actionlint -pyflakes=
 pinact run --check --min-age 7
-DOTNET_CLI_UI_LANGUAGE=en dotnet build
+$env:DOTNET_CLI_UI_LANGUAGE = 'en'
+dotnet build --no-restore
 ```
 
 Use the commands as follows:
 
-- Run `dotnet format` and `DOTNET_CLI_UI_LANGUAGE=en dotnet build` for source
+- Run `dotnet format` and the environment-pinned `dotnet build` for source
   changes.
 - Run Markdown lint for documentation changes.
-  The Docker command is the documented pinned path, but Docker is not required.
-  Another `markdownlint-cli2` installation method is acceptable when it uses the
-  repository configuration.
+  The Docker command is the reviewed immutable path.
 - Run `shellcheck`, `actionlint`, and `pinact` when changing GitHub Actions
   workflows, composite actions, shell scripts, or related repository automation.
   ShellCheck should run before actionlint so actionlint can use its ShellCheck
@@ -118,8 +117,8 @@ On Linux, run the Markdown lint command with `sudo docker` and use
 `--user "$(id -u):$(id -g)"`.
 
 For package or release changes, also verify the release documentation in
-[README.md](./README.md) and confirm that the Thunderstore-facing files under
-`assets/` are still correct.
+[README.md](./README.md), the selected package-host contract, and the exact
+files copied into the final archive.
 
 ## Pull requests
 

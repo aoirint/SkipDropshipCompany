@@ -15,6 +15,7 @@ function Get-RenderedTemplate([string] $TemplatePath, [psobject] $Variables) {
         'project_directory',
         'project_file',
         'plugin_assembly',
+        'enable_publication',
         'thunderstore_namespace',
         'thunderstore_community',
         'thunderstore_categories'
@@ -22,7 +23,11 @@ function Get-RenderedTemplate([string] $TemplatePath, [psobject] $Variables) {
     foreach ($name in $required) {
         $value = $Variables.$name
         if ($null -eq $value) { throw "Missing workflow variable: $name" }
-        if ($name -eq 'thunderstore_categories') {
+        if ($name -eq 'enable_publication') {
+            if ($value -isnot [bool]) { throw "Unsafe workflow variable: $name" }
+            $value = if ($value) { 'true' } else { 'false' }
+        }
+        elseif ($name -eq 'thunderstore_categories') {
             # Preserve a one-element JSON array under StrictMode.
             $values = @(@($value) | ForEach-Object { [string] $_ })
             if ($values.Count -eq 0 -or ($values | Where-Object { [string]::IsNullOrWhiteSpace($_) -or $_ -match "`r|`n" })) { throw "Unsafe workflow variable: $name" }
@@ -32,7 +37,7 @@ function Get-RenderedTemplate([string] $TemplatePath, [psobject] $Variables) {
             $value = [string] $value
             if ([string]::IsNullOrWhiteSpace($value) -or $value -match "`r|`n") { throw "Unsafe workflow variable: $name" }
         }
-        if ($name -ne 'thunderstore_categories' -and [string]::IsNullOrWhiteSpace($value)) {
+        if ($name -notin @('enable_publication', 'thunderstore_categories') -and [string]::IsNullOrWhiteSpace($value)) {
             throw "Unsafe workflow variable: $name"
         }
         $text = $text.Replace("@@$($name.ToUpperInvariant())@@", $value)
@@ -51,6 +56,7 @@ try {
         @{ Source = 'generate-version/action.yml'; Destination = '.github/actions/generate-version/action.yml' },
         @{ Source = 'publish-thunderstore/action.yml'; Destination = '.github/actions/publish-thunderstore/action.yml' },
         @{ Source = 'publish-thunderstore/publish-thunderstore.sh'; Destination = '.github/actions/publish-thunderstore/publish-thunderstore.sh' },
+        @{ Source = 'check-apm-project/action.yml'; Destination = '.github/actions/check-apm-project/action.yml' },
         @{ Source = 'install-workflow-tools/action.yml.template'; Destination = '.github/actions/install-workflow-tools/action.yml' },
         @{ Source = 'setup-dotnet/action.yml.template'; Destination = '.github/actions/setup-dotnet/action.yml' },
         @{ Source = 'lint-source/action.yml.template'; Destination = '.github/actions/lint-source/action.yml' },

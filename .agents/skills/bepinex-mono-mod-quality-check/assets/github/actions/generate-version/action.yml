@@ -66,9 +66,13 @@ runs:
 
         CSPROJ_VERSION="${{ steps.csproj-version.outputs.version }}"
 
-        # Tags are fetched here, not by checkout, because release mode depends
-        # on the remote tag set at the moment the build runs.
-        git fetch --tags
+        # The planning checkout must fetch full history and tags before this
+        # action runs. This keeps private-repository credentials inside the
+        # checkout action instead of persisting them for a later fetch.
+        if [ "$(git rev-parse --is-shallow-repository)" != "false" ]; then
+          echo "Version planning requires a full checkout with tags." >&2
+          exit 1
+        fi
         if git rev-parse "refs/tags/v${CSPROJ_VERSION}" >/dev/null 2>&1; then
           echo "mode=edge" >> "${GITHUB_OUTPUT}"
         elif [[ "${CSPROJ_VERSION}" == "0.0.0" ]]; then

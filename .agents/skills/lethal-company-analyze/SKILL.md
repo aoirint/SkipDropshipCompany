@@ -118,3 +118,7 @@ description:
    reproduction commands with the deliverable. Make each rebuild mode's no-clobber archive list complete, construct
    isolated verifier roots explicitly from sealed manifests, and finish with receiver-side read-only verification of the
    complete recursive handoff chain.
+8. In public compatibility documentation, identify a game build with the Steam Build ID and Steam Manifest ID. Keep
+   loader, dependency, and runtime facts in separate fields; do not expose local extraction paths, private-repository
+   identifiers, or internal handoff hashes. Internal evidence ledgers may retain the hashes needed for reproducibility.
+   Prefer direct domain titles and prose over repeatedly labeling sections as analysis, trace, or version artifacts.

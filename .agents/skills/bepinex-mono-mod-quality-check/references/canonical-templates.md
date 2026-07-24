@@ -4,6 +4,13 @@ Use the bundled templates only when the target repository adopts the matching
 release contract. They are exact reusable files, not examples to rewrite per
 repository.
 
+## Contents
+
+- [Bundled templates](#bundled-templates)
+- [Initial provenance](#initial-provenance)
+- [Adopt or verify](#adopt-or-verify)
+- [Improve without drift](#improve-without-drift)
+
 ## Bundled templates
 
 The mapping in `assets/template-map.json` installs these template groups:
@@ -12,7 +19,10 @@ The mapping in `assets/template-map.json` installs these template groups:
   contributor workflow, AI-assistance disclosure, and Contribution License
   Agreement text and confirmation synchronized as one contract. Do not deploy
   the CLA checkbox without the bundled agreement, or the agreement without its
-  required confirmation.
+  required confirmation. Adopt this pair only when `.github/CODEOWNERS` exists
+  and identifies the maintainer linked by the contributor guide. The sync
+  script enforces paired selection and a non-empty ownership rule; the adopter
+  must review that the named maintainer or team is correct.
 - `github-generate-version`: derive stable, prerelease, and edge versions and
   synchronize project and Thunderstore manifest versions.
 - `github-publish-thunderstore-action` and
@@ -24,16 +34,19 @@ Thunderstore templates apply only when the evidence ledger selects
 Thunderstore and the release workflow supplies the required reviewed inputs.
 Keep `thunderstore_namespace`, `thunderstore_community`, and
 `thunderstore_categories` as target-specific render variables; never replace
-them with values copied from another repository.
+them with values copied from another repository. Keep `enable_publication`
+`false` until the maintainer explicitly authorizes GitHub Release and
+package-host publication; a stable project version alone is not authorization.
 
 `assets/github/workflows/` contains rendered CI skeletons rather than
 exact-sync template IDs: project and package-host values are intentionally
 render variables. Render the paired `pull-request.yml.template`,
 `main.yml.template`, and the local `install-workflow-tools`, `setup-dotnet`,
-`lint-source`, `generate-version`, and `publish-thunderstore` Composite Actions,
-including the publisher script, together. A workflow change that adds or
-changes a local-action reference or input is incomplete until the renderer
-deploys the complete matching action in the same invocation. The small actions expose their
+`check-apm-project`, `lint-source`, `generate-version`, and
+`publish-thunderstore` Composite Actions, including the publisher script,
+together. A workflow change that adds or changes a local-action reference or
+input is incomplete until the renderer deploys the complete matching action in
+the same invocation. The small actions expose their
 individual toolchain, environment, and lint responsibilities; `lint-source`
 validates source on the caller's runner;
 `Main` repeats that validation on the pushed integration commit, resolves
@@ -43,6 +56,21 @@ package source files and retains every artifact, including non-published edge
 output. Keep the workflow default at `contents: read` and grant
 `contents: write` only to the release job. Do not fold the event boundaries back into one trigger-heavy workflow
 or add manual dispatch without a named operator procedure.
+
+Repository ignore and Markdown policy are independent of the selected package
+host. Render them without adopting a publishing workflow:
+
+```powershell
+& .agents/skills/bepinex-mono-mod-quality-check/scripts/render_repository_files.ps1 `
+  -RepoRoot . -Apply -ProjectDirectory ExampleMod
+```
+
+Use `-Check` with the same project directory during authoring and review.
+Document the command in target contributor guidance when maintainers expect it
+to run locally. Do not add it to consumer CI: rendered workflows and actions
+must remain functional when `.agents/skills/` is absent. The renderer changes
+only `.gitignore` and `.markdownlint-cli2.yaml`; use the exact-sync template IDs
+for `.gitattributes`, contributor policy, and the pull request template.
 
 ## Initial provenance
 
@@ -73,13 +101,17 @@ repository contract; omitting `-Template` selects all bundled templates.
   -Template repository-contributing,github-pull-request-template
 ```
 
-Use the same selection in contributor documentation and CI, replacing
-`-Apply` with `-Check`. The check fails when a selected destination is missing
-or modified. YAML must match exactly after Git-policy line-ending
-normalization; executable shell files must match byte-for-byte, including LF.
+Use the same selection in contributor documentation and authoring-time review,
+replacing `-Apply` with `-Check`. Do not execute the installed Skill from
+consumer CI. The check fails when a selected destination is missing or
+modified. YAML must match exactly after Git-policy line-ending normalization;
+executable shell files must match byte-for-byte, including LF.
 Select `repository-contributing` and `github-pull-request-template` together;
 they are not independently adoptable because the checkbox confirms the
-agreement in the companion document.
+agreement in the companion document. This pair contains contribution licensing
+terms and is applicable only after the maintainer explicitly selects the
+project license and those terms. While either decision is blocked, use
+license-neutral contributor guidance without a CLA checkbox.
 
 ## Improve without drift
 

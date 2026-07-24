@@ -137,6 +137,30 @@ try {
         $templates = @($templates | Where-Object { $selectedIds.Contains($_.Id) })
     }
 
+    $contributorContractIds = @(
+        'repository-contributing',
+        'github-pull-request-template'
+    )
+    $selectedContributorContractIds = @(
+        $templates | Where-Object { $_.Id -in $contributorContractIds }
+    )
+    if ($selectedContributorContractIds.Count -notin @(0, 2)) {
+        throw 'Select repository-contributing and github-pull-request-template together.'
+    }
+    if ($selectedContributorContractIds.Count -eq 2) {
+        $codeownersPath = Join-Path $repoRootPath '.github/CODEOWNERS'
+        if (-not (Test-Path -LiteralPath $codeownersPath -PathType Leaf)) {
+            throw 'The contributor contract requires .github/CODEOWNERS.'
+        }
+        $ownerRules = @(
+            Get-Content -LiteralPath $codeownersPath |
+                Where-Object { $_.Trim() -and -not $_.Trim().StartsWith('#') }
+        )
+        if ($ownerRules.Count -eq 0) {
+            throw '.github/CODEOWNERS has no ownership rule.'
+        }
+    }
+
     $drifted = $false
     foreach ($entry in $templates) {
         $destinationPath = Join-Path $repoRootPath $entry.Destination

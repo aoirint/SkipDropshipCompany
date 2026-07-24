@@ -4,6 +4,11 @@ description: Run the repository's workflow, C#, and Markdown source checks.
 runs:
   using: composite
   steps:
+    - name: Check APM project metadata
+      uses: ./.github/actions/check-apm-project
+      with:
+        expected-apm-version: "0.26.0"
+
     - name: Install workflow lint tools
       uses: ./.github/actions/install-workflow-tools
 

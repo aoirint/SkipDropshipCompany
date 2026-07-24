@@ -11,23 +11,26 @@ targets:
 - codex
 dependencies:
   apm:
-  - aoirint/skills/.apm/skills/apm-usage#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/bepinex-mono-mod-quality-check#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/changelog-workflow#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/code-quality-check#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/commit-message-quality-check#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/git-worktree-workflow#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/github-actions-quality-check#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/gitignore-workflow#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/issue-quality-check#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/lethal-company-analyze#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/prose-quality-check#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/pull-request-quality-check#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/release-note-workflow#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/rollout-workflow#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/security-check#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/software-documentation-maintenance#8a315e49001597b260c1c2e1b5b348ebedba4f0c
-  - aoirint/skills/.apm/skills/unity-game-analyze#8a315e49001597b260c1c2e1b5b348ebedba4f0c
+  - git: aoirint/skills
+    ref: b0fe82275d00aea5191c92fa58f30fccc1cbb3f1
+    skills:
+    - apm-usage
+    - bepinex-mono-mod-quality-check
+    - changelog-workflow
+    - code-quality-check
+    - commit-message-quality-check
+    - git-worktree-workflow
+    - github-actions-quality-check
+    - gitignore-workflow
+    - issue-quality-check
+    - lethal-company-analyze
+    - prose-quality-check
+    - pull-request-quality-check
+    - release-note-workflow
+    - rollout-workflow
+    - security-check
+    - software-documentation-maintenance
+    - unity-game-analyze
   mcp: []
 includes: auto
 scripts: {}

@@ -1,40 +1,45 @@
 {
-  "version": "v0.25.0",
-  "published_at": "2026-07-12T13:07:22Z",
+  "version": "v0.26.0",
+  "published_at": "2026-07-18T21:57:33Z",
   "cooldown_days": 7,
-  "eligible_on": "2026-07-19T13:07:22Z",
-  "release_url": "https://github.com/microsoft/apm/releases/tag/v0.25.0",
+  "eligible_on": "2026-07-25T21:57:33Z",
+  "release_url": "https://github.com/microsoft/apm/releases/tag/v0.26.0",
   "download_url_template": "https://github.com/microsoft/apm/releases/download/{version}/{asset}",
   "assets": [
     {
       "platform": "macos-arm64",
       "archive": "apm-darwin-arm64.tar.gz",
       "extracted_directory": "apm-darwin-arm64",
-      "sha256": "8b46963bf881d1369c1ee30f6099fba54d13379a8860ec190cdcaf50cf4586a9"
+      "sha256": "febddd0a8beb4be7b411e708ed746937a14482d5e0935eb776b7f35e320654df"
     },
     {
       "platform": "macos-x86_64",
       "archive": "apm-darwin-x86_64.tar.gz",
       "extracted_directory": "apm-darwin-x86_64",
-      "sha256": "8b1c43543113550e49939c7970429e19881d6347c90c44185eb55ea73d0eca73"
+      "sha256": "6cc47251bbefabe36224bcc5370c1ef08405d4fd15900b42e11ba672ae29483f"
     },
     {
       "platform": "linux-arm64",
       "archive": "apm-linux-arm64.tar.gz",
       "extracted_directory": "apm-linux-arm64",
-      "sha256": "962d0d463544bdba42f2c99e8daa12eef2abd15d52e18bfbbad07fb13e573305"
+      "sha256": "c4d6b5ab6d9bdca3c3c324db7ce8d1c4faf7b317f45a55a50ae2571eaa506d25"
     },
     {
       "platform": "linux-x86_64",
       "archive": "apm-linux-x86_64.tar.gz",
       "extracted_directory": "apm-linux-x86_64",
-      "sha256": "7a4281ef915e9609f8841eced19285bf2dcf702862302171f7e893c30e1b3244"
+      "sha256": "3afba455c5283852ba4c392f668be7c27b65bc4a0fa60a8b53a4626c52628431"
     },
     {
       "platform": "windows-x86_64",
       "archive": "apm-windows-x86_64.zip",
       "extracted_directory": "apm-windows-x86_64",
-      "sha256": "1d9b3b44ffe031c331f4dfe33694bbb80d10d16165ca053110b96dbeb7365943"
+      "sha256": "1b74a90c7ee6373ab2926addd110c1dbc5934a9675e5f436cac4d04f46cce2f5"
     }
-  ]
+  ],
+  "cooldown_exception": {
+    "approved_at": "2026-07-24T13:48:14Z",
+    "reason": "APM 0.26.0 fixes audit config-consistency false failures for virtual packages (microsoft/apm#2214).",
+    "scope": "bootstrap-cli-release-time-gate"
+  }
 }

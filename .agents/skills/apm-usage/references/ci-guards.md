@@ -27,7 +27,7 @@ Add one step to an existing composite lint action:
 - name: Check APM project metadata
   uses: ./.github/actions/check-apm-project
   with:
-    expected-apm-version: "0.25.0"
+    expected-apm-version: "0.26.0"
 ```
 
 The check uses only the Python standard library available on the selected

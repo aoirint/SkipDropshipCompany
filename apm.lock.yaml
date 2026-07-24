@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-07-24T14:12:59.632799+00:00'
+generated_at: '2026-07-24T14:51:01.128307+00:00'
 apm_version: 0.26.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: b0fe82275d00aea5191c92fa58f30fccc1cbb3f1
-  resolved_ref: b0fe82275d00aea5191c92fa58f30fccc1cbb3f1
+  resolved_commit: 92588481a4b26cc708ed843b7d1f685a4bfa3c49
+  resolved_ref: 92588481a4b26cc708ed843b7d1f685a4bfa3c49
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -94,6 +94,7 @@ dependencies:
   - .agents/skills/pull-request-quality-check/SKILL.md
   - .agents/skills/pull-request-quality-check/agents/openai.yaml
   - .agents/skills/pull-request-quality-check/references/fallback-pr-body.md
+  - .agents/skills/pull-request-quality-check/scripts/check_llm_disclosure.py
   - .agents/skills/release-note-workflow
   - .agents/skills/release-note-workflow/README.md
   - .agents/skills/release-note-workflow/SKILL.md
@@ -191,9 +192,10 @@ dependencies:
     .agents/skills/prose-quality-check/SKILL.md: sha256:89f553473800fae3801ccfc9cd2a0a58bc647d17663bc39cd653bff4442367fd
     .agents/skills/prose-quality-check/agents/openai.yaml: sha256:b83e0a5d151e6e20df6f7d97f268955c6abfd105d53820f6baad0de8403fc062
     .agents/skills/pull-request-quality-check/README.md: sha256:5c15de701adc508b9dd828846317f47b0f5b925c5a8842b6c32b4d9e3946e11f
-    .agents/skills/pull-request-quality-check/SKILL.md: sha256:df43d06303ef838cc50827c313edd985f0487d87dd0461063e968ca283e69d1e
+    .agents/skills/pull-request-quality-check/SKILL.md: sha256:25b13009a02d58d0b165c408733e46aa57ae76b9b264cddbc36313a1a34a9f48
     .agents/skills/pull-request-quality-check/agents/openai.yaml: sha256:1ddb931336ca5ce10b9accf92787e36168c1c71a4b999bd85f130144e778bfa4
     .agents/skills/pull-request-quality-check/references/fallback-pr-body.md: sha256:b381d75f9d1f525ce72f594b1cd8a8de37539bf29c5750c139bbd7113f606dfc
+    .agents/skills/pull-request-quality-check/scripts/check_llm_disclosure.py: sha256:ecef5b6732ecef2e674184f3ae114c0f5a16bc8ce0550b03d03b2b53e93d6f37
     .agents/skills/release-note-workflow/README.md: sha256:f13446e75a1c77495c4d55476ba8ca919aa3181e0864feb7a668a20a5cdf964b
     .agents/skills/release-note-workflow/SKILL.md: sha256:1566fb9311f6be6f1fe9402d38d9cdfa7c9d7c40ed4a62042f869ca6225fb276
     .agents/skills/release-note-workflow/agents/openai.yaml: sha256:30cfe7d4520783cfc8c72f5f81cc3e7a5708a5827e691f0003a665d89558fda0
@@ -216,7 +218,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:e932d6f1f0460e52a2a12897931a8b7621ce7387531e86ad1949cb1e028d75dc
+  content_hash: sha256:609d9c30c911cf72d0d89504804ec8425c5b944e243689570cee6441178cc18f
   skill_subset:
   - apm-usage
   - bepinex-mono-mod-quality-check
@@ -974,7 +976,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:df43d06303ef838cc50827c313edd985f0487d87dd0461063e968ca283e69d1e
+  content_hash: sha256:25b13009a02d58d0b165c408733e46aa57ae76b9b264cddbc36313a1a34a9f48
 - kind: project-relative
   target: codex
   value: .agents/skills/pull-request-quality-check/agents/openai.yaml
@@ -993,6 +995,15 @@ deployments:
   - aoirint/skills
   active_owner: aoirint/skills
   content_hash: sha256:b381d75f9d1f525ce72f594b1cd8a8de37539bf29c5750c139bbd7113f606dfc
+- kind: project-relative
+  target: codex
+  value: .agents/skills/pull-request-quality-check/scripts/check_llm_disclosure.py
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:ecef5b6732ecef2e674184f3ae114c0f5a16bc8ce0550b03d03b2b53e93d6f37
 - kind: project-relative
   target: codex
   value: .agents/skills/release-note-workflow

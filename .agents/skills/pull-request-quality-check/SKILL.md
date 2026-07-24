@@ -31,7 +31,11 @@ description:
     > This comment was created with assistance from LLMs.
     ```
 
-    Omit an alert only when assistance was not significant.
+    Omit an alert only when assistance was not significant. Treat the alert as
+    an invariant, not interchangeable formatting: no template content or
+    other alert may precede or replace it. If an existing body starts with
+    another alert, prepend the LLM alert and preserve the existing body after
+    the separating blank line.
 
 5. Keep verification evidence distinct: automated commands, CI results, non-AI manual checks, screenshots/videos, and
    AI-assisted inspections. Put requested AI-assisted inspections under `## Testing`, then `### AI-assisted inspections`
@@ -52,6 +56,22 @@ Verify the stored body from the complete `--json body` response, not
 line-oriented `--jq` output. In PowerShell, preserve the response as one raw
 string, decode it, require `body` to be a `[string]`, compare it with the
 candidate, and remove the temporary file.
+
+Before writing an AI-assisted body or comment, run
+`scripts/check_llm_disclosure.py` against the candidate. For a
+disclosure-only repair, also pass the exact prior body so the check proves that
+only the required alert prefix was added. After writing, fetch the complete
+JSON response and run the helper against that response and the candidate.
+
+For multi-PR or multi-comment work, treat each stored artifact as an
+independent completion unit:
+
+1. Preflight every candidate before the first external write.
+2. Verify each stored artifact immediately after its write.
+3. Audit the complete target set at the end, including targets that required
+   no edit.
+4. Report success only when every target has exactly one required alert at the
+   absolute top and every stored body matches its approved candidate.
 
 Before `gh pr merge` creates a squash or merge commit:
 

@@ -25,8 +25,17 @@ and distinct from user-facing release notes.
 6. Source compatibility, support, environment, and migration claims. Mark unsourced claims as missing input or draft
    material; distinguish confirmed, best-effort, limited-check, and known-issue evidence. Group paired tools and
    dependencies with the product/version they qualify.
-7. Preserve historical accuracy. Mark backfilled metadata as backfilled, retain meaningful prerelease history, attach
-   withdrawn or superseded notes to the affected entry, and use complete prerelease versions when they matter.
+   When the same compatibility statement appears in multiple changelogs or
+   user documentation, use an established canonical hierarchy and preserve its
+   entries, nesting, dates, and reference links. Do not flatten a tested
+   environment into a generic dependency label or delete supported-platform
+   details to make copies look shorter.
+7. Preserve historical accuracy. Mark backfilled metadata as backfilled, retain meaningful prerelease history, and use
+   complete prerelease versions when they matter. Treat `Unreleased` as the prospective final release state: remove
+   proposals, implementation iterations, and settings-category moves that were withdrawn or superseded within the same
+   pull request. Record only the final user- or maintainer-visible change, such as the settings that exist after the
+   change. Retain a withdrawn or superseded note only when a published artifact or a prior versioned entry makes that
+   history durable.
 8. Describe public package metadata from actual publication-channel history, not local or GitHub-only artifacts. Treat a
    newly public compatibility label as `Changed`; use `Fixed` only for a correction already exposed publicly.
 9. Write concise factual bullets. Avoid issue or PR identifiers unless the maintainer needs the durable link. Use

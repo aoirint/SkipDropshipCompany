@@ -126,6 +126,12 @@ Use the required map rather than a file's current name:
 - Keep contribution, review, security-reporting, and agent policy in their repository governance
   files; link to operations when a procedure is shared.
 
+For a host-consent or authorization concern, keep the need to prevent unapproved client use,
+external protocol constraints, and credible technical options in `domain/`. Put the product's
+selection of an option, its authorization model, rejected alternatives, and rationale in
+`architecture/`. Do not present a selected transport as reusable domain truth merely because it
+uses an external API.
+
 Keep each fact in one canonical place and link to it elsewhere. Split a mixed document when its
 facts have different owners, audiences, evidence sources, or change triggers. Do not create a
 concern document without a distinct question, but do retain each required section index.
@@ -152,6 +158,12 @@ applicable version, build, API level, environment, or deployment target once in 
 - observed behavior from intended or proposed behavior;
 - public contract from implementation detail;
 - external-system facts from this product's policy or design choice.
+
+Follow the repository's established `Target` shape when one exists. For example, sibling domain
+documents may consistently list the game, manifest/build identifier, and evidence. Put that scope
+once near the start of the concern document; do not repeat version literals throughout the body.
+Do not add an `Evidence` field merely to imitate a template: include only evidence that was
+actually inspected and can be repeated by a future maintainer.
 
 Do not include machine-local paths, secrets, incidental generated output, or substantial copied
 third-party source. Give enough evidence detail for a future maintainer to repeat the check. Inspect

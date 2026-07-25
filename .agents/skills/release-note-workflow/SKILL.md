@@ -21,6 +21,9 @@ Do not author the canonical developer changelog or publish, tag, or upload a rel
 - Keep the developer changelog as the detailed source of truth.
 - Make every public history accurate for its own destination.
 - Keep source notes, release planning, validators, and the final published artifact synchronized.
+- Avoid release-specific operational-documentation churn. Derive a version from
+  its canonical source where needed; do not copy it into guides or workflows
+  merely to describe the current release.
 
 ## Workflow
 
@@ -47,6 +50,9 @@ Do not author the canonical developer changelog or publish, tag, or upload a rel
 6. Use `Notes`, after change categories, for compatibility and limitation metadata unless the channel requires another
    layout. Source claims, preserve confidence levels, and group paired tools or dependencies with their tested
    product/version. Exclude test dependencies, diagnostics, and issue/PR IDs unless users need them.
+   Keep a durable beta or known-limitation gate when it remains true; do not
+   replace its concrete scope with a generic status notice. Update operational
+   documentation only when the operation itself changes.
 7. Synchronize the boundary with automation when the repository packages or generates the destination:
    - Make release planning select the correct notes source and heading rule for each release mode and destination.
    - Require a destination version heading only when that destination publishes the version; otherwise require an

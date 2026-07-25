@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate required LLM disclosure and exact pull-request body preservation."""
+"""Validate required LLM disclosure and pull-request body preservation."""
 
 from __future__ import annotations
 
@@ -43,6 +43,21 @@ def disclosure_prefixes(disclosure: str) -> tuple[str, str]:
     return lf_prefix, crlf_prefix
 
 
+def matches_candidate(body: str, candidate: str) -> bool:
+    """Compare bodies, permitting only one terminal newline representation."""
+    if body == candidate:
+        return True
+
+    def without_terminal_newline(value: str) -> str:
+        if value.endswith("\r\n"):
+            return value[:-2]
+        if value.endswith(("\n", "\r")):
+            return value[:-1]
+        return value
+
+    return without_terminal_newline(body) == without_terminal_newline(candidate)
+
+
 def validate(args: argparse.Namespace) -> list[str]:
     body = read_body(args)
     disclosure = DISCLOSURES[args.kind]
@@ -72,8 +87,11 @@ def validate(args: argparse.Namespace) -> list[str]:
 
     if args.expected_body_file is not None:
         expected = read_text(args.expected_body_file)
-        if body != expected:
-            errors.append("stored body does not exactly match the approved candidate")
+        if not matches_candidate(body, expected):
+            errors.append(
+                "stored body does not match the approved candidate, allowing only "
+                "terminal-newline normalization"
+            )
 
     return errors
 
@@ -101,7 +119,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--expected-body-file",
         type=Path,
-        help="Require the body to match this approved candidate exactly.",
+        help=(
+            "Require the body to match this approved candidate, allowing only "
+            "terminal-newline normalization."
+        ),
     )
     return parser.parse_args()
 

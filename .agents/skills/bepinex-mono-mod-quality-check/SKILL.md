@@ -237,10 +237,18 @@ conditional branches, verification matrix, and report format. Do not replace tha
      any explicitly selected license with the release intent. Do not create, infer, or package a license until the
      maintainer selects one.
    - When compatibility is repeated across the package README, developer
-     changelog, and package changelog, preserve the canonical hierarchy,
-     tested environment, platform requirements, and reference links in every
-     applicable destination. Do not shorten a copy by flattening or omitting
-     supported compatibility context.
+     changelog, and package changelog, inspect same-role entries in designated
+     peer repositories before writing. Preserve the established hierarchy,
+     dates, and reference links, while retaining each artifact's role: README
+     compatibility sections may show the target and test environment; changelog
+     `Notes` entries should state concise compatibility facts. Keep detailed
+     evidence status in the evidence ledger, developer documentation, or PR
+     notes unless it changes the release's user-facing compatibility meaning.
+     Do not infer that an incomplete runtime result belongs in a package
+     changelog or README merely because it is recorded in developer evidence;
+     add it only when the same-role convention or maintainer selects it.
+     Do not add a `Changed` entry that merely says the documentation was
+     "clarified"; record the resulting compatibility state under `Notes`.
    - Separate package readiness from publication authorization. When the evidence ledger confirms a distribution host,
      keep the repository family's portable manifest, package README, user-facing changelog, editable and rendered icon,
      final-archive validation, inert publisher tooling, and a license only when explicitly selected complete even when
@@ -255,6 +263,11 @@ conditional branches, verification matrix, and report format. Do not replace tha
    - Verify identity, supported game/loader baseline, dependencies, and release version on the exact metadata and
      documentation files copied into the final archive. Repository-root prose does not satisfy a package-facing claim
      when it is not distributed.
+   - When a package-facing README embeds screenshots or diagrams, verify that every reference resolves and renders in
+     the package host or its documented renderer. Keep renderer-specific fallback files separate from editable
+     developer sources, and do not treat root-README rendering as package validation. Package an image only when the
+     host contract requires it; otherwise a stable repository-hosted fallback may avoid duplicating an asset whose
+     authoring lifecycle belongs in developer documentation.
    - Keep developer changelog entries and user-facing release notes in their repository-defined roles. Either package a
      distinct publication-facing source or explicitly declare the canonical changelog dual-purpose; do not describe a
      derivation step that packaging does not perform. Do not claim untested game compatibility or publish a version

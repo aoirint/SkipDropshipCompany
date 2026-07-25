@@ -109,6 +109,9 @@ description:
    the concrete repeat workflow, fresh-state behavior, independence assumptions, save-state side effects, and the
    observation window are established. Otherwise present a bounded candidate strategy or conditional frequency
    calculation.
+   When explaining interacting state predicates to players, name the subject and reference point of every distance or
+   threshold, and keep independently evaluated conditions separate. Describe a NavMesh or terrain setup as a possible
+   aid only unless the target-build evidence establishes its exact effect and required combination.
 6. Calibrate review cost to risk. Use a fresh blank-context reviewer for new mechanics, endpoint meanings, computations,
    evidence-class changes, gameplay recommendations, or broad narrative/visual rewrites. Do not spend a subagent pass on
    a localized mechanically verifiable edit such as a heading level, label, link, or known table placement when

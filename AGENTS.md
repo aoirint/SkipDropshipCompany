@@ -77,5 +77,5 @@ document owner and technical evidence are established.
 
 ## Icon Assets
 
-When changing `assets/icon.svg` or regenerating `assets/icon.png`, follow
-`docs/icon-authoring.md`.
+When changing `docs/release/icon.svg` or regenerating `assets/icon.png`, follow
+`docs/release/icon-authoring.md`.

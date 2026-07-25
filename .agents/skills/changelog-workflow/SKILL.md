@@ -25,11 +25,16 @@ and distinct from user-facing release notes.
 6. Source compatibility, support, environment, and migration claims. Mark unsourced claims as missing input or draft
    material; distinguish confirmed, best-effort, limited-check, and known-issue evidence. Group paired tools and
    dependencies with the product/version they qualify.
-   When the same compatibility statement appears in multiple changelogs or
-   user documentation, use an established canonical hierarchy and preserve its
-   entries, nesting, dates, and reference links. Do not flatten a tested
-   environment into a generic dependency label or delete supported-platform
-   details to make copies look shorter.
+   When compatibility appears in multiple artifacts or peer repositories,
+   inspect same-role entries before choosing wording. Preserve their hierarchy,
+   dates, and reference links, but keep each destination in its established
+   role: a README may show a target and test environment, while a changelog
+   `Notes` entry records the compatibility fact. Do not copy test environments
+   or evidence-status prose into a user-facing changelog unless it changes the
+   release's user-facing compatibility meaning. Do not infer that an incomplete
+   runtime result belongs in a package changelog or README merely because it is
+   recorded in developer evidence; add it only when the same-role convention or
+   maintainer selects it.
 7. Preserve historical accuracy. Mark backfilled metadata as backfilled, retain meaningful prerelease history, and use
    complete prerelease versions when they matter. Treat `Unreleased` as the prospective final release state: remove
    proposals, implementation iterations, and settings-category moves that were withdrawn or superseded within the same
@@ -38,7 +43,12 @@ and distinct from user-facing release notes.
    history durable.
 8. Describe public package metadata from actual publication-channel history, not local or GitHub-only artifacts. Treat a
    newly public compatibility label as `Changed`; use `Fixed` only for a correction already exposed publicly.
-9. Write concise factual bullets. Avoid issue or PR identifiers unless the maintainer needs the durable link. Use
+9. Put a compatibility fact under `Notes` as `Compatibility: <product and
+   version>` when that is the repository or peer-family convention. Do not add
+   a `Changed` bullet that merely says compatibility documentation was
+   "clarified"; record the final compatibility state instead. For backfilled
+   historical entries, retain the backfill status and the historical hierarchy.
+10. Write concise factual bullets. Avoid issue or PR identifiers unless the maintainer needs the durable link. Use
    `prose-quality-check` for prose changes that risk losing confidence, relationship, or historical-status nuance.
 
 ## Handoff and boundaries

@@ -12,7 +12,7 @@ targets:
 dependencies:
   apm:
   - git: aoirint/skills
-    ref: 92588481a4b26cc708ed843b7d1f685a4bfa3c49
+    ref: 111f116ab1da401f9727566ed431ee07086f449d
     skills:
     - apm-usage
     - bepinex-mono-mod-quality-check

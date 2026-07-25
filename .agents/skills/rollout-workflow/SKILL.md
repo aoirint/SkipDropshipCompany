@@ -28,7 +28,10 @@ that is already validated there; do not use rollout work to redesign it.
    explain it in the commit or PR.
 3. Do not vary structure, terminology, examples, filenames, or metadata merely
    because a peer is a different repository.
-4. Compare each peer destination with the primary after editing. Every remaining
+4. Preserve the canonical content's information granularity. Do not flatten a
+   hierarchy, remove linked dependencies or platform requirements, or replace
+   concrete limitations with a generic summary merely to make a peer concise.
+5. Compare each peer destination with the primary after editing. Every remaining
    difference must have a documented local reason.
 
 ## Validate and publish

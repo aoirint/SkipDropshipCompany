@@ -38,6 +38,9 @@ Do not author the canonical developer changelog or publish, tag, or upload a rel
    - For a first public release, or when a destination skipped the prereleases, consolidate still-relevant user-visible
      outcomes into the next destination entry. Keep it under an explicit draft marker until version and date are
      confirmed; do not copy prerelease dates or imply those versions were available there.
+   - Omit a generic `Unreleased` heading from a user-facing changelog that records published destination history. Keep
+     it only when the destination intentionally shows draft content, and label that content as draft; remove it when a
+     stable entry is finalized.
 3. Read the exact canonical section that supplies the selected release. If it, the confirmed version, or UTC date is
    missing, produce clearly labeled draft review text and list the missing inputs; never use a release-ready placeholder
    heading.
@@ -58,16 +61,19 @@ Do not author the canonical developer changelog or publish, tag, or upload a rel
    - Require a destination version heading only when that destination publishes the version; otherwise require an
      explicit draft section and reject headings that falsely claim other-channel releases.
    - Exercise both the accepted destination history and a mutation that inserts an invalid cross-channel heading.
-   - Inspect the completed archive or stored release body, not only the source file.
+   - Inspect the completed archive or stored release body, not only the source file. When packaging generates a
+     manifest version, use the manifest embedded in that archive as publication evidence rather than a checked-in
+     placeholder.
 8. Use `prose-quality-check` for nuanced prose and `security-check` for security- or supply-chain-sensitive content.
 
 ## Check readiness
 
 Before publication, confirm the version, destination-specific public-version set, documented tag convention, local and
 remote tag availability, required note format, release-workflow inclusion, final-artifact content, and documented
-verification result. Treat missing metadata, tag or remote-tag verification, channel-history or prerelease-policy
-evidence, workflow inclusion, artifact inspection, or failed verification as blockers. Do not publish, create tags or
-releases, or expose private paths, transcripts, or credentials.
+verification result. When the workflow owns tag or release creation, require the expected tag to be absent locally and
+remotely, then hand creation to that workflow rather than pre-creating it. Treat missing metadata, tag or remote-tag
+verification, channel-history or prerelease-policy evidence, workflow inclusion, artifact inspection, or failed
+verification as blockers. Do not publish, create tags or releases, or expose private paths, transcripts, or credentials.
 
 For review-only requests, make no edits and return a compact status matrix for the source section, notes destination,
 destination history, version and tags, format, workflow inclusion, artifact verification, required updates, and

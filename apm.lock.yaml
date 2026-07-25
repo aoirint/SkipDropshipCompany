@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-07-25T06:17:45.786505+00:00'
+generated_at: '2026-07-25T06:22:55.072184+00:00'
 apm_version: 0.26.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: 5c0c9fbeab4bb798f9b0fff87f3860851b754803
-  resolved_ref: 5c0c9fbeab4bb798f9b0fff87f3860851b754803
+  resolved_commit: d08845144339c1e2d9e0ed98d4b3ab8f93a04d91
+  resolved_ref: d08845144339c1e2d9e0ed98d4b3ab8f93a04d91
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -213,7 +213,7 @@ dependencies:
     .agents/skills/software-documentation-maintenance/README.md: sha256:df6442dbefc58dab91b442b51f3ca4a0af5938f844542d35a3c18a721b631861
     .agents/skills/software-documentation-maintenance/SKILL.md: sha256:36d61f85d5f982e691c807a369ada22bbeb661ef13dca1891591e34c0662d890
     .agents/skills/software-documentation-maintenance/agents/openai.yaml: sha256:ee6ff516cfb6b9d7a76bacd166c461bc79cd012e0a7e7683aada95e1b5d1ff14
-    .agents/skills/software-documentation-maintenance/references/visual-documentation-assets.md: sha256:5d6384c59080a3b230cd6976a6115b300b091e026aabd6ddb2eea25d7d192095
+    .agents/skills/software-documentation-maintenance/references/visual-documentation-assets.md: sha256:967e49ba1593e58753ff48c94394d0edcadfba55574151f91cf7679d6aa7b774
     .agents/skills/unity-game-analyze/README.md: sha256:844d7294c5867870315e0a2d521d59654e9b0f4ee14885902ceca84ba7c70ec7
     .agents/skills/unity-game-analyze/SKILL.md: sha256:68481c536fbfbda49b8c6e1a74f55faf4ce48c14006efeb13b37a83509e4e7d9
     .agents/skills/unity-game-analyze/agents/openai.yaml: sha256:d6b6ee37197ee95d8a81bddeabc3ccc6a87b80dababa874ed5ab514e317f3088
@@ -222,7 +222,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:f7911c616b521c4730921b74f9ebaae4edbec127c35dd3aedac70ddfb145cb6a
+  content_hash: sha256:4b3cee2711aa65537a15d161b0eaa287623154798e47383de2f688ef3dd3e00f
   skill_subset:
   - apm-usage
   - bepinex-mono-mod-quality-check
@@ -1187,7 +1187,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:5d6384c59080a3b230cd6976a6115b300b091e026aabd6ddb2eea25d7d192095
+  content_hash: sha256:967e49ba1593e58753ff48c94394d0edcadfba55574151f91cf7679d6aa7b774
 - kind: project-relative
   target: codex
   value: .agents/skills/unity-game-analyze

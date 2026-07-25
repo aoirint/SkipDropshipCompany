@@ -9,10 +9,10 @@ that format. Place it by the responsibility it serves and the lifecycle that cha
 - **Domain or architecture content:** owns the game/platform facts or product-design facts a diagram explains. Link
   to the release asset when it is user-facing; the drawing must not become a second source of those facts.
 - **Release material:** owns diagrams, icons, screenshots, package-renderer fallbacks, and other presentation assets
-  when they are shared by a release README, package page, or release process. Keep the editable source and its focused
-  authoring guide together in `docs/release/` so an update does not separate the asset from the procedure that keeps
-  its derivatives and consumers correct. Runtime-package files still belong in the package layout required by the
-  package host.
+  when they are used by a release README, package page, or release process. A single editable icon still has this
+  lifecycle when it produces a required package PNG. Keep the editable source and its focused authoring guide together
+  in `docs/release/` so an update does not separate the asset from the procedure that keeps its derivatives and
+  consumers correct. Runtime-package files still belong in the package layout required by the package host.
 - **Operations:** owns a shared procedure that applies across several assets, such as a renderer invocation, image
   conversion policy, capture environment, or validation matrix. A release-asset-specific guide may stay beside its
   source and link to this shared operation instead of duplicating it.
@@ -23,11 +23,11 @@ compatibility validation are recurring maintenance work.
 
 ## Create directories only for an owned question
 
-Create `docs/release/` when release-facing assets need shared ownership, discovery, or maintenance guidance beyond
-the README that embeds them. It is especially appropriate when an editable source needs a retained fallback for
-another renderer. Do not create an empty future category. If one static screenshot has no procedure, it may remain in
-a small asset subdirectory owned by the release-facing document or package source without becoming an indexed
-documentation section.
+Create `docs/release/` when a release-facing asset has an editable source and focused maintenance guidance, including
+a single package icon with a generated PNG. It is especially appropriate when an editable source needs a retained
+fallback for another renderer. Do not create an empty future category. If one static screenshot has no procedure, it
+may remain in a small asset subdirectory owned by the release-facing document or package source without becoming an
+indexed documentation section.
 
 Do not create `docs/diagrams/` just to collect files with a common format. It is appropriate only if the repository
 has an independent, cross-cutting diagram system whose maintainer question cannot be owned by domain, architecture,

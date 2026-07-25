@@ -55,7 +55,8 @@ When using `gh`, write Markdown to a temporary file and pass `--body-file`.
 Verify the stored body from the complete `--json body` response, not
 line-oriented `--jq` output. In PowerShell, preserve the response as one raw
 string, decode it, require `body` to be a `[string]`, compare it with the
-candidate, and remove the temporary file.
+candidate allowing only terminal-newline normalization, and remove the
+temporary file. Do not normalize any other whitespace or line endings.
 
 Before writing an AI-assisted body or comment, run
 `scripts/check_llm_disclosure.py` against the candidate. For a
@@ -71,7 +72,8 @@ independent completion unit:
 3. Audit the complete target set at the end, including targets that required
    no edit.
 4. Report success only when every target has exactly one required alert at the
-   absolute top and every stored body matches its approved candidate.
+   absolute top and every stored body matches its approved candidate, allowing
+   only terminal-newline normalization.
 
 Before `gh pr merge` creates a squash or merge commit:
 
@@ -91,9 +93,13 @@ Before `gh pr merge` creates a squash or merge commit:
    `gh pr merge --body-file`.
 6. Verify the stored commit message and trailers after merge. Preserve the
    multiline value as one string:
-   - Save the full commit API JSON response to a temporary file and parse it as
-     JSON. In PowerShell, use `Get-Content -Raw | ConvertFrom-Json`, then
-     require `commit.message` to be a `[string]`.
+   - Query the repository commit endpoint
+     `repos/{owner}/{repo}/commits/{sha}`, whose response contains
+     `commit.message`; do not use the Git-data endpoint
+     `repos/{owner}/{repo}/git/commits/{sha}`, whose `message` is at the root.
+     Save the full response to a temporary file and parse it as JSON. In
+     PowerShell, use `Get-Content -Raw | ConvertFrom-Json`, then require
+     `commit.message` to be a `[string]`.
    - Do not assign line-oriented output from
      `gh api --jq '.commit.message'` directly to a PowerShell variable; a
      multiline value becomes an array of lines and breaks exact comparison.

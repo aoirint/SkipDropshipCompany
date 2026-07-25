@@ -44,6 +44,11 @@ use the applicable documentation-system or domain-specific skill.
      relationships.
    - Paragraphs that mix context, decision, evidence, and consequence.
    - List items that contain several facts, exceptions, examples, or follow-up notes.
+   - Spatial or state conditions whose thresholds use different subjects or reference positions.
+     Name the subject and reference in every independently readable item; do not rely on a
+     deictic phrase such as "that position" when it could refer to more than one value.
+   - Independently evaluated conditions phrased as though they were one conjunction. Keep them
+     separate unless the factual source establishes that every part is required together.
 4. Prefer lists when presenting enumerations.
    - Use inline prose only when the enumeration is short enough to read naturally or when the local
      document style clearly favors inline wording.

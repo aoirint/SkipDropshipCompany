@@ -15,7 +15,9 @@ and distinct from user-facing release notes.
 
 1. Locate the canonical changelog and confirm its role before editing.
 2. Keep `Unreleased` first. Move entries to a versioned section only after the maintainer confirms the stable version
-   and UTC release date; never add placeholder release headings.
+   and UTC release date; never add placeholder release headings. At that promotion, move every remaining final,
+   release-ready bullet into the new versioned section and leave `Unreleased` empty. Do not duplicate promoted bullets
+   or retain implementation history that does not describe the final release state.
 3. Use Keep a Changelog categories where applicable: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and
    `Security`. Put supplemental compatibility, test, limitation, or migration context under `Notes`, after change
    categories.

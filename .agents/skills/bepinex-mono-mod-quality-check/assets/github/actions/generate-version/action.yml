@@ -99,9 +99,11 @@ runs:
         if [ "${RELEASE_MODE}" = "edge" ]; then
           # Edge artifacts need globally unique SemVer-compatible versions so
           # repeated main-branch builds do not collide with published packages.
-          DATE_STRING=$(date -u "+%Y-%m-%dT%H-%M-%SZ")
+          # NuGet rejects an all-numeric prerelease identifier with a leading
+          # zero. Prefix both fields so neither identifier is numeric-only.
+          DATE_STRING=$(date -u "+d%Y%m%d%H%M%S")
           SHA_SHORT="${GITHUB_SHA:0:7}"
-          APP_VERSION="${CSPROJ_VERSION}-edge.${DATE_STRING}.${SHA_SHORT}"
+          APP_VERSION="${CSPROJ_VERSION}-edge.${DATE_STRING}.g${SHA_SHORT}"
         else
           APP_VERSION="${CSPROJ_VERSION}"
         fi

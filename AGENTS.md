@@ -11,9 +11,6 @@ directly.
   their resolved commits and content hashes.
 - Keep this unpublished APM project at `version: 0.0.0` until its
   distribution and versioning design is explicitly decided.
-- Use APM CLI 0.26.0 for lock operations. Its normal seven-day cooldown was
-  explicitly waived because it fixes virtual-package `config-consistency`
-  audit failures. The waiver covers only the CLI release time gate.
 - To restore the committed Skill set, run `apm install --frozen` from the
   repository root, then run `apm audit --ci`.
 - Make shared Skill changes in
@@ -26,6 +23,10 @@ directly.
   `.agents/skills/` changes together.
 
 ### Approved cooldown exception
+
+Use APM CLI 0.26.0 for lock operations. Its normal seven-day cooldown was
+explicitly waived because it fixes virtual-package `config-consistency` audit
+failures. The waiver covers only the CLI release time gate.
 
 A maintainer may explicitly waive the normal seven-day wait for the latest
 `aoirint/skills` main commit. Record the waiver and exact full commit SHA in

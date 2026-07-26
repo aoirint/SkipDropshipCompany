@@ -14,22 +14,23 @@ directly.
 - Use APM CLI 0.26.0 for lock operations. Its normal seven-day cooldown was
   explicitly waived because it fixes virtual-package `config-consistency`
   audit failures. The waiver covers only the CLI release time gate.
-- A maintainer may explicitly waive the normal seven-day wait for a directly
-  selected current `aoirint/skills` main commit. Record the waiver and exact
-  full commit SHA in the pull request.
-- That waiver applies only to the direct `aoirint/skills` commit selection. It
-  does not cover dependencies of `aoirint/skills`; review those dependencies
-  and enforce their cooldown independently.
 - To restore the committed Skill set, run `apm install --frozen` from the
   repository root, then run `apm audit --ci`.
-- Make all Skill changes in the public
+- Make shared Skill changes in
   [aoirint/skills](https://github.com/aoirint/skills) repository. This
-  repository only selects, pins, and deploys those Skills.
-- To update a Skill dependency, review its source, commit pin, license, and
-  cooldown first. Update `apm.yml`, remove only the validated project lock,
-  regenerate it with APM 0.26.0, then run `apm install --frozen` and
-  `apm audit --ci`. Commit the manifest, lockfile, notices, and generated
+  repository only selects, pins, and deploys them.
+- To update the Skill dependency, review its source, commit pin, license, and
+  cooldown first. Regenerate the lockfile with APM, then run
+  `apm install --frozen` and `apm audit --ci`. Commit the manifest, lockfile,
+  notices, and generated
   `.agents/skills/` changes together.
+
+### Approved cooldown exception
+
+A maintainer may explicitly waive the normal seven-day wait for the latest
+`aoirint/skills` main commit. Record the waiver and exact full commit SHA in
+the pull request. That waiver applies only to the `aoirint/skills` commit; it
+does not waive review or cooldown requirements for any of its dependencies.
 
 ## Markdown Checks
 

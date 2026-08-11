@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-08-11T08:24:39.592277+00:00'
+generated_at: '2026-08-11T08:49:34.772578+00:00'
 apm_version: 0.27.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: 2c77fb8583c437c7e47cd293f4bc703f410b9be0
-  resolved_ref: 2c77fb8583c437c7e47cd293f4bc703f410b9be0
+  resolved_commit: 9831bb2c9d41ffbd9d41336b840384b3e303e2e8
+  resolved_ref: 9831bb2c9d41ffbd9d41336b840384b3e303e2e8
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -173,7 +173,7 @@ dependencies:
     .agents/skills/github-actions-quality-check/assets/github/workflows/main.yml: sha256:9c6fc9b8a12eda5300d526de709ab17456781179efa43ea9c911bde795204690
     .agents/skills/github-actions-quality-check/assets/github/workflows/pull-request.yml: sha256:825813d13866d67da9edf0420d9d8290d2ffe36c20ae4ae0f97a1c91992b818b
     .agents/skills/github-actions-quality-check/references/composite-actions.md: sha256:d914d0fe4495121c5fdf168681a6dac62b897c28771e67ffb30c04f8d7fe3298
-    .agents/skills/github-actions-quality-check/references/naming-and-readability.md: sha256:139ba5ec7fa0c374437fc4e193ed8d67ad3d4788146a1efbf1726eb687d5b4e6
+    .agents/skills/github-actions-quality-check/references/naming-and-readability.md: sha256:ed1ed605d688fcce1f5e764b4858009240cf2334832b84786f210ce450db71c7
     .agents/skills/github-actions-quality-check/references/repository-enforcement.md: sha256:0d511bf8d7467cab263da08be0263c8fa1a69555d9937e98472ef4c9de7c80d9
     .agents/skills/github-actions-quality-check/references/runner-selection.md: sha256:6e9929a316ba9efbf6171366de0d1a3c976aee73d22c26b2d1ec33017af6f164
     .agents/skills/github-actions-quality-check/references/template-contract.md: sha256:daf97ae3248bcd3e4300199e62369898e4827c9abfa749a7051bac82fd8b79bd
@@ -213,7 +213,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:110695f3f8ab158f51ef37eb143f131dfed711dfab670460a377d517199bd723
+  content_hash: sha256:068e0f032e5c782828b09e908faca88110fb59323e8e153aca9c69547fd6d74a
   skill_subset:
   - apm-workflow
   - bepinex-mono-mod-quality-check
@@ -789,7 +789,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:139ba5ec7fa0c374437fc4e193ed8d67ad3d4788146a1efbf1726eb687d5b4e6
+  content_hash: sha256:ed1ed605d688fcce1f5e764b4858009240cf2334832b84786f210ce450db71c7
 - kind: project-relative
   target: codex
   value: .agents/skills/github-actions-quality-check/references/repository-enforcement.md

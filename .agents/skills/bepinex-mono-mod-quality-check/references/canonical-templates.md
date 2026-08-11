@@ -23,10 +23,10 @@ The mapping in `assets/template-map.json` installs these template groups:
   and identifies the maintainer linked by the contributor guide. The sync
   script enforces paired selection and a non-empty ownership rule; the adopter
   must review that the named maintainer or team is correct.
-- `github-generate-version`: derive stable, prerelease, and edge versions and
+- `github-resolve-bepinex-version`: derive stable, prerelease, and edge versions and
   synchronize project and Thunderstore manifest versions.
-- `github-publish-thunderstore-action` and
-  `github-publish-thunderstore-script`: submit one prebuilt package to
+- `github-deploy-bepinex-thunderstore-action` and
+  `github-deploy-bepinex-thunderstore-script`: submit one prebuilt package to
   Thunderstore without rebuilding it.
 
 The version template requires the marker and file contract it documents. The
@@ -41,13 +41,18 @@ package-host publication; a stable project version alone is not authorization.
 `assets/github/workflows/` contains rendered CI skeletons rather than
 exact-sync template IDs: project and package-host values are intentionally
 render variables. Render the paired `pull-request.yml.template`,
-`main.yml.template`, and the local `install-workflow-tools`, `setup-dotnet`,
-`check-apm-project`, `lint-source`, `generate-version`, and
-`publish-thunderstore` Composite Actions, including the publisher script,
+`main.yml.template`, and the local `install-workflow-tools`,
+`setup-dotnet-locked`, `check-dotnet-bepinex-source`,
+`resolve-bepinex-version`, and `deploy-bepinex-thunderstore` Composite
+Actions, including the publisher script,
 together. A workflow change that adds or changes a local-action reference or
 input is incomplete until the renderer deploys the complete matching action in
-the same invocation. The small actions expose their
-individual toolchain, environment, and lint responsibilities; `lint-source`
+the same invocation. The renderer sources `install-workflow-tools` only from
+`github-actions-quality-check`; this Skill must not retain an editable copy.
+The generated consumer repository still receives the complete local action
+and never reads an installed Skill at workflow runtime. The small actions expose their
+individual toolchain, environment, and check responsibilities;
+`check-dotnet-bepinex-source`
 validates source on the caller's runner;
 `Main` repeats that validation on the pushed integration commit, resolves
 read-only version and release state in `plan`, then gates build and publication
@@ -83,9 +88,9 @@ those consumers part of the quality contract:
 | Template | Initial Git blob |
 | --- | --- |
 | `repository-contributing` | `2b8b39f943946719558a0877088c1268f9a87d75` |
-| `github-generate-version` | `0535faef6bfa4195e015c3a8c1e6c575d3e2c9ec` |
-| `github-publish-thunderstore-action` | `18dbef7efb310fe4cf03d7318cbd779c45ea5638` |
-| `github-publish-thunderstore-script` | `0e3bcb2ae5ff850e1a25db6591565ec0f67af0ee` |
+| `github-resolve-bepinex-version` | `0535faef6bfa4195e015c3a8c1e6c575d3e2c9ec` |
+| `github-deploy-bepinex-thunderstore-action` | `18dbef7efb310fe4cf03d7318cbd779c45ea5638` |
+| `github-deploy-bepinex-thunderstore-script` | `0e3bcb2ae5ff850e1a25db6591565ec0f67af0ee` |
 
 After this import, `aoirint/skills` is the source of truth; consumer history is
 evidence, not an upstream to copy automatically.

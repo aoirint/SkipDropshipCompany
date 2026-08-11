@@ -92,7 +92,7 @@ Use APM when the repository uses Codex agent guidance.
    Do not make product build, lint, package, or release jobs depend on deployed
    Skills; those jobs must remain functional when `.agents/skills/` is absent.
 
-See `$apm-usage` for installation, cooldown, license, and update details.
+See `$apm-workflow` for installation, cooldown, license, and update details.
 
 ## NuGet and C# project quality
 

@@ -18,8 +18,8 @@ defaults:
 
 jobs:
   # Re-run the required source checks on the exact integrated commit.
-  checks:
-    name: Checks
+  check:
+    name: Check
     runs-on: ubuntu-slim
 
     steps:
@@ -29,4 +29,4 @@ jobs:
           persist-credentials: false
 
       - name: Run shared source gate
-        uses: ./.github/actions/lint-source
+        uses: ./.github/actions/check-repository-source

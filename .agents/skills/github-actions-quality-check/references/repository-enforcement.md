@@ -57,7 +57,7 @@ rules and send the complete reviewed replacement with `PUT`.
 
 1. Add or adapt a validation workflow that runs the intended job on
    `pull_request`. Add `merge_group` when the repository uses a merge queue.
-2. Give the job a stable visible name, such as `Checks` or `Tests`.
+2. Give the job a stable visible name, such as `Check` or `Test`.
 3. Merge that workflow change to the default branch.
 4. Open a pull request and wait for a successful run. Confirm the exact
    context before adding it to the ruleset:
@@ -106,7 +106,7 @@ reusable-workflow names. Read back all three endpoints after the change.
 
 ## 5. Create or complete the default ruleset
 
-Save the following JSON as `ruleset.json` after replacing `Checks` with an
+Save the following JSON as `ruleset.json` after replacing `Check` with an
 observed pull-request check context. Repository role ID `5` is the `admin`
 role; its bypass mode is limited to pull requests. If no context is available,
 remove the complete `required_status_checks` object and apply the fallback from
@@ -128,7 +128,7 @@ section 2.
     { "type": "required_status_checks", "parameters": {
       "strict_required_status_checks_policy": true,
       "do_not_enforce_on_create": false,
-      "required_status_checks": [{ "context": "Checks" }]
+      "required_status_checks": [{ "context": "Check" }]
     } }
   ]
 }

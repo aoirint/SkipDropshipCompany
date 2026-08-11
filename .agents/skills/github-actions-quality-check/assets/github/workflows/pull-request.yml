@@ -21,8 +21,8 @@ defaults:
 
 jobs:
   # Keep proposed source validation separate from publishing privileges.
-  checks:
-    name: Checks
+  check:
+    name: Check
     runs-on: ubuntu-slim
 
     steps:
@@ -32,4 +32,4 @@ jobs:
           persist-credentials: false
 
       - name: Run shared source gate
-        uses: ./.github/actions/lint-source
+        uses: ./.github/actions/check-repository-source

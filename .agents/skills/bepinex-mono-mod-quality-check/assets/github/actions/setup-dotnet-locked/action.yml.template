@@ -1,0 +1,33 @@
+name: Set up locked .NET environment
+description: Install the reviewed SDK and restore the committed NuGet graph.
+
+outputs:
+  build-state-owned:
+    description: Whether this action established ownership of generated .NET build state.
+    value: ${{ steps.ownership.outputs.build-state-owned }}
+
+runs:
+  using: composite
+  steps:
+    - name: Reserve .NET build state
+      id: ownership
+      shell: bash
+      run: |
+        test ! -e @@PROJECT_DIRECTORY@@/bin
+        test ! -e @@PROJECT_DIRECTORY@@/obj
+        echo 'build-state-owned=true' >>"$GITHUB_OUTPUT"
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
+      with:
+        global-json-file: global.json
+        cache: true
+        cache-dependency-path: @@PROJECT_DIRECTORY@@/packages.lock.json
+
+    - name: Restore NuGet packages
+      shell: bash
+      run: dotnet restore --locked-mode
+
+    - name: Verify selected SDK
+      shell: bash
+      run: dotnet --version

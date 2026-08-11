@@ -23,6 +23,12 @@ be named `Pull Request`, contain a `check` job named `Check`, and call
 `.github/actions/check-docker/action.yml` named `Check Docker source`: each layer answers a different
 question.
 
+When a repository family standardizes lifecycle workflow names, audit every entry workflow by its
+top-level `name`, not by file name or job names. A workflow triggered by pushes to the integration
+branch remains `Main` when it also builds or publishes artifacts; keep `Build` and `Deploy` for the
+jobs that perform those narrower outcomes. Do not preserve a repository-local workflow-name
+exception merely because its file is still named `build.yml`.
+
 Before renaming a workflow or job, inventory branch rules, merge queues, badges, API consumers,
 documentation, and reusable-workflow callers. Treat a required job display-name change as a
 repository-enforcement migration, not a cosmetic edit.

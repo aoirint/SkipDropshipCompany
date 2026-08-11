@@ -285,6 +285,10 @@ conditional branches, verification matrix, and report format. Do not replace tha
      and loader-compatible version are deliberately handled for stable, prerelease, and edge builds.
 6. Check BepInEx release automation when the repository uses GitHub Actions or GitHub Releases. Apply
    `github-actions-quality-check` for the shared workflow and repository-enforcement baseline.
+   - Give the read-only release plan a full checkout with tag history (`fetch-depth: 0`) before resolving a version.
+     During rollout, verify this in the committed consumer workflow itself; the canonical template being correct does
+     not prove that an existing or previously copied workflow retained the setting. Run the main-push path after merge
+     so a pull-request-only source check cannot hide a release-plan history failure.
    - Keep checksum material used to verify the build-to-release handoff inside the workflow artifact by default.
      Publish only the package archive unless the repository has an explicit user-facing checksum-asset contract.
    - Install the exact SDK selected by `global.json` in CI with a full-SHA-pinned setup action or another pinned,

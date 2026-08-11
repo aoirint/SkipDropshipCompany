@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-08-11T07:15:59.536037+00:00'
+generated_at: '2026-08-11T08:24:39.592277+00:00'
 apm_version: 0.27.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: 6a1e6431bbaed762f55783c3dcd7dc4b07736596
-  resolved_ref: 6a1e6431bbaed762f55783c3dcd7dc4b07736596
+  resolved_commit: 2c77fb8583c437c7e47cd293f4bc703f410b9be0
+  resolved_ref: 2c77fb8583c437c7e47cd293f4bc703f410b9be0
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -126,7 +126,7 @@ dependencies:
     .agents/skills/apm-workflow/scripts/propose_bootstrap_update.py: sha256:5c8d079ff9caa4175a971c5d231bc24d8143d47d238496cace60b1d91d8d00d8
     .agents/skills/apm-workflow/scripts/propose_bootstrap_update.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
     .agents/skills/bepinex-mono-mod-quality-check/README.md: sha256:f1cedde8c48a1aa4ebe4a57decff164fd845ba82a64ddcbe66e9fc9f349286f5
-    .agents/skills/bepinex-mono-mod-quality-check/SKILL.md: sha256:5c70a2f7e16c39bd17dd90fd43b90fbec62cff54585cb641dce28b8dda79287c
+    .agents/skills/bepinex-mono-mod-quality-check/SKILL.md: sha256:c0a4782db7a9f6455e6139bc42095822d87c95a5af536cdabfc839a6af8c6654
     .agents/skills/bepinex-mono-mod-quality-check/agents/openai.yaml: sha256:a4d486e33ec1ce652ec78ffbc6c783b8005bd30202716385aaf5b5b686451cf7
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/check-dotnet-bepinex-source/action.yml.template: sha256:2938e617044ad99a2d9591f05a1525d3bb22a85340b881fdf36236950b2d401e
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/deploy-bepinex-thunderstore/action.yml: sha256:95eecbea6e59e7de9d3f36fc588938e08d8621fa8820e12ea6c8ea3828959a58
@@ -213,7 +213,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:ac27952ee585df0cc8fdfb53d02e4681405ca7b5eebb80f2c2d1707342adaeef
+  content_hash: sha256:110695f3f8ab158f51ef37eb143f131dfed711dfab670460a377d517199bd723
   skill_subset:
   - apm-workflow
   - bepinex-mono-mod-quality-check
@@ -321,7 +321,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:5c70a2f7e16c39bd17dd90fd43b90fbec62cff54585cb641dce28b8dda79287c
+  content_hash: sha256:c0a4782db7a9f6455e6139bc42095822d87c95a5af536cdabfc839a6af8c6654
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/agents/openai.yaml

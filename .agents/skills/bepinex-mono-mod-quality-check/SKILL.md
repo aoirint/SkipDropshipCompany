@@ -36,6 +36,10 @@ Apply `prose-quality-check` only after ownership and technical evidence are sett
 into reusable domain knowledge, and do not treat a well-structured document as proof that its game or release claim is
 correct.
 
+Use `github-actions-quality-check` for the shared event, trust, permission, concurrency, runner, action-pin,
+artifact-lineage, and repository-enforcement baseline. This Skill owns only the BepInEx/.NET/Thunderstore commands,
+release identity, package contract, and domain-specific templates layered on that baseline.
+
 Use `unity-game-analyze` to establish version-specific game-code and serialized-asset evidence: the concrete call path,
 effective prefab/scene values, object/load reachability, lifecycle timing, authority, and unresolved runtime inputs.
 This Skill consumes that evidence to select and verify hooks, adapters, identity mappings, compatibility claims, and
@@ -59,15 +63,9 @@ namespace; they do not replace this Skill's quality bar.
 - For C# changes, require locked restore, format verification without restore, and a no-restore build. For Markdown,
   workflow, shell, APM, package, or release changes, apply the corresponding checks in
   [repository-quality-template.md](references/repository-quality-template.md).
-- Use event-owned CI entry workflows: pull requests (and merge queues when used) validate proposed source with a `lint`
-  job (and a `test` job when the repository has tests), while the integration branch re-runs those jobs on its exact
-  commit and directly gates `build`, retained edge artifacts, and `release` through `needs`. Keep `lint-source` as a
-  Composite Action name, not a catch-all job name. When version or publication state must be resolved, use a read-only
-  `plan` job and make `build` depend directly on `lint`, optional `test`, and `plan`; have `release` consume the
-  verified build artifact and any needed plan output. Here, read-only means that planning does not modify tracked
-  source/package files, tags, releases, or other GitHub state and has no write-capable token. It may fetch remote refs
-  needed to classify the current version. Do not add manual dispatch or polling jobs without a documented
-  operator/recovery need.
+- Apply the event-owned workflow, direct-job-graph, read-only planning, permission, concurrency, and artifact-lineage
+  rules from `github-actions-quality-check`. This Skill supplies the BepInEx-specific source gate, release identity,
+  archive, edge-build, and Thunderstore extensions.
 - When the target adopts a bundled CI or publishing contract, copy its files exactly from this Skill's canonical
   `assets/` and verify them from the installed Skill during authoring and review. Consumer CI must run only committed
   repository-owned actions and scripts; it must not execute `.agents/skills/` or require this Skill at workflow
@@ -282,20 +280,10 @@ conditional branches, verification matrix, and report format. Do not replace tha
      or result. A generic exception or nonzero exit does not prove the advertised rejection branch.
    - When the project derives manifest or package versions in CI, verify that the project version, generated version,
      and loader-compatible version are deliberately handled for stable, prerelease, and edge builds.
-6. Check GitHub repository settings, CI, and release automation when the repository uses GitHub Actions or GitHub
-   Releases.
-   - Require the repository or organization Actions setting that enforces full-length commit-SHA pins. Independently
-     verify every third-party `uses:` reference has a full commit SHA and an accurate version comment; inspect reusable
-     workflows, container digests, and downloaded-tool checksums too.
-   - When the repository publishes GitHub Releases, require repository-level immutable releases where GitHub makes the
-     setting available. Automation must attach every asset before publishing the release and must fail rather than
-     replace an existing tag, release, or asset. If the setting is unavailable, record the residual risk and require an
-     explicit fail-on-existing-release/tag/asset path instead of silently treating releases as immutable.
+6. Check BepInEx release automation when the repository uses GitHub Actions or GitHub Releases. Apply
+   `github-actions-quality-check` for the shared workflow and repository-enforcement baseline.
    - Keep checksum material used to verify the build-to-release handoff inside the workflow artifact by default.
      Publish only the package archive unless the repository has an explicit user-facing checksum-asset contract.
-   - Trace one release from its source commit through locked restore, build, archived artifact, and release asset.
-     Publish only the artifact produced by that build; do not rebuild a separately checked-out revision in the release
-     job. Create and verify an artifact digest across the build and release jobs.
    - Install the exact SDK selected by `global.json` in CI with a full-SHA-pinned setup action or another pinned,
      verified mechanism before restore. Do not assume a hosted runner already contains the release-critical SDK.
    - Separate validation artifacts, prereleases, and stable publishing according to the repository's version rules. Gate
@@ -310,16 +298,13 @@ conditional branches, verification matrix, and report format. Do not replace tha
    - Keep archive creation CI-owned. A locally callable validator is useful, but a second repository-local production
      packager, `release/` helper tree, or custom approval schema needs a distinct consumer and lifecycle. Never remove the
      stable release path while consolidating packaging ownership.
-   - Default workflow permissions to read-only. Scope `contents: write` and publishing secrets to the release job that
-     needs them, and never expose a publish credential to pull-request validation.
 7. Run the narrowest relevant checks, then widen for the changed surface.
    - For C# or project changes, run locked restore, format verification, and no-restore build. Run the documented tests
      when automated tests are present or changed. Use the solution or project path required by the repository layout.
    - For documentation or package text, run Markdown lint over every committed Markdown file using the checked-in
      configuration.
-   - For workflows, composite actions, or shell scripts, run ShellCheck, `actionlint`, and
-     `pinact run --check --min-age 7`; check full-SHA action pins, container digests, downloaded-tool checksums,
-     permissions, concurrency, and secret scope.
+   - For workflows, composite actions, or shell scripts, apply the automated and AI-assisted validation scopes from
+     `github-actions-quality-check`, then run the BepInEx/.NET/package checks enabled by this Skill.
    - Reconcile declared tooling with execution. Every committed lint/check configuration and every command promised in
      README or CONTRIBUTING must have a runnable documented command and an enabled CI invocation, or be removed with the
      documented reason.

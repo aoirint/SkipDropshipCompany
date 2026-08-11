@@ -17,19 +17,22 @@ defaults:
     shell: bash
 
 jobs:
-  lint:
+  checks:
+    name: Checks
     # A merged commit is validated again in this workflow. This direct
     # dependency is the release gate; do not replace it with workflow polling.
     runs-on: ubuntu-slim
 
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Check out integrated source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/lint-source
-
+      - name: Run source checks
+        uses: ./.github/actions/lint-source
   plan:
+    name: Plan
     # Resolve one release identity before build mutates package source files.
     # Keep planning read-only so edge metadata remains reusable by its consumers.
     runs-on: ubuntu-slim
@@ -41,7 +44,8 @@ jobs:
       manifest_version: ${{ steps.generate-version.outputs.manifest_version }}
 
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Check out integrated source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
@@ -53,8 +57,9 @@ jobs:
           write_files: false
 
   build:
+    name: Build
     needs:
-      - lint
+      - checks
       - plan
     # Build keeps ubuntu-latest because packaging currently relies on
     # runner-provided shell tools such as jq and 7z.
@@ -69,7 +74,8 @@ jobs:
     steps:
       # Checkout is required before generating versions because the local
       # composite action reads project files and fetches tags from this clone.
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Check out integrated source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Generate version
         uses: ./.github/actions/generate-version
@@ -79,7 +85,7 @@ jobs:
           app_version: ${{ needs.plan.outputs.app_version }}
           manifest_version: ${{ needs.plan.outputs.manifest_version }}
 
-      - name: Setup .NET
+      - name: Set up .NET
         # This shared action pins the SDK and restores the same locked graph
         # used by source validation.
         uses: ./.github/actions/setup-dotnet
@@ -178,6 +184,7 @@ jobs:
           } >> "${GITHUB_STEP_SUMMARY}"
 
   release:
+    name: Release
     needs:
       - build
       - plan
@@ -195,7 +202,8 @@ jobs:
     steps:
       # Checkout is needed even though the package is downloaded, because the
       # Thunderstore publisher is a repository-local composite action.
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Check out integrated source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Download build artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1

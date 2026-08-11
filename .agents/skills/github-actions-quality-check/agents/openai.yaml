@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Actions Quality Check"
+  short_description: "Review secure and reliable GitHub Actions automation"
+  default_prompt: "Use $github-actions-quality-check to review GitHub Actions workflows."

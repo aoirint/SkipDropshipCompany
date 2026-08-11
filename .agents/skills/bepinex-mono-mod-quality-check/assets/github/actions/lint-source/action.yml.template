@@ -1,4 +1,4 @@
-name: Lint source
+name: Lint BepInEx source
 description: Run the repository's workflow, C#, and Markdown source checks.
 
 runs:

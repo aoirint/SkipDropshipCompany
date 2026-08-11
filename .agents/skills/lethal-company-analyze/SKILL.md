@@ -51,6 +51,12 @@ description:
    schemas.
 5. Freeze analysis thresholds, binning, tie rules, sparse-cell fallbacks, folds, metrics, and uncertainty interpretation
    before inspecting production outcomes.
+6. For an item-pool or weighted-spawn comparison, contract separately: (a) the serialized-pool weight share, (b) the
+   effective normal-draw share after every proved deterministic filter, replacement, reroll, or weight adjustment, and
+   (c) each conditional-branch share. For each endpoint, name the eligible entries, code transformation, branch
+   predicate, and whether its branch rate is established. Do not blend conditional branches into a normal-draw result
+   without their target-build rate, and do not present any draw share as an actual per-round spawned-item rate unless
+   attempt count, placement/instantiation outcome, and the observation window are established.
 
 ## Compute reproducibly
 

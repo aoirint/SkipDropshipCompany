@@ -289,19 +289,10 @@ independent stages.
 1. If APM is `yes`, preserve/create `apm.yml`, pin remote sources to full SHAs,
    check provenance/license/last-changed-subdirectory cooldown, record third
    party notices, then commit manifest, lockfile, and generated output together.
-2. If GitHub Actions is `yes`, create/align event-owned entry workflows: `Pull
-   Request` for `pull_request` and `merge_group` when used; `Main` for the
-   protected integration-branch push. Both run the same lint gate on
-   their checked-out commit. `Main` uses direct `needs` dependencies to gate
-   read-only `plan`, build, artifact upload, and publication; never substitute
-   API polling or an `await-quality` job. `plan` owns the resolved version and
-   release state; build and release consume its outputs rather than resolving a
-   second identity. Run lint in this order: checkout; external-tool
-   setup and verification; ShellCheck; actionlint; pinact; SDK setup; locked
-   restore; format; no-restore build; tests; Markdown lint; archive validation
-   when relevant. Use read-only permissions, explicit Bash, and PR-only
-   cancellation concurrency. Add manual dispatch only for a documented
-   diagnostic or recovery operation.
+2. If GitHub Actions is `yes`, apply `github-actions-quality-check` for entry
+   workflows, the direct job graph, planning, permissions, concurrency,
+   executable inputs, and validation tools. Extend that graph with this
+   repository's BepInEx/.NET source, archive, and publication contracts.
    Read the SDK version from `global.json` and install it explicitly using a
    full-SHA-pinned setup action or pinned verified equivalent before restore;
    verify `dotnet --version` matches. Do not depend on runner inventory.
@@ -314,9 +305,8 @@ independent stages.
    directory, or a repository-specific approval/evidence schema unless a named
    consumer and distinct lifecycle require it. Consolidation must preserve the
    stable release job and its verified artifact handoff.
-3. Pin third-party actions by full SHA plus accurate version comment, containers
-   by digest, and downloaded executable tools by adjacent version and checksum.
-   Cache only verified archives and use committed lockfiles as NuGet cache keys.
+3. Use committed lockfiles as NuGet cache keys. Do not cache restored package
+   directories or depend on ambient runner SDK state.
 4. If GitHub Releases is `yes`, create a build job that creates one archive and
    digest from the integration-branch commit, then uploads it for every build
    including unpublished edge builds; publish only a downloaded-and-verified copy.
@@ -374,7 +364,7 @@ not passed; record the command, reason, and resulting risk.
 | Identifier-dependent behavior | fixture where catalog/protocol index differs from stable domain ID | hash/persist/log/serialize result follows the contractually named identity |
 | Lifecycle predicate change | positive-and-adjacent-negative truth table | every named positive passes; loading/departing/travelling/reset/unavailable negatives fail unless explicitly included |
 | NuGet source/package/lock change | source/publisher/version/hash/license/transitive/age review | ledger records approval; mapping/locks cover every resolver |
-| Workflow/action/shell change | ShellCheck, `actionlint`, `pinact run --check --min-age 7`, manual pin/permission/concurrency/secret review | all pass; every executable input is pinned/verified |
+| Workflow/action/shell change | Complete `github-actions-quality-check` verification | shared automated and inspection checks pass; every executable input is verified |
 | Bundled template adopted or changed | run `sync_templates.ps1 -Check` from the installed Skill during authoring with the repository's selected IDs in the canonical Skill and every opted-in consumer | every selected destination exists and satisfies its manifest comparison mode; exclusions and local variants are documented; consumer CI has no `.agents/skills/` runtime dependency |
 | Lint/check config or contributor command | trace config to local command and enabled CI step | each retained config is consumed and every promised command is runnable in both documented and CI contexts |
 | APM change | `apm lock`; lock review; `apm install --frozen`; `apm audit --ci` | expected refs/hashes and no drift |

@@ -147,9 +147,12 @@ Read [template-contract.md](references/template-contract.md) before creating or
 repairing event-owned validation. The bundled files under `assets/github/`
 provide a minimal entry-workflow and tool-installation baseline. Copy them into
 the consumer repository, then make only repository-evidenced substitutions.
-Copy `assets/github/markdownlint-cli2.yaml` to
-`.markdownlint-cli2.yaml` whenever an outer source-check action runs the
-shared Markdown check. Add only repository-evidenced generated, vendored, or
-submodule paths to `ignores`; do not fork the shared rule baseline.
+When an outer source-check action runs Markdown validation, use
+`prose-quality-check` as the rule owner and copy its
+`assets/markdownlint-cli2.yaml` to `.markdownlint-cli2.yaml`. When an applicable
+domain Skill owns a reviewed derived configuration, such as
+`hugo-quality-check`, use that domain asset instead. Add only
+repository-evidenced generated, vendored, or submodule paths to `ignores`; do
+not fork or silently weaken the shared prose baseline.
 Consumer CI must run committed repository-owned files and must not execute the
 installed Skill at workflow runtime.

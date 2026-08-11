@@ -18,7 +18,7 @@ runs:
         echo 'build-state-owned=true' >>"$GITHUB_OUTPUT"
 
     - name: Set up .NET
-      uses: actions/setup-dotnet-locked@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
+      uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
       with:
         global-json-file: global.json
         cache: true

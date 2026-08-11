@@ -59,7 +59,9 @@ its ecosystem Skill do not establish.
 3. Build a direct job graph.
    - Read [naming-and-readability.md](references/naming-and-readability.md)
      before naming or renaming workflow files, workflows, jobs, steps, or local
-     actions. Use `checks`, `tests`, `builds`, and `deploys` as a small
+     actions. Read [composite-actions.md](references/composite-actions.md)
+     before creating or substantially changing a local Composite Action. Use
+     `check`, `test`, `build`, and `deploy` as a small
      conceptual vocabulary when it fits, but split jobs and workflows only
      when their operational boundaries justify the cost.
    - Make build depend directly on every required validation and plan job.
@@ -109,6 +111,13 @@ its ecosystem Skill do not establish.
      protected environment. Use the artifact-specific ecosystem Skill and
      `security-check` for final-container inspection.
 7. Validate source and embedded shell.
+   - Treat every embedded `run:` block as maintained source code. Apply
+     `code-quality-check` and the applicable language Skill, including
+     `python-quality-check` for embedded Python. Keep short orchestration
+     inline; move parsing, branching, reusable functions, or behavior that
+     needs focused tests into a repository-owned script. Follow the placement,
+     invocation, and validation contract in
+     [composite-actions.md](references/composite-actions.md).
    - Run the repository-documented `actionlint`, applicable standalone
      ShellCheck, and `pinact run --check --min-age 7`. Supply `GITHUB_TOKEN` to
      pinact when available.

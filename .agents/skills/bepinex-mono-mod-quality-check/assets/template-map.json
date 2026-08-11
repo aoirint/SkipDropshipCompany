@@ -20,21 +20,21 @@
       "comparison": "text-normalized-newlines"
     },
     {
-      "id": "github-generate-version",
-      "source": "github/actions/generate-version/action.yml",
-      "destination": ".github/actions/generate-version/action.yml",
+      "id": "github-resolve-bepinex-version",
+      "source": "github/actions/resolve-bepinex-version/action.yml",
+      "destination": ".github/actions/resolve-bepinex-version/action.yml",
       "comparison": "text-normalized-newlines"
     },
     {
-      "id": "github-publish-thunderstore-action",
-      "source": "github/actions/publish-thunderstore/action.yml",
-      "destination": ".github/actions/publish-thunderstore/action.yml",
+      "id": "github-deploy-bepinex-thunderstore-action",
+      "source": "github/actions/deploy-bepinex-thunderstore/action.yml",
+      "destination": ".github/actions/deploy-bepinex-thunderstore/action.yml",
       "comparison": "text-normalized-newlines"
     },
     {
-      "id": "github-publish-thunderstore-script",
-      "source": "github/actions/publish-thunderstore/publish-thunderstore.sh",
-      "destination": ".github/actions/publish-thunderstore/publish-thunderstore.sh",
+      "id": "github-deploy-bepinex-thunderstore-script",
+      "source": "github/actions/deploy-bepinex-thunderstore/publish-thunderstore.sh",
+      "destination": ".github/actions/deploy-bepinex-thunderstore/publish-thunderstore.sh",
       "comparison": "bytes"
     }
   ]

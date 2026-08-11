@@ -40,6 +40,9 @@ Use `github-actions-quality-check` for the shared event, trust, permission, conc
 artifact-lineage, and repository-enforcement baseline. This Skill owns only the BepInEx/.NET/Thunderstore commands,
 release identity, package contract, and domain-specific templates layered on that baseline.
 
+For an APM-managed repository, apply `apm-workflow`. Keep `apm audit --ci` and Markdown lint in the outer
+`check-dotnet-bepinex-source` action so every event-owned entry workflow enforces the same repository baseline.
+
 Use `unity-game-analyze` to establish version-specific game-code and serialized-asset evidence: the concrete call path,
 effective prefab/scene values, object/load reachability, lifecycle timing, authority, and unresolved runtime inputs.
 This Skill consumes that evidence to select and verify hooks, adapters, identity mappings, compatibility claims, and

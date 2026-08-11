@@ -1,0 +1,67 @@
+name: Check BepInEx source
+description: Run the repository's workflow, C#, and Markdown source checks.
+
+runs:
+  using: composite
+  steps:
+    - name: Set up reviewed APM CLI
+      uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439 # v1.10.0
+      with:
+        apm-version: "0.27.0"
+        setup-only: "true"
+
+    - name: Audit APM deployment
+      shell: bash
+      run: apm audit --ci
+
+    - name: Install workflow validation tools
+      id: workflow-tools
+      uses: ./.github/actions/install-workflow-tools
+
+    - name: Lint standalone shell
+      shell: bash
+      run: >-
+        shellcheck
+        .github/actions/resolve-bepinex-version/resolve-version.sh
+        .github/actions/deploy-bepinex-thunderstore/publish-thunderstore.sh
+
+    - name: Lint workflows and inline shell
+      shell: bash
+      run: actionlint -color -pyflakes=
+
+    - name: Verify immutable action pins
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: pinact run --check --min-age 7
+
+    - name: Set up locked .NET environment
+      id: setup
+      uses: ./.github/actions/setup-dotnet-locked
+
+    - name: Check C# formatting
+      shell: bash
+      run: dotnet format --no-restore --verify-no-changes
+
+    - name: Build C# source
+      shell: bash
+      run: dotnet build --no-restore
+
+    - name: Lint Markdown
+      uses: DavidAnson/markdownlint-cli2-action@ce4853d43830c74c1753b39f3cf40f71c2031eb9 # v23.0.0
+      with:
+        config: .markdownlint-cli2.yaml
+        globs: "**/*.md"
+
+    # setup-dotnet owns its runner cache; remove only build state created by this action.
+    - name: Remove .NET build state
+      if: always() && steps.setup.outputs.build-state-owned == 'true'
+      shell: bash
+      run: dotnet clean --no-restore
+
+    - name: Remove workflow validation tools
+      if: ${{ always() && steps.workflow-tools.outputs.installation-directory != '' }}
+      shell: bash
+      env:
+        WORKFLOW_TOOLS_DIRECTORY: ${{ steps.workflow-tools.outputs.installation-directory }}
+      run: rm -rf -- "$WORKFLOW_TOOLS_DIRECTORY"

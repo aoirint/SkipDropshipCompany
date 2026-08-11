@@ -48,23 +48,36 @@ function Get-RenderedTemplate([string] $TemplatePath, [psobject] $Variables) {
 
 try {
     $skillRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
+    $skillsRoot = [IO.Path]::GetDirectoryName($skillRoot)
     $repoRootPath = [IO.Path]::GetFullPath($RepoRoot)
     $variables = Get-Content -LiteralPath $VariablesFile -Raw | ConvertFrom-Json
     $templates = @(
         @{ Source = 'pull-request.yml.template'; Destination = '.github/workflows/pull-request.yml' },
         @{ Source = 'main.yml.template'; Destination = '.github/workflows/main.yml' },
-        @{ Source = 'generate-version/action.yml'; Destination = '.github/actions/generate-version/action.yml' },
-        @{ Source = 'publish-thunderstore/action.yml'; Destination = '.github/actions/publish-thunderstore/action.yml' },
-        @{ Source = 'publish-thunderstore/publish-thunderstore.sh'; Destination = '.github/actions/publish-thunderstore/publish-thunderstore.sh' },
-        @{ Source = 'check-apm-project/action.yml'; Destination = '.github/actions/check-apm-project/action.yml' },
-        @{ Source = 'install-workflow-tools/action.yml.template'; Destination = '.github/actions/install-workflow-tools/action.yml' },
-        @{ Source = 'setup-dotnet/action.yml.template'; Destination = '.github/actions/setup-dotnet/action.yml' },
-        @{ Source = 'lint-source/action.yml.template'; Destination = '.github/actions/lint-source/action.yml' },
+        @{ Source = 'resolve-bepinex-version/action.yml'; Destination = '.github/actions/resolve-bepinex-version/action.yml' },
+        @{ Source = 'resolve-bepinex-version/resolve-version.sh'; Destination = '.github/actions/resolve-bepinex-version/resolve-version.sh' },
+        @{ Source = 'deploy-bepinex-thunderstore/action.yml'; Destination = '.github/actions/deploy-bepinex-thunderstore/action.yml' },
+        @{ Source = 'deploy-bepinex-thunderstore/publish-thunderstore.sh'; Destination = '.github/actions/deploy-bepinex-thunderstore/publish-thunderstore.sh' },
+        @{ Source = 'install-workflow-tools/action.yml'; Destination = '.github/actions/install-workflow-tools/action.yml' },
+        @{ Source = 'install-workflow-tools/install-workflow-tools.sh'; Destination = '.github/actions/install-workflow-tools/install-workflow-tools.sh' },
+        @{ Source = 'setup-dotnet-locked/action.yml.template'; Destination = '.github/actions/setup-dotnet-locked/action.yml' },
+        @{ Source = 'check-dotnet-bepinex-source/action.yml.template'; Destination = '.github/actions/check-dotnet-bepinex-source/action.yml' },
         @{ Source = '.gitignore.template'; Destination = '.gitignore' },
         @{ Source = '.markdownlint-cli2.yaml'; Destination = '.markdownlint-cli2.yaml' }
     )
     foreach ($entry in $templates) {
-        $templateRoot = if ($entry.Source -in @('.gitignore.template', '.markdownlint-cli2.yaml')) { Join-Path $skillRoot 'assets/repository' } elseif ($entry.Source -match 'action\.yml(?:\.template)?$' -or $entry.Source -match '^publish-thunderstore/') { Join-Path $skillRoot 'assets/github/actions' } else { Join-Path $skillRoot 'assets/github/workflows' }
+        $templateRoot = if ($entry.Source -in @('.gitignore.template', '.markdownlint-cli2.yaml')) {
+            Join-Path $skillRoot 'assets/repository'
+        }
+        elseif ($entry.Source -match '^install-workflow-tools/') {
+            Join-Path $skillsRoot 'github-actions-quality-check/assets/github/actions'
+        }
+        elseif ($entry.Source -match 'action\.yml(?:\.template)?$' -or $entry.Source -match '^(resolve-bepinex-version|deploy-bepinex-thunderstore)/') {
+            Join-Path $skillRoot 'assets/github/actions'
+        }
+        else {
+            Join-Path $skillRoot 'assets/github/workflows'
+        }
         $expected = Get-RenderedTemplate (Join-Path $templateRoot $entry.Source) $variables
         $destination = Join-Path $repoRootPath $entry.Destination
         if ($Apply) {

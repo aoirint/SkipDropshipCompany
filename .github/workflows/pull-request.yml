@@ -16,7 +16,8 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  check:
+    name: Check
     # Keep proposed source validation separate from publishing privileges.
     runs-on: ubuntu-slim
 
@@ -27,4 +28,4 @@ jobs:
           persist-credentials: false
 
       - name: Run source checks
-        uses: ./.github/actions/lint-source
+        uses: ./.github/actions/check-dotnet-bepinex-source

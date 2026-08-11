@@ -19,8 +19,8 @@ defaults:
 jobs:
   # A merged commit is validated again in this workflow. This direct
   # dependency is the release gate; do not replace it with workflow polling.
-  checks:
-    name: Checks
+  check:
+    name: Check
     runs-on: ubuntu-slim
 
     steps:
@@ -30,7 +30,7 @@ jobs:
           persist-credentials: false
 
       - name: Run BepInEx source gate
-        uses: ./.github/actions/lint-source
+        uses: ./.github/actions/check-dotnet-bepinex-source
 
   # Resolve one release identity before build mutates package source files.
   # Keep planning read-only so edge metadata remains reusable by its consumers.
@@ -53,7 +53,7 @@ jobs:
 
       - name: Generate version plan
         id: generate-version
-        uses: ./.github/actions/generate-version
+        uses: ./.github/actions/resolve-bepinex-version
         with:
           csproj_file: "@@PROJECT_DIRECTORY@@/@@PROJECT_FILE@@"
           write_files: false
@@ -61,7 +61,7 @@ jobs:
   build:
     name: Build
     needs:
-      - checks
+      - check
       - plan
     # Build keeps ubuntu-latest because packaging currently relies on
     # runner-provided shell tools such as jq and 7z.
@@ -80,7 +80,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Generate version
-        uses: ./.github/actions/generate-version
+        uses: ./.github/actions/resolve-bepinex-version
         with:
           csproj_file: "@@PROJECT_DIRECTORY@@/@@PROJECT_FILE@@"
           release_mode: ${{ needs.plan.outputs.release_mode }}
@@ -90,7 +90,7 @@ jobs:
       - name: Set up .NET
         # This shared action pins the SDK and restores the same locked graph
         # used by source validation.
-        uses: ./.github/actions/setup-dotnet
+        uses: ./.github/actions/setup-dotnet-locked
 
       - name: Record start time
         id: start-time
@@ -188,8 +188,8 @@ jobs:
             echo "| Artifact Digest | ${ARTIFACT_DIGEST_MARKDOWN} |"
           } >> "${GITHUB_STEP_SUMMARY}"
 
-  release:
-    name: Release
+  deploy:
+    name: Deploy
     needs:
       - build
       - plan
@@ -259,7 +259,7 @@ jobs:
         # Thunderstore does not accept the prerelease versions generated here,
         # so only stable latest releases are published to the community.
         if: needs.plan.outputs.release_mode == 'latest'
-        uses: ./.github/actions/publish-thunderstore
+        uses: ./.github/actions/deploy-bepinex-thunderstore
         with:
           artifact_path: ./tmp_artifacts/*.zip
           token: ${{ secrets.THUNDERSTORE_TOKEN }}

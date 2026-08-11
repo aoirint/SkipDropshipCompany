@@ -17,8 +17,8 @@ permissions:
 
 jobs:
   # Keep proposed source validation separate from publishing privileges.
-  checks:
-    name: Checks
+  check:
+    name: Check
     runs-on: ubuntu-slim
 
     steps:
@@ -28,4 +28,4 @@ jobs:
           persist-credentials: false
 
       - name: Run BepInEx source gate
-        uses: ./.github/actions/lint-source
+        uses: ./.github/actions/check-dotnet-bepinex-source

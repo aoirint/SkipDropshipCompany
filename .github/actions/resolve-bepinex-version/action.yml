@@ -1,0 +1,52 @@
+name: Resolve BepInEx version
+description: Resolve application, Git, and manifest versions from project state.
+
+inputs:
+  csproj_file:
+    # This file must contain APP_VERSION_MARKER immediately before <Version>.
+    description: csproj file path.
+    required: true
+  release_mode:
+    description: Resolved release mode override from the plan job.
+    required: false
+    default: ""
+  app_version:
+    description: Resolved application version override from the plan job.
+    required: false
+    default: ""
+  manifest_version:
+    description: Resolved manifest version override from the plan job.
+    required: false
+    default: ""
+  write_files:
+    description: Whether to write resolved versions into package source files.
+    required: false
+    default: "true"
+
+outputs:
+  release_mode:
+    description: latest, prerelease, or edge.
+    value: ${{ steps.resolve.outputs.release_mode }}
+  app_version:
+    description: Application version.
+    value: ${{ steps.resolve.outputs.app_version }}
+  git_version:
+    description: Git tag version.
+    value: ${{ steps.resolve.outputs.git_version }}
+  manifest_version:
+    description: Thunderstore manifest version_number.
+    value: ${{ steps.resolve.outputs.manifest_version }}
+
+runs:
+  using: composite
+  steps:
+    - name: Resolve BepInEx release identity
+      id: resolve
+      shell: bash
+      env:
+        VERSION_CSPROJ_FILE: ${{ inputs.csproj_file }}
+        VERSION_RELEASE_MODE: ${{ inputs.release_mode }}
+        VERSION_APP_VERSION: ${{ inputs.app_version }}
+        VERSION_MANIFEST_VERSION: ${{ inputs.manifest_version }}
+        VERSION_WRITE_FILES: ${{ inputs.write_files }}
+      run: bash "${{ github.action_path }}/resolve-version.sh"

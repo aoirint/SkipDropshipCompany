@@ -147,5 +147,9 @@ Read [template-contract.md](references/template-contract.md) before creating or
 repairing event-owned validation. The bundled files under `assets/github/`
 provide a minimal entry-workflow and tool-installation baseline. Copy them into
 the consumer repository, then make only repository-evidenced substitutions.
+Copy `assets/github/markdownlint-cli2.yaml` to
+`.markdownlint-cli2.yaml` whenever an outer source-check action runs the
+shared Markdown check. Add only repository-evidenced generated, vendored, or
+submodule paths to `ignores`; do not fork the shared rule baseline.
 Consumer CI must run committed repository-owned files and must not execute the
 installed Skill at workflow runtime.

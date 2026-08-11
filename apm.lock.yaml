@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-08-11T06:04:18.924547+00:00'
+generated_at: '2026-08-11T06:40:24.269897+00:00'
 apm_version: 0.27.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: 7ee24b75904233a42a7fc01d79c6dfc81ca36d7c
-  resolved_ref: 7ee24b75904233a42a7fc01d79c6dfc81ca36d7c
+  resolved_commit: bd19f9e124aeb6947e664df29922ce3881f66609
+  resolved_ref: bd19f9e124aeb6947e664df29922ce3881f66609
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -68,6 +68,7 @@ dependencies:
   - .agents/skills/github-actions-quality-check/agents/openai.yaml
   - .agents/skills/github-actions-quality-check/assets/github/actions/install-workflow-tools/action.yml
   - .agents/skills/github-actions-quality-check/assets/github/actions/install-workflow-tools/install-workflow-tools.sh
+  - .agents/skills/github-actions-quality-check/assets/github/markdownlint-cli2.yaml
   - .agents/skills/github-actions-quality-check/assets/github/workflows/main.yml
   - .agents/skills/github-actions-quality-check/assets/github/workflows/pull-request.yml
   - .agents/skills/github-actions-quality-check/references/composite-actions.md
@@ -127,7 +128,7 @@ dependencies:
     .agents/skills/bepinex-mono-mod-quality-check/README.md: sha256:f1cedde8c48a1aa4ebe4a57decff164fd845ba82a64ddcbe66e9fc9f349286f5
     .agents/skills/bepinex-mono-mod-quality-check/SKILL.md: sha256:5c70a2f7e16c39bd17dd90fd43b90fbec62cff54585cb641dce28b8dda79287c
     .agents/skills/bepinex-mono-mod-quality-check/agents/openai.yaml: sha256:a4d486e33ec1ce652ec78ffbc6c783b8005bd30202716385aaf5b5b686451cf7
-    .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/check-dotnet-bepinex-source/action.yml.template: sha256:ee69729f8346df3466e8950c2e3c88b060a9a9b2da042819b3b71d52955363ce
+    .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/check-dotnet-bepinex-source/action.yml.template: sha256:2938e617044ad99a2d9591f05a1525d3bb22a85340b881fdf36236950b2d401e
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/deploy-bepinex-thunderstore/action.yml: sha256:95eecbea6e59e7de9d3f36fc588938e08d8621fa8820e12ea6c8ea3828959a58
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/deploy-bepinex-thunderstore/publish-thunderstore.sh: sha256:1801d6c68370a3c0de36d3910f6e9cbc319654669974365f8f52df759ee16023
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/resolve-bepinex-version/action.yml: sha256:281bf9478a67321553b0387bd9a59c65504783ec04dfb517d6412a0695df8331
@@ -165,10 +166,11 @@ dependencies:
     .agents/skills/git-worktree-workflow/SKILL.md: sha256:67e2474b9878cc6cb209ae30b19c233f65969abe5b5d543f0c9a16e46f1d40d2
     .agents/skills/git-worktree-workflow/agents/openai.yaml: sha256:3eb9da73e7a041e77d82f0d5c3a8c67e914575cff8651b71d077db30fe3da99a
     .agents/skills/github-actions-quality-check/README.md: sha256:1c9cb3b29bb4c99e3a2e87b1b79a6eee30470c8762b2cdb5f82cb61387176d86
-    .agents/skills/github-actions-quality-check/SKILL.md: sha256:5dd037fffe2e287c5cfbfb02d2c8eeb94bb28ae192f9c5878fd8370db49f5cd8
+    .agents/skills/github-actions-quality-check/SKILL.md: sha256:499e65b4cf6f77d1f09c8340840e9aa6dcf8d0102371d3a137fdc09c894e2c43
     .agents/skills/github-actions-quality-check/agents/openai.yaml: sha256:505565c70b7441db1d8c17b5522b7f777acd748be441c55fdcc1f2093e185a5d
     .agents/skills/github-actions-quality-check/assets/github/actions/install-workflow-tools/action.yml: sha256:9a46e0ebabe3d4d2302e75e252a11b4639e88884feb2066665a9bcc099c2b0dd
     .agents/skills/github-actions-quality-check/assets/github/actions/install-workflow-tools/install-workflow-tools.sh: sha256:767b5865c488f12e2488f55807e76d789e968f11ef6b1364be5f3b47542ea898
+    .agents/skills/github-actions-quality-check/assets/github/markdownlint-cli2.yaml: sha256:50390308413d207ffb315795ce0ee4029f43e9e78e43249149942421c696e2ed
     .agents/skills/github-actions-quality-check/assets/github/workflows/main.yml: sha256:9c6fc9b8a12eda5300d526de709ab17456781179efa43ea9c911bde795204690
     .agents/skills/github-actions-quality-check/assets/github/workflows/pull-request.yml: sha256:825813d13866d67da9edf0420d9d8290d2ffe36c20ae4ae0f97a1c91992b818b
     .agents/skills/github-actions-quality-check/references/composite-actions.md: sha256:d914d0fe4495121c5fdf168681a6dac62b897c28771e67ffb30c04f8d7fe3298
@@ -211,7 +213,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:9880f8b48160964a276f061840d95504326316fdbb1647f88b4ab8c16fed7f85
+  content_hash: sha256:f5509ac40a802023b1b1b8dc5dc7d589ed5c9d7e43e6a81d369b719f2df90134
   skill_subset:
   - apm-workflow
   - bepinex-mono-mod-quality-check
@@ -337,7 +339,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:ee69729f8346df3466e8950c2e3c88b060a9a9b2da042819b3b71d52955363ce
+  content_hash: sha256:2938e617044ad99a2d9591f05a1525d3bb22a85340b881fdf36236950b2d401e
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/deploy-bepinex-thunderstore/action.yml
@@ -724,7 +726,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:5dd037fffe2e287c5cfbfb02d2c8eeb94bb28ae192f9c5878fd8370db49f5cd8
+  content_hash: sha256:499e65b4cf6f77d1f09c8340840e9aa6dcf8d0102371d3a137fdc09c894e2c43
 - kind: project-relative
   target: codex
   value: .agents/skills/github-actions-quality-check/agents/openai.yaml
@@ -752,6 +754,15 @@ deployments:
   - aoirint/skills
   active_owner: aoirint/skills
   content_hash: sha256:767b5865c488f12e2488f55807e76d789e968f11ef6b1364be5f3b47542ea898
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/assets/github/markdownlint-cli2.yaml
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:50390308413d207ffb315795ce0ee4029f43e9e78e43249149942421c696e2ed
 - kind: project-relative
   target: codex
   value: .agents/skills/github-actions-quality-check/assets/github/workflows/main.yml

@@ -57,7 +57,7 @@ runs:
     - name: Remove .NET build state
       if: always() && steps.setup.outputs.build-state-owned == 'true'
       shell: bash
-      run: dotnet clean --no-restore
+      run: dotnet clean
 
     - name: Remove workflow validation tools
       if: ${{ always() && steps.workflow-tools.outputs.installation-directory != '' }}

@@ -1,4 +1,4 @@
-name: Publish Thunderstore Package
+name: Publish Thunderstore package
 description: Upload and submit a prebuilt Thunderstore package zip.
 
 inputs:

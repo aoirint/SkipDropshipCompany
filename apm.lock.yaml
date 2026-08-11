@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-07-26T02:34:03.883477+00:00'
+generated_at: '2026-08-11T02:59:27.784784+00:00'
 apm_version: 0.26.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: 4361f1c00e419199803f6f88a760654f486f3ae4
-  resolved_ref: 4361f1c00e419199803f6f88a760654f486f3ae4
+  resolved_commit: 8cedd768610d8767d160ff5b6e592bd85fd75848
+  resolved_ref: 8cedd768610d8767d160ff5b6e592bd85fd75848
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -64,10 +64,18 @@ dependencies:
   - .agents/skills/git-worktree-workflow/README.md
   - .agents/skills/git-worktree-workflow/SKILL.md
   - .agents/skills/git-worktree-workflow/agents/openai.yaml
-  - .agents/skills/gitignore-workflow
-  - .agents/skills/gitignore-workflow/README.md
-  - .agents/skills/gitignore-workflow/SKILL.md
-  - .agents/skills/gitignore-workflow/agents/openai.yaml
+  - .agents/skills/github-actions-quality-check
+  - .agents/skills/github-actions-quality-check/README.md
+  - .agents/skills/github-actions-quality-check/SKILL.md
+  - .agents/skills/github-actions-quality-check/agents/openai.yaml
+  - .agents/skills/github-actions-quality-check/assets/github/actions/install-workflow-tools/action.yml
+  - .agents/skills/github-actions-quality-check/assets/github/workflows/main.yml
+  - .agents/skills/github-actions-quality-check/assets/github/workflows/pull-request.yml
+  - .agents/skills/github-actions-quality-check/references/naming-and-readability.md
+  - .agents/skills/github-actions-quality-check/references/repository-enforcement.md
+  - .agents/skills/github-actions-quality-check/references/runner-selection.md
+  - .agents/skills/github-actions-quality-check/references/template-contract.md
+  - .agents/skills/github-actions-quality-check/references/validation-and-reporting.md
   - .agents/skills/lethal-company-analyze
   - .agents/skills/lethal-company-analyze/README.md
   - .agents/skills/lethal-company-analyze/SKILL.md
@@ -119,18 +127,18 @@ dependencies:
     .agents/skills/apm-usage/scripts/propose_bootstrap_update.py: sha256:9d7d3a4292a9ad4a833f970a51cce0202f3850503d39e410c1d2fccad5eb0b58
     .agents/skills/apm-usage/scripts/propose_bootstrap_update.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
     .agents/skills/bepinex-mono-mod-quality-check/README.md: sha256:f1cedde8c48a1aa4ebe4a57decff164fd845ba82a64ddcbe66e9fc9f349286f5
-    .agents/skills/bepinex-mono-mod-quality-check/SKILL.md: sha256:cbe0d14ca7ad4e784ad16fa8c9ae1272037a6290cd9044f73eb541e7b87bbedc
+    .agents/skills/bepinex-mono-mod-quality-check/SKILL.md: sha256:04e705a02609eae4381990026cfac4c781507f685fa974894fd9c7a8c4e5510e
     .agents/skills/bepinex-mono-mod-quality-check/agents/openai.yaml: sha256:a4d486e33ec1ce652ec78ffbc6c783b8005bd30202716385aaf5b5b686451cf7
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/check-apm-project/action.yml: sha256:108bc5e9964026880fb49086728f8458b16174f33636dea79276bd286505bbd4
-    .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/generate-version/action.yml: sha256:38f0bad4357f2650b9da6e0b23eaaa5e855695635ede31a9d170f7ba4d20a150
+    .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/generate-version/action.yml: sha256:25e36715934dfa58aa2fca8947512f6b87eddae1b2b1fdb7961aeef3e51da065
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/install-workflow-tools/action.yml.template: sha256:8f881f57add1754f54fcdd59eed60a174f1cdcd240dfba708eafb4ec95cc6ecc
-    .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/lint-source/action.yml.template: sha256:b00bb7dcd936ea572c8186fb43f8ca69ee2b2bf714711ace27cefa3eb994ac72
-    .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/publish-thunderstore/action.yml: sha256:aa75302334d13b50b76696e3759f1b0723f2262ae724103bb01515713d311329
+    .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/lint-source/action.yml.template: sha256:3331b5c9bb9dc32eaae28fae75ca246b6cfbb20f71e5a1f5023118018c5597e3
+    .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/publish-thunderstore/action.yml: sha256:dd877b537d3e23fb4fd44f63dd8a2f5805a38ee5b9ccbe55c395e05c1e3b0924
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/publish-thunderstore/publish-thunderstore.sh: sha256:1801d6c68370a3c0de36d3910f6e9cbc319654669974365f8f52df759ee16023
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/setup-dotnet/action.yml.template: sha256:a2d07a4b0b215b444a34fa99b80b3f00297db02e9c8440be2805c63bba39e040
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/pull_request_template.md: sha256:49963f5d04444593df31b14f9e8ef7640893fb6fa0014d10160b7560ed7d700f
-    .agents/skills/bepinex-mono-mod-quality-check/assets/github/workflows/main.yml.template: sha256:09876b3e4253ab3cd03538252ae14752f85c4b0f9591eeb272ab10ddc7efeb19
-    .agents/skills/bepinex-mono-mod-quality-check/assets/github/workflows/pull-request.yml.template: sha256:b4ff31aed4a8f4b5362ffa3def1b69fb4e3fdf80c6631f60179a9d45c11f36c1
+    .agents/skills/bepinex-mono-mod-quality-check/assets/github/workflows/main.yml.template: sha256:a87909b2b8e00a0bd090bf5ec0e81ce5eb4e710e53e55c6d9bb60ba973186176
+    .agents/skills/bepinex-mono-mod-quality-check/assets/github/workflows/pull-request.yml.template: sha256:59556312bc855d8cee9be7015c256236abe79076ede1800816458f9d83f77784
     .agents/skills/bepinex-mono-mod-quality-check/assets/github/workflows/workflow-variables.example.json: sha256:c75305b13481cd12efa9844325573801b8edfca9c5920b44227cc1e2e3a7a917
     .agents/skills/bepinex-mono-mod-quality-check/assets/repository/.gitattributes: sha256:2b68c0cf28e58a65b9c842bb1f5733c32fe65e519c359c16b4081e8b21182e1e
     .agents/skills/bepinex-mono-mod-quality-check/assets/repository/.gitignore.template: sha256:aa3fc6bc8a3f1e0acd4bb87f23aeb4d5c0d9ff6b3e8a0a5d93823cd16ac59a98
@@ -139,10 +147,10 @@ dependencies:
     .agents/skills/bepinex-mono-mod-quality-check/assets/template-map.json: sha256:ebc85ebbd44d94f986568d5ae294c4adfa6843b59d440f1fa674fe137407891c
     .agents/skills/bepinex-mono-mod-quality-check/references/canonical-templates.md: sha256:268371468d41221932d1bef774325f682fa4bbe58907c5edd9915b5690c9e610
     .agents/skills/bepinex-mono-mod-quality-check/references/guest-feature-authorization.md: sha256:a3fb62447f9cffb31b5f7ab767812d2c3a95998ff5154afe3cc357d02022d894
-    .agents/skills/bepinex-mono-mod-quality-check/references/implementation-runbook.md: sha256:20920e7c4bf3004914507b15729302a4239c10c6d7754cd39fb213162d7beb7c
-    .agents/skills/bepinex-mono-mod-quality-check/references/repository-derived-baseline.md: sha256:386b0dabcc9d657c22b1654737bb9b2d9038c3e87ec9e84bd970a3af48bcf333
+    .agents/skills/bepinex-mono-mod-quality-check/references/implementation-runbook.md: sha256:9ddfa8cd61174b4347bcbb62eac75f8f88dad9c3e8fdfc8f2e784284f913b55b
+    .agents/skills/bepinex-mono-mod-quality-check/references/repository-derived-baseline.md: sha256:17c479c44e7075c9be57325f6c608a596664265d85ea81b89b81c887dca2e350
     .agents/skills/bepinex-mono-mod-quality-check/references/repository-family-alignment.md: sha256:8d88dfe1267a2aec93ad71d7b1ba4d5148c7d5ef148ee35d3cb90568f8ce6ba7
-    .agents/skills/bepinex-mono-mod-quality-check/references/repository-quality-template.md: sha256:1d52944c5da892591b2539baa8eaa17877ef3b6da966815c1c0503c71629c4e3
+    .agents/skills/bepinex-mono-mod-quality-check/references/repository-quality-template.md: sha256:8f3819694edf327962e62d9edabe1ccfdf7aa02dd9b268ed4f28191f9828308d
     .agents/skills/bepinex-mono-mod-quality-check/scripts/render_repository_files.ps1: sha256:61c5ba3f6cdc0a53d2f293e9e0bf4621f274ae34c216d6c06a27a0b6ca6e6ca0
     .agents/skills/bepinex-mono-mod-quality-check/scripts/render_workflows.ps1: sha256:d9affc8359537e3fd691a8283cbaa39cc992044138018215e2713c39ebe53232
     .agents/skills/bepinex-mono-mod-quality-check/scripts/sync_templates.ps1: sha256:15386224ed6d16041afb6008fc51a1735edc86dc4566aa3f573594392925ab70
@@ -158,11 +166,19 @@ dependencies:
     .agents/skills/git-worktree-workflow/README.md: sha256:fa6483b5919a01b84fa0d6ffcbaae20b84ed3807e18029e8807e61b0ee4f9de9
     .agents/skills/git-worktree-workflow/SKILL.md: sha256:67e2474b9878cc6cb209ae30b19c233f65969abe5b5d543f0c9a16e46f1d40d2
     .agents/skills/git-worktree-workflow/agents/openai.yaml: sha256:3eb9da73e7a041e77d82f0d5c3a8c67e914575cff8651b71d077db30fe3da99a
-    .agents/skills/gitignore-workflow/README.md: sha256:0de188ebcdd40ea1aec701410e1c2182049b66bc4ec4d83a3bf55685b4267d47
-    .agents/skills/gitignore-workflow/SKILL.md: sha256:2ef38f42e418c10e0ba7632e3ba37614df97044dfa8847ad1338e6c4c896c089
-    .agents/skills/gitignore-workflow/agents/openai.yaml: sha256:f6a9b176003028588ff4c1d9ee4e23c625892d00b65086bf4b6b26a3f896030d
+    .agents/skills/github-actions-quality-check/README.md: sha256:1c9cb3b29bb4c99e3a2e87b1b79a6eee30470c8762b2cdb5f82cb61387176d86
+    .agents/skills/github-actions-quality-check/SKILL.md: sha256:08e6ae783d3b18e3924226ead2f1fe93af67ca15ca1d478c2653c46fa868ea77
+    .agents/skills/github-actions-quality-check/agents/openai.yaml: sha256:505565c70b7441db1d8c17b5522b7f777acd748be441c55fdcc1f2093e185a5d
+    .agents/skills/github-actions-quality-check/assets/github/actions/install-workflow-tools/action.yml: sha256:8f881f57add1754f54fcdd59eed60a174f1cdcd240dfba708eafb4ec95cc6ecc
+    .agents/skills/github-actions-quality-check/assets/github/workflows/main.yml: sha256:2ad5a01fbcceb748ea1a1f96b4a362aa9c4f6048e4e52eb6fae2234f007f3e3e
+    .agents/skills/github-actions-quality-check/assets/github/workflows/pull-request.yml: sha256:8dcb30edb98ef1f108ead5579e49b3eb73aa1c2494f36b774aa836af2b267c80
+    .agents/skills/github-actions-quality-check/references/naming-and-readability.md: sha256:6bebb3f2551925b38791b6ff68e9c13747a6a7387d0d58840f86fd7ca7931821
+    .agents/skills/github-actions-quality-check/references/repository-enforcement.md: sha256:72f1ace12342293c036e7bf76d031f30845c99d60fb82ca7956c65866a630c9a
+    .agents/skills/github-actions-quality-check/references/runner-selection.md: sha256:6e9929a316ba9efbf6171366de0d1a3c976aee73d22c26b2d1ec33017af6f164
+    .agents/skills/github-actions-quality-check/references/template-contract.md: sha256:bb1c89c097aac9d294237532094d3f101f8ab9dd26fc49441b9bb5e79ee74135
+    .agents/skills/github-actions-quality-check/references/validation-and-reporting.md: sha256:6b3093c39d7884f4a030977f12887ddc7dba43d69a25267177d6259a4f5d4ee2
     .agents/skills/lethal-company-analyze/README.md: sha256:25274fc0d0155864c4e421d315a1b91d21cc203a4c75e25a740c17f04f9387d6
-    .agents/skills/lethal-company-analyze/SKILL.md: sha256:f2d523ae1129687d1b1a636d307bb7cbaa87ddd5c595c20a028f99461a039f6b
+    .agents/skills/lethal-company-analyze/SKILL.md: sha256:0e027f7df896d7a89b5945b9de00e0a17d514e8f9afa1e2fa6771eef1bfec3bb
     .agents/skills/lethal-company-analyze/agents/openai.yaml: sha256:fb80fc51dba972198601c2ec76805752f34a214bbd9a73d4bbdff7e8165ad0bf
     .agents/skills/lethal-company-analyze/references/efficient-full-enumeration.md: sha256:d63989945259eb66eb483fe979d51f795882a9d0c589bc06e59c7f0ce7e84bcb
     .agents/skills/lethal-company-analyze/references/evidence-policy.md: sha256:64af82c994a31ec2a9791342c85c53c44966af2b4ff6c9d8b779259604777b42
@@ -195,7 +211,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:9af2aba371779ec675b76fde4a23eef4be77607b9c4968030401d2cbe3bdaae8
+  content_hash: sha256:89bcb059ff88d1855643754077a320f9c2a176fd12af88fbc9e239aa4729a17b
   skill_subset:
   - apm-usage
   - bepinex-mono-mod-quality-check
@@ -204,11 +220,9 @@ dependencies:
   - commit-message-quality-check
   - git-worktree-workflow
   - github-actions-quality-check
-  - gitignore-workflow
-  - issue-quality-check
+  - gitignore-workflow - github-workflow
   - lethal-company-analyze
   - prose-quality-check
-  - pull-request-quality-check
   - release-note-workflow
   - rollout-workflow
   - security-check
@@ -323,7 +337,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:cbe0d14ca7ad4e784ad16fa8c9ae1272037a6290cd9044f73eb541e7b87bbedc
+  content_hash: sha256:04e705a02609eae4381990026cfac4c781507f685fa974894fd9c7a8c4e5510e
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/agents/openai.yaml
@@ -350,7 +364,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:38f0bad4357f2650b9da6e0b23eaaa5e855695635ede31a9d170f7ba4d20a150
+  content_hash: sha256:25e36715934dfa58aa2fca8947512f6b87eddae1b2b1fdb7961aeef3e51da065
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/install-workflow-tools/action.yml.template
@@ -368,7 +382,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:b00bb7dcd936ea572c8186fb43f8ca69ee2b2bf714711ace27cefa3eb994ac72
+  content_hash: sha256:3331b5c9bb9dc32eaae28fae75ca246b6cfbb20f71e5a1f5023118018c5597e3
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/publish-thunderstore/action.yml
@@ -377,7 +391,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:aa75302334d13b50b76696e3759f1b0723f2262ae724103bb01515713d311329
+  content_hash: sha256:dd877b537d3e23fb4fd44f63dd8a2f5805a38ee5b9ccbe55c395e05c1e3b0924
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/assets/github/actions/publish-thunderstore/publish-thunderstore.sh
@@ -413,7 +427,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:09876b3e4253ab3cd03538252ae14752f85c4b0f9591eeb272ab10ddc7efeb19
+  content_hash: sha256:a87909b2b8e00a0bd090bf5ec0e81ce5eb4e710e53e55c6d9bb60ba973186176
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/assets/github/workflows/pull-request.yml.template
@@ -422,7 +436,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:b4ff31aed4a8f4b5362ffa3def1b69fb4e3fdf80c6631f60179a9d45c11f36c1
+  content_hash: sha256:59556312bc855d8cee9be7015c256236abe79076ede1800816458f9d83f77784
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/assets/github/workflows/workflow-variables.example.json
@@ -503,7 +517,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:20920e7c4bf3004914507b15729302a4239c10c6d7754cd39fb213162d7beb7c
+  content_hash: sha256:9ddfa8cd61174b4347bcbb62eac75f8f88dad9c3e8fdfc8f2e784284f913b55b
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/references/repository-derived-baseline.md
@@ -512,7 +526,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:386b0dabcc9d657c22b1654737bb9b2d9038c3e87ec9e84bd970a3af48bcf333
+  content_hash: sha256:17c479c44e7075c9be57325f6c608a596664265d85ea81b89b81c887dca2e350
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/references/repository-family-alignment.md
@@ -530,7 +544,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:1d52944c5da892591b2539baa8eaa17877ef3b6da966815c1c0503c71629c4e3
+  content_hash: sha256:8f3819694edf327962e62d9edabe1ccfdf7aa02dd9b268ed4f28191f9828308d
 - kind: project-relative
   target: codex
   value: .agents/skills/bepinex-mono-mod-quality-check/scripts/render_repository_files.ps1
@@ -704,7 +718,7 @@ deployments:
   content_hash: sha256:3eb9da73e7a041e77d82f0d5c3a8c67e914575cff8651b71d077db30fe3da99a
 - kind: project-relative
   target: codex
-  value: .agents/skills/gitignore-workflow
+  value: .agents/skills/github-actions-quality-check
   runtime: null
   scope: project
   owners:
@@ -713,31 +727,103 @@ deployments:
   content_hash: null
 - kind: project-relative
   target: codex
-  value: .agents/skills/gitignore-workflow/README.md
+  value: .agents/skills/github-actions-quality-check/README.md
   runtime: null
   scope: project
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:0de188ebcdd40ea1aec701410e1c2182049b66bc4ec4d83a3bf55685b4267d47
+  content_hash: sha256:1c9cb3b29bb4c99e3a2e87b1b79a6eee30470c8762b2cdb5f82cb61387176d86
 - kind: project-relative
   target: codex
-  value: .agents/skills/gitignore-workflow/SKILL.md
+  value: .agents/skills/github-actions-quality-check/SKILL.md
   runtime: null
   scope: project
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:2ef38f42e418c10e0ba7632e3ba37614df97044dfa8847ad1338e6c4c896c089
+  content_hash: sha256:08e6ae783d3b18e3924226ead2f1fe93af67ca15ca1d478c2653c46fa868ea77
 - kind: project-relative
   target: codex
-  value: .agents/skills/gitignore-workflow/agents/openai.yaml
+  value: .agents/skills/github-actions-quality-check/agents/openai.yaml
   runtime: null
   scope: project
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:f6a9b176003028588ff4c1d9ee4e23c625892d00b65086bf4b6b26a3f896030d
+  content_hash: sha256:505565c70b7441db1d8c17b5522b7f777acd748be441c55fdcc1f2093e185a5d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/assets/github/actions/install-workflow-tools/action.yml
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:8f881f57add1754f54fcdd59eed60a174f1cdcd240dfba708eafb4ec95cc6ecc
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/assets/github/workflows/main.yml
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:2ad5a01fbcceb748ea1a1f96b4a362aa9c4f6048e4e52eb6fae2234f007f3e3e
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/assets/github/workflows/pull-request.yml
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:8dcb30edb98ef1f108ead5579e49b3eb73aa1c2494f36b774aa836af2b267c80
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/references/naming-and-readability.md
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:6bebb3f2551925b38791b6ff68e9c13747a6a7387d0d58840f86fd7ca7931821
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/references/repository-enforcement.md
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:72f1ace12342293c036e7bf76d031f30845c99d60fb82ca7956c65866a630c9a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/references/runner-selection.md
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:6e9929a316ba9efbf6171366de0d1a3c976aee73d22c26b2d1ec33017af6f164
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/references/template-contract.md
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:bb1c89c097aac9d294237532094d3f101f8ab9dd26fc49441b9bb5e79ee74135
+- kind: project-relative
+  target: codex
+  value: .agents/skills/github-actions-quality-check/references/validation-and-reporting.md
+  runtime: null
+  scope: project
+  owners:
+  - aoirint/skills
+  active_owner: aoirint/skills
+  content_hash: sha256:6b3093c39d7884f4a030977f12887ddc7dba43d69a25267177d6259a4f5d4ee2
 - kind: project-relative
   target: codex
   value: .agents/skills/lethal-company-analyze
@@ -764,7 +850,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:f2d523ae1129687d1b1a636d307bb7cbaa87ddd5c595c20a028f99461a039f6b
+  content_hash: sha256:0e027f7df896d7a89b5945b9de00e0a17d514e8f9afa1e2fa6771eef1bfec3bb
 - kind: project-relative
   target: codex
   value: .agents/skills/lethal-company-analyze/agents/openai.yaml

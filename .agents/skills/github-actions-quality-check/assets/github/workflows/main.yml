@@ -1,0 +1,32 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Re-run the required source checks on the exact integrated commit.
+  checks:
+    name: Checks
+    runs-on: ubuntu-slim
+
+    steps:
+      - name: Check out integrated source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Run shared source gate
+        uses: ./.github/actions/lint-source

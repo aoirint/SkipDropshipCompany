@@ -1,4 +1,4 @@
-name: Generate Version
+name: Generate BepInEx version
 description: "Generate application and git version based on csproj version and git tags."
 
 inputs:

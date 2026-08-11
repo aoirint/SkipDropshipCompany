@@ -8,12 +8,16 @@ on:
     types:
       - checks_requested
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
+defaults:
+  run:
+    shell: bash
 
 jobs:
   # Keep proposed source validation separate from publishing privileges.
@@ -27,5 +31,5 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Run BepInEx source gate
+      - name: Run shared source gate
         uses: ./.github/actions/lint-source

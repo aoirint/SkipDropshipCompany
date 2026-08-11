@@ -159,30 +159,12 @@ See `$apm-usage` for installation, cooldown, license, and update details.
 
 ## GitHub repository and CI
 
-- Configure GitHub Actions to require full-length commit-SHA pins when the
-  repository or organization setting is available. Keep a verified version
-  comment next to every third-party action reference. Pin container images by
-  digest and verify checksums before executing downloaded tools.
-- Use event-owned entry workflows. `Pull Request` handles `pull_request` and
-  `merge_group` when a merge queue uses required checks; it validates proposed
-  source only. `Main` handles protected integration-branch pushes, re-runs the
-  lint gate on the exact pushed commit, and uses direct `needs`
-  dependencies to gate build and publication. Do not add `workflow_dispatch`,
-  polling, or a cross-workflow wait job without a documented diagnostic,
-  recovery, or trust-boundary need. Set read-only workflow permissions,
-  explicit Bash defaults, and a concurrency group that cancels obsolete
-  pull-request runs but never cancels an active release.
-- Keep CI stages ordered and reproducible: checkout; install/check external
-  linters; actionlint and ShellCheck; action-pin verification; .NET setup;
-  locked restore; `dotnet format --no-restore --verify-no-changes`; build; and
-  Markdown lint. Run ShellCheck before actionlint when actionlint can use it
-  for inline shell validation.
-- Extract a same-runner repeated setup/check sequence into a local Composite
-  Action when it materially reduces duplication, including this shared
-  lint sequence. Keep runner choice, job permissions, artifact
-  upload, and release dependencies visible in entry workflows. Introduce a
-  reusable workflow only when job-level matrix, outputs, or permission
-  boundaries make a Composite Action insufficient; document that reason.
+- Apply `github-actions-quality-check` for event ownership, job dependencies,
+  permissions, concurrency, runners, executable inputs, validation tools,
+  artifacts, releases, and repository enforcement.
+- Keep the BepInEx/.NET source gate ordered and reproducible: explicit SDK
+  setup; locked restore; `dotnet format --no-restore --verify-no-changes`;
+  no-restore build; applicable tests; package checks; and Markdown lint.
 - Keep documentation, checked-in lint/check configuration, and CI in one
   executable contract. Every retained configuration must be consumed by a
   documented local command and an enabled CI step; remove stale configuration
@@ -191,20 +173,12 @@ See `$apm-usage` for installation, cooldown, license, and update details.
   may run committed repository-owned actions and scripts copied or rendered by
   a Skill, but must not execute `.agents/skills/` or require APM installation to
   build, lint, package, or release the product.
-- Use `pinact run --check --min-age 7`, `actionlint`, and ShellCheck for
-  workflow or composite-action changes. Cache downloaded tool archives only;
-  verify their checksum on every extraction. Keep the tool version and checksum
-  adjacent and update them as one supply-chain-reviewed change.
 - Cache NuGet using the committed lockfile path. Keep the .NET SDK version,
   target framework, and CI documentation aligned. Do not rely on the ambient
   runner toolchain for release-critical behavior.
 - Install the `global.json` SDK explicitly in CI with a full-SHA-pinned setup
   action or pinned verified equivalent, then assert `dotnet --version` before
   locked restore.
-- Review GitHub repository settings in addition to workflow YAML: Actions
-  source restrictions and SHA-pin enforcement, default token permissions,
-  branch protection/required checks, immutable releases, and release secrets.
-  Record settings that cannot be inspected as verification gaps.
 
 ## Composite actions
 
@@ -225,8 +199,8 @@ See `$apm-usage` for installation, cooldown, license, and update details.
   logging them, and return only non-sensitive URLs or identifiers.
 - Keep composite actions small. Put reusable game/framework behavior in C#;
   keep only CI orchestration and deterministic repository tasks in YAML or
-  shell. Test changed action scripts with ShellCheck and their calling workflow
-  with actionlint and pinact.
+  shell. Apply `github-actions-quality-check` when validating changed actions
+  and their calling workflows.
 - Add the selected template IDs and `sync_templates.ps1 -Check` command to
   contributor documentation for authoring-time review. Do not add it to
   consumer CI. A repository that needs a different contract must stop selecting

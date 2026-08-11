@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-08-11T02:59:27.784784+00:00'
+generated_at: '2026-08-11T03:22:10.440435+00:00'
 apm_version: 0.26.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: 8cedd768610d8767d160ff5b6e592bd85fd75848
-  resolved_ref: 8cedd768610d8767d160ff5b6e592bd85fd75848
+  resolved_commit: 82fb9ef5149bf59721053fc881e499b7a67ac39b
+  resolved_ref: 82fb9ef5149bf59721053fc881e499b7a67ac39b
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -211,7 +211,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:89bcb059ff88d1855643754077a320f9c2a176fd12af88fbc9e239aa4729a17b
+  content_hash: sha256:6eec088c34d2f984e328d7c3521313313034d7d26cae6a190bf73ef58bbbf9fa
   skill_subset:
   - apm-usage
   - bepinex-mono-mod-quality-check

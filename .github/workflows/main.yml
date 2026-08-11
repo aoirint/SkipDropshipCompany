@@ -17,8 +17,7 @@ defaults:
     shell: bash
 
 jobs:
-  checks:
-    name: Checks
+  lint:
     # A merged commit is validated again in this workflow. This direct
     # dependency is the release gate; do not replace it with workflow polling.
     runs-on: ubuntu-slim
@@ -59,7 +58,7 @@ jobs:
   build:
     name: Build
     needs:
-      - checks
+      - lint
       - plan
     # Build keeps ubuntu-latest because packaging currently relies on
     # runner-provided shell tools such as jq and 7z.

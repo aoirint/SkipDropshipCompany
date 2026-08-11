@@ -110,6 +110,10 @@ its ecosystem Skill do not establish.
    - Isolate write permissions and credentials in the publication job or
      protected environment. Use the artifact-specific ecosystem Skill and
      `security-check` for final-container inspection.
+   - When a repository uses a root `VERSION` file on its integration branch as
+     the release request and identity, read
+     [version-file-releases.md](references/version-file-releases.md) and apply
+     its event, planning, idempotency, publication, and migration contract.
 7. Validate source and embedded shell.
    - Treat every embedded `run:` block as maintained source code. Apply
      `code-quality-check` and the applicable language Skill, including

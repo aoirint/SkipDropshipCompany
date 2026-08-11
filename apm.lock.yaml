@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-08-11T14:59:35.139042+00:00'
+generated_at: '2026-08-11T15:13:25.196503+00:00'
 apm_version: 0.27.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: f97f2cf209112a3dfafff5618bd5466f6f502e72
-  resolved_ref: f97f2cf209112a3dfafff5618bd5466f6f502e72
+  resolved_commit: f4aa56f4abffb1448c24c04ea4ae4463f5721d10
+  resolved_ref: f4aa56f4abffb1448c24c04ea4ae4463f5721d10
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -200,7 +200,7 @@ dependencies:
     .agents/skills/rollout-workflow/SKILL.md: sha256:a87f837b9234cf7629609fa3a76b415cfc15eafea44064976221e9efbdafe643
     .agents/skills/rollout-workflow/agents/openai.yaml: sha256:543a7befd986c51540ef35603fe63830f5032dc02b31f89e7f2179df3b3ca5dc
     .agents/skills/security-check/README.md: sha256:d321689b998388180ac852fdb6374ab3b79bec508a53d00461a9db79fb246d2e
-    .agents/skills/security-check/SKILL.md: sha256:e000b686cc36ae4308b502bdf3d89c287b27a62cc6d024e55ac72f04f8188013
+    .agents/skills/security-check/SKILL.md: sha256:658368991ef988551e192551e7e539a6801f74d587b95039bbc9b36c6ab75345
     .agents/skills/security-check/agents/openai.yaml: sha256:b1021ca2df7466813d0a376fc8bdff83603f568b02ef712e236fb2cfeef377c0
     .agents/skills/security-check/references/artifact-inspection.md: sha256:9842555f4789e77e6cf3d22b000116497207ecf6fa5587f2b1fe0dc20e7dffda
     .agents/skills/security-check/references/distributed-software-licensing.md: sha256:dce7c9fbfe665eb875388ab732b63b0226a5fd4592b12a62c42b6d1372c0d025
@@ -217,7 +217,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:1bdde1f36202c833f222c7e38265999ab21e0d3ede12eae173718cd716e488c0
+  content_hash: sha256:157c9a36a0efd2a912881899bc1db19168a6c54511a7a62b106c23af0ed3d500
   skill_subset:
   - apm-workflow
   - bepinex-mono-mod-quality-check
@@ -1063,7 +1063,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:e000b686cc36ae4308b502bdf3d89c287b27a62cc6d024e55ac72f04f8188013
+  content_hash: sha256:658368991ef988551e192551e7e539a6801f74d587b95039bbc9b36c6ab75345
 - kind: project-relative
   target: codex
   value: .agents/skills/security-check/agents/openai.yaml

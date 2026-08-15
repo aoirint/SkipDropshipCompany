@@ -134,7 +134,7 @@ See `$apm-workflow` for installation, cooldown, license, and update details.
 
 ## Documentation and Markdown
 
-- Apply `software-documentation-maintenance` and require `docs/README.md`,
+- Apply `domain-architecture-docs-workflow` and require `docs/README.md`,
   `docs/domain/README.md`, `docs/architecture/README.md`, and
   `docs/operations/README.md`. Link the developer entry point from the root
   README. Keep base-game, loader, Harmony, Unity, networking, and package-host

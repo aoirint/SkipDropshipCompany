@@ -1,0 +1,4 @@
+interface:
+  display_name: "Domain and Architecture Docs Workflow"
+  short_description: "Maintain coherent software documentation systems"
+  default_prompt: "Use $domain-architecture-docs-workflow to structure and maintain this repository's documentation system."

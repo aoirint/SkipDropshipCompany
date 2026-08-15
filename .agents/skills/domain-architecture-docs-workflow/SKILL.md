@@ -1,5 +1,5 @@
 ---
-name: software-documentation-maintenance
+name: domain-architecture-docs-workflow
 description: >-
   Design, restructure, and maintain a software repository's documentation
   system, including its required docs/domain, docs/architecture, and
@@ -11,7 +11,7 @@ description: >-
   technical correctness.
 ---
 
-# Software Documentation Maintenance
+# Domain and Architecture Documentation Workflow
 
 Build a documentation system that lets each reader find the applicable truth,
 understand its evidence and scope, and update it when the software changes.

@@ -21,7 +21,7 @@ description:
 
 ## Documentation responsibility
 
-Use `software-documentation-maintenance` to create and maintain the required `docs/domain/`, `docs/architecture/`, and
+Use `domain-architecture-docs-workflow` to create and maintain the required `docs/domain/`, `docs/architecture/`, and
 `docs/operations/` map, its indexes, canonical ownership, migrations, and links. This Skill remains responsible for the
 BepInEx-specific content and correctness placed in that map:
 

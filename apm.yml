@@ -12,7 +12,7 @@ targets:
 dependencies:
   apm:
   - git: aoirint/skills
-    ref: 44b51eef2237a460a4d3bca423a675b1ffd09eda
+    ref: e5adf74a632936834a31a7cc2507030b362a7210
     skills:
     - apm-workflow
     - bepinex-mono-mod-quality-check
@@ -28,7 +28,7 @@ dependencies:
     - release-note-workflow
     - rollout-workflow
     - security-check
-    - software-documentation-maintenance
+    - domain-architecture-docs-workflow
     - unity-game-analyze
   mcp: []
 includes: auto

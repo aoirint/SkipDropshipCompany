@@ -1,12 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-08-11T15:13:25.196503+00:00'
-apm_version: 0.27.0
+generated_at: '2026-08-15T09:45:26.314790+00:00'
+apm_version: 0.28.0
 dependencies:
 - repo_url: aoirint/skills
   name: skills
   host: github.com
-  resolved_commit: f4aa56f4abffb1448c24c04ea4ae4463f5721d10
-  resolved_ref: f4aa56f4abffb1448c24c04ea4ae4463f5721d10
+  resolved_commit: 44b51eef2237a460a4d3bca423a675b1ffd09eda
+  resolved_ref: 44b51eef2237a460a4d3bca423a675b1ffd09eda
   version: 0.0.0
   package_type: apm_package
   deployed_files:
@@ -124,7 +124,7 @@ dependencies:
     .agents/skills/apm-workflow/README.md: sha256:e346edab06f5ec792cdb77edcaa8042f523af67753dc4fe72498ae1899b87c89
     .agents/skills/apm-workflow/SKILL.md: sha256:bbddd9935373713999b78e5390b3c38e0886299beeb410d6eb338d13e25154fa
     .agents/skills/apm-workflow/agents/openai.yaml: sha256:f3c083196472ec9253886b369202ddeb8eb2534fd2da9799798bae2eb33b2e55
-    .agents/skills/apm-workflow/references/apm-bootstrap.json: sha256:e0ebfd624fc79e35c5a5a305d77476860ff87019edc3afc0b37b5cd2884276b1
+    .agents/skills/apm-workflow/references/apm-bootstrap.json: sha256:ae425dc00b981c195e0664ad77b9fed8c4667a45efcdadd382e79fb572d7fc22
     .agents/skills/apm-workflow/scripts/propose_bootstrap_update.py: sha256:5c8d079ff9caa4175a971c5d231bc24d8143d47d238496cace60b1d91d8d00d8
     .agents/skills/apm-workflow/scripts/propose_bootstrap_update.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
     .agents/skills/bepinex-mono-mod-quality-check/README.md: sha256:f1cedde8c48a1aa4ebe4a57decff164fd845ba82a64ddcbe66e9fc9f349286f5
@@ -217,7 +217,7 @@ dependencies:
     .agents/skills/unity-game-analyze/references/serialized-assets.md: sha256:19401734d5381193b5cd38c2bace359d95018848b83b7f69cade906908b7a735
     .agents/skills/unity-game-analyze/scripts/inventory_build.py: sha256:8b93aa49165b8f0f406321336fbe08c7383677b13d0049af76fc64ec2313bddd
     .agents/skills/unity-game-analyze/scripts/inventory_build.py.lock: sha256:016afc221516f1724533f1623ec77ef8a9a80c06a1ffae431f32f5e063e59986
-  content_hash: sha256:157c9a36a0efd2a912881899bc1db19168a6c54511a7a62b106c23af0ed3d500
+  content_hash: sha256:4dd5a906943c218d3d61fad4e13de7618b61ce9643af1727db4a8f520938dd29
   skill_subset:
   - apm-workflow
   - bepinex-mono-mod-quality-check
@@ -280,7 +280,7 @@ deployments:
   owners:
   - aoirint/skills
   active_owner: aoirint/skills
-  content_hash: sha256:e0ebfd624fc79e35c5a5a305d77476860ff87019edc3afc0b37b5cd2884276b1
+  content_hash: sha256:ae425dc00b981c195e0664ad77b9fed8c4667a45efcdadd382e79fb572d7fc22
 - kind: project-relative
   target: codex
   value: .agents/skills/apm-workflow/scripts/propose_bootstrap_update.py

@@ -160,8 +160,9 @@ See `$apm-workflow` for installation, cooldown, license, and update details.
 ## GitHub repository and CI
 
 - Apply `github-actions-quality-check` for event ownership, job dependencies,
-  permissions, concurrency, runners, executable inputs, validation tools,
-  artifacts, releases, and repository enforcement.
+  workflow/job `permissions:` declarations, concurrency, runners, executable
+  inputs, validation tools, artifacts, and releases. Apply `github-workflow`
+  for repository settings and enforcement.
 - Keep the BepInEx/.NET source gate ordered and reproducible: explicit SDK
   setup; locked restore; `dotnet format --no-restore --verify-no-changes`;
   no-restore build; applicable tests; package checks; and Markdown lint.

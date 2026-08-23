@@ -17,7 +17,7 @@ Keep these categories distinct:
   unmet gate, reason, and follow-up.
 
 Do not convert an unavailable source into a pass. A successful actionlint run
-does not prove repository settings, runtime behavior, or artifact correctness.
+does not prove runtime behavior or artifact correctness.
 
 ## Automated checks
 
@@ -43,6 +43,7 @@ Report:
 5. external action, download, and container review;
 6. artifact lineage and release idempotency;
 7. actionlint, ShellCheck, pinact, and ecosystem-check results separately;
-8. repository-setting evidence and post-change read-back when applicable;
+8. workflow-side evidence requested by `github-workflow`, such as stable job
+   names, event coverage, and reachable external `uses:` names;
 9. skipped checks, unavailable evidence, blockers, residual risk, and approved
    exceptions.

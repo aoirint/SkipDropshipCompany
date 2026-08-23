@@ -2,11 +2,11 @@
 name: github-actions-quality-check
 description: >-
   Review, design, create, or repair GitHub Actions workflows and local actions
-  for event boundaries, dependency structure, permissions, concurrency,
-  immutable pins, runner selection, validation, artifacts, releases, and
-  repository enforcement. Use for .github/workflows, .github/actions, Actions
-  policy, required-check design, or CI template changes; use github-workflow
-  for issue, pull-request, comment, and squash-merge text or operations.
+  for event boundaries, dependency structure, workflow and job permissions,
+  concurrency, immutable pins, runner selection, validation, artifacts,
+  releases, and publication behavior. Use for .github/workflows,
+  .github/actions, reusable workflows, or CI template changes; use
+  github-workflow for repository settings and GitHub collaboration operations.
 ---
 
 # GitHub Actions Quality Check
@@ -14,15 +14,17 @@ description: >-
 ## When to Use
 
 Use this Skill for GitHub Actions workflow files, local Composite Actions,
-reusable workflows, Actions repository settings, required-check contexts, and
-CI templates. Pair it with the ecosystem Skill that owns the commands being
-automated and with `security-check` for third-party executable inputs,
-permissions, secrets, publishing credentials, and artifacts.
+reusable workflows, and CI templates. Pair it with the ecosystem Skill that
+owns the commands being automated and with `security-check` for third-party
+executable inputs, workflow/job permissions, secrets, publishing credentials,
+and artifacts.
 
-Use `github-workflow` for issue and pull-request artifacts, comments, reviews,
-and squash merges. Do not use this Skill to infer application test commands,
-release identity, package layout, or deployment policy that the repository and
-its ecosystem Skill do not establish.
+Use `github-workflow` for every repository setting, including Actions
+permissions, workflow token policy, selected-action allowlists, environments,
+required checks, rulesets, merge settings, and immutable releases, as well as
+issue and pull-request artifacts. Do not use this Skill to infer application
+test commands, release identity, package layout, or deployment policy that the
+repository and its ecosystem Skill do not establish.
 
 ## Goals
 
@@ -38,8 +40,9 @@ its ecosystem Skill do not establish.
 
 1. Inventory before editing.
    - Read repository guidance, every entry workflow, every reachable local
-     action or reusable workflow, release scripts, required-check settings, and
-     the ecosystem's local validation contract.
+     action or reusable workflow, release scripts, the expected check contexts
+     supplied by repository policy, and the ecosystem's local validation
+     contract.
    - Record each event, job name, runner, `needs` edge, permission, concurrency
      rule, external `uses:`, download, secret, cache, artifact, and publication
      side effect.
@@ -95,10 +98,10 @@ its ecosystem Skill do not establish.
      release age, checksum or digest where applicable, runtime behavior, and
      requested permissions. A seven-day cooldown is a minimum gate, not proof
      of trust.
-   - Before restricting an Actions allowlist, recursively inventory every
-     reachable `uses:`. Allow only required names; with SHA enforcement, an
-     individual `owner/action@*` allowlist entry permits future reviewed pins
-     without wildcarding an owner.
+   - When `github-workflow` needs selected-action allowlist evidence,
+     recursively inventory every reachable `uses:` and report the exact
+     external action and reusable-workflow names. Do not mutate the allowlist
+     from this Skill.
 6. Preserve exact-source artifact and release gates.
    - Build once from the validated commit, validate the final packaged artifact,
      record its digest and source identity, and pass that artifact forward.
@@ -130,19 +133,19 @@ its ecosystem Skill do not establish.
      pins, lint failures, and unreviewed suppressions as findings.
    - Use [validation-and-reporting.md](references/validation-and-reporting.md)
      for evidence categories, tool scope, and the completion report.
-8. Review repository enforcement when it is in scope.
-   - Read [repository-enforcement.md](references/repository-enforcement.md)
-     before auditing or changing Actions policy, required checks, merge rules,
-     environments, or the default-branch ruleset.
-   - Verify every required status context is a current pull-request job name
-     and also runs on `merge_group` when a merge queue uses it. Never create a
-     ruleset that can block every merge because its check cannot run.
-   - For apply requests, record the requested payload and perform post-change
-     read-back. For audit-only requests, leave inaccessible values unverified.
+8. Provide workflow-side evidence for repository settings when requested.
+   - Report stable visible job names and whether each job runs on
+     `pull_request` and, when applicable, `merge_group`.
+   - Add or repair the workflow when an intended required check cannot run in
+     the required event, but leave required-check selection and ruleset
+     mutation to `github-workflow`.
+   - Report reachable external `uses:` names and pin review as inputs to an
+     Actions allowlist decision; do not read an allowlist request as authority
+     to change repository settings.
 9. Summarize separately:
    - automated checks and exact scope;
    - AI-assisted structural and security inspection;
-   - observed facts, applied changes, and post-change verification;
+   - observed facts, workflow changes, and post-change verification;
    - blockers, unavailable evidence, approved exceptions, and skipped checks.
 
 ## Templates

@@ -3,7 +3,7 @@
 ## Overview
 
 Review and design secure, deterministic, and evidence-backed GitHub Actions
-workflows, local actions, CI templates, and repository enforcement.
+workflows, local actions, and CI templates.
 
 ## Install
 

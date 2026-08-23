@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Workflow"
+  short_description: "Manage safe GitHub settings and artifacts."
+  default_prompt: "Use $github-workflow to audit or change GitHub repository settings, or to preflight, create, review, or update a GitHub collaboration artifact."

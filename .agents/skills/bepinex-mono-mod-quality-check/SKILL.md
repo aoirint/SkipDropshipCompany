@@ -36,9 +36,10 @@ Apply `prose-quality-check` only after ownership and technical evidence are sett
 into reusable domain knowledge, and do not treat a well-structured document as proof that its game or release claim is
 correct.
 
-Use `github-actions-quality-check` for the shared event, trust, permission, concurrency, runner, action-pin,
-artifact-lineage, and repository-enforcement baseline. This Skill owns only the BepInEx/.NET/Thunderstore commands,
-release identity, package contract, and domain-specific templates layered on that baseline.
+Use `github-actions-quality-check` for the shared event, trust, workflow/job permission, concurrency, runner,
+action-pin, and artifact-lineage baseline. Use `github-workflow` for repository settings and enforcement. This Skill
+owns only the BepInEx/.NET/Thunderstore commands, release identity, package contract, and domain-specific templates
+layered on those baselines.
 
 For an APM-managed repository, apply `apm-workflow`. Keep `apm audit --ci` and Markdown lint in the outer
 `check-dotnet-bepinex-source` action so every event-owned entry workflow enforces the same repository baseline.
@@ -284,7 +285,8 @@ conditional branches, verification matrix, and report format. Do not replace tha
    - When the project derives manifest or package versions in CI, verify that the project version, generated version,
      and loader-compatible version are deliberately handled for stable, prerelease, and edge builds.
 6. Check BepInEx release automation when the repository uses GitHub Actions or GitHub Releases. Apply
-   `github-actions-quality-check` for the shared workflow and repository-enforcement baseline.
+   `github-actions-quality-check` for the shared workflow baseline and `github-workflow` for repository settings and
+   enforcement.
    - Give the read-only release plan a full checkout with tag history (`fetch-depth: 0`) before resolving a version.
      During rollout, verify this in the committed consumer workflow itself; the canonical template being correct does
      not prove that an existing or previously copied workflow retained the setting. Run the main-push path after merge

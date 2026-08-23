@@ -90,8 +90,8 @@ not automatic quality improvements.
 
 For repositories that use GitHub Actions to build an archive and publish
 releases, apply the shared workflow, artifact, permission, executable-input,
-release, and repository-enforcement baseline from
-`github-actions-quality-check`.
+and release baseline from `github-actions-quality-check`. Apply the repository
+settings and enforcement baseline from `github-workflow`.
 
 Extend that baseline with the BepInEx release modes:
 

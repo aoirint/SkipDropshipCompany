@@ -17,14 +17,16 @@ directly.
   [aoirint/skills](https://github.com/aoirint/skills) repository. This
   repository only selects, pins, and deploys them.
 - To update the Skill dependency, review its source, commit pin, license, and
-  cooldown first. Regenerate the lockfile with APM, then run
-  `apm install --frozen` and `apm audit --ci`. Commit the manifest, lockfile,
+  cooldown first. Regenerate the lockfile with APM and complete its deployment
+  ledger with a reviewed `apm install`, then verify with
+  `apm install --frozen` and `apm audit --ci`. Preserve exact owned outputs
+  before rebuilding the ledger. Commit the manifest, lockfile,
   notices, and generated
   `.agents/skills/` changes together.
 
 ### Approved cooldown exception
 
-Use APM CLI 0.28.0 for lock operations. It is the newest reviewed release
+Use APM CLI 0.34.0 for lock operations. It is the newest reviewed release
 that satisfies the normal seven-day cooldown; using it is not an exception.
 
 A maintainer may explicitly waive the normal seven-day wait for the latest

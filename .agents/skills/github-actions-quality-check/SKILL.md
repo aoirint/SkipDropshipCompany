@@ -17,7 +17,9 @@ Use this Skill for GitHub Actions workflow files, local Composite Actions,
 reusable workflows, and CI templates. Pair it with the ecosystem Skill that
 owns the commands being automated and with `security-check` for third-party
 executable inputs, workflow/job permissions, secrets, publishing credentials,
-and artifacts.
+and artifacts. When a workflow installs mise or invokes repository mise tasks,
+use `mise-workflow` for the exact mise/tool pins, `mise.lock`, and local/CI task
+parity; this Skill retains workflow trust and execution structure.
 
 Use `github-workflow` for every repository setting, including Actions
 permissions, workflow token policy, selected-action allowlists, environments,

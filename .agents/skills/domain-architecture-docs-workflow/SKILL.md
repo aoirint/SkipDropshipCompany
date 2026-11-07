@@ -163,6 +163,22 @@ and invariants, workflows and lifecycles, component or integration boundaries, a
 decisions. Good domain concerns follow an independently versioned external dependency. Good
 operations concerns follow a repeatable procedure with one trigger and verification contract.
 
+Before adding a lasting migration or upgrade guide, identify the affected
+users/operators, supported old state, and actions they must perform later.
+Keep transient implementation steps and migration history in the PR when no
+later reader needs a procedure. Canonical docs still own current behavior and
+enduring design rationale. Keep discoverable upgrade instructions while users
+or installations still need the supported transition, even if each performs it
+only once. Pair with `code-quality-check` to evaluate whether migration or
+compatibility code is needed, rather than assuming a guide requires such code.
+
+Choose how much older behavior to describe by weighing the affected audience,
+transition impact, and support obligations against confusion for readers of the
+current system. For a low-use, unstable feature, a precise reference to versioned
+historical docs may be enough; verify that it still serves any required upgrade
+or recovery path. Do not copy the full old specification into current docs by
+default. Unknown usage is not evidence that nobody depends on the old behavior.
+
 ### 4. Establish evidence and scope
 
 Inspect authoritative source code, configuration, schemas, generated artifacts, automation,
@@ -217,6 +233,11 @@ operation. Verify commands, paths, environment
 variables, CI jobs, package contents, and release targets against the repository.
 
 ### 5. Migrate without losing information
+
+Apply this checklist when reorganizing existing documentation. The passage map
+and editing sequence are working review evidence, not a requirement to publish
+a permanent migration guide. Preserve redirects or compatibility guidance when
+known external links or supported reader workflows depend on them.
 
 1. Create a section-level map from every source passage to its canonical destination.
 2. Add the required directories, destinations, and indexes before deleting or renaming sources.

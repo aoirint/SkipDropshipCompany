@@ -159,7 +159,7 @@ the consumer repository, then make only repository-evidenced substitutions.
 When an outer source-check action runs Markdown validation, use
 `prose-quality-check` as the rule owner and copy its
 `assets/markdownlint-cli2.yaml` to `.markdownlint-cli2.yaml`. When an applicable
-domain Skill owns a reviewed derived configuration, such as
+domain Skill owns a derived configuration, such as
 `hugo-quality-check`, use that domain asset instead. Add only
 repository-evidenced generated, vendored, or submodule paths to `ignores`; do
 not fork or silently weaken the shared prose baseline.

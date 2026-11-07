@@ -2,7 +2,8 @@
 
 ## Overview
 
-Design, restructure, and maintain a software repository's documentation system.
+Design, restructure, and maintain a software repository's documentation system,
+including the boundary between lasting upgrade guidance and one-time PR context.
 
 ## Install
 

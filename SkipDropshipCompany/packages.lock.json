@@ -4,7 +4,7 @@
     ".NETStandard,Version=v2.1": {
       "BepInEx.Analyzers": {
         "type": "Direct",
-        "requested": "[1.*, )",
+        "requested": "[1.0.8, 1.0.8]",
         "resolved": "1.0.8",
         "contentHash": "xrfNmunsPhBx+vStTxLonq/aHkRrDH77c9tG/x3m5eejrKe5B0nf7cJPRRt6x330sGI0bLaPTtygdeHUgvI3wQ=="
       },
@@ -20,7 +20,7 @@
       },
       "BepInEx.PluginInfoProps": {
         "type": "Direct",
-        "requested": "[2.*, )",
+        "requested": "[2.1.0, 2.1.0]",
         "resolved": "2.1.0",
         "contentHash": "VCG3QRiqNdW9ku2FEcNsbK+HKxrZmW0VxwMNyLNO7h0xGorU+C6vBHN8Qq4eAL5fU11Uks5x2uoYdqEoKD3P8A=="
       },

@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Unreleased
 
+### Changed
+
+- Use .NET SDK 11.0.100 for local and CI builds and configure a seven-day
+  NuGet cooldown for automatic version selection.
+
 ## v0.2.8 - 2026-07-18 UTC
 
 ### Changed

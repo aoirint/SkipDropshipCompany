@@ -154,6 +154,8 @@ are still verified before use.
 
 ### Dependency updates
 
+NuGet applies a seven-day minimum publish age to automatic version selection.
+
 To update the lock file after modifying your package references, run:
 
 ```powershell
@@ -176,17 +178,6 @@ When changing `assets/manifest.json` dependency strings:
   dependency baseline.
 - Keep dependency string updates separate from manifest description or
   compatibility-marker prose when practical.
-
-### NuGet minimum publish age
-
-The SDK selected by `global.json` provides NuGet 8 without changing the mod's
-runtime target.
-Both configured NuGet sources use a seven-day minimum publish age
-(`minPublishAgeHours="168"`).
-Keep package references non-floating and review lockfile changes.
-
-See [NuGet minimum publish age](docs/domain/dependencies.md#nuget-minimum-publish-age)
-for how the filter works and what it does not cover.
 
 ### .NET and C# tooling updates
 

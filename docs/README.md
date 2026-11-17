@@ -14,6 +14,10 @@
   base-game member declarations or behaviour analysis into it; link to the
   relevant domain document instead.
 
+## Operations
+
+- [Maintainer procedures](operations/README.md) covers dependency updates.
+
 ## Release assets
 
 - [Icon authoring](release/icon-authoring.md) describes the package icon source

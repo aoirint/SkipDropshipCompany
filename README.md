@@ -154,11 +154,11 @@ are still verified before use.
 
 ### Dependency updates
 
-To update the lock file after modifying your package references, run:
+NuGet applies a seven-day minimum publish age to automatic version selection.
 
-```powershell
-dotnet restore --use-lock-file
-```
+See the [dependency update commands][dependency-update-commands].
+
+[dependency-update-commands]: https://github.com/aoirint/SkipDropshipCompany/blob/main/docs/operations/development.md#dependency-updates
 
 ### Thunderstore manifest dependency updates
 
@@ -176,27 +176,6 @@ When changing `assets/manifest.json` dependency strings:
   dependency baseline.
 - Keep dependency string updates separate from manifest description or
   compatibility-marker prose when practical.
-
-### NuGet minimum publish age
-
-Use .NET SDK 11.0.100 or a later stable SDK selected by `global.json`.
-The configured NuGet sources use `minPublishAgeHours="168"` to delay
-automatic version selection by `dotnet package add` and
-`dotnet package update` for seven days. This NuGet 8 feature is the reason
-for adopting the .NET 11 STS SDK; it does not change the mod's runtime target.
-
-Explicit version requests bypass this filter. Ordinary restore, including
-transitive dependencies and locked restore, does not validate package age.
-Floating references with an applicable cooldown fail with NU1020; keep the
-existing non-floating package versions and review lockfile changes.
-Both nuget.org and the BepInEx feed expose registration `published` metadata.
-If an evaluated version lacks its publish date, automatic selection fails
-rather than assuming it is old enough. Source mappings and exceptions retain
-their existing scope. Cooldown expiry does not establish package trust;
-continue reviewing provenance, identity, hashes, and vulnerability signals.
-
-See [NuGet minimum package publish age][nuget-minimum-publish-age] for the
-supported operations and restore limitations.
 
 ### .NET and C# tooling updates
 
@@ -546,5 +525,3 @@ TODO: Add test scenarios for the configuration options.
 [shellcheck-repo]: https://github.com/koalaman/shellcheck
 [thunderstore-lethal-company-community]: https://thunderstore.io/c/lethal-company/
 [visual-studio-download]: https://visualstudio.microsoft.com/en-us/vs/
-
-[nuget-minimum-publish-age]: https://learn.microsoft.com/en-us/nuget/consume-packages/minimum-package-publish-age

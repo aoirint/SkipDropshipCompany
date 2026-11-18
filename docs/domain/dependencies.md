@@ -5,7 +5,7 @@
 NuGet 8 applies a source's minimum publish age when `dotnet package add` or
 `dotnet package update` automatically selects a version.
 An explicit version request bypasses the filter.
-Source mapping and configured exceptions still apply.
+Configured package exceptions still apply.
 
 The filter uses the registration `published` timestamp.
 Both nuget.org and the BepInEx feed expose this metadata.
